@@ -148,6 +148,84 @@
             top: 6px;
         }
         
+        /* Red & Black Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #1a1a1a;
+            border: 2px solid #dc2626;
+            border-radius: 50px;
+            padding: 8px 16px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+        
+        .theme-toggle:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+        
+        /* Red & Black Theme Variables */
+        body.red-black-theme {
+            --primary-color: #dc2626;
+            --secondary-color: #1a1a1a;
+            --accent-color: #ef4444;
+            --dark-accent: #991b1b;
+        }
+        
+        /* Red & Black Theme Styles */
+        body.red-black-theme .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #374151 50%, #dc2626 100%);
+        }
+        
+        body.red-black-theme .pricing-badge {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+        }
+        
+        body.red-black-theme .btn-primary {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+        }
+        
+        body.red-black-theme .service-card:hover {
+            border-color: #dc2626;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.2);
+        }
+        
+        body.red-black-theme .service-icon svg {
+            stroke: #1a1a1a;
+        }
+        
+        body.red-black-theme .service-icon svg [fill="#FF7043"] {
+            fill: #dc2626;
+        }
+        
+        body.red-black-theme .nav-cta {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+        }
+        
+        body.red-black-theme .credential-badge:hover {
+            border-color: #dc2626;
+        }
+        
+        body.red-black-theme .partner-badge {
+            background: linear-gradient(135deg, #1a1a1a, #374151);
+        }
+        
+        body.red-black-theme .calendar-book-btn {
+            background: linear-gradient(135deg, #1a1a1a, #374151);
+        }
+        
+        body.red-black-theme .calendar-option-card:hover {
+            border-color: #dc2626;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.2);
+        }
+        
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Merriweather', serif;
             font-weight: 700;
@@ -1234,6 +1312,11 @@
     <!-- Skip to main content for screen readers -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+        🔥 Red/Black Theme
+    </button>
+    
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -2102,8 +2185,44 @@
             });
         });
 
+        // Red/Black Theme Toggle Functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (body.classList.contains('red-black-theme')) {
+                // Switch back to default theme
+                body.classList.remove('red-black-theme');
+                themeToggle.innerHTML = '🔥 Red/Black Theme';
+                localStorage.setItem('website-theme', 'default');
+                showNotification('Switched to Default Theme', 'success');
+            } else {
+                // Switch to red/black theme
+                body.classList.add('red-black-theme');
+                themeToggle.innerHTML = '🔵 Default Theme';
+                localStorage.setItem('website-theme', 'red-black');
+                showNotification('Switched to Red/Black Theme', 'success');
+            }
+        }
+
+        // Load saved theme on page load
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('website-theme');
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedTheme === 'red-black') {
+                body.classList.add('red-black-theme');
+                themeToggle.innerHTML = '🔵 Default Theme';
+            }
+        }
+
         // Load saved photo on page load
         window.addEventListener('load', function() {
+            // Load theme preference
+            loadSavedTheme();
+            
+            // Load saved photo
             const savedPhoto = localStorage.getItem('professionalPhoto');
             if (savedPhoto) {
                 const professionalPhoto = document.getElementById('professionalPhoto');
