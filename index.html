@@ -88,6 +88,13 @@
             margin-right: auto;
         }
         
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
         .cta-button {
             display: inline-block;
             background: linear-gradient(45deg, #667eea, #764ba2);
@@ -104,6 +111,15 @@
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .cta-button.book-now {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .cta-button.book-now:hover {
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
         }
         
         .services {
@@ -132,11 +148,19 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border-left: 5px solid #667eea;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         
         .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card.expanded {
+            transform: scale(1.02);
+            z-index: 10;
         }
         
         .service-icon {
@@ -163,6 +187,77 @@
             font-weight: bold;
             display: inline-block;
             font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            opacity: 0;
+        }
+        
+        .service-details.show {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        
+        .service-details h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .service-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .service-details li {
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .service-details li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .book-service-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: 100%;
+            font-size: 1rem;
+        }
+        
+        .book-service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .click-hint {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
         
         .about {
@@ -266,7 +361,8 @@
         }
         
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
@@ -276,7 +372,8 @@
         }
         
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
         }
@@ -299,6 +396,44 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
         
+        .calendar-booking {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .calendar-booking h3 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .calendar-booking p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .calendar-btn {
+            background: white;
+            color: #ff6b35;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .calendar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
         footer {
             background: #2d3748;
             color: white;
@@ -314,6 +449,11 @@
             
             .hero h1 {
                 font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
             
             .about-content {
@@ -344,55 +484,166 @@
         <div class="container">
             <h1>Professional Computer & Tech Support</h1>
             <p>Expert solutions for all your technology needs in Brisbane. Fast, reliable, and affordable at $100 per hour.</p>
-            <a href="#contact" class="cta-button">Get Help Now - $100/Hour</a>
+            <div class="cta-buttons">
+                <a href="#contact" class="cta-button">Get Help Now - $100/Hour</a>
+                <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8" target="_blank" class="cta-button book-now">Book Appointment</a>
+            </div>
         </div>
     </section>
 
     <section class="services" id="services">
         <div class="container">
-            <h2>Our Services</h2>
+            <h2>Our Services - Click Each Card for Details</h2>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" onclick="toggleServiceDetails(this)">
+                    <div class="click-hint">Click for details</div>
                     <div class="service-icon">💻</div>
                     <h3>Computer Repair</h3>
                     <p>Hardware diagnostics, component replacement, and system optimization for desktops and laptops.</p>
                     <div class="service-price">$100 per hour</div>
+                    <div class="service-details">
+                        <h4>Comprehensive Computer Repair Services:</h4>
+                        <ul>
+                            <li>Hardware diagnostics and troubleshooting</li>
+                            <li>Motherboard, RAM, and CPU replacement</li>
+                            <li>Hard drive and SSD upgrades</li>
+                            <li>Graphics card installation and repair</li>
+                            <li>Power supply unit replacement</li>
+                            <li>Cooling system maintenance</li>
+                            <li>Screen and keyboard repairs for laptops</li>
+                            <li>Performance optimization and tune-ups</li>
+                            <li>Boot issues and system crashes</li>
+                            <li>Blue screen error resolution</li>
+                        </ul>
+                        <button class="book-service-btn" onclick="window.open('https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8', '_blank')">Book Computer Repair - $100/hr</button>
+                    </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card" onclick="toggleServiceDetails(this)">
+                    <div class="click-hint">Click for details</div>
                     <div class="service-icon">🌐</div>
                     <h3>Network Setup</h3>
                     <p>WiFi configuration, router setup, network troubleshooting, and security implementation.</p>
                     <div class="service-price">$100 per hour</div>
+                    <div class="service-details">
+                        <h4>Complete Network Solutions:</h4>
+                        <ul>
+                            <li>WiFi router installation and configuration</li>
+                            <li>Network security setup and encryption</li>
+                            <li>Ethernet cable installation</li>
+                            <li>Mesh network system setup</li>
+                            <li>Network printer configuration</li>
+                            <li>File sharing and network drives</li>
+                            <li>Internet connection troubleshooting</li>
+                            <li>Port forwarding and VPN setup</li>
+                            <li>Network speed optimization</li>
+                            <li>Smart home device connectivity</li>
+                        </ul>
+                        <button class="book-service-btn" onclick="window.open('https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8', '_blank')">Book Network Setup - $100/hr</button>
+                    </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card" onclick="toggleServiceDetails(this)">
+                    <div class="click-hint">Click for details</div>
                     <div class="service-icon">🔧</div>
                     <h3>Software Support</h3>
                     <p>Operating system installation, software troubleshooting, and application setup.</p>
                     <div class="service-price">$100 per hour</div>
+                    <div class="service-details">
+                        <h4>Professional Software Services:</h4>
+                        <ul>
+                            <li>Windows and macOS installation</li>
+                            <li>Operating system updates and patches</li>
+                            <li>Software installation and configuration</li>
+                            <li>Driver updates and compatibility</li>
+                            <li>Application troubleshooting</li>
+                            <li>Microsoft Office setup and training</li>
+                            <li>Adobe Creative Suite installation</li>
+                            <li>Antivirus software configuration</li>
+                            <li>System backup and restore</li>
+                            <li>Registry cleaning and optimization</li>
+                        </ul>
+                        <button class="book-service-btn" onclick="window.open('https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8', '_blank')">Book Software Support - $100/hr</button>
+                    </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card" onclick="toggleServiceDetails(this)">
+                    <div class="click-hint">Click for details</div>
                     <div class="service-icon">🔒</div>
                     <h3>Virus Removal</h3>
                     <p>Malware detection, virus removal, system cleaning, and security software installation.</p>
                     <div class="service-price">$100 per hour</div>
+                    <div class="service-details">
+                        <h4>Complete Security Solutions:</h4>
+                        <ul>
+                            <li>Virus and malware removal</li>
+                            <li>Spyware and adware cleaning</li>
+                            <li>Ransomware removal and recovery</li>
+                            <li>Browser hijacker elimination</li>
+                            <li>System security audit</li>
+                            <li>Firewall configuration</li>
+                            <li>Real-time protection setup</li>
+                            <li>Email security implementation</li>
+                            <li>Safe browsing education</li>
+                            <li>Regular security maintenance plans</li>
+                        </ul>
+                        <button class="book-service-btn" onclick="window.open('https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8', '_blank')">Book Virus Removal - $100/hr</button>
+                    </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card" onclick="toggleServiceDetails(this)">
+                    <div class="click-hint">Click for details</div>
                     <div class="service-icon">📱</div>
                     <h3>Mobile Device Support</h3>
                     <p>Smartphone and tablet troubleshooting, app installation, and device optimization.</p>
                     <div class="service-price">$100 per hour</div>
+                    <div class="service-details">
+                        <h4>Mobile Device Expertise:</h4>
+                        <ul>
+                            <li>iPhone and Android troubleshooting</li>
+                            <li>App installation and configuration</li>
+                            <li>Email and account setup</li>
+                            <li>Data transfer between devices</li>
+                            <li>Cloud backup configuration</li>
+                            <li>Screen replacement coordination</li>
+                            <li>Battery optimization</li>
+                            <li>Bluetooth and WiFi connectivity</li>
+                            <li>Tablet and iPad support</li>
+                            <li>Mobile security setup</li>
+                        </ul>
+                        <button class="book-service-btn" onclick="window.open('https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8', '_blank')">Book Mobile Support - $100/hr</button>
+                    </div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card" onclick="toggleServiceDetails(this)">
+                    <div class="click-hint">Click for details</div>
                     <div class="service-icon">💾</div>
                     <h3>Data Recovery</h3>
                     <p>File recovery, backup solutions, and data transfer services for all storage devices.</p>
                     <div class="service-price">$100 per hour</div>
+                    <div class="service-details">
+                        <h4>Data Recovery Specialists:</h4>
+                        <ul>
+                            <li>Hard drive data recovery</li>
+                            <li>SSD and flash drive recovery</li>
+                            <li>Deleted file restoration</li>
+                            <li>Corrupted file repair</li>
+                            <li>Photo and video recovery</li>
+                            <li>Email recovery services</li>
+                            <li>Database restoration</li>
+                            <li>Cloud backup setup</li>
+                            <li>External drive data transfer</li>
+                            <li>Emergency data recovery</li>
+                        </ul>
+                        <button class="book-service-btn" onclick="window.open('https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8', '_blank')">Book Data Recovery - $100/hr</button>
+                    </div>
                 </div>
+            </div>
+            
+            <div class="calendar-booking">
+                <h3>Ready to Get Started?</h3>
+                <p>Book your appointment directly through our Google Calendar. Choose a time that works for you and we'll be there to help with your tech needs at $100 per hour.</p>
+                <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8" target="_blank" class="calendar-btn">Book Appointment Now</a>
             </div>
         </div>
     </section>
@@ -469,6 +720,13 @@
                             Emergency support available
                         </div>
                     </div>
+                    <div class="contact-item">
+                        <span>📅</span>
+                        <div>
+                            <strong>Online Booking:</strong><br>
+                            <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8" target="_blank" style="color: white; text-decoration: underline;">Schedule via Google Calendar</a>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="contact-form">
@@ -488,7 +746,7 @@
                         </div>
                         <div class="form-group">
                             <label for="service">Service Type</label>
-                            <select id="service" name="service" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem;">
+                            <select id="service" name="service">
                                 <option value="">Select a service</option>
                                 <option value="computer-repair">Computer Repair - $100/hr</option>
                                 <option value="network-setup">Network Setup - $100/hr</option>
@@ -503,6 +761,10 @@
                             <textarea id="message" name="message" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="submit-btn">Request Service - $100/Hour</button>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <p style="color: #4a5568; font-size: 0.9rem;">Or book directly:</p>
+                            <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8" target="_blank" class="calendar-btn" style="margin-top: 0.5rem;">Google Calendar Booking</a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -512,6 +774,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2024 Labyrinth Tech Support. Professional computer services at $100 per hour. Brisbane, Australia.</p>
+            <p style="margin-top: 0.5rem;">Book appointments: <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2FER6aZTK5ShH6GjO6JXwOL2KCcYkNpTGHtOiV3XMoLnGOF9-S7mSU1yCZjw4mG2LXdyZiVwU8" target="_blank" style="color: #667eea;">Google Calendar</a></p>
         </div>
     </footer>
 
@@ -526,10 +789,45 @@
             });
         });
 
+        // Service card expansion functionality
+        function toggleServiceDetails(card) {
+            const details = card.querySelector('.service-details');
+            const isExpanded = details.classList.contains('show');
+            
+            // Close all other expanded cards
+            document.querySelectorAll('.service-details.show').forEach(detail => {
+                detail.classList.remove('show');
+                detail.parentElement.classList.remove('expanded');
+            });
+            
+            // Toggle current card
+            if (!isExpanded) {
+                details.classList.add('show');
+                card.classList.add('expanded');
+            }
+        }
+
+        // Close expanded cards when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.service-card')) {
+                document.querySelectorAll('.service-details.show').forEach(detail => {
+                    detail.classList.remove('show');
+                    detail.parentElement.classList.remove('expanded');
+                });
+            }
+        });
+
         // Form submission handling
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for your inquiry! We will contact you within 24 hours to schedule your service at $100 per hour.');
+            alert('Thank you for your inquiry! We will contact you within 24 hours to schedule your service at $100 per hour. You can also book directly through our Google Calendar link.');
+        });
+
+        // Add click tracking for booking buttons
+        document.querySelectorAll('.book-service-btn, .calendar-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('Booking button clicked:', this.textContent);
+            });
         });
     </script>
 </body>
