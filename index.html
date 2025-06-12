@@ -437,28 +437,170 @@
         
         .about-photo {
             height: 500px;
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
             border-radius: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 5rem;
             position: relative;
-            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 3px dashed #cbd5e1;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
         
-        .about-photo::after {
-            content: 'Professional Photo Placeholder';
+        .about-photo:hover {
+            border-color: #2563eb;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        }
+        
+        .photo-upload-area {
+            text-align: center;
+            color: #64748b;
+        }
+        
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #94a3b8;
+        }
+        
+        .upload-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #475569;
+            font-weight: 600;
+        }
+        
+        .upload-hint {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .professional-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 17px;
+            display: none;
+        }
+        
+        .photo-overlay {
             position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            border-radius: 0 0 17px 17px;
+            text-align: center;
+            display: none;
+        }
+        
+        .photo-overlay h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .photo-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Photo Upload Modal */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(0,0,0,0.8);
-            padding: 10px 20px;
-            border-radius: 8px;
-            white-space: nowrap;
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .photo-modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+        
+        .photo-preview {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+        }
+        
+        .photo-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cancel {
+            background: #6b7280;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         /* Testimonials */
@@ -967,7 +1109,19 @@
                         <div class="credential-badge">Quality Guaranteed</div>
                     </div>
                 </div>
-                <div class="about-photo">🛠️</div>
+                <div class="about-photo" onclick="openPhotoModal()">
+                    <img id="professionalPhoto" class="professional-photo" alt="Professional headshot">
+                    <div class="photo-upload-area" id="uploadArea">
+                        <div class="upload-icon">📷</div>
+                        <div class="upload-text">Add Professional Photo</div>
+                        <div class="upload-hint">Click to upload your professional headshot<br>Recommended: 500x500px, JPG or PNG</div>
+                        <button class="upload-btn">Choose Photo</button>
+                    </div>
+                    <div class="photo-overlay" id="photoOverlay">
+                        <h4>Evangelos - Tech Support Expert</h4>
+                        <p>Professional Computer Technician & IT Specialist</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1173,6 +1327,27 @@
         </div>
     </footer>
 
+    <!-- Photo Upload Modal -->
+    <div class="photo-modal" id="photoModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePhotoModal()">&times;</button>
+            <h3>Upload Professional Photo</h3>
+            <p style="color: #6b7280; margin-bottom: 1rem;">Choose a professional headshot to display on your website</p>
+            
+            <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="previewPhoto(event)">
+            <div style="text-align: center;">
+                <button class="upload-btn" onclick="document.getElementById('photoInput').click()">Select Photo</button>
+            </div>
+            
+            <img id="photoPreview" class="photo-preview" alt="Photo preview">
+            
+            <div class="photo-actions" style="display: none;" id="photoActions">
+                <button class="btn-save" onclick="savePhoto()">Save Photo</button>
+                <button class="btn-cancel" onclick="closePhotoModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1231,6 +1406,101 @@
             } else {
                 navbar.style.background = '#fff';
                 navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // Photo upload functionality
+        function openPhotoModal() {
+            document.getElementById('photoModal').classList.add('show');
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModal').classList.remove('show');
+            document.getElementById('photoPreview').style.display = 'none';
+            document.getElementById('photoActions').style.display = 'none';
+            document.getElementById('photoInput').value = '';
+        }
+
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('photoPreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    document.getElementById('photoActions').style.display = 'flex';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function savePhoto() {
+            const preview = document.getElementById('photoPreview');
+            const professionalPhoto = document.getElementById('professionalPhoto');
+            const uploadArea = document.getElementById('uploadArea');
+            const photoOverlay = document.getElementById('photoOverlay');
+            
+            // Set the professional photo
+            professionalPhoto.src = preview.src;
+            professionalPhoto.style.display = 'block';
+            
+            // Hide upload area and show overlay
+            uploadArea.style.display = 'none';
+            photoOverlay.style.display = 'block';
+            
+            // Save to localStorage for persistence
+            localStorage.setItem('professionalPhoto', preview.src);
+            
+            closePhotoModal();
+            
+            // Show success message
+            showNotification('Professional photo updated successfully!');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+                z-index: 3000;
+                font-weight: 600;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Load saved photo on page load
+        window.addEventListener('load', function() {
+            const savedPhoto = localStorage.getItem('professionalPhoto');
+            if (savedPhoto) {
+                const professionalPhoto = document.getElementById('professionalPhoto');
+                const uploadArea = document.getElementById('uploadArea');
+                const photoOverlay = document.getElementById('photoOverlay');
+                
+                professionalPhoto.src = savedPhoto;
+                professionalPhoto.style.display = 'block';
+                uploadArea.style.display = 'none';
+                photoOverlay.style.display = 'block';
             }
         });
     </script>
