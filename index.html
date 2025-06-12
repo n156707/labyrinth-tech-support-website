@@ -1116,13 +1116,13 @@
                         <div class="credential-badge">Quality Guaranteed</div>
                     </div>
                 </div>
-                <div class="about-photo" onclick="openPhotoModal()">
+                <div class="about-photo" onclick="checkAdminAccess()">
                     <img id="professionalPhoto" class="professional-photo" alt="Professional headshot">
                     <div class="photo-upload-area" id="uploadArea">
                         <div class="upload-icon">📷</div>
                         <div class="upload-text">Add Professional Photo</div>
-                        <div class="upload-hint">Click to upload your professional headshot<br>Recommended: 500x500px, JPG or PNG</div>
-                        <button class="upload-btn">Choose Photo</button>
+                        <div class="upload-hint">Admin access required<br>Contact administrator to update photo</div>
+                        <button class="upload-btn" disabled>Admin Only</button>
                     </div>
                     <div class="photo-overlay" id="photoOverlay">
                         <h4>Evangelos - Tech Support Expert</h4>
@@ -1334,6 +1334,22 @@
         </div>
     </footer>
 
+    <!-- Admin Login Modal -->
+    <div class="photo-modal" id="adminModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAdminModal()">&times;</button>
+            <h3>Administrator Access Required</h3>
+            <p style="color: #6b7280; margin-bottom: 1rem;">Enter administrator credentials to manage website content</p>
+            
+            <div style="text-align: center;">
+                <input type="password" id="adminPassword" placeholder="Admin Password" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; margin: 10px; font-size: 16px; width: 250px;" onkeypress="handleAdminKeyPress(event)">
+                <br>
+                <button style="background: #1A237E; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 10px;" onclick="verifyAdminAccess()">Login</button>
+                <div id="adminError" style="color: #dc3545; margin-top: 10px; display: none;">Invalid password. Contact administrator for access.</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Photo Upload Modal -->
     <div class="photo-modal" id="photoModal">
         <div class="modal-content">
@@ -1416,8 +1432,58 @@
             }
         });
 
+        // Admin authentication variables
+        let isAdminAuthenticated = false;
+        const adminPasswordHash = 'labyrinth2024'; // Simple password for demo - replace with secure hash
+
+        // Admin access check
+        function checkAdminAccess() {
+            if (isAdminAuthenticated) {
+                openPhotoModal();
+            } else {
+                document.getElementById('adminModal').classList.add('show');
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.remove('show');
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminError').style.display = 'none';
+        }
+
+        function handleAdminKeyPress(event) {
+            if (event.key === 'Enter') {
+                verifyAdminAccess();
+            }
+        }
+
+        function verifyAdminAccess() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === adminPasswordHash) {
+                isAdminAuthenticated = true;
+                closeAdminModal();
+                openPhotoModal();
+                showNotification('Admin access granted - photo upload enabled');
+                
+                // Update UI to show admin mode
+                const uploadArea = document.getElementById('uploadArea');
+                uploadArea.querySelector('.upload-hint').innerHTML = 'Click to upload your professional headshot<br>Recommended: 500x500px, JPG or PNG';
+                uploadArea.querySelector('.upload-btn').disabled = false;
+                uploadArea.querySelector('.upload-btn').textContent = 'Choose Photo';
+            } else {
+                document.getElementById('adminError').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('adminError').style.display = 'none';
+                }, 3000);
+            }
+        }
+
         // Photo upload functionality
         function openPhotoModal() {
+            if (!isAdminAuthenticated) {
+                showNotification('Admin access required to update photos', 'error');
+                return;
+            }
             document.getElementById('photoModal').classList.add('show');
         }
 
@@ -1465,17 +1531,21 @@
             showNotification('Professional photo updated successfully!');
         }
 
-        function showNotification(message) {
+        function showNotification(message, type = 'success') {
             const notification = document.createElement('div');
+            const isError = type === 'error';
+            const bgColor = isError ? 'linear-gradient(135deg, #dc3545, #c82333)' : 'linear-gradient(135deg, #10b981, #059669)';
+            const shadowColor = isError ? 'rgba(220, 53, 69, 0.3)' : 'rgba(16, 185, 129, 0.3)';
+            
             notification.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: linear-gradient(135deg, #10b981, #059669);
+                background: ${bgColor};
                 color: white;
                 padding: 15px 25px;
                 border-radius: 10px;
-                box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+                box-shadow: 0 10px 25px ${shadowColor};
                 z-index: 3000;
                 font-weight: 600;
                 transform: translateX(400px);
