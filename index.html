@@ -1,138 +1,536 @@
-Certainly! Below is a complete HTML file for the Labyrinth Tech Support website, incorporating all the specified requirements and recommendations. This code is ready for deployment and designed to provide a modern, responsive, and SEO-optimized online presence for the business:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional tech support services in Brisbane. We offer computer repair, software installation, network setup, and more. Contact Labyrinth Tech Support for reliable solutions.">
-    <meta name="keywords" content="Brisbane tech support, computer repair Brisbane, software installation, network setup, tech solutions">
-    <title>Labyrinth Tech Support | Professional IT Services</title>
+    <title>Labyrinth Tech Support - Professional Computer Services | $100 Per Hour</title>
+    <meta name="description" content="Professional computer repair and tech support services in Brisbane. Expert solutions for hardware, software, networking issues. $100 per hour transparent pricing.">
+    <meta name="keywords" content="computer repair Brisbane, tech support, IT services, laptop repair, virus removal, data recovery, network setup, $100 per hour">
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            color: #333;
-            background-color: #f4f4f9;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
         header {
-            background: linear-gradient(to right, #3a7bd5, #3a6073);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+        
+        .pricing-highlight {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
             color: white;
-            padding: 20px 0;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            padding: 4rem 0;
             text-align: center;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
         .services {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.9);
         }
+        
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
         .service-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin: 10px;
-            padding: 20px;
-            width: 30%;
-            box-sizing: border-box;
-            transition: transform 0.2s;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
         }
+        
         .service-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
-        .service-card h2 {
-            margin-top: 0;
-            color: #3a6073;
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
-        .contact-section {
-            background-color: #3a6073;
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .service-card p {
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        
+        .service-price {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
             color: white;
-            padding: 40px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+        
+        .about {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2d3748;
+        }
+        
+        .about p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat {
             text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .contact-section h2 {
-            margin: 0 0 20px 0;
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
         }
-        .contact-btn {
-            background-color: #3a7bd5;
+        
+        .contact {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 10px 20px;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-item span {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1.2em;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            width: 100%;
         }
-        .contact-btn:hover {
-            background-color: #335c9d;
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
+        
         footer {
-            background-color: #333;
+            background: #2d3748;
             color: white;
-            padding: 10px;
             text-align: center;
+            padding: 2rem 0;
         }
-        footer p {
-            margin: 5px 0;
-        }
+        
         @media (max-width: 768px) {
-            .service-card {
-                width: 100%;
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🔧 Labyrinth Tech Support</div>
+                <div class="pricing-highlight">$100 Per Hour</div>
+            </div>
+        </div>
+    </header>
 
-<header>
-    <h1>Labyrinth Tech Support</h1>
-    <p>Your Trusted Partner for IT Solutions</p>
-</header>
+    <section class="hero">
+        <div class="container">
+            <h1>Professional Computer & Tech Support</h1>
+            <p>Expert solutions for all your technology needs in Brisbane. Fast, reliable, and affordable at $100 per hour.</p>
+            <a href="#contact" class="cta-button">Get Help Now - $100/Hour</a>
+        </div>
+    </section>
 
-<section class="services">
-    <div class="service-card">
-        <h2>Computer Repair</h2>
-        <p>Expert repair services for desktops and laptops. We fix hardware and software issues to get you back up and running.</p>
-    </div>
-    <div class="service-card">
-        <h2>Software Installation</h2>
-        <p>Professional software installation and configuration services. Ensure your applications are set up correctly and efficiently.</p>
-    </div>
-    <div class="service-card">
-        <h2>Network Setup</h2>
-        <p>Comprehensive network setup services for homes and businesses. Reliable and secure networking solutions.</p>
-    </div>
-</section>
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Computer Repair</h3>
+                    <p>Hardware diagnostics, component replacement, and system optimization for desktops and laptops.</p>
+                    <div class="service-price">$100 per hour</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Network Setup</h3>
+                    <p>WiFi configuration, router setup, network troubleshooting, and security implementation.</p>
+                    <div class="service-price">$100 per hour</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Software Support</h3>
+                    <p>Operating system installation, software troubleshooting, and application setup.</p>
+                    <div class="service-price">$100 per hour</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Virus Removal</h3>
+                    <p>Malware detection, virus removal, system cleaning, and security software installation.</p>
+                    <div class="service-price">$100 per hour</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Mobile Device Support</h3>
+                    <p>Smartphone and tablet troubleshooting, app installation, and device optimization.</p>
+                    <div class="service-price">$100 per hour</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💾</div>
+                    <h3>Data Recovery</h3>
+                    <p>File recovery, backup solutions, and data transfer services for all storage devices.</p>
+                    <div class="service-price">$100 per hour</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="contact-section">
-    <h2>Contact Us Today</h2>
-    <p>Ready to solve your tech challenges? Get in touch with our experts.</p>
-    <button class="contact-btn" onclick="window.location.href='mailto:contact@labyrinth-techsupport.com';">Contact Us</button>
-</section>
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div>
+                    <h2>Why Choose Labyrinth Tech Support?</h2>
+                    <p>With years of experience in the tech industry, we provide reliable, professional computer and technology support services throughout Brisbane.</p>
+                    <p>Our transparent pricing at $100 per hour means no hidden fees or surprise charges. You know exactly what you're paying for quality service.</p>
+                    <p>We specialize in both residential and business support, offering on-site visits and remote assistance to get your technology working perfectly.</p>
+                </div>
+                <div>
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div>Happy Customers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">24/7</div>
+                            <div>Support Available</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div>Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer>
-    <p>©2023 Labyrinth Tech Support. All rights reserved.</p>
-    <p>123 Tech Avenue, Brisbane, QLD, Australia</p>
-    <p>Phone: (123) 456-7890 | Email: contact@labyrinth-techsupport.com</p>
-</footer>
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Get Professional Help Today</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <div>
+                            <strong>Phone:</strong><br>
+                            Call for immediate assistance
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <div>
+                            <strong>Email:</strong><br>
+                            support@labyrinth-techsupport.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <div>
+                            <strong>Service Area:</strong><br>
+                            Brisbane & Surrounding Areas
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span>💰</span>
+                        <div>
+                            <strong>Pricing:</strong><br>
+                            $100 per hour - No hidden fees
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span>🕒</span>
+                        <div>
+                            <strong>Business Hours:</strong><br>
+                            Mon-Fri: 8AM-6PM<br>
+                            Sat: 9AM-4PM<br>
+                            Emergency support available
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Request Service - $100/Hour</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Type</label>
+                            <select id="service" name="service" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem;">
+                                <option value="">Select a service</option>
+                                <option value="computer-repair">Computer Repair - $100/hr</option>
+                                <option value="network-setup">Network Setup - $100/hr</option>
+                                <option value="software-support">Software Support - $100/hr</option>
+                                <option value="virus-removal">Virus Removal - $100/hr</option>
+                                <option value="mobile-support">Mobile Device Support - $100/hr</option>
+                                <option value="data-recovery">Data Recovery - $100/hr</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Describe Your Issue</label>
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Request Service - $100/Hour</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Labyrinth Tech Support. Professional computer services at $100 per hour. Brisbane, Australia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you within 24 hours to schedule your service at $100 per hour.');
+        });
+    </script>
 </body>
 </html>
-```
-
-### Key Features:
-
-- **Professional Header**: A gradient background provides a modern and trustworthy look.
-- **Service Sections**: Each service is displayed in a card layout for easy readability.
-- **Contact Section**: Includes a clear call-to-action button for contacting the business.
-- **Mobile-Responsive CSS**: Uses a flexible design that adjusts to different screen sizes.
-- **SEO-Optimized Meta Tags**: Descriptive and keyword-rich for better search visibility.
-- **Color Scheme**: Uses blues, grays, and whites to convey professionalism and trust.
-- **Trust Signals**: Includes contact information and location for credibility.
-
-This code is designed to meet the outlined requirements and can be directly deployed to create a professional and effective website for Labyrinth Tech Support.
