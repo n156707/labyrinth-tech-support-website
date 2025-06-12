@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%231A237E'/><text x='50' y='65' font-family='Arial,sans-serif' font-size='45' font-weight='bold' text-anchor='middle' fill='white'>🔧</text></svg>">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -30,18 +30,46 @@
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Merriweather', serif;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 1rem;
-            color: #1A237E;
+            margin-bottom: 1.5rem;
+            color: #004488;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.8rem;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
         }
+        
+        /* Grid-based layout improvements */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-8 { grid-column: span 8; }
+        .col-12 { grid-column: span 12; }
         
         /* Navigation */
         .navbar {
@@ -802,6 +830,74 @@
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
         
+        /* Enhanced Credentials and Trust Elements */
+        .credentials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        .credential-badge {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .credential-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .badge-icon {
+            font-size: 1.2rem;
+        }
+        
+        .badge-text {
+            color: #004488;
+            font-weight: 600;
+        }
+        
+        .trust-signals {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 15px;
+            border: 1px solid #cbd5e0;
+        }
+        
+        .partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .partner-badge {
+            background: linear-gradient(135deg, #004488, #0066cc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 68, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .partner-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 68, 136, 0.4);
+        }
+
         /* Footer */
         .footer {
             background: #111827;
@@ -1110,10 +1206,33 @@
                     <p class="about-text">Our transparent pricing at $100 per hour means no surprises - professional service that's accessible to everyone in Brisbane.</p>
                     
                     <div class="credentials">
-                        <div class="credential-badge">Professional Certified</div>
-                        <div class="credential-badge">Brisbane Local Expert</div>
-                        <div class="credential-badge">Transparent Pricing</div>
-                        <div class="credential-badge">Quality Guaranteed</div>
+                        <div class="credential-badge">
+                            <div class="badge-icon">🏆</div>
+                            <div class="badge-text">Professional Certified</div>
+                        </div>
+                        <div class="credential-badge">
+                            <div class="badge-icon">📍</div>
+                            <div class="badge-text">Brisbane Local Expert</div>
+                        </div>
+                        <div class="credential-badge">
+                            <div class="badge-icon">💰</div>
+                            <div class="badge-text">Transparent $100/hr</div>
+                        </div>
+                        <div class="credential-badge">
+                            <div class="badge-icon">✅</div>
+                            <div class="badge-text">Quality Guaranteed</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Trust Signals Section -->
+                    <div class="trust-signals">
+                        <h4 style="color: #004488; margin-bottom: 1rem;">Industry Certifications & Partners</h4>
+                        <div class="partner-logos">
+                            <div class="partner-badge">🔒 SSL Secured</div>
+                            <div class="partner-badge">🛡️ Privacy Protected</div>
+                            <div class="partner-badge">⚡ Fast Response</div>
+                            <div class="partner-badge">🔧 Expert Certified</div>
+                        </div>
                     </div>
                 </div>
                 <div class="about-photo" onclick="checkAdminAccess()">
