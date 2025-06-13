@@ -320,6 +320,73 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .service-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            margin-top: 1rem;
+        }
+        
+        .service-details.expanded {
+            max-height: 500px;
+        }
+        
+        .service-expand-btn {
+            background: none;
+            border: none;
+            color: var(--accent-teal);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .service-expand-btn:hover {
+            color: var(--secondary-blue);
+        }
+        
+        .service-expand-btn svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .service-expand-btn.expanded svg {
+            transform: rotate(180deg);
+        }
+        
+        .service-details h4 {
+            color: var(--primary-navy);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .service-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        
+        .service-details li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f3f5;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .service-details li:last-child {
+            border-bottom: none;
+        }
+        
+        .service-details li::before {
+            content: "✓";
+            color: var(--accent-teal);
+            font-weight: bold;
         }
         
         .service-card::before {
@@ -776,7 +843,7 @@
                     <p class="section-subtitle">Comprehensive technology solutions for individuals and businesses across Brisbane</p>
                 </div>
                 <div class="services-grid">
-                    <div class="service-card">
+                    <div class="service-card" id="computer-repair">
                         <div class="service-header">
                             <div class="service-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -786,12 +853,41 @@
                                     <rect x="14" y="10" width="4" height="2" fill="currentColor"/>
                                 </svg>
                             </div>
-                            <h3>Computer Repair</h3>
+                            <h3>Computer Repair Brisbane</h3>
                             <div class="service-price">From $100</div>
                         </div>
-                        <p>Hardware diagnostics, component replacement, system optimization, and performance upgrades. We service all brands including Dell, HP, Lenovo, and custom builds.</p>
+                        <p>Professional desktop computer repair services in Brisbane. Hardware diagnostics, component replacement, system optimization, and performance upgrades for all major brands.</p>
+                        <button class="service-expand-btn" onclick="toggleService('computer-repair')">
+                            Learn More 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="service-details" id="computer-repair-details">
+                            <h4>Complete Computer Repair Services</h4>
+                            <ul>
+                                <li>Motherboard repair and replacement</li>
+                                <li>Power supply unit diagnostics and replacement</li>
+                                <li>RAM memory testing and upgrades</li>
+                                <li>Graphics card installation and repair</li>
+                                <li>Hard drive replacement and SSD upgrades</li>
+                                <li>CPU cooling system maintenance</li>
+                                <li>Case fan replacement and airflow optimization</li>
+                                <li>USB port and connectivity repairs</li>
+                            </ul>
+                            <h4>Supported Brands</h4>
+                            <p>Dell, HP, Lenovo, ASUS, Acer, MSI, custom-built gaming PCs, workstations, and business computers. Same-day computer repair Brisbane CBD and surrounding suburbs.</p>
+                            <h4>Performance Optimization</h4>
+                            <ul>
+                                <li>Windows startup optimization</li>
+                                <li>Registry cleaning and defragmentation</li>
+                                <li>Temporary file removal and disk cleanup</li>
+                                <li>Background process management</li>
+                                <li>Driver updates and compatibility fixes</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" id="virus-removal">
                         <div class="service-header">
                             <div class="service-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -801,12 +897,41 @@
                                     <path d="M9 15l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <h3>Virus Removal</h3>
+                            <h3>Virus Removal Brisbane</h3>
                             <div class="service-price">$120</div>
                         </div>
-                        <p>Complete malware elimination, system security hardening, and antivirus installation. Includes data recovery and system restoration.</p>
+                        <p>Professional malware removal and computer virus cleaning services in Brisbane. Complete system security hardening with antivirus installation and data recovery.</p>
+                        <button class="service-expand-btn" onclick="toggleService('virus-removal')">
+                            Learn More 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="service-details" id="virus-removal-details">
+                            <h4>Complete Malware Elimination</h4>
+                            <ul>
+                                <li>Trojan horse detection and removal</li>
+                                <li>Spyware and adware cleaning</li>
+                                <li>Ransomware removal and prevention</li>
+                                <li>Browser hijacker elimination</li>
+                                <li>Rootkit scanning and removal</li>
+                                <li>Backdoor threat elimination</li>
+                                <li>Keylogger detection and removal</li>
+                                <li>Boot sector virus cleaning</li>
+                            </ul>
+                            <h4>System Security Hardening</h4>
+                            <ul>
+                                <li>Windows firewall configuration</li>
+                                <li>Automatic updates activation</li>
+                                <li>User account control optimization</li>
+                                <li>Browser security settings</li>
+                                <li>Email security configuration</li>
+                            </ul>
+                            <h4>Prevention & Protection</h4>
+                            <p>Installation of enterprise-grade antivirus software, real-time protection setup, and user education on safe browsing practices. 30-day guarantee against reinfection.</p>
+                        </div>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" id="laptop-repair">
                         <div class="service-header">
                             <div class="service-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -816,12 +941,42 @@
                                     <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
                                 </svg>
                             </div>
-                            <h3>Laptop Repair</h3>
+                            <h3>Laptop Repair Brisbane</h3>
                             <div class="service-price">From $150</div>
                         </div>
-                        <p>Screen replacement, keyboard repair, battery replacement, charging port fixes, and motherboard repairs for all laptop brands.</p>
+                        <p>Expert laptop repair services for all brands in Brisbane. Screen replacement, keyboard repair, battery replacement, charging port fixes, and motherboard repairs.</p>
+                        <button class="service-expand-btn" onclick="toggleService('laptop-repair')">
+                            Learn More 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="service-details" id="laptop-repair-details">
+                            <h4>Screen & Display Repairs</h4>
+                            <ul>
+                                <li>Cracked screen replacement (LED, LCD, OLED)</li>
+                                <li>Backlight repair and replacement</li>
+                                <li>Hinge repair and replacement</li>
+                                <li>Display cable replacement</li>
+                                <li>Touch screen digitizer repair</li>
+                                <li>External display connectivity issues</li>
+                            </ul>
+                            <h4>Hardware Component Repairs</h4>
+                            <ul>
+                                <li>Keyboard replacement (individual keys or full keyboard)</li>
+                                <li>Trackpad and mouse button repair</li>
+                                <li>Battery replacement and calibration</li>
+                                <li>Charging port and power jack repair</li>
+                                <li>Fan cleaning and replacement</li>
+                                <li>Speaker and microphone repair</li>
+                                <li>Webcam replacement</li>
+                                <li>WiFi antenna repair</li>
+                            </ul>
+                            <h4>Supported Laptop Brands</h4>
+                            <p>MacBook Pro, MacBook Air, Dell XPS, HP Pavilion, Lenovo ThinkPad, ASUS ZenBook, Acer Aspire, MSI Gaming laptops, Surface Pro, and all major laptop manufacturers. Same-day laptop repair Brisbane CBD.</p>
+                        </div>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" id="data-recovery">
                         <div class="service-header">
                             <div class="service-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -832,12 +987,42 @@
                                     <circle cx="12" cy="12" r="2" fill="currentColor"/>
                                 </svg>
                             </div>
-                            <h3>Data Recovery</h3>
+                            <h3>Data Recovery Brisbane</h3>
                             <div class="service-price">From $200</div>
                         </div>
-                        <p>Professional data recovery from failed hard drives, corrupted files, accidental deletion, and damaged storage devices.</p>
+                        <p>Professional data recovery services in Brisbane for failed hard drives, corrupted files, accidental deletion, and damaged storage devices. No data, no fee guarantee.</p>
+                        <button class="service-expand-btn" onclick="toggleService('data-recovery')">
+                            Learn More 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="service-details" id="data-recovery-details">
+                            <h4>Hard Drive Data Recovery</h4>
+                            <ul>
+                                <li>Mechanical hard drive failure recovery</li>
+                                <li>SSD data recovery and repair</li>
+                                <li>Click of death and head crash recovery</li>
+                                <li>Firmware corruption repair</li>
+                                <li>PCB circuit board replacement</li>
+                                <li>Platter damage assessment</li>
+                                <li>RAID array reconstruction</li>
+                            </ul>
+                            <h4>File Recovery Services</h4>
+                            <ul>
+                                <li>Accidentally deleted file recovery</li>
+                                <li>Formatted drive recovery</li>
+                                <li>Partition table corruption repair</li>
+                                <li>Operating system crash recovery</li>
+                                <li>Virus damaged file restoration</li>
+                                <li>Photo and video recovery</li>
+                                <li>Email and document recovery</li>
+                            </ul>
+                            <h4>Storage Device Support</h4>
+                            <p>USB drives, SD cards, external hard drives, NAS devices, servers, and all storage media types. Clean room facilities for physical drive recovery. Emergency 24-hour data recovery Brisbane.</p>
+                        </div>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" id="network-setup">
                         <div class="service-header">
                             <div class="service-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -846,12 +1031,42 @@
                                     <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
                                 </svg>
                             </div>
-                            <h3>Network Setup</h3>
+                            <h3>Network Setup Brisbane</h3>
                             <div class="service-price">From $180</div>
                         </div>
-                        <p>WiFi configuration, router setup, network security, business network installation, and connectivity troubleshooting.</p>
+                        <p>Professional WiFi network setup and configuration in Brisbane. Router installation, network security, business network solutions, and connectivity troubleshooting.</p>
+                        <button class="service-expand-btn" onclick="toggleService('network-setup')">
+                            Learn More 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="service-details" id="network-setup-details">
+                            <h4>WiFi Network Installation</h4>
+                            <ul>
+                                <li>Router configuration and optimization</li>
+                                <li>WiFi range extender installation</li>
+                                <li>Mesh network setup (Eero, Orbi, Google Nest)</li>
+                                <li>Guest network configuration</li>
+                                <li>Parental controls setup</li>
+                                <li>QoS bandwidth management</li>
+                                <li>WiFi password security</li>
+                            </ul>
+                            <h4>Business Network Solutions</h4>
+                            <ul>
+                                <li>Office network infrastructure</li>
+                                <li>Ethernet cable installation</li>
+                                <li>Network switch configuration</li>
+                                <li>VPN setup for remote workers</li>
+                                <li>Network attached storage (NAS)</li>
+                                <li>Print server configuration</li>
+                                <li>Network security auditing</li>
+                            </ul>
+                            <h4>Troubleshooting & Maintenance</h4>
+                            <p>Slow internet diagnosis, connection dropouts, port forwarding, firewall configuration, and ongoing network monitoring. NBN setup and optimization services Brisbane wide.</p>
+                        </div>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" id="business-support">
                         <div class="service-header">
                             <div class="service-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -862,10 +1077,39 @@
                                     <path d="M9 9h6v6H9z" fill="currentColor" opacity="0.3"/>
                                 </svg>
                             </div>
-                            <h3>Business IT Support</h3>
+                            <h3>Business IT Support Brisbane</h3>
                             <div class="service-price">Custom Quote</div>
                         </div>
-                        <p>Ongoing IT support, server maintenance, email setup, cloud migration, and comprehensive business technology solutions.</p>
+                        <p>Comprehensive business IT support services in Brisbane. Ongoing support contracts, server maintenance, email setup, cloud migration, and enterprise technology solutions.</p>
+                        <button class="service-expand-btn" onclick="toggleService('business-support')">
+                            Learn More 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="service-details" id="business-support-details">
+                            <h4>Managed IT Services</h4>
+                            <ul>
+                                <li>24/7 remote monitoring and support</li>
+                                <li>Proactive maintenance and updates</li>
+                                <li>Help desk and user support</li>
+                                <li>Asset management and inventory</li>
+                                <li>Performance monitoring and reporting</li>
+                                <li>Backup and disaster recovery</li>
+                                <li>Security monitoring and updates</li>
+                            </ul>
+                            <h4>Cloud & Email Solutions</h4>
+                            <ul>
+                                <li>Microsoft 365 setup and migration</li>
+                                <li>Google Workspace configuration</li>
+                                <li>Cloud storage and file sharing</li>
+                                <li>Email security and spam filtering</li>
+                                <li>Domain and DNS management</li>
+                                <li>Cloud backup solutions</li>
+                            </ul>
+                            <h4>Enterprise Solutions</h4>
+                            <p>Server installation and maintenance, Active Directory setup, database management, compliance consulting, and scalable IT infrastructure. Serving small to medium businesses across Brisbane and Queensland.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1132,12 +1376,12 @@
                 <div class="footer-section">
                     <h3>Services</h3>
                     <ul class="footer-links">
-                        <li><a href="#computer-repair">Computer Repair</a></li>
-                        <li><a href="#virus-removal">Virus Removal</a></li>
-                        <li><a href="#laptop-repair">Laptop Repair</a></li>
-                        <li><a href="#data-recovery">Data Recovery</a></li>
-                        <li><a href="#network-setup">Network Setup</a></li>
-                        <li><a href="#business-support">Business IT</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('computer-repair')">Computer Repair Brisbane</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('virus-removal')">Virus Removal Brisbane</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('laptop-repair')">Laptop Repair Brisbane</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('data-recovery')">Data Recovery Brisbane</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('network-setup')">Network Setup Brisbane</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('business-support')">Business IT Support</a></li>
                     </ul>
                 </div>
                 
@@ -1207,6 +1451,56 @@
             // Reset form
             this.reset();
         });
+
+        // Service expansion functionality
+        function toggleService(serviceId) {
+            const details = document.getElementById(serviceId + '-details');
+            const button = event.target.closest('.service-expand-btn');
+            
+            if (details.classList.contains('expanded')) {
+                details.classList.remove('expanded');
+                button.classList.remove('expanded');
+                button.innerHTML = 'Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            } else {
+                // Close all other expanded services
+                document.querySelectorAll('.service-details.expanded').forEach(detail => {
+                    detail.classList.remove('expanded');
+                });
+                document.querySelectorAll('.service-expand-btn.expanded').forEach(btn => {
+                    btn.classList.remove('expanded');
+                    btn.innerHTML = 'Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                });
+                
+                // Expand clicked service
+                details.classList.add('expanded');
+                button.classList.add('expanded');
+                button.innerHTML = 'Show Less <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            }
+        }
+
+        // Footer link functionality to expand specific service
+        function expandServiceFromFooter(serviceId) {
+            setTimeout(() => {
+                const details = document.getElementById(serviceId + '-details');
+                const button = document.querySelector(`#${serviceId} .service-expand-btn`);
+                
+                // Close all expanded services first
+                document.querySelectorAll('.service-details.expanded').forEach(detail => {
+                    detail.classList.remove('expanded');
+                });
+                document.querySelectorAll('.service-expand-btn.expanded').forEach(btn => {
+                    btn.classList.remove('expanded');
+                    btn.innerHTML = 'Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                });
+                
+                // Expand target service
+                if (details && button) {
+                    details.classList.add('expanded');
+                    button.classList.add('expanded');
+                    button.innerHTML = 'Show Less <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                }
+            }, 500);
+        }
 
         // Add loading animation to buttons on click
         document.querySelectorAll('.btn-primary, .btn-secondary, .cta-button').forEach(button => {
