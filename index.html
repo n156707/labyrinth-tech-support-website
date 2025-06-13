@@ -7,7 +7,7 @@
     <meta name="description" content="Expert computer repair and IT support services in Brisbane QLD. Same-day laptop repair, desktop fixes, data recovery, network setup. 12-month warranty. Call 0482 012 429 for professional computer technicians serving Greater Brisbane area.">
     
     <!-- Enhanced SEO Keywords Meta Tags with Long-tail Keywords -->
-    <meta name="keywords" content="computer repair Brisbane, laptop repair Brisbane QLD, desktop computer repair near me, same day computer repair Brisbane, IT support Brisbane CBD, emergency computer repair Brisbane, business IT support Brisbane, data recovery Brisbane, network setup Brisbane, virus removal Brisbane, computer technician Brisbane, MacBook repair Brisbane, PC repair Brisbane northside, computer repair Brisbane southside, affordable computer repair Brisbane, network dropout solutions Brisbane, software problem resolution Brisbane, email migration services Brisbane, WiFi troubleshooting Brisbane, application crash repair Brisbane, email system migration Brisbane">
+    <meta name="keywords" content="computer repair Brisbane, laptop repair Brisbane QLD, desktop computer repair near me, same day computer repair Brisbane, IT support Brisbane CBD, emergency computer repair Brisbane, business IT support Brisbane, data recovery Brisbane, network setup Brisbane, virus removal Brisbane, computer technician Brisbane, MacBook repair Brisbane, PC repair Brisbane northside, computer repair Brisbane southside, affordable computer repair Brisbane, network dropout solutions Brisbane, software problem resolution Brisbane, email migration services Brisbane, WiFi troubleshooting Brisbane, application crash repair Brisbane, email system migration Brisbane, computer repair prices Brisbane, $100 hourly rate computer repair, transparent pricing computer repair Brisbane">
     <meta name="author" content="Labyrinth Tech Support">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="geo.region" content="AU-QLD">
@@ -966,6 +966,181 @@
             background: var(--neutral-50);
         }
         
+        /* Pricing Section */
+        .pricing-section {
+            padding: 6rem 0;
+            background: var(--neutral-50);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .pricing-card {
+            background: var(--surface-white);
+            border-radius: var(--border-radius-2xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary-brand);
+            position: relative;
+            transform: scale(1.02);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-brand);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--border-radius-lg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--neutral-200);
+            padding-bottom: 2rem;
+        }
+        
+        .pricing-header h3 {
+            color: var(--neutral-900);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .currency {
+            color: var(--primary-brand);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .amount {
+            color: var(--primary-brand);
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .period {
+            color: var(--neutral-600);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .pricing-subtitle {
+            color: var(--neutral-600);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+        
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: var(--neutral-700);
+            font-size: 0.95rem;
+        }
+        
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success-green);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .pricing-footer {
+            border-top: 1px solid var(--neutral-200);
+            padding-top: 2rem;
+            text-align: center;
+        }
+        
+        .pricing-btn {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .pricing-note {
+            color: var(--neutral-500);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        .pricing-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .highlight-card {
+            background: var(--surface-white);
+            border-radius: var(--border-radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .highlight-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .highlight-card h4 {
+            color: var(--neutral-900);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-card p {
+            color: var(--neutral-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
         /* Footer */
         .footer {
             background: var(--neutral-900);
@@ -1055,6 +1230,19 @@
             
             .faq-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-highlights {
+                gap: 1.5rem;
             }
         }
         
@@ -1508,6 +1696,77 @@
                                     <li>Staff training on new email systems and productivity features</li>
                                 </ul>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Transparent Pricing for Brisbane Computer Repair</h2>
+                    <p class="section-subtitle">Professional computer repair services with competitive rates and no hidden fees. All work backed by our 12-month warranty.</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <h3>Standard Hourly Rate</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">100</span>
+                                <span class="period">/hour</span>
+                            </div>
+                            <p class="pricing-subtitle">Capped at $100 per hour maximum</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Professional computer diagnosis and repair</li>
+                                <li>Same-day service available</li>
+                                <li>12-month warranty on all repairs</li>
+                                <li>No hidden fees or surprise charges</li>
+                                <li>Free initial consultation and quote</li>
+                                <li>Parts and labor included in warranty</li>
+                                <li>Emergency after-hours support available</li>
+                                <li>On-site service throughout Brisbane</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#contact" class="btn-primary pricing-btn">Get Free Quote</a>
+                            <p class="pricing-note">Call for emergency rates and bulk service discounts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-highlights">
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h4>No Hidden Costs</h4>
+                            <p>Transparent pricing with detailed quotes provided upfront. You'll know exactly what you're paying before any work begins.</p>
+                        </div>
+                        
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h4>Rate Cap Guarantee</h4>
+                            <p>Our hourly rate is capped at $100 maximum, ensuring fair and predictable pricing for all computer repair services.</p>
+                        </div>
+                        
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h4>Free Diagnostics</h4>
+                            <p>Complimentary initial assessment and detailed quote for all computer repair work - no charge for consultation.</p>
                         </div>
                     </div>
                 </div>
