@@ -95,17 +95,54 @@
     }
     </script>
     
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-navy: #1e3a8a;
-            --secondary-blue: #3b82f6;
-            --accent-teal: #14b8a6;
-            --accent-orange: #f97316;
-            --neutral-gray: #6b7280;
-            --light-gray: #f3f4f6;
-            --white: #ffffff;
-            --text-dark: #111827;
-            --text-light: #374151;
+            --primary-brand: #0066ff;
+            --primary-dark: #0052cc;
+            --secondary-cyan: #00d4ff;
+            --accent-purple: #6366f1;
+            --accent-emerald: #10b981;
+            --success-green: #22c55e;
+            --warning-amber: #f59e0b;
+            --error-red: #ef4444;
+            
+            --gradient-primary: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            --gradient-secondary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #e5e5e5;
+            --neutral-300: #d4d4d4;
+            --neutral-400: #a3a3a3;
+            --neutral-500: #737373;
+            --neutral-600: #525252;
+            --neutral-700: #404040;
+            --neutral-800: #262626;
+            --neutral-900: #171717;
+            
+            --surface-white: #ffffff;
+            --surface-glass: rgba(255, 255, 255, 0.85);
+            --surface-dark: #1a1a1a;
+            --surface-elevated: rgba(255, 255, 255, 0.95);
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            --border-radius-sm: 0.375rem;
+            --border-radius-md: 0.5rem;
+            --border-radius-lg: 0.75rem;
+            --border-radius-xl: 1rem;
+            --border-radius-2xl: 1.5rem;
+            
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
         }
         
         * {
@@ -114,28 +151,36 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: var(--font-sans);
             line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--white);
+            color: var(--neutral-700);
+            background: var(--neutral-50);
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1.5rem;
         }
         
-        /* Header Styles */
+        /* Modern Navigation */
         .header {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            background: var(--surface-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
         
         .nav-container {
@@ -148,22 +193,28 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-navy);
+            color: var(--neutral-900);
             text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--accent-teal), var(--secondary-blue));
-            border-radius: 8px;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            box-shadow: var(--shadow-md);
         }
         
         .nav-menu {
@@ -174,50 +225,112 @@
         }
         
         .nav-link {
-            color: var(--text-light);
+            color: var(--neutral-600);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .nav-link:hover {
-            color: var(--accent-teal);
+            color: var(--primary-brand);
+            background: rgba(0, 102, 255, 0.05);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
         }
         
         .cta-button {
-            background: var(--accent-orange);
+            background: var(--gradient-primary);
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            border-radius: var(--border-radius-lg);
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
         
         .cta-button:hover {
-            background: #ea580c;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
         
-        /* Hero Section */
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Hero Section - Modern Design */
         .hero {
-            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-blue) 100%);
-            color: white;
-            padding: 120px 0 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="1"/></g></svg>') repeat;
+            animation: floating 20s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero-subtitle {
             font-size: 1.25rem;
             margin-bottom: 2.5rem;
             opacity: 0.9;
+            line-height: 1.6;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -228,45 +341,76 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 3rem;
         }
         
         .btn-primary {
-            background: var(--accent-teal);
-            color: white;
+            background: var(--surface-white);
+            color: var(--primary-brand);
             padding: 1rem 2rem;
-            border-radius: 8px;
+            border-radius: var(--border-radius-xl);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
+            box-shadow: var(--shadow-xl);
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
         
         .btn-primary:hover {
-            background: #0f9b8e;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-2xl);
+            color: var(--primary-dark);
         }
         
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             padding: 1rem 2rem;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius-xl);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
         
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.6);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
         }
         
-        /* Value Proposition Section */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+        
+        /* Modern Cards */
         .value-prop {
-            padding: 80px 0;
-            background: var(--light-gray);
+            padding: 6rem 0;
+            background: var(--surface-white);
         }
         
         .section-header {
@@ -275,259 +419,245 @@
         }
         
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
-            color: var(--primary-navy);
+            color: var(--neutral-900);
             margin-bottom: 1rem;
         }
         
         .section-subtitle {
             font-size: 1.2rem;
-            color: var(--text-light);
+            color: var(--neutral-600);
             max-width: 600px;
             margin: 0 auto;
         }
         
         .value-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
         
         .value-card {
-            background: white;
+            background: var(--surface-white);
             padding: 2.5rem;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
+            border-radius: var(--border-radius-2xl);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            border: 1px solid var(--neutral-100);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
         
         .value-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
         }
         
         .value-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--accent-teal), var(--secondary-blue));
-            border-radius: 50%;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius-2xl);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 2rem;
             color: white;
+            box-shadow: var(--shadow-lg);
         }
         
         .value-card h3 {
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--primary-navy);
+            color: var(--neutral-900);
             margin-bottom: 1rem;
+            text-align: center;
         }
         
         .value-card p {
-            color: var(--text-light);
+            color: var(--neutral-600);
             line-height: 1.7;
+            text-align: center;
         }
         
         /* Services Section */
         .services {
-            padding: 80px 0;
+            padding: 6rem 0;
+            background: var(--neutral-50);
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
         }
         
         .service-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 2rem;
+            background: var(--surface-white);
+            border-radius: var(--border-radius-2xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
+            border: 1px solid var(--neutral-100);
+            position: relative;
+            overflow: hidden;
         }
         
         .service-card:hover {
-            border-color: var(--accent-teal);
-            box-shadow: 0 8px 30px rgba(20,184,166,0.15);
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
         }
+        
+        .service-card:nth-child(1) .service-icon { background: var(--gradient-primary); }
+        .service-card:nth-child(2) .service-icon { background: var(--gradient-secondary); }
+        .service-card:nth-child(3) .service-icon { background: var(--gradient-accent); }
+        .service-card:nth-child(4) .service-icon { background: linear-gradient(135deg, var(--warning-amber) 0%, var(--error-red) 100%); }
+        .service-card:nth-child(5) .service-icon { background: linear-gradient(135deg, var(--error-red) 0%, var(--accent-purple) 100%); }
+        .service-card:nth-child(6) .service-icon { background: linear-gradient(135deg, var(--success-green) 0%, var(--secondary-cyan) 100%); }
         
         .service-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
         
         .service-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--accent-teal), var(--secondary-blue));
-            border-radius: 8px;
+            border-radius: var(--border-radius-xl);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            box-shadow: var(--shadow-md);
         }
         
         .service-card h3 {
             font-size: 1.4rem;
             font-weight: 600;
-            color: var(--primary-navy);
+            color: var(--neutral-900);
         }
         
         .service-card p {
-            color: var(--text-light);
+            color: var(--neutral-600);
             margin-bottom: 1.5rem;
             line-height: 1.7;
         }
         
         .service-expand-btn {
             background: transparent;
-            color: var(--accent-teal);
-            border: 1px solid var(--accent-teal);
+            color: var(--primary-brand);
+            border: 2px solid var(--primary-brand);
             padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            border-radius: var(--border-radius-lg);
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            font-family: var(--font-sans);
         }
         
         .service-expand-btn:hover {
-            background: var(--accent-teal);
+            background: var(--primary-brand);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         
         .service-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
-            margin-top: 1rem;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            margin-top: 0;
         }
         
         .service-details.expanded {
             max-height: 500px;
+            margin-top: 1.5rem;
         }
         
         .service-details-content {
-            padding-top: 1rem;
-            border-top: 1px solid #e5e7eb;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--neutral-100);
         }
         
         .service-details h4 {
-            color: var(--primary-navy);
+            color: var(--neutral-900);
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
         
         .service-details ul {
-            color: var(--text-light);
-            padding-left: 1.2rem;
-            line-height: 1.7;
+            color: var(--neutral-600);
+            padding-left: 1.5rem;
+            line-height: 1.8;
         }
         
-        /* Additional Content Section */
-        .additional-content {
-            padding: 80px 0;
-            background: var(--light-gray);
-        }
-        
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
-        }
-        
-        .content-block {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        
-        .content-block h3 {
-            color: var(--primary-navy);
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .content-block p {
-            color: var(--text-light);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-        
-        .content-block ul {
-            color: var(--text-light);
-            padding-left: 1.2rem;
-            line-height: 1.7;
-        }
-        
-        .content-block ul li {
+        .service-details li {
             margin-bottom: 0.5rem;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            padding: 80px 0;
-        }
-        
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 2rem;
-        }
-        
-        .faq-item {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-        
-        .faq-question {
-            color: var(--primary-navy);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .faq-answer {
-            color: var(--text-light);
-            line-height: 1.6;
         }
         
         /* Testimonials Section */
         .testimonials {
-            padding: 80px 0;
-            background: var(--light-gray);
+            padding: 6rem 0;
+            background: var(--surface-white);
         }
         
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
         
         .testimonial-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: var(--surface-white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-2xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--neutral-100);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 4rem;
+            color: var(--primary-brand);
+            font-family: Georgia, serif;
+            line-height: 1;
+            opacity: 0.3;
         }
         
         .testimonial-text {
             font-style: italic;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
+            color: var(--neutral-600);
+            margin-bottom: 2rem;
             line-height: 1.7;
+            position: relative;
+            z-index: 2;
         }
         
         .testimonial-author {
@@ -539,68 +669,85 @@
         .author-avatar {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--accent-teal), var(--secondary-blue));
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
+            box-shadow: var(--shadow-md);
         }
         
         .author-info h4 {
-            color: var(--primary-navy);
+            color: var(--neutral-900);
             font-weight: 600;
+            margin-bottom: 0.25rem;
         }
         
         .author-info p {
-            color: var(--text-light);
+            color: var(--neutral-500);
             font-size: 0.9rem;
         }
         
         /* Contact Section */
         .contact {
-            padding: 80px 0;
-            background: var(--primary-navy);
+            padding: 6rem 0;
+            background: var(--gradient-primary);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="1"/></g></svg>') repeat;
         }
         
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+            position: relative;
+            z-index: 2;
         }
         
         .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-details {
-            space-y: 1rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--accent-teal);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(10px);
         }
         
         .contact-form {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-2xl);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-xl);
         }
         
         .form-group {
@@ -611,67 +758,76 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            font-size: 0.95rem;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.875rem;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 6px;
-            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-lg);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             font-size: 1rem;
+            font-family: var(--font-sans);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
         
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--accent-teal);
-            background: rgba(255,255,255,0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
         }
         
         .submit-btn {
-            background: var(--accent-teal);
-            color: white;
+            background: var(--surface-white);
+            color: var(--primary-brand);
             padding: 1rem 2rem;
             border: none;
-            border-radius: 6px;
+            border-radius: var(--border-radius-lg);
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
+            font-family: var(--font-sans);
+            box-shadow: var(--shadow-lg);
         }
         
         .submit-btn:hover {
-            background: #0f9b8e;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            background: var(--neutral-50);
         }
         
         /* Footer */
         .footer {
-            background: var(--text-dark);
+            background: var(--neutral-900);
             color: white;
-            padding: 3rem 0 1rem;
+            padding: 4rem 0 2rem;
         }
         
         .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
         
         .footer-column h4 {
-            color: var(--accent-teal);
+            color: var(--secondary-cyan);
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
         
         .footer-column ul {
@@ -679,27 +835,29 @@
         }
         
         .footer-column ul li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
         
         .footer-column ul li a {
-            color: rgba(255,255,255,0.8);
+            color: var(--neutral-300);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 0.95rem;
         }
         
         .footer-column ul li a:hover {
-            color: var(--accent-teal);
+            color: var(--secondary-cyan);
         }
         
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 1rem;
+            border-top: 1px solid var(--neutral-700);
+            padding-top: 2rem;
             text-align: center;
-            color: rgba(255,255,255,0.6);
+            color: var(--neutral-400);
+            font-size: 0.9rem;
         }
         
-        /* Responsive Design */
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -714,20 +872,27 @@
                 align-items: center;
             }
             
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
             .section-header h2 {
                 font-size: 2rem;
             }
             
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
-            .content-grid {
+            .value-grid,
+            .services-grid {
                 grid-template-columns: 1fr;
             }
             
-            .faq-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 0 1rem;
             }
         }
         
@@ -746,18 +911,24 @@
         
         /* Focus styles for accessibility */
         *:focus {
-            outline: 2px solid var(--accent-teal);
+            outline: 2px solid var(--primary-brand);
             outline-offset: 2px;
         }
         
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            :root {
-                --primary-navy: #000000;
-                --secondary-blue: #0000ff;
-                --accent-teal: #008080;
-                --accent-orange: #ff6600;
+        /* Smooth scrolling animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
         }
         
         /* Reduced motion support */
@@ -805,11 +976,25 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Expert Computer Repair & IT Support in Brisbane</h1>
-                    <p class="hero-subtitle">Fast, reliable computer repair and comprehensive IT solutions for home and business. Same-day service available with 12-month warranty on all repairs. Trusted by 500+ Brisbane customers.</p>
+                    <h1>Brisbane's Premier Computer Repair & IT Support</h1>
+                    <p class="hero-subtitle">Experience next-level tech support with same-day service, 12-month warranty, and expert solutions. Trusted by 500+ Brisbane customers for reliable computer repair and comprehensive IT services.</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn-primary">Get Free Quote</a>
                         <a href="tel:+61482012429" class="btn-secondary">Call 0482 012 429</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Happy Customers</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Month Warranty</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Emergency Support</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -819,8 +1004,8 @@
         <section class="value-prop">
             <div class="container">
                 <div class="section-header">
-                    <h2>Why Choose Labyrinth Tech Support Brisbane</h2>
-                    <p class="section-subtitle">Trusted by over 500+ Brisbane residents and businesses for reliable computer repair and IT support solutions</p>
+                    <h2>Why Choose Labyrinth Tech Support</h2>
+                    <p class="section-subtitle">Professional computer repair and IT support services designed for Brisbane homes and businesses</p>
                 </div>
                 <div class="value-grid">
                     <div class="value-card">
@@ -829,8 +1014,8 @@
                                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3>Same-Day Computer Repair Service</h3>
-                        <p>Urgent computer problems? We provide same-day on-site computer repair service throughout Brisbane metropolitan area with emergency callout available for critical business systems.</p>
+                        <h3>Same-Day Service</h3>
+                        <p>Urgent computer emergencies solved within hours. Our rapid response team provides same-day on-site service throughout Brisbane with priority scheduling for critical business systems.</p>
                     </div>
                     <div class="value-card">
                         <div class="value-icon">
@@ -838,17 +1023,17 @@
                                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3>12-Month Warranty on All Repairs</h3>
-                        <p>All computer repairs come with our comprehensive 12-month warranty covering parts and labour, giving you complete peace of mind for all IT support services.</p>
+                        <h3>12-Month Warranty</h3>
+                        <p>Industry-leading warranty protection on all repairs covering both parts and labor. Complete peace of mind with comprehensive coverage you can trust.</p>
                     </div>
                     <div class="value-card">
                         <div class="value-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100-4m0 4v2m0-6V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3>Expert IT Technicians</h3>
-                        <p>Our certified IT technicians have 10+ years experience with all major computer brands and operating systems including Windows, Mac, and Linux for comprehensive IT support.</p>
+                        <h3>Expert Technicians</h3>
+                        <p>Certified professionals with 10+ years experience across all major platforms - Windows, Mac, Linux. Advanced training in latest technologies and repair techniques.</p>
                     </div>
                 </div>
             </div>
@@ -858,8 +1043,8 @@
         <section id="services" class="services">
             <div class="container">
                 <div class="section-header">
-                    <h2>Brisbane Computer Repair & IT Support Services</h2>
-                    <p class="section-subtitle">Comprehensive technology solutions for homes and businesses across Brisbane - from emergency computer repair to business IT consulting</p>
+                    <h2>Comprehensive IT Solutions</h2>
+                    <p class="section-subtitle">Complete technology services from emergency repairs to strategic IT consulting</p>
                 </div>
                 <div class="services-grid">
                     <div class="service-card" id="computer-repair">
@@ -871,7 +1056,7 @@
                             </div>
                             <h3>Computer Repair Services</h3>
                         </div>
-                        <p>Professional computer repair for desktops, laptops, and all-in-one systems in Brisbane. From hardware failures to software issues, we diagnose and fix all computer problems quickly and efficiently with same-day service available.</p>
+                        <p>Expert repair solutions for all computer types - desktops, laptops, and workstations. From hardware failures to software corruption, we restore your systems to peak performance.</p>
                         <button class="service-expand-btn" onclick="toggleService('computer-repair')">
                             Learn More 
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -880,16 +1065,14 @@
                         </button>
                         <div class="service-details" id="computer-repair-details">
                             <div class="service-details-content">
-                                <h4>Brisbane Computer Repair Services Include:</h4>
+                                <h4>Comprehensive Repair Services:</h4>
                                 <ul>
-                                    <li>Slow performance optimization and system tuning</li>
-                                    <li>Blue screen errors and system crash troubleshooting</li>
-                                    <li>Hardware replacement (RAM, hard drives, graphics cards, power supplies)</li>
-                                    <li>Motherboard and component diagnostics</li>
-                                    <li>Overheating repair and cooling system optimization</li>
-                                    <li>Boot failure recovery and startup issue resolution</li>
-                                    <li>Virus removal and malware cleaning</li>
-                                    <li>Windows, Mac, and Linux computer repair</li>
+                                    <li>Performance optimization and system tuning</li>
+                                    <li>Hardware diagnostics and component replacement</li>
+                                    <li>Operating system repair and reinstallation</li>
+                                    <li>Virus removal and security restoration</li>
+                                    <li>Data recovery and backup solutions</li>
+                                    <li>Overheating repair and cooling optimization</li>
                                 </ul>
                             </div>
                         </div>
@@ -902,9 +1085,9 @@
                                     <path d="M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <h3>IT Support Solutions</h3>
+                            <h3>Business IT Support</h3>
                         </div>
-                        <p>Comprehensive IT support for small businesses and home offices in Brisbane. We provide network setup, security solutions, and ongoing technical support to keep your systems running smoothly and securely.</p>
+                        <p>Comprehensive IT infrastructure management for growing businesses. Network setup, security implementation, and ongoing support to keep your operations running smoothly.</p>
                         <button class="service-expand-btn" onclick="toggleService('it-support')">
                             Learn More 
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -913,16 +1096,14 @@
                         </button>
                         <div class="service-details" id="it-support-details">
                             <div class="service-details-content">
-                                <h4>IT Support Services Include:</h4>
+                                <h4>Enterprise IT Solutions:</h4>
                                 <ul>
-                                    <li>Business network setup and configuration</li>
-                                    <li>Wi-Fi optimization and wireless troubleshooting</li>
-                                    <li>Email setup and Microsoft Office 365 management</li>
-                                    <li>Cloud storage and automated backup solutions</li>
-                                    <li>Antivirus and cybersecurity software installation</li>
-                                    <li>Regular maintenance contracts and system updates</li>
+                                    <li>Network design and implementation</li>
+                                    <li>Cloud migration and management</li>
+                                    <li>Cybersecurity and compliance</li>
                                     <li>Server installation and maintenance</li>
-                                    <li>Remote monitoring and support services</li>
+                                    <li>Email and productivity suite setup</li>
+                                    <li>Backup and disaster recovery planning</li>
                                 </ul>
                             </div>
                         </div>
@@ -933,12 +1114,11 @@
                             <div class="service-icon">
                                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path d="M12 19l9-7-9-7-9 7 9 7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="m12 19-9-7 9-7 9 7-9 7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
                             <h3>Remote Tech Support</h3>
                         </div>
-                        <p>Get instant computer help without leaving your Brisbane home or office. Our secure remote support service allows our IT technicians to diagnose and fix many computer issues remotely, saving you time and money.</p>
+                        <p>Instant technical assistance through secure remote connections. Solve software issues, perform updates, and receive training without leaving your location.</p>
                         <button class="service-expand-btn" onclick="toggleService('remote-support')">
                             Learn More 
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -947,49 +1127,14 @@
                         </button>
                         <div class="service-details" id="remote-support-details">
                             <div class="service-details-content">
-                                <h4>Remote Tech Support Benefits:</h4>
+                                <h4>Remote Support Benefits:</h4>
                                 <ul>
-                                    <li>Instant technical assistance for urgent issues</li>
-                                    <li>Software troubleshooting and repair services</li>
-                                    <li>System optimization and performance tuning</li>
-                                    <li>Software installation and security updates</li>
-                                    <li>Training and guidance for new software</li>
-                                    <li>Cost-effective solution for many IT problems</li>
-                                    <li>Screen sharing for real-time assistance</li>
-                                    <li>Secure encrypted connections for privacy</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="service-card" id="business-consulting">
-                        <div class="service-header">
-                            <div class="service-icon">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <h3>Business IT Consulting</h3>
-                        </div>
-                        <p>Strategic IT consulting for growing Brisbane businesses. We help you choose the right technology solutions, improve efficiency, and plan for future growth with scalable IT infrastructure and cybersecurity.</p>
-                        <button class="service-expand-btn" onclick="toggleService('business-consulting')">
-                            Learn More 
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <div class="service-details" id="business-consulting-details">
-                            <div class="service-details-content">
-                                <h4>Business IT Consulting Services:</h4>
-                                <ul>
-                                    <li>IT infrastructure planning and design</li>
-                                    <li>Technology budget planning and cost optimization</li>
-                                    <li>Cybersecurity assessments and recommendations</li>
-                                    <li>Software and hardware procurement advice</li>
-                                    <li>Disaster recovery and business continuity planning</li>
-                                    <li>Staff IT training and documentation</li>
-                                    <li>Cloud migration and digital transformation</li>
-                                    <li>Compliance and data protection consulting</li>
+                                    <li>Immediate response for urgent issues</li>
+                                    <li>Software troubleshooting and optimization</li>
+                                    <li>System updates and security patches</li>
+                                    <li>User training and guidance</li>
+                                    <li>Cost-effective problem resolution</li>
+                                    <li>Secure encrypted connections</li>
                                 </ul>
                             </div>
                         </div>
@@ -1002,9 +1147,9 @@
                                     <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <h3>Emergency Computer Repair</h3>
+                            <h3>Emergency Support</h3>
                         </div>
-                        <p>Critical computer emergency in Brisbane? We offer 24/7 emergency computer repair services for business-critical systems. When downtime costs money, we're here to get you back online fast with priority support.</p>
+                        <p>24/7 emergency response for critical system failures. When every minute counts, our rapid response team provides immediate on-site assistance.</p>
                         <button class="service-expand-btn" onclick="toggleService('emergency-repair')">
                             Learn More 
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1013,16 +1158,14 @@
                         </button>
                         <div class="service-details" id="emergency-repair-details">
                             <div class="service-details-content">
-                                <h4>Emergency Computer Services:</h4>
+                                <h4>Emergency Services:</h4>
                                 <ul>
-                                    <li>24/7 emergency callout service in Brisbane</li>
-                                    <li>Server failure recovery and restoration</li>
-                                    <li>Critical data recovery from failed hard drives</li>
-                                    <li>Network outage troubleshooting and repair</li>
-                                    <li>Critical system restoration and backup recovery</li>
-                                    <li>Priority support for business-critical systems</li>
-                                    <li>After-hours and weekend emergency support</li>
-                                    <li>Rapid response within 2 hours for emergencies</li>
+                                    <li>24/7 emergency callout service</li>
+                                    <li>Server failure recovery</li>
+                                    <li>Critical data recovery operations</li>
+                                    <li>Network outage resolution</li>
+                                    <li>Business continuity support</li>
+                                    <li>Priority response within 2 hours</li>
                                 </ul>
                             </div>
                         </div>
@@ -1035,9 +1178,9 @@
                                     <path d="M8 17l4 4 4-4m-4-5v9m6-9a9 9 0 10-18 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <h3>Data Recovery Services</h3>
+                            <h3>Data Recovery</h3>
                         </div>
-                        <p>Lost important files in Brisbane? Our data recovery specialists can recover data from failed hard drives, corrupted storage devices, and accidentally deleted files with industry-leading success rates and advanced recovery techniques.</p>
+                        <p>Advanced data recovery from failed drives, corrupted files, and damaged storage devices. Industry-leading success rates with secure handling of sensitive information.</p>
                         <button class="service-expand-btn" onclick="toggleService('data-recovery')">
                             Learn More 
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1046,109 +1189,48 @@
                         </button>
                         <div class="service-details" id="data-recovery-details">
                             <div class="service-details-content">
-                                <h4>Data Recovery Services Include:</h4>
+                                <h4>Recovery Capabilities:</h4>
                                 <ul>
-                                    <li>Hard drive failure recovery (mechanical and electronic)</li>
-                                    <li>SSD data recovery and flash memory repair</li>
-                                    <li>USB drive and external storage recovery</li>
-                                    <li>Accidentally deleted file recovery</li>
-                                    <li>RAID array reconstruction and repair</li>
-                                    <li>Database recovery and corruption repair</li>
-                                    <li>Photo and video recovery services</li>
-                                    <li>Clean room data recovery for severe damage</li>
+                                    <li>Hard drive and SSD recovery</li>
+                                    <li>RAID array reconstruction</li>
+                                    <li>Database recovery and repair</li>
+                                    <li>Photo and video restoration</li>
+                                    <li>Email and document recovery</li>
+                                    <li>Clean room data recovery services</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Additional Content Section -->
-        <section class="additional-content">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Comprehensive IT Solutions for Brisbane</h2>
-                    <p class="section-subtitle">Expert computer repair and IT support services designed for Brisbane homes and businesses</p>
-                </div>
-                <div class="content-grid">
-                    <div class="content-block">
-                        <h3>Why Professional Computer Repair Matters</h3>
-                        <p>When your computer breaks down, it's tempting to try DIY fixes or cheap alternatives. However, professional computer repair services in Brisbane offer several advantages that save you time, money, and frustration in the long run.</p>
-                        <p>Our certified technicians use advanced diagnostic tools to identify the root cause of problems, not just the symptoms. This comprehensive approach ensures lasting repairs backed by our 12-month warranty.</p>
-                        <p>Whether you're dealing with a slow laptop, desktop computer crashes, or network connectivity issues, professional IT support provides peace of mind and reliable solutions that keep your technology working optimally.</p>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h3>Common Computer Problems We Fix</h3>
-                        <p>Our Brisbane computer repair experts handle a wide range of technical issues for both residential and commercial clients. Here are some of the most common problems we resolve:</p>
-                        <ul>
-                            <li>Computer running slowly or freezing frequently</li>
-                            <li>Blue screen of death (BSOD) errors</li>
-                            <li>Hard drive failures and data loss</li>
-                            <li>Virus infections and malware removal</li>
-                            <li>Network connectivity and Wi-Fi problems</li>
-                            <li>Software installation and configuration issues</li>
-                            <li>Hardware upgrades and component replacement</li>
-                            <li>Email setup and troubleshooting</li>
-                            <li>Printer and peripheral device problems</li>
-                            <li>Operating system corruption and reinstallation</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h3>Business IT Support Brisbane</h3>
-                        <p>Small and medium businesses in Brisbane face unique IT challenges that require professional solutions. Our business IT support services are designed to keep your operations running smoothly while protecting your valuable data.</p>
-                        <p>We provide proactive IT management that prevents problems before they occur, including regular system monitoring, security updates, and preventive maintenance. This approach minimizes downtime and ensures your team can focus on growing your business.</p>
-                        <p>From setting up secure networks to implementing cloud solutions and providing staff training, our IT consulting services help Brisbane businesses leverage technology for competitive advantage while maintaining robust cybersecurity.</p>
-                    </div>
-                    
-                    <div class="content-block">
-                        <h3>Emergency Computer Repair Service</h3>
-                        <p>Computer emergencies don't follow business hours. That's why we offer 24/7 emergency computer repair services for critical situations in Brisbane. Whether it's a server failure affecting your entire business or a personal computer containing irreplaceable family photos, we respond quickly.</p>
-                        <p>Our emergency service includes rapid diagnosis, on-site repair when possible, and immediate temporary solutions to minimize disruption. We understand that every hour of downtime can cost businesses money and cause stress for individuals.</p>
-                        <p>Contact us immediately for emergency situations, and we'll dispatch a certified technician to resolve your computer problems as quickly as possible with the same high-quality service and warranty coverage.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Frequently Asked Questions</h2>
-                    <p class="section-subtitle">Common questions about our computer repair and IT support services in Brisbane</p>
-                </div>
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <div class="faq-question">How quickly can you repair my computer?</div>
-                        <div class="faq-answer">Most computer repairs are completed within 24-48 hours. We offer same-day service for urgent repairs and emergency callouts for critical business systems. Simple software issues can often be resolved within a few hours.</div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Do you provide on-site computer repair services?</div>
-                        <div class="faq-answer">Yes, we provide on-site computer repair services throughout the Brisbane metropolitan area. This is particularly convenient for desktop computers, network issues, or when you have multiple devices that need attention.</div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">What brands of computers do you repair?</div>
-                        <div class="faq-answer">We repair all major computer brands including Dell, HP, Lenovo, ASUS, Acer, Apple MacBook, Microsoft Surface, and custom-built PCs. Our technicians are experienced with Windows, macOS, and Linux operating systems.</div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Is my data safe during repairs?</div>
-                        <div class="faq-answer">Yes, we take data protection very seriously. We create backups before performing any repairs and use secure diagnostic procedures. All our technicians sign confidentiality agreements, and we can provide data encryption services if required.</div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Do you offer IT support for small businesses?</div>
-                        <div class="faq-answer">Absolutely! We provide comprehensive IT support for small and medium businesses including network setup, server management, cybersecurity, cloud solutions, and ongoing maintenance contracts tailored to your business needs.</div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">What areas of Brisbane do you service?</div>
-                        <div class="faq-answer">We service the entire Brisbane metropolitan area including CBD, South Brisbane, West End, New Farm, Fortitude Valley, Spring Hill, Milton, and surrounding suburbs. Contact us to confirm service availability in your specific location.</div>
+                    <div class="service-card" id="it-consulting">
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3>IT Consulting</h3>
+                        </div>
+                        <p>Strategic technology planning and digital transformation guidance. Expert advice on infrastructure optimization, security enhancement, and growth-focused IT investments.</p>
+                        <button class="service-expand-btn" onclick="toggleService('it-consulting')">
+                            Learn More 
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="service-details" id="it-consulting-details">
+                            <div class="service-details-content">
+                                <h4>Consulting Services:</h4>
+                                <ul>
+                                    <li>Technology strategy development</li>
+                                    <li>Infrastructure assessment and planning</li>
+                                    <li>Security audits and compliance</li>
+                                    <li>Digital transformation roadmaps</li>
+                                    <li>Cost optimization analysis</li>
+                                    <li>Vendor selection and management</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1158,32 +1240,32 @@
         <section id="testimonials" class="testimonials">
             <div class="container">
                 <div class="section-header">
-                    <h2>What Our Brisbane Customers Say</h2>
-                    <p class="section-subtitle">Real reviews from satisfied customers across Brisbane who trust our computer repair and IT support services</p>
+                    <h2>Customer Success Stories</h2>
+                    <p class="section-subtitle">Real experiences from satisfied Brisbane customers</p>
                 </div>
                 <div class="testimonials-grid">
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"Fantastic computer repair service! They fixed my laptop the same day and it's running better than ever. The 12-month warranty gave me confidence in their work. Best IT support in Brisbane - highly recommended!"</p>
+                        <p class="testimonial-text">Exceptional service and expertise! They recovered critical business data from a crashed server within hours. The team's professionalism and quick response saved our operations. Highly recommend their emergency support services.</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">SM</div>
                             <div class="author-info">
                                 <h4>Sarah Mitchell</h4>
-                                <p>Small Business Owner, Brisbane CBD</p>
+                                <p>Business Owner, Brisbane CBD</p>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"Professional and knowledgeable IT technicians. They set up our office network and provided ongoing IT support. Great value for money and excellent customer service. Our business runs much smoother now."</p>
+                        <p class="testimonial-text">Outstanding IT support for our growing company. They modernized our entire network infrastructure and provided comprehensive staff training. The ongoing support contract gives us peace of mind knowing experts are always available.</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">DT</div>
                             <div class="author-info">
                                 <h4>David Thompson</h4>
-                                <p>Office Manager, West End</p>
+                                <p>IT Manager, West End</p>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-card">
-                        <p class="testimonial-text">"They recovered all my family photos from a crashed hard drive when I thought they were lost forever. Amazing data recovery service and fair pricing. Thank you so much for saving my precious memories!"</p>
+                        <p class="testimonial-text">Amazing data recovery service! They retrieved years of family photos and important documents from a completely dead laptop. The technicians explained everything clearly and delivered exactly what they promised. Truly lifesavers!</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">JL</div>
                             <div class="author-info">
@@ -1200,8 +1282,8 @@
         <section id="contact" class="contact">
             <div class="container">
                 <div class="section-header">
-                    <h2 style="color: white;">Get Your Free Computer Repair Quote Today</h2>
-                    <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Contact Labyrinth Tech Support for fast, reliable computer repair and IT support services in Brisbane</p>
+                    <h2 style="color: white;">Ready to Get Started?</h2>
+                    <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Contact us today for expert computer repair and IT support services in Brisbane</p>
                 </div>
                 <div class="contact-grid">
                     <div class="contact-info">
@@ -1215,7 +1297,7 @@
                                 </div>
                                 <div>
                                     <p><strong>Phone:</strong> <a href="tel:+61482012429" style="color: white;">0482 012 429</a></p>
-                                    <p style="font-size: 0.9rem; opacity: 0.8;">Available 7 days a week for computer repair</p>
+                                    <p style="font-size: 0.9rem; opacity: 0.8;">24/7 Emergency Support Available</p>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -1227,7 +1309,7 @@
                                 </div>
                                 <div>
                                     <p><strong>Email:</strong> <a href="mailto:info@labyrinth-techsupport.com" style="color: white;">info@labyrinth-techsupport.com</a></p>
-                                    <p style="font-size: 0.9rem; opacity: 0.8;">Response within 1 hour during business hours</p>
+                                    <p style="font-size: 0.9rem; opacity: 0.8;">Quick response within 1 hour</p>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -1239,7 +1321,7 @@
                                 </div>
                                 <div>
                                     <p><strong>Service Area:</strong> Greater Brisbane</p>
-                                    <p style="font-size: 0.9rem; opacity: 0.8;">On-site and remote IT support available</p>
+                                    <p style="font-size: 0.9rem; opacity: 0.8;">On-site and remote support</p>
                                 </div>
                             </div>
                         </div>
@@ -1260,8 +1342,8 @@
                                 <input type="tel" id="phone" name="phone" placeholder="0412 345 678">
                             </div>
                             <div class="form-group">
-                                <label for="issue">Describe Your Computer Problem</label>
-                                <textarea id="issue" name="issue" rows="4" placeholder="Tell us about your computer repair or IT support needs..." required></textarea>
+                                <label for="issue">Describe Your Issue</label>
+                                <textarea id="issue" name="issue" rows="4" placeholder="Tell us about your computer or IT support needs..." required></textarea>
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
                         </form>
@@ -1276,34 +1358,34 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h4>Computer Repair Services</h4>
+                    <h4>Services</h4>
                     <ul>
-                        <li><a href="#services" onclick="expandServiceFromFooter('computer-repair')">Computer Repair Brisbane</a></li>
-                        <li><a href="#services" onclick="expandServiceFromFooter('it-support')">IT Support Services</a></li>
-                        <li><a href="#services" onclick="expandServiceFromFooter('remote-support')">Remote Tech Support</a></li>
-                        <li><a href="#services" onclick="expandServiceFromFooter('business-consulting')">Business IT Consulting</a></li>
-                        <li><a href="#services" onclick="expandServiceFromFooter('emergency-repair')">Emergency Computer Repair</a></li>
-                        <li><a href="#services" onclick="expandServiceFromFooter('data-recovery')">Data Recovery Services</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('computer-repair')">Computer Repair</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('it-support')">IT Support</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('remote-support')">Remote Support</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('emergency-repair')">Emergency Repair</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('data-recovery')">Data Recovery</a></li>
+                        <li><a href="#services" onclick="expandServiceFromFooter('it-consulting')">IT Consulting</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Support</h4>
                     <ul>
                         <li><a href="#contact">Get Free Quote</a></li>
-                        <li><a href="tel:+61482012429">Emergency IT Support</a></li>
+                        <li><a href="tel:+61482012429">Emergency Support</a></li>
                         <li><a href="#testimonials">Customer Reviews</a></li>
-                        <li><a href="#contact">Contact Brisbane Office</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
                         <li><a href="#services">Service Areas</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#about">About Labyrinth Tech</a></li>
-                        <li><a href="#testimonials">Customer Testimonials</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Warranty Information</a></li>
+                        <li><a href="#">Warranty Info</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1311,14 +1393,14 @@
                     <ul>
                         <li>Phone: <a href="tel:+61482012429">0482 012 429</a></li>
                         <li>Email: <a href="mailto:info@labyrinth-techsupport.com">info@labyrinth-techsupport.com</a></li>
-                        <li>Service Area: Greater Brisbane, QLD</li>
-                        <li>Hours: 7 Days a Week, 8 AM - 8 PM</li>
+                        <li>Service Area: Greater Brisbane</li>
+                        <li>Hours: 7 Days a Week</li>
                         <li>Emergency: 24/7 Available</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Labyrinth Tech Support. All rights reserved. Professional computer repair and IT support services in Brisbane. Same-day service available with 12-month warranty.</p>
+                <p>&copy; 2024 Labyrinth Tech Support. All rights reserved. Professional computer repair and IT support services in Brisbane.</p>
             </div>
         </div>
     </footer>
@@ -1374,20 +1456,12 @@
             }, 500);
         }
 
-        // Add loading animation to buttons on click
-        document.querySelectorAll('.btn-primary, .btn-secondary, .cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-
         // Enhanced form submission handling
         document.querySelector('.contact-form form').addEventListener('submit', function(e) {
             e.preventDefault();
             const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
             submitBtn.innerHTML = 'Sending...';
             submitBtn.disabled = true;
             
@@ -1395,11 +1469,56 @@
             setTimeout(() => {
                 submitBtn.innerHTML = 'Message Sent!';
                 setTimeout(() => {
-                    submitBtn.innerHTML = 'Send Message';
+                    submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                     this.reset();
                 }, 2000);
             }, 1000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.85)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.value-card, .service-card, .testimonial-card').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
