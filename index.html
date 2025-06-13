@@ -1484,77 +1484,75 @@
             box-shadow: var(--shadow-lg);
         }
         
-        .featured-reviews {
-            display: grid;
-            gap: 2rem;
+        .direct-reviews-link {
+            margin-bottom: 2rem;
         }
         
-        .review-placeholder {
+        .reviews-cta {
             background: var(--surface-white);
             border-radius: var(--border-radius-xl);
-            padding: 2.5rem;
+            padding: 3rem;
+            text-align: center;
             box-shadow: var(--shadow-md);
             border: 1px solid var(--neutral-200);
             position: relative;
+            overflow: hidden;
         }
         
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+        .reviews-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
         }
         
-        .review-header .rating-stars {
-            gap: 0.125rem;
-        }
-        
-        .review-header .star {
-            font-size: 1.25rem;
-            color: #fbbf24;
-        }
-        
-        .review-source {
-            font-size: 0.875rem;
-            color: var(--neutral-500);
-            font-weight: 500;
-        }
-        
-        .review-content h4 {
+        .reviews-cta h3 {
             color: var(--neutral-900);
-            font-size: 1.25rem;
+            font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
         
-        .review-content p {
+        .reviews-cta p {
             color: var(--neutral-600);
+            font-size: 1.1rem;
             line-height: 1.7;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .setup-instructions {
-            background: var(--neutral-50);
+        .reviews-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
             border-radius: var(--border-radius-lg);
-            padding: 1.5rem;
-            border-left: 4px solid var(--primary-brand);
-        }
-        
-        .setup-instructions h5 {
-            color: var(--neutral-900);
-            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
         }
         
-        .setup-instructions ol {
-            color: var(--neutral-600);
-            line-height: 1.6;
-            padding-left: 1.5rem;
+        .reviews-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--gradient-secondary);
         }
         
-        .setup-instructions li {
-            margin-bottom: 0.5rem;
+        .reviews-link-btn svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .reviews-link-btn:hover svg {
+            transform: scale(1.1);
         }
         
         .review-schema-notice {
@@ -1940,8 +1938,24 @@
                 min-height: 48px;
             }
             
-            .review-placeholder {
-                padding: 1.5rem;
+            .reviews-cta {
+                padding: 2rem;
+            }
+            
+            .reviews-cta h3 {
+                font-size: 1.5rem;
+            }
+            
+            .reviews-cta p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .reviews-link-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 2rem;
+                font-size: 1rem;
             }
             
             .review-header {
@@ -2920,31 +2934,17 @@
                     </div>
                 </div>
                 
-                <div class="featured-reviews">
-                    <div class="review-placeholder">
-                        <div class="review-header">
-                            <div class="review-stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <div class="review-source">Google Review</div>
-                        </div>
-                        <div class="review-content">
-                            <h4>Ready to Display Your Google Reviews</h4>
-                            <p>Once you connect your Google Business Profile, real customer reviews will automatically appear here. This creates an authentic trust signal that helps Brisbane customers choose your computer repair services with confidence.</p>
-                        </div>
-                        <div class="setup-instructions">
-                            <h5>Quick Setup Steps:</h5>
-                            <ol>
-                                <li>Claim your Google Business Profile</li>
-                                <li>Get your Google Place ID</li>
-                                <li>Replace placeholder with your business details</li>
-                                <li>Reviews will display automatically</li>
-                            </ol>
-                        </div>
+                <div class="direct-reviews-link">
+                    <div class="reviews-cta">
+                        <h3>See What Brisbane Customers Are Saying</h3>
+                        <p>Read authentic reviews from satisfied customers who trust Labyrinth Tech Support for their computer repair needs across Brisbane.</p>
+                        <a href="https://www.google.com/maps/place/Labyrinth+Tech+Support/@-27.4698,153.0251,17z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!8m2!3d-27.4698!4d153.0251!16s%2Fg%2F11c0qsr5qm" target="_blank" class="btn-primary reviews-link-btn" rel="noopener">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            View Our Google Reviews
+                        </a>
                     </div>
                 </div>
                 
