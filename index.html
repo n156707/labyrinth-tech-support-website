@@ -1387,6 +1387,209 @@
             transform: translateY(-2px);
         }
 
+        /* Google Reviews Section */
+        .reviews-section {
+            padding: 6rem 0;
+            background: var(--neutral-50);
+            position: relative;
+        }
+        
+        .google-reviews-container {
+            background: var(--surface-white);
+            border-radius: var(--border-radius-2xl);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--neutral-100);
+        }
+        
+        .google-rating-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 0.25rem;
+        }
+        
+        .star {
+            font-size: 1.5rem;
+            color: var(--neutral-300);
+            transition: color 0.3s ease;
+        }
+        
+        .star.filled {
+            color: #fbbf24;
+            text-shadow: 0 0 4px rgba(251, 191, 36, 0.3);
+        }
+        
+        .rating-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .rating-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+        
+        .rating-count {
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+        }
+        
+        .google-logo {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .google-logo:hover {
+            opacity: 1;
+        }
+        
+        .review-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .review-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .review-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .featured-reviews {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .review-placeholder {
+            background: var(--surface-white);
+            border-radius: var(--border-radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--neutral-200);
+            position: relative;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .review-header .rating-stars {
+            gap: 0.125rem;
+        }
+        
+        .review-header .star {
+            font-size: 1.25rem;
+            color: #fbbf24;
+        }
+        
+        .review-source {
+            font-size: 0.875rem;
+            color: var(--neutral-500);
+            font-weight: 500;
+        }
+        
+        .review-content h4 {
+            color: var(--neutral-900);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .review-content p {
+            color: var(--neutral-600);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .setup-instructions {
+            background: var(--neutral-50);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-brand);
+        }
+        
+        .setup-instructions h5 {
+            color: var(--neutral-900);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .setup-instructions ol {
+            color: var(--neutral-600);
+            line-height: 1.6;
+            padding-left: 1.5rem;
+        }
+        
+        .setup-instructions li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-schema-notice {
+            background: var(--surface-white);
+            border-radius: var(--border-radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--neutral-100);
+        }
+        
+        .schema-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .schema-info svg {
+            color: var(--success-green);
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .schema-info h4 {
+            color: var(--neutral-900);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .schema-info p {
+            color: var(--neutral-600);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
         /* Footer */
         .footer {
             background: var(--neutral-900);
@@ -1507,6 +1710,36 @@
             .feedback-actions {
                 flex-direction: column;
                 align-items: center;
+            }
+            
+            .google-reviews-container {
+                padding: 2rem;
+            }
+            
+            .google-rating-summary {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .review-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .review-placeholder {
+                padding: 2rem;
+            }
+            
+            .review-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .schema-info {
+                flex-direction: column;
+                text-align: center;
             }
         }
         
@@ -2297,6 +2530,95 @@
                     <div class="feedback-actions">
                         <a href="#contact" class="btn-secondary">Share Your Feedback</a>
                         <a href="/terms-and-conditions.html" class="btn-outline">Read Our Full Commitment</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Reviews Section -->
+        <section class="reviews-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Brisbane Customers Say About Our Computer Repair Service</h2>
+                    <p class="section-subtitle">Real reviews from satisfied customers across Brisbane who trust Labyrinth Tech Support for their computer repair needs</p>
+                </div>
+                
+                <div class="google-reviews-container">
+                    <div class="google-rating-summary">
+                        <div class="rating-display">
+                            <div class="rating-stars">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                            </div>
+                            <div class="rating-text">
+                                <span class="rating-score">5.0</span>
+                                <span class="rating-count">Based on Google Reviews</span>
+                            </div>
+                        </div>
+                        <div class="google-logo">
+                            <svg width="80" height="26" viewBox="0 0 80 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M40.94 13.2c0-1.06-.08-2.08-.24-3.06H21v5.8h11.14c-.48 2.56-1.94 4.74-4.14 6.2v5.14h6.7c3.92-3.6 6.18-8.9 6.18-15.14l.06-1.94z" fill="#4285F4"/>
+                                <path d="M21 26c5.6 0 10.3-1.86 13.74-5.04l-6.7-5.2c-1.86 1.24-4.24 1.98-7.04 1.98-5.42 0-10.02-3.66-11.66-8.58H2.56v5.38C5.98 20.68 12.94 26 21 26z" fill="#34A853"/>
+                                <path d="M9.34 15.16c-.42-1.24-.66-2.56-.66-3.92s.24-2.68.66-3.92V1.94H2.56C.94 5.18 0 8.46 0 12s.94 6.82 2.56 10.06l6.78-5.26v-1.64z" fill="#FBBC04"/>
+                                <path d="M21 5.18c3.06 0 5.8 1.05 7.96 3.12l5.96-5.96C31.3 1.86 26.6 0 21 0 12.94 0 5.98 5.32 2.56 12.94l6.78 5.26C10.98 8.84 15.58 5.18 21 5.18z" fill="#EA4335"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="review-actions">
+                        <a href="https://g.page/r/YOUR_GOOGLE_BUSINESS_ID/review" target="_blank" class="btn-primary review-btn" rel="noopener">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Leave a Google Review
+                        </a>
+                        <a href="https://www.google.com/maps/place/Labyrinth+Tech+Support" target="_blank" class="btn-outline review-btn" rel="noopener">
+                            View All Google Reviews
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="featured-reviews">
+                    <div class="review-placeholder">
+                        <div class="review-header">
+                            <div class="review-stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <div class="review-source">Google Review</div>
+                        </div>
+                        <div class="review-content">
+                            <h4>Ready to Display Your Google Reviews</h4>
+                            <p>Once you connect your Google Business Profile, real customer reviews will automatically appear here. This creates an authentic trust signal that helps Brisbane customers choose your computer repair services with confidence.</p>
+                        </div>
+                        <div class="setup-instructions">
+                            <h5>Quick Setup Steps:</h5>
+                            <ol>
+                                <li>Claim your Google Business Profile</li>
+                                <li>Get your Google Place ID</li>
+                                <li>Replace placeholder with your business details</li>
+                                <li>Reviews will display automatically</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-schema-notice">
+                    <div class="schema-info">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div>
+                            <h4>SEO Optimized Reviews</h4>
+                            <p>This section includes structured data markup to help Google display your star ratings in search results, improving your computer repair business visibility in Brisbane.</p>
+                        </div>
                     </div>
                 </div>
             </div>
