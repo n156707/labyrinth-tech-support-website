@@ -1141,6 +1141,167 @@
             line-height: 1.6;
         }
 
+        /* Values Section */
+        .values-section {
+            padding: 6rem 0;
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .values-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="1"/></g></svg>') repeat;
+        }
+        
+        .values-section .section-header {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 4rem;
+        }
+        
+        .values-section h2,
+        .values-section .section-subtitle {
+            color: white;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .value-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-2xl);
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .value-card .value-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .value-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .value-card p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        
+        .value-card ul {
+            list-style: none;
+        }
+        
+        .value-card li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        .value-card li::before {
+            content: '✓';
+            color: var(--surface-white);
+            font-weight: 600;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .feedback-invitation {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-2xl);
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feedback-invitation h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .feedback-invitation p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .feedback-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
         /* Footer */
         .footer {
             background: var(--neutral-900);
@@ -1243,6 +1404,24 @@
             
             .pricing-highlights {
                 gap: 1.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .value-card {
+                padding: 2rem;
+            }
+            
+            .feedback-invitation {
+                padding: 2rem;
+            }
+            
+            .feedback-actions {
+                flex-direction: column;
+                align-items: center;
             }
         }
         
@@ -1735,6 +1914,7 @@
                         <div class="pricing-footer">
                             <a href="#contact" class="btn-primary pricing-btn">Get Free Quote</a>
                             <p class="pricing-note">Call for emergency rates and bulk service discounts</p>
+                            <p class="pricing-note"><a href="/terms-and-conditions.html" style="color: var(--primary-brand); text-decoration: none;">View full terms and pricing details</a></p>
                         </div>
                     </div>
                     
@@ -1959,6 +2139,79 @@
                                 <p>Restaurant Owner, Fortitude Valley</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sustainability and Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Commitment to Brisbane and Beyond</h2>
+                    <p class="section-subtitle">Ethical practices, sustainability, and community collaboration drive everything we do</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card sustainability">
+                        <div class="value-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 22c5.421 0 9.99-4.369 9.99-9.99S17.421 2.02 12 2.02 2.01 6.389 2.01 12.01 6.579 22 12 22z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 12h8l-4-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Environmental Responsibility</h3>
+                        <p>We prioritize repair over replacement, ensuring your devices last longer and reducing electronic waste. All e-waste is recycled through certified programs, and we donate working devices to Brisbane community organizations.</p>
+                        <ul>
+                            <li>Repair-first approach extending device lifespan</li>
+                            <li>Certified e-waste recycling partnerships</li>
+                            <li>Community device donation program</li>
+                            <li>Paperless operations when possible</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="value-card transparency">
+                        <div class="value-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Transparent Practices</h3>
+                        <p>No hidden fees, no surprise charges. Our $100/hour rate cap and free consultations ensure you always know what you're paying. We believe in honest communication and fair business practices.</p>
+                        <ul>
+                            <li>Rate capped at $100/hour maximum</li>
+                            <li>Free initial consultations and quotes</li>
+                            <li>Clear explanation of all work performed</li>
+                            <li>No hidden fees or surprise charges</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="value-card community">
+                        <div class="value-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Community Collaboration</h3>
+                        <p>Your feedback shapes our services. We host quarterly customer advisory sessions, provide free tech education workshops, and actively listen to Brisbane's technology needs.</p>
+                        <ul>
+                            <li>Monthly feedback review and implementation</li>
+                            <li>Quarterly customer advisory panels</li>
+                            <li>Free community tech education workshops</li>
+                            <li>Local Brisbane supplier partnerships</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="feedback-invitation">
+                    <h3>Help Shape Our Future</h3>
+                    <p>We believe the best services are built in collaboration with our community. Your experiences, suggestions, and feedback drive our continuous improvement.</p>
+                    <div class="feedback-actions">
+                        <a href="#contact" class="btn-secondary">Share Your Feedback</a>
+                        <a href="/terms-and-conditions.html" class="btn-outline">Read Our Full Commitment</a>
                     </div>
                 </div>
             </div>
