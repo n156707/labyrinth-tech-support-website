@@ -88,6 +88,19 @@ body.high-contrast .value-icon svg {
   filter: none;
 }
 
+/* Form inputs with proper black text on white backgrounds */
+body.high-contrast .form-group input,
+body.high-contrast .form-group textarea {
+  background: var(--hc-fg) !important;
+  color: var(--hc-bg) !important;
+  border: 3px solid var(--hc-accent) !important;
+}
+
+body.high-contrast .form-group input::placeholder,
+body.high-contrast .form-group textarea::placeholder {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
 body.high-contrast p,
 body.high-contrast li {
   line-height: 1.9;
@@ -201,6 +214,19 @@ body.high-contrast .cta-button:focus {
   .value-icon svg {
     color: var(--hc-bg);
     filter: none;
+  }
+
+  /* Form inputs with proper black text on white backgrounds */
+  .form-group input,
+  .form-group textarea {
+    background: var(--hc-fg) !important;
+    color: var(--hc-bg) !important;
+    border: 3px solid var(--hc-accent) !important;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(0, 0, 0, 0.7) !important;
   }
 
   a:focus {
