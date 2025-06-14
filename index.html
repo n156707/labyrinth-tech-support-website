@@ -2503,7 +2503,7 @@
             }
         }
     
-        /* Enhanced High Contrast Layout with Continuous Design */
+        /* Hero Section High Contrast Fix */
         
         .navbar {
             position: fixed;
@@ -2669,7 +2669,7 @@
             font-size: 1.2rem;
         }
 
-        /* Dark Mode Styles with Enhanced Contrast */
+        /* Dark Mode Styles */
         body.dark-mode {
             background: #0f172a;
             color: #f8fafc;
@@ -2716,7 +2716,7 @@
             color: #cbd5e1;
         }
 
-        /* Enhanced System High Contrast Mode Support */
+        /* FIXED: Enhanced System High Contrast Mode Support - Hero Section Focus */
         @media (prefers-contrast: high) {
             /* Base High Contrast Styles */
             body {
@@ -2802,9 +2802,103 @@
                 font-weight: 900 !important;
             }
             
+            /* HERO SECTION HIGH CONTRAST FIX */
+            .hero {
+                background: #000000 !important;
+                color: #ffffff !important;
+                border-top: 3px solid #ffffff !important;
+                border-bottom: 3px solid #ffffff !important;
+            }
+            
+            .hero h1,
+            .hero .hero-title {
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+                border-bottom: 3px solid #ffffff !important;
+                padding-bottom: 1rem !important;
+                margin-bottom: 1.5rem !important;
+                background: #000000 !important;
+            }
+            
+            .hero h2,
+            .hero .hero-subtitle {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+                background: #000000 !important;
+                padding: 0.5rem 0 !important;
+            }
+            
+            .hero p,
+            .hero .hero-description,
+            .hero .hero-text {
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                background: #000000 !important;
+                line-height: 1.8 !important;
+                padding: 0.25rem 0 !important;
+            }
+            
+            .hero ul li,
+            .hero .hero-list li,
+            .hero .value-item {
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                background: #000000 !important;
+                border-left: 4px solid #ffffff !important;
+                padding-left: 1rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            .hero .hero-cta,
+            .hero .cta-button,
+            .hero .hero-button {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-weight: 900 !important;
+                border: 3px solid #ffffff !important;
+                text-shadow: none !important;
+                padding: 1rem 2rem !important;
+            }
+            
+            .hero .hero-cta:hover,
+            .hero .cta-button:hover,
+            .hero .hero-button:hover {
+                background: #cccccc !important;
+                border-color: #cccccc !important;
+            }
+            
+            /* About Section High Contrast */
+            .about {
+                background: #000000 !important;
+                color: #ffffff !important;
+                border-top: 3px solid #ffffff !important;
+                border-bottom: 3px solid #ffffff !important;
+            }
+            
+            .about h1,
+            .about h2,
+            .about h3 {
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+                border-bottom: 2px solid #ffffff !important;
+                padding-bottom: 0.5rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .about p,
+            .about li {
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
+                line-height: 1.8 !important;
+            }
+            
             /* Content Sections High Contrast */
-            .hero,
-            .about,
             .services,
             .sustainability,
             .pricing,
@@ -2981,7 +3075,7 @@
             }
         }
 
-        /* Content sections for dark mode with enhanced contrast */
+        /* Content sections for dark mode */
         body.dark-mode .hero,
         body.dark-mode .about,
         body.dark-mode .services,
@@ -3210,7 +3304,7 @@
             <li><strong>Android:</strong> Settings → Accessibility → High contrast text + Color inversion</li>
             <li><strong>iOS:</strong> Settings → Accessibility → Display → Increase Contrast + Smart Invert</li>
         </ul>
-        <p><em>System-level high contrast provides continuous, consistent accessibility across all content.</em></p>
+        <p><em>System-level high contrast provides continuous, consistent accessibility across all content including hero sections.</em></p>
         <p><strong>Keyboard shortcut:</strong> Press Alt+H to show/hide this help panel.</p>
     </div>
 
@@ -4383,7 +4477,7 @@
                 info.classList.add('show');
                 setTimeout(() => {
                     info.classList.remove('show');
-                }, 12000); // Hide after 12 seconds for longer reading time
+                }, 15000); // Hide after 15 seconds for longer reading time
             }
         }
         
@@ -4394,11 +4488,11 @@
                 toggleTheme();
             }
             
-            // Show accessibility info on first visit or every 10th visit
+            // Show accessibility info on first visit or every 5th visit
             const visitCount = parseInt(localStorage.getItem('labyrinth-visit-count') || '0') + 1;
             localStorage.setItem('labyrinth-visit-count', visitCount.toString());
             
-            if (visitCount === 1 || visitCount % 10 === 0) {
+            if (visitCount === 1 || visitCount % 5 === 0) {
                 showAccessibilityInfo();
             }
         });
