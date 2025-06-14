@@ -256,6 +256,74 @@ body.high-contrast .value-icon svg {
   filter: none;
 }
 
+/* Services section consistent with top of page */
+body.high-contrast .services {
+  background: var(--hc-bg) !important;
+}
+
+body.high-contrast .section-header h2,
+body.high-contrast .services h2 {
+  color: var(--hc-fg) !important;
+  font-size: var(--hc-size-h2) !important;
+  font-weight: 900 !important;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 4px solid var(--hc-accent) !important;
+  padding-bottom: 1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+body.high-contrast .section-subtitle,
+body.high-contrast .services .section-subtitle {
+  color: var(--hc-accent) !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  line-height: 1.6 !important;
+}
+
+body.high-contrast .service-card {
+  background: var(--hc-bg) !important;
+  border: 4px solid var(--hc-fg) !important;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+}
+
+body.high-contrast .service-card h3 {
+  color: var(--hc-accent) !important;
+  font-size: var(--hc-size-h3) !important;
+  font-weight: 900 !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.high-contrast .service-card p {
+  color: var(--hc-fg) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  line-height: 1.8 !important;
+}
+
+body.high-contrast .service-icon {
+  background: var(--hc-accent) !important;
+  border: 4px solid var(--hc-fg) !important;
+}
+
+body.high-contrast .service-icon svg {
+  color: var(--hc-bg) !important;
+  filter: none !important;
+}
+
+body.high-contrast .service-expand-btn {
+  background: var(--hc-accent) !important;
+  color: var(--hc-bg) !important;
+  border: 3px solid var(--hc-fg) !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+body.high-contrast .service-expand-btn:hover {
+  background: var(--hc-fg) !important;
+  color: var(--hc-bg) !important;
+  border: 3px solid var(--hc-accent) !important;
+}
+
 /* Form inputs with proper black text on white backgrounds */
 body.high-contrast .form-group input,
 body.high-contrast .form-group textarea {
@@ -454,6 +522,68 @@ body.high-contrast .cta-button:focus {
   body.bull-theme .footer {
     background: var(--hc-minotaur-bg) !important;
     border-top: 4px solid var(--hc-minotaur-accent) !important;
+  }
+
+  /* Minotaur theme services section consistency */
+  body.bull-theme .services {
+    background: var(--hc-minotaur-bg) !important;
+  }
+
+  body.bull-theme .section-header h2,
+  body.bull-theme .services h2 {
+    color: var(--hc-minotaur-light) !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    border-bottom: 4px solid var(--hc-minotaur-accent) !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  body.bull-theme .section-subtitle,
+  body.bull-theme .services .section-subtitle {
+    color: var(--hc-minotaur-accent) !important;
+    font-family: 'Lora', serif !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+  }
+
+  body.bull-theme .service-card {
+    background: var(--hc-minotaur-dark) !important;
+    border: 4px solid var(--hc-minotaur-accent) !important;
+  }
+
+  body.bull-theme .service-card h3 {
+    color: var(--hc-minotaur-light) !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 900 !important;
+  }
+
+  body.bull-theme .service-card p {
+    color: var(--hc-minotaur-secondary) !important;
+    font-family: 'Lora', serif !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+  }
+
+  body.bull-theme .service-icon {
+    background: var(--hc-minotaur-accent) !important;
+    border: 4px solid var(--hc-minotaur-light) !important;
+  }
+
+  body.bull-theme .service-expand-btn {
+    background: var(--hc-minotaur-accent) !important;
+    color: var(--hc-minotaur-dark) !important;
+    border: 3px solid var(--hc-minotaur-light) !important;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 700 !important;
+  }
+
+  body.bull-theme .service-expand-btn:hover {
+    background: var(--hc-minotaur-light) !important;
+    color: var(--hc-minotaur-dark) !important;
+    border: 3px solid var(--hc-minotaur-accent) !important;
   }
 
   a:focus {
