@@ -2503,159 +2503,177 @@
             }
         }
     
-        /* Remove duplicate accessibility buttons and clean layout */
+        /* Complete Title Bar Redesign with Accessibility */
         
-        /* Hide any floating or duplicate accessibility buttons */
-        .accessibility-toggle:not(.accessibility-btn),
-        .floating-accessibility,
-        .accessibility-widget,
-        .replit-accessibility-toggle {
-            display: none !important;
-        }
-        
-        /* Ensure only navbar accessibility button is visible */
-        .navbar .accessibility-btn {
-            display: flex !important;
-        }
-        
-        /* Clean navigation styling */
+        /* Navigation Bar */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fff;
-            padding: 1rem 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+            background: white;
             border-bottom: 1px solid #e5e7eb;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0;
         }
 
-        .nav-left {
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            gap: 2rem;
+        }
+
+        /* Brand Section */
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #1f2937;
+            flex-shrink: 0;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1f2937;
+        }
+
+        .brand-subtitle {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        /* Action Buttons */
+        .nav-actions {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             flex-shrink: 0;
         }
 
-        .logo {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Theme Toggle */
+        .theme-btn {
+            background: #f59e0b;
             color: white;
-            font-size: 16px;
-        }
-
-        .brand {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-            font-size: 1rem;
-            color: #1f2937;
-            text-decoration: none;
-        }
-
-        .brand strong {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .brand span {
-            font-weight: 500;
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
-        }
-
-        .nav-links li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .nav-links li a:hover {
-            color: #3b82f6;
-            background: #eff6ff;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 0.5rem;
-            flex-shrink: 0;
-            align-items: center;
-        }
-
-        .theme-toggle,
-        .accessibility-btn {
-            padding: 0.5rem 1rem;
             border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
             font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             white-space: nowrap;
         }
 
-        .theme-toggle {
-            background: #f5d76e;
-            color: #000;
-        }
-
-        .theme-toggle:hover {
-            background: #f1c40f;
+        .theme-btn:hover {
+            background: #d97706;
             transform: translateY(-1px);
         }
 
-        .theme-toggle.active {
-            background: #2c3e50;
-            color: #fff;
+        .theme-btn.dark {
+            background: #374151;
+            color: #f9fafb;
         }
 
+        .theme-btn.dark:hover {
+            background: #4b5563;
+        }
+
+        /* Accessibility Button */
         .accessibility-btn {
-            background: linear-gradient(to right, #7b2ff7, #00c6ff);
-            color: #fff;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
         }
 
         .accessibility-btn:hover {
-            background: linear-gradient(to right, #6a1b9a, #0288d1);
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(139, 92, 246, 0.4);
         }
 
         .accessibility-btn.active {
-            background: linear-gradient(to right, #e91e63, #ff5722);
+            background: linear-gradient(135deg, #dc2626, #ea580c);
+            box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
         }
 
+        /* Call Button */
         .call-btn {
             background: #3b82f6;
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
             font-size: 0.875rem;
+            font-weight: 600;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
@@ -2665,7 +2683,8 @@
             transform: translateY(-1px);
         }
 
-        .mobile-toggle {
+        /* Mobile Menu Button */
+        .mobile-btn {
             display: none;
             background: none;
             border: 1px solid #d1d5db;
@@ -2687,35 +2706,25 @@
             border-bottom-color: #374151;
         }
 
-        body.dark-mode .brand {
+        body.dark-mode .nav-brand {
             color: #f9fafb;
         }
 
-        body.dark-mode .brand span {
+        body.dark-mode .brand-name {
+            color: #f9fafb;
+        }
+
+        body.dark-mode .brand-subtitle {
             color: #d1d5db;
         }
 
-        body.dark-mode .nav-links li a {
+        body.dark-mode .nav-links a {
             color: #d1d5db;
         }
 
-        body.dark-mode .nav-links li a:hover {
+        body.dark-mode .nav-links a:hover {
             color: #60a5fa;
             background: #1e3a8a;
-        }
-
-        body.dark-mode .theme-toggle {
-            background: #374151;
-            color: #d1d5db;
-        }
-
-        body.dark-mode .theme-toggle:hover {
-            background: #4b5563;
-        }
-
-        body.dark-mode .theme-toggle.active {
-            background: #60a5fa;
-            color: #111827;
         }
 
         body.dark-mode .call-btn {
@@ -2727,7 +2736,7 @@
             background: #3b82f6;
         }
 
-        body.dark-mode .mobile-toggle {
+        body.dark-mode .mobile-btn {
             border-color: #4b5563;
             color: #d1d5db;
         }
@@ -2743,36 +2752,42 @@
             border-bottom: 2px solid #ffffff !important;
         }
 
-        body.high-contrast .brand {
+        body.high-contrast .nav-brand {
             color: #ffffff !important;
         }
 
-        body.high-contrast .brand span {
+        body.high-contrast .brand-name {
             color: #ffffff !important;
+            font-weight: 800 !important;
         }
 
-        body.high-contrast .logo {
-            background: #ffffff !important;
-            color: #000000 !important;
-        }
-
-        body.high-contrast .nav-links li a {
+        body.high-contrast .brand-subtitle {
             color: #ffffff !important;
             font-weight: 600 !important;
         }
 
-        body.high-contrast .nav-links li a:hover {
+        body.high-contrast .brand-logo {
             background: #ffffff !important;
             color: #000000 !important;
         }
 
-        body.high-contrast .theme-toggle {
+        body.high-contrast .nav-links a {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+
+        body.high-contrast .nav-links a:hover {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        body.high-contrast .theme-btn {
             background: #ffffff !important;
             color: #000000 !important;
             font-weight: 700 !important;
         }
 
-        body.high-contrast .theme-toggle:hover {
+        body.high-contrast .theme-btn:hover {
             background: #cccccc !important;
         }
 
@@ -2780,6 +2795,7 @@
             background: #ffffff !important;
             color: #000000 !important;
             font-weight: 700 !important;
+            box-shadow: none !important;
         }
 
         body.high-contrast .accessibility-btn:hover {
@@ -2797,7 +2813,7 @@
             background: #cccccc !important;
         }
 
-        body.high-contrast .mobile-toggle {
+        body.high-contrast .mobile-btn {
             border-color: #ffffff !important;
             color: #ffffff !important;
         }
@@ -2879,20 +2895,21 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .navbar {
+            .nav-container {
                 padding: 1rem;
-                flex-wrap: wrap;
             }
 
             .nav-links {
                 display: none;
-                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                border-top: 1px solid #e5e7eb;
                 flex-direction: column;
                 gap: 0;
-                background: #fff;
-                border-radius: 8px;
                 padding: 1rem;
-                margin-top: 1rem;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
 
@@ -2900,38 +2917,39 @@
                 display: flex;
             }
 
-            .nav-links li a {
-                padding: 0.75rem;
-                display: block;
+            .nav-links a {
+                padding: 0.75rem 1rem;
                 border-radius: 6px;
+                text-align: center;
             }
 
             .nav-actions {
-                gap: 0.25rem;
+                gap: 0.5rem;
             }
 
-            .theme-toggle,
+            .theme-btn,
             .accessibility-btn {
                 padding: 0.375rem 0.75rem;
                 font-size: 0.75rem;
             }
 
             .call-btn {
-                padding: 0.375rem 0.75rem;
+                padding: 0.375rem 1rem;
                 font-size: 0.75rem;
             }
 
-            .mobile-toggle {
+            .mobile-btn {
                 display: block;
             }
 
             body.dark-mode .nav-links {
                 background: #1f2937;
+                border-top-color: #374151;
             }
 
             body.high-contrast .nav-links {
                 background: #000000 !important;
-                border: 2px solid #ffffff !important;
+                border-top: 2px solid #ffffff !important;
             }
         }
 
@@ -2943,6 +2961,44 @@
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Brand Section -->
+            <a href="#" class="nav-brand">
+                <div class="brand-logo">🔧</div>
+                <div class="brand-text">
+                    <div class="brand-name">Labyrinth</div>
+                    <div class="brand-subtitle">Tech Support</div>
+                </div>
+            </a>
+            
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <!-- Action Buttons -->
+            <div class="nav-actions">
+                <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">
+                    <span>🌓</span>
+                    <span>Theme</span>
+                </button>
+                
+                <button class="accessibility-btn" id="accessBtn" onclick="toggleAccessibility()">
+                    <span>♿</span>
+                    <span>Accessibility</span>
+                </button>
+                
+                <a href="tel:0482012429" class="call-btn">Call Now</a>
+                
+                <button class="mobile-btn" onclick="toggleMobile()">☰</button>
+            </div>
+        </div>
+    </nav>
     <!-- Accessibility Toggle Button -->
     <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
         🔄 Accessibility
@@ -2951,27 +3007,7 @@
     <a href="#main-content" class="sr-only">Skip to main content</a>
     
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="nav-container">
-                <a href="#" class="logo">
-                    <div class="logo-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" alt="Labyrinth Tech Support Logo - Professional Computer Repair Brisbane">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    Labyrinth Tech Support
-                </a>
-                <ul class="nav-menu">
-                    <li><a href="#services" class="nav-link" title="Computer Repair Services Brisbane">Services</a></li>
-                    <li><a href="#about" class="nav-link" title="About Labyrinth Tech Support">About</a></li>
-                    <li><a href="#testimonials" class="nav-link" title="Customer Reviews Brisbane">Reviews</a></li>
-                    <li><a href="#contact" class="nav-link" title="Contact Computer Repair Brisbane">Contact</a></li>
-                    <li><a href="tel:+61482012429" class="cta-button" title="Call Brisbane Computer Repair">Call Now</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    
 
     <!-- Main Content -->
     <main id="main-content">
@@ -4137,13 +4173,59 @@
         let isDarkMode = false;
         let isHighContrast = false;
         
-        // Remove any duplicate accessibility buttons on load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Remove all accessibility buttons except the one in navbar
-            const duplicateButtons = document.querySelectorAll('.accessibility-toggle:not(.accessibility-btn), .floating-accessibility, .accessibility-widget');
-            duplicateButtons.forEach(btn => btn.remove());
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeBtn');
+            const icon = btn.querySelector('span:first-child');
+            const text = btn.querySelector('span:last-child');
             
-            // Load saved preferences
+            isDarkMode = !isDarkMode;
+            
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                btn.classList.add('dark');
+                icon.textContent = '🌙';
+                text.textContent = 'Dark';
+            } else {
+                body.classList.remove('dark-mode');
+                btn.classList.remove('dark');
+                icon.textContent = '🌓';
+                text.textContent = 'Theme';
+            }
+            
+            localStorage.setItem('labyrinth-theme', isDarkMode ? 'dark' : 'light');
+        }
+        
+        function toggleAccessibility() {
+            const body = document.body;
+            const btn = document.getElementById('accessBtn');
+            const icon = btn.querySelector('span:first-child');
+            const text = btn.querySelector('span:last-child');
+            
+            isHighContrast = !isHighContrast;
+            
+            if (isHighContrast) {
+                body.classList.add('high-contrast');
+                btn.classList.add('active');
+                icon.textContent = '👁';
+                text.textContent = 'High Contrast';
+            } else {
+                body.classList.remove('high-contrast');
+                btn.classList.remove('active');
+                icon.textContent = '♿';
+                text.textContent = 'Accessibility';
+            }
+            
+            localStorage.setItem('labyrinth-accessibility', isHighContrast ? 'high' : 'normal');
+        }
+        
+        function toggleMobile() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('labyrinth-theme');
             if (savedTheme === 'dark') {
                 toggleTheme();
@@ -4154,49 +4236,6 @@
                 toggleAccessibility();
             }
         });
-        
-        function toggleTheme() {
-            const body = document.body;
-            const btn = document.getElementById('themeBtn');
-            
-            isDarkMode = !isDarkMode;
-            
-            if (isDarkMode) {
-                body.classList.add('dark-mode');
-                btn.classList.add('active');
-                btn.innerHTML = '🌙 Dark';
-            } else {
-                body.classList.remove('dark-mode');
-                btn.classList.remove('active');
-                btn.innerHTML = '🌓 Theme';
-            }
-            
-            localStorage.setItem('labyrinth-theme', isDarkMode ? 'dark' : 'light');
-        }
-        
-        function toggleAccessibility() {
-            const body = document.body;
-            const btn = document.getElementById('accessBtn');
-            
-            isHighContrast = !isHighContrast;
-            
-            if (isHighContrast) {
-                body.classList.add('high-contrast');
-                btn.classList.add('active');
-                btn.innerHTML = '👁 High Contrast';
-            } else {
-                body.classList.remove('high-contrast');
-                btn.classList.remove('active');
-                btn.innerHTML = '♿ Accessibility';
-            }
-            
-            localStorage.setItem('labyrinth-accessibility', isHighContrast ? 'high' : 'normal');
-        }
-        
-        function toggleMobile() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('show');
-        }
         
         // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
@@ -4213,7 +4252,7 @@
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
             const navLinks = document.getElementById('navLinks');
-            const mobileBtn = document.querySelector('.mobile-toggle');
+            const mobileBtn = document.querySelector('.mobile-btn');
             
             if (navLinks && mobileBtn && !navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
                 navLinks.classList.remove('show');
