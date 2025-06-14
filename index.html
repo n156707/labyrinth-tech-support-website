@@ -2503,7 +2503,7 @@
             }
         }
     
-        /* Enhanced Navigation with Integrated Accessibility Toggle */
+        /* Enhanced Navigation with Fixed Accessibility Toggle */
         .header {
             position: fixed;
             top: 0;
@@ -2547,51 +2547,48 @@
             color: var(--primary-brand);
         }
         
-        /* Integrated Accessibility Toggle in Navigation */
-        .accessibility-nav-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: none;
-            border: 2px solid var(--neutral-300);
-            border-radius: 25px;
-            padding: 8px 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--neutral-700);
-            font-family: var(--font-sans);
-        }
-        
-        .accessibility-nav-toggle:hover {
-            border-color: var(--primary-brand);
-            color: var(--primary-brand);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,102,255,0.2);
-        }
-        
-        .accessibility-nav-toggle.active {
-            background: #C1121F;
-            border-color: #C1121F;
-            color: white;
-            box-shadow: 0 4px 15px rgba(193,18,31,0.4);
-        }
-        
-        .accessibility-nav-toggle.active:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(193,18,31,0.5);
-            background: #8B0000;
-        }
-        
-        .accessibility-icon {
-            font-size: 16px;
-        }
-        
+        /* Fixed Accessibility Toggle - Positioned Before Call Now */
         .nav-actions {
             display: flex;
             align-items: center;
             gap: 1rem;
+        }
+        
+        .accessibility-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            font-family: var(--font-sans);
+            box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+        }
+        
+        .accessibility-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+        
+        .accessibility-toggle.active {
+            background: #C1121F;
+            box-shadow: 0 4px 15px rgba(193,18,31,0.4);
+        }
+        
+        .accessibility-toggle.active:hover {
+            background: #8B0000;
+            box-shadow: 0 6px 20px rgba(193,18,31,0.5);
+        }
+        
+        .accessibility-icon {
+            font-size: 14px;
         }
         
         .nav-cta {
@@ -2646,6 +2643,16 @@
             background-color: #FFFFFF !important;
             padding: 0.5rem 1rem !important;
             border-radius: 4px !important;
+        }
+        
+        body.high-contrast .accessibility-toggle {
+            background: #C1121F !important;
+            color: #FFFFFF !important;
+            border: 2px solid #8B0000 !important;
+        }
+        
+        body.high-contrast .accessibility-toggle:hover {
+            background: #8B0000 !important;
         }
         
         body.high-contrast .nav-cta {
@@ -2886,7 +2893,7 @@
             outline-offset: 2px !important;
         }
         
-        /* Mobile Responsive High Contrast */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             body.high-contrast .hero h1 {
                 font-size: 2.5rem !important;
@@ -2928,9 +2935,9 @@
                 gap: 0.5rem;
             }
             
-            .accessibility-nav-toggle {
+            .accessibility-toggle {
                 padding: 6px 12px;
-                font-size: 12px;
+                font-size: 11px;
             }
             
             .nav-cta {
@@ -4154,7 +4161,7 @@
     <script>
         function toggleAccessibility() {
             const body = document.body;
-            const button = document.querySelector('.accessibility-nav-toggle');
+            const button = document.querySelector('.accessibility-toggle');
             const text = button.querySelector('.accessibility-text');
             
             if (body.classList.contains('high-contrast')) {
@@ -4162,11 +4169,13 @@
                 button.classList.remove('active');
                 text.textContent = 'Accessibility';
                 localStorage.setItem('labyrinth-accessibility', 'normal');
+                console.log('Switched to normal mode');
             } else {
                 body.classList.add('high-contrast');
                 button.classList.add('active');
                 text.textContent = 'High Contrast';
                 localStorage.setItem('labyrinth-accessibility', 'high-contrast');
+                console.log('Switched to high contrast mode');
             }
         }
         
@@ -4175,16 +4184,19 @@
             menu.classList.toggle('mobile-open');
         }
         
-        // Load saved accessibility preference
+        // Load saved accessibility preference on page load
         document.addEventListener('DOMContentLoaded', function() {
             const saved = localStorage.getItem('labyrinth-accessibility');
-            const button = document.querySelector('.accessibility-nav-toggle');
-            const text = button.querySelector('.accessibility-text');
+            const button = document.querySelector('.accessibility-toggle');
+            const text = button ? button.querySelector('.accessibility-text') : null;
             
-            if (saved === 'high-contrast') {
+            console.log('Loaded accessibility preference:', saved);
+            
+            if (saved === 'high-contrast' && button && text) {
                 document.body.classList.add('high-contrast');
                 button.classList.add('active');
                 text.textContent = 'High Contrast';
+                console.log('Applied high contrast mode from saved preference');
             }
         });
         
@@ -4205,8 +4217,6 @@
                     if (document.body.classList.contains('high-contrast')) {
                         this.style.outline = '4px solid #C1121F';
                         this.style.outlineOffset = '3px';
-                        this.style.background = '#FFFFFF';
-                        this.style.color = '#000000';
                     } else {
                         this.style.outline = '3px solid #667eea';
                         this.style.outlineOffset = '2px';
@@ -4214,12 +4224,8 @@
                 });
                 
                 element.addEventListener('blur', function() {
-                    if (!document.body.classList.contains('high-contrast')) {
-                        this.style.outline = '';
-                        this.style.outlineOffset = '';
-                        this.style.background = '';
-                        this.style.color = '';
-                    }
+                    this.style.outline = '';
+                    this.style.outlineOffset = '';
                 });
             });
         });
@@ -4229,7 +4235,7 @@
             const menu = document.querySelector('.nav-menu');
             const menuBtn = document.querySelector('.mobile-menu-btn');
             
-            if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+            if (menu && menuBtn && !menu.contains(event.target) && !menuBtn.contains(event.target)) {
                 menu.classList.remove('mobile-open');
             }
         });
