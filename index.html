@@ -396,6 +396,172 @@
         body.high-contrast .expand-btn.expanded {
             background: linear-gradient(135deg, #ff6b6b, #ee5a52) !important;
         }
+        
+        /* Pricing Section */
+        .pricing {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #0066ff;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #0066ff;
+            margin-bottom: 30px;
+        }
+        
+        .price span {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .pricing-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-note {
+            font-style: italic;
+            color: #666;
+            margin-top: 20px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .testimonial-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .customer {
+            font-weight: bold;
+            color: #0066ff;
+        }
+        
+        .google-reviews {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .google-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .google-star {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .rating-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .google-reviews-btn {
+            display: inline-block;
+            background: #4285f4;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        
+        .google-reviews-btn:hover {
+            background: #3367d6;
+        }
+        
+        /* High contrast mode for pricing and testimonials */
+        body.high-contrast .pricing {
+            background: transparent !important;
+        }
+        
+        body.high-contrast .pricing-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%) !important;
+            border-color: rgba(255,255,255,0.25) !important;
+            color: white !important;
+        }
+        
+        body.high-contrast .testimonials {
+            background: transparent !important;
+        }
+        
+        body.high-contrast .testimonial-card,
+        body.high-contrast .google-reviews {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%) !important;
+            border: 2px solid rgba(255,255,255,0.25) !important;
+            color: white !important;
+        }
     </style>
 </head>
 <body>
@@ -534,6 +700,60 @@
                     </div>
                     <button class="expand-btn" onclick="toggleExpansion(this)">Show More Details</button>
                 </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card featured">
+                    <h3>Standard Rate</h3>
+                    <div class="price">$100<span>/hour</span></div>
+                    <ul>
+                        <li>✓ Diagnostic included in repair cost</li>
+                        <li>✓ No call-out fees within Brisbane</li>
+                        <li>✓ 12-month warranty on all repairs</li>
+                        <li>✓ Fixed price quotes before work begins</li>
+                        <li>✓ Same-day service available</li>
+                    </ul>
+                    <p class="price-note">Rate capped at $100/hour. Most repairs completed within 1-2 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Brisbane Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Outstanding service! Fixed my laptop screen replacement same day. Professional work and fair pricing. Highly recommend for any computer repairs in Brisbane."</p>
+                    <div class="customer">- Sarah M., Brisbane</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Excellent computer repair service. My desktop was running very slow, and they optimized it perfectly. Great communication and honest pricing."</p>
+                    <div class="customer">- Michael T., Brisbane</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Professional data recovery service saved all my important files when my hard drive failed. Reliable technician with great expertise."</p>
+                    <div class="customer">- Emma L., Brisbane</div>
+                </div>
+            </div>
+            <div class="google-reviews">
+                <div class="google-rating">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTQuMDkgOC4yNkwyMiA5TDE2IDEwTDE3Ljc0IDIyTDEyIDE5TDYuMjYgMjJMOCAxMEwyIDlMOS45MSA4LjI2TDEyIDJaIiBmaWxsPSIjRkZENzAwIi8+Cjwvc3ZnPg==" alt="Google Star" class="google-star">
+                    <span class="rating-text">4.9/5 Stars on Google Reviews</span>
+                </div>
+                <a href="https://www.google.com/search?q=Labyrinth+Tech+Support+Brisbane+reviews" target="_blank" class="google-reviews-btn">
+                    View All Google Reviews
+                </a>
             </div>
         </div>
     </section>
