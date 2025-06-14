@@ -1,6 +1,6 @@
 /* High contrast theme extracted from index.html */
 :root {
-  /* Palette tuned for extremely high contrast */
+  /* Standard high contrast palette */
   --hc-bg: #000000;
   --hc-fg: #ffffff;
   --hc-accent: #f8d000;
@@ -10,12 +10,180 @@
   --hc-size-h1: 4.5rem;
   --hc-size-h2: 3.25rem;
   --hc-size-h3: 2.4rem;
+  
+  /* Minotaur theme high contrast variables */
+  --hc-minotaur-bg: #0D0907;
+  --hc-minotaur-fg: #F4E4BC;
+  --hc-minotaur-accent: #DAA520;
+  --hc-minotaur-secondary: #CD853F;
+  --hc-minotaur-border: #B8860B;
+  --hc-minotaur-dark: #1A0F0A;
+  --hc-minotaur-light: #FFF8DC;
 }
 
 body.high-contrast {
   background: var(--hc-bg);
   color: var(--hc-fg);
   font-size: var(--hc-size-base);
+}
+
+/* Minotaur theme high contrast mode */
+body.high-contrast.bull-theme {
+  background: var(--hc-minotaur-bg);
+  color: var(--hc-minotaur-fg);
+  font-family: 'Lora', serif;
+}
+
+/* Minotaur theme typography */
+body.high-contrast.bull-theme h1,
+body.high-contrast.bull-theme h2,
+body.high-contrast.bull-theme h3,
+body.high-contrast.bull-theme h4,
+body.high-contrast.bull-theme h5,
+body.high-contrast.bull-theme h6 {
+  color: var(--hc-minotaur-accent) !important;
+  font-family: 'Cinzel', serif !important;
+  font-weight: 900 !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.high-contrast.bull-theme p,
+body.high-contrast.bull-theme li,
+body.high-contrast.bull-theme span {
+  color: var(--hc-minotaur-fg) !important;
+  font-family: 'Lora', serif !important;
+  font-weight: 600 !important;
+}
+
+/* Minotaur theme header */
+body.high-contrast.bull-theme .header {
+  background: var(--hc-minotaur-dark) !important;
+  border-bottom: 4px solid var(--hc-minotaur-accent) !important;
+}
+
+body.high-contrast.bull-theme .logo-text {
+  color: var(--hc-minotaur-accent) !important;
+  font-family: 'Cinzel', serif !important;
+}
+
+body.high-contrast.bull-theme .nav-link {
+  color: var(--hc-minotaur-fg) !important;
+  font-family: 'Lora', serif !important;
+  border-bottom: 2px solid transparent !important;
+}
+
+body.high-contrast.bull-theme .nav-link:hover {
+  color: var(--hc-minotaur-accent) !important;
+  border-bottom: 2px solid var(--hc-minotaur-accent) !important;
+}
+
+/* Minotaur theme hero section */
+body.high-contrast.bull-theme .hero {
+  background: linear-gradient(135deg, var(--hc-minotaur-bg) 0%, var(--hc-minotaur-dark) 100%) !important;
+  border: 4px solid var(--hc-minotaur-border) !important;
+}
+
+body.high-contrast.bull-theme .hero h1 {
+  color: var(--hc-minotaur-light) !important;
+  font-size: 3.5rem !important;
+}
+
+body.high-contrast.bull-theme .hero-subtitle {
+  color: var(--hc-minotaur-accent) !important;
+  font-size: 1.5rem !important;
+}
+
+/* Minotaur theme value cards */
+body.high-contrast.bull-theme .value-card {
+  background: var(--hc-minotaur-dark) !important;
+  border: 4px solid var(--hc-minotaur-accent) !important;
+  box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3) !important;
+}
+
+body.high-contrast.bull-theme .value-card h3 {
+  color: var(--hc-minotaur-light) !important;
+  font-size: 2rem !important;
+}
+
+body.high-contrast.bull-theme .value-card p {
+  color: var(--hc-minotaur-secondary) !important;
+  font-size: 1.2rem !important;
+}
+
+body.high-contrast.bull-theme .value-icon {
+  background: var(--hc-minotaur-accent) !important;
+  border: 4px solid var(--hc-minotaur-light) !important;
+}
+
+/* Minotaur theme service cards */
+body.high-contrast.bull-theme .service-card {
+  background: var(--hc-minotaur-dark) !important;
+  border: 3px solid var(--hc-minotaur-border) !important;
+}
+
+body.high-contrast.bull-theme .service-card h3 {
+  color: var(--hc-minotaur-light) !important;
+}
+
+body.high-contrast.bull-theme .service-card p {
+  color: var(--hc-minotaur-secondary) !important;
+}
+
+body.high-contrast.bull-theme .service-icon {
+  background: var(--hc-minotaur-accent) !important;
+  border: 3px solid var(--hc-minotaur-light) !important;
+}
+
+/* Minotaur theme buttons */
+body.high-contrast.bull-theme .cta-button,
+body.high-contrast.bull-theme .service-expand-btn,
+body.high-contrast.bull-theme button {
+  background: var(--hc-minotaur-accent) !important;
+  color: var(--hc-minotaur-dark) !important;
+  border: 3px solid var(--hc-minotaur-light) !important;
+  font-family: 'Cinzel', serif !important;
+  font-weight: 700 !important;
+}
+
+body.high-contrast.bull-theme .cta-button:hover,
+body.high-contrast.bull-theme .service-expand-btn:hover,
+body.high-contrast.bull-theme button:hover {
+  background: var(--hc-minotaur-light) !important;
+  color: var(--hc-minotaur-dark) !important;
+  border: 3px solid var(--hc-minotaur-accent) !important;
+}
+
+/* Minotaur theme contact section */
+body.high-contrast.bull-theme .contact {
+  background: linear-gradient(135deg, var(--hc-minotaur-dark) 0%, var(--hc-minotaur-bg) 100%) !important;
+  border: 4px solid var(--hc-minotaur-accent) !important;
+}
+
+body.high-contrast.bull-theme .contact h2 {
+  color: var(--hc-minotaur-light) !important;
+}
+
+body.high-contrast.bull-theme .contact-icon {
+  background: var(--hc-minotaur-accent) !important;
+  border: 3px solid var(--hc-minotaur-light) !important;
+}
+
+/* Minotaur theme footer */
+body.high-contrast.bull-theme .footer {
+  background: var(--hc-minotaur-bg) !important;
+  border-top: 4px solid var(--hc-minotaur-accent) !important;
+}
+
+body.high-contrast.bull-theme .footer h4 {
+  color: var(--hc-minotaur-accent) !important;
+}
+
+body.high-contrast.bull-theme .footer a {
+  color: var(--hc-minotaur-secondary) !important;
+}
+
+body.high-contrast.bull-theme .footer a:hover {
+  color: var(--hc-minotaur-light) !important;
 }
 
 body.high-contrast .container {
@@ -227,6 +395,65 @@ body.high-contrast .cta-button:focus {
   .form-group input::placeholder,
   .form-group textarea::placeholder {
     color: rgba(0, 0, 0, 0.7) !important;
+  }
+
+  /* Minotaur theme system high contrast */
+  body.bull-theme h1,
+  body.bull-theme h2,
+  body.bull-theme h3,
+  body.bull-theme h4,
+  body.bull-theme h5,
+  body.bull-theme h6 {
+    color: var(--hc-minotaur-accent) !important;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 900 !important;
+  }
+
+  body.bull-theme p,
+  body.bull-theme li,
+  body.bull-theme span {
+    color: var(--hc-minotaur-fg) !important;
+    font-family: 'Lora', serif !important;
+    font-weight: 600 !important;
+  }
+
+  body.bull-theme .value-card {
+    background: var(--hc-minotaur-dark) !important;
+    border: 4px solid var(--hc-minotaur-accent) !important;
+  }
+
+  body.bull-theme .value-card h3 {
+    color: var(--hc-minotaur-light) !important;
+    font-size: 2rem !important;
+  }
+
+  body.bull-theme .value-card p {
+    color: var(--hc-minotaur-secondary) !important;
+  }
+
+  body.bull-theme .value-icon {
+    background: var(--hc-minotaur-accent) !important;
+    border: 4px solid var(--hc-minotaur-light) !important;
+  }
+
+  body.bull-theme .service-card {
+    background: var(--hc-minotaur-dark) !important;
+    border: 3px solid var(--hc-minotaur-border) !important;
+  }
+
+  body.bull-theme .hero {
+    background: linear-gradient(135deg, var(--hc-minotaur-bg) 0%, var(--hc-minotaur-dark) 100%) !important;
+    border: 4px solid var(--hc-minotaur-border) !important;
+  }
+
+  body.bull-theme .contact {
+    background: linear-gradient(135deg, var(--hc-minotaur-dark) 0%, var(--hc-minotaur-bg) 100%) !important;
+    border: 4px solid var(--hc-minotaur-accent) !important;
+  }
+
+  body.bull-theme .footer {
+    background: var(--hc-minotaur-bg) !important;
+    border-top: 4px solid var(--hc-minotaur-accent) !important;
   }
 
   a:focus {
