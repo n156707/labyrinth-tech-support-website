@@ -2503,105 +2503,56 @@
             }
         }
     
-        /* Red Bull Inspired Theme System */
-        :root {
-            --bg-color: #f4f4f4;
-            --text-color: #000;
-            --accent-color: #C1121F;
-            --secondary-color: #e2e2e2;
-            --muted-color: #444444;
-            --success-color: #22c55e;
-            --warning-color: #f59e0b;
-            
-            --font-heading: 'Cinzel', serif;
-            --font-body: 'Lora', serif;
-            --font-tech: 'Inter', sans-serif;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #000;
-            --text-color: #fff;
-            --accent-color: #C1121F;
-            --secondary-color: #2E2E2E;
-            --muted-color: #CCCCCC;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            line-height: 1.7;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        /* Enhanced Navigation with Theme Integration */
+        /* Enhanced Accessibility Integration with Fixed Layout */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(var(--bg-color), 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 1px solid var(--neutral-200);
             transition: all 0.3s ease;
-            height: 70px;
         }
-
-        [data-theme="dark"] .header {
-            background: rgba(0, 0, 0, 0.95);
-        }
-
-        [data-theme="light"] .header {
-            background: rgba(244, 244, 244, 0.95);
-        }
-
+        
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 1rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
-            height: 100%;
         }
-
-        /* Mythological Logo Design */
+        
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            font-family: var(--font-heading);
-            font-size: 1.6rem;
+            gap: 0.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent-color);
-            transition: all 0.3s ease;
+            color: var(--neutral-900);
+            text-decoration: none;
+            transition: transform 0.3s ease;
         }
-
-        .logo-mascot {
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, #8B0000 100%);
-            border-radius: 50%;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 4px 15px rgba(193, 18, 31, 0.4);
-            border: 2px solid var(--accent-color);
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-md);
         }
-
-        .logo:hover .logo-mascot {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 20px rgba(193, 18, 31, 0.6);
-        }
-
-        /* Navigation Links with Mythological Touch */
-        .nav-links {
+        
+        .nav-menu {
             display: flex;
             align-items: center;
             gap: 2rem;
@@ -2609,440 +2560,356 @@
             margin: 0;
             padding: 0;
         }
-
-        .nav-links a {
+        
+        .nav-menu a {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--neutral-700);
             font-weight: 500;
-            font-family: var(--font-tech);
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             padding: 0.5rem 1rem;
-            border-radius: 6px;
+            border-radius: var(--border-radius-md);
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-brand);
+            background: rgba(0, 102, 255, 0.1);
+        }
+        
+        /* Integrated Accessibility Toggle */
+        .accessibility-menu-item {
             position: relative;
         }
-
-        .nav-links a:hover {
-            color: var(--bg-color);
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        /* Theme Toggle Integration */
-        .theme-toggle {
-            background: var(--secondary-color);
-            color: var(--text-color);
-            border: 2px solid var(--accent-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-family: var(--font-tech);
-        }
-
-        .theme-toggle:hover {
-            background: var(--accent-color);
-            color: var(--bg-color);
-            transform: translateY(-1px);
-        }
-
-        /* Accessibility Toggle with Red Bull Styling */
+        
         .accessibility-toggle {
-            background: var(--secondary-color);
-            border: 2px solid var(--accent-color);
-            border-radius: 20px;
-            padding: 8px 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-color);
-            font-family: var(--font-tech);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            background: none;
+            border: 2px solid var(--neutral-300);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--neutral-700);
+            font-family: var(--font-sans);
         }
-
-        .accessibility-toggle:hover,
-        .accessibility-toggle.active {
-            background: var(--accent-color);
-            color: var(--bg-color);
+        
+        .accessibility-toggle:hover {
+            border-color: var(--primary-brand);
+            color: var(--primary-brand);
+            background: rgba(0, 102, 255, 0.05);
             transform: translateY(-1px);
         }
-
-        /* Navigation Actions */
+        
+        .accessibility-toggle.active {
+            background: var(--primary-brand);
+            border-color: var(--primary-brand);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+        }
+        
+        .accessibility-icon {
+            font-size: 1rem;
+        }
+        
         .nav-actions {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-
+        
         .nav-cta {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #8B0000 100%);
+            background: var(--gradient-primary);
             color: white;
-            padding: 12px 24px;
+            padding: 0.75rem 1.5rem;
             border-radius: 25px;
             text-decoration: none;
-            font-weight: 700;
-            font-family: var(--font-heading);
+            font-weight: 600;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            box-shadow: var(--shadow-md);
         }
-
+        
         .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(193, 18, 31, 0.4);
-            border-color: var(--accent-color);
+            box-shadow: var(--shadow-lg);
         }
-
-        /* Mythological Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--bg-color) 0%, var(--secondary-color) 100%);
-            position: relative;
-            overflow: hidden;
-            margin-top: 70px;
-            padding: 4rem 0;
-            border-bottom: 4px solid var(--accent-color);
+        
+        /* High Contrast Accessibility Mode with Better Contrast */
+        body.high-contrast {
+            background: #000000 !important;
+            color: #FFFFFF !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="bullPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><text x="25" y="30" text-anchor="middle" font-size="20" fill="rgba(193,18,31,0.05)">🐂</text></pattern></defs><rect width="100" height="100" fill="url(%23bullPattern)"/></svg>') repeat;
-            opacity: 0.3;
+        
+        body.high-contrast .header {
+            background: #1a1a1a !important;
+            border-bottom: 3px solid #FFFFFF !important;
+            backdrop-filter: none !important;
         }
-
-        .hero-mascot {
-            position: absolute;
-            top: 20%;
-            right: 5%;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, #8B0000 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            box-shadow: 0 10px 30px rgba(193, 18, 31, 0.5);
-            border: 4px solid var(--accent-color);
-            animation: mysticalPulse 4s ease-in-out infinite;
-            z-index: 10;
+        
+        body.high-contrast .logo {
+            color: #FFFFFF !important;
+            font-weight: 800 !important;
         }
-
-        @keyframes mysticalPulse {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg);
-                box-shadow: 0 10px 30px rgba(193, 18, 31, 0.5);
-            }
-            50% { 
-                transform: scale(1.1) rotate(10deg);
-                box-shadow: 0 15px 40px rgba(193, 18, 31, 0.8);
-            }
+        
+        body.high-contrast .logo-icon {
+            background: #FFFFFF !important;
+            color: #000000 !important;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        
+        body.high-contrast .nav-menu a {
+            color: #FFFFFF !important;
+            font-weight: 600 !important;
+            font-size: 1.1rem !important;
+            border: 2px solid transparent !important;
         }
-
-        .hero h1 {
-            font-family: var(--font-heading);
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            color: var(--accent-color);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: 2px;
+        
+        body.high-contrast .nav-menu a:hover {
+            color: #000000 !important;
+            background: #FFFFFF !important;
+            border-color: #FFFFFF !important;
         }
-
-        .hero-subtitle {
-            font-family: var(--font-body);
-            font-size: 1.4rem;
-            margin-bottom: 3rem;
-            line-height: 1.6;
-            color: var(--text-color);
-            font-style: italic;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        
+        body.high-contrast .accessibility-toggle {
+            background: #FFFFFF !important;
+            border-color: #FFFFFF !important;
+            color: #000000 !important;
+            font-weight: 700 !important;
         }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
+        
+        body.high-contrast .accessibility-toggle:hover {
+            background: #CCCCCC !important;
+            border-color: #CCCCCC !important;
         }
-
-        .btn-primary,
-        .btn-secondary {
-            padding: 1.2rem 2.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            transition: all 0.3s ease;
-            border: 2px solid var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        
+        body.high-contrast .nav-cta {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            font-weight: 700 !important;
+            border: 3px solid #FFFFFF !important;
         }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: white;
+        
+        body.high-contrast .nav-cta:hover {
+            background: #CCCCCC !important;
+            border-color: #CCCCCC !important;
         }
-
-        .btn-primary:hover {
-            background: #8B0000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(193, 18, 31, 0.4);
+        
+        /* Hero Section High Contrast */
+        body.high-contrast .hero {
+            background: #000000 !important;
+            border-bottom: 4px solid #FFFFFF !important;
         }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent-color);
+        
+        body.high-contrast .hero h1 {
+            color: #FFFFFF !important;
+            font-size: 4rem !important;
+            font-weight: 900 !important;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.3) !important;
+            line-height: 1.1 !important;
         }
-
-        .btn-secondary:hover {
-            background: var(--accent-color);
-            color: white;
-            transform: translateY(-3px);
+        
+        body.high-contrast .hero-subtitle {
+            color: #FFFFFF !important;
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            line-height: 1.6 !important;
         }
-
-        /* Content Sections with Mythological Theme */
-        .section {
-            padding: 6rem 0;
-            background: var(--bg-color);
-            border-bottom: 2px solid var(--secondary-color);
+        
+        body.high-contrast .btn-primary,
+        body.high-contrast .btn-secondary {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            font-weight: 800 !important;
+            font-size: 1.1rem !important;
+            border: 3px solid #FFFFFF !important;
+            padding: 1rem 2rem !important;
         }
-
-        .section:nth-child(even) {
-            background: var(--secondary-color);
+        
+        body.high-contrast .btn-primary:hover,
+        body.high-contrast .btn-secondary:hover {
+            background: #CCCCCC !important;
+            border-color: #CCCCCC !important;
+            transform: translateY(-3px) !important;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        
+        /* Content Sections High Contrast */
+        body.high-contrast .value-card,
+        body.high-contrast .service-card,
+        body.high-contrast .pricing-card,
+        body.high-contrast .sustainability-card,
+        body.high-contrast .testimonial-card,
+        body.high-contrast .faq-item {
+            background: #1a1a1a !important;
+            border: 3px solid #FFFFFF !important;
+            color: #FFFFFF !important;
         }
-
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        
+        body.high-contrast .value-card:hover,
+        body.high-contrast .service-card:hover,
+        body.high-contrast .pricing-card:hover,
+        body.high-contrast .sustainability-card:hover,
+        body.high-contrast .testimonial-card:hover,
+        body.high-contrast .faq-item:hover {
+            background: #333333 !important;
+            border-color: #CCCCCC !important;
+            transform: translateY(-5px) !important;
         }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--muted-color);
-            margin-bottom: 4rem;
-            font-style: italic;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        
+        body.high-contrast h1, 
+        body.high-contrast h2, 
+        body.high-contrast h3,
+        body.high-contrast .section-title {
+            color: #FFFFFF !important;
+            font-weight: 900 !important;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.1) !important;
         }
-
-        /* Service Cards with Mythological Design */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        
+        body.high-contrast .section-title {
+            font-size: 3rem !important;
+            border-bottom: 4px solid #FFFFFF !important;
+            padding-bottom: 1rem !important;
         }
-
-        .service-card {
-            background: var(--secondary-color);
-            border: 2px solid var(--accent-color);
-            border-radius: 15px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        
+        body.high-contrast .value-card h3,
+        body.high-contrast .service-card h3,
+        body.high-contrast .pricing-card h3,
+        body.high-contrast .sustainability-card h3 {
+            color: #FFFFFF !important;
+            font-size: 1.8rem !important;
+            font-weight: 800 !important;
+            border-bottom: 2px solid #FFFFFF !important;
+            padding-bottom: 0.5rem !important;
         }
-
-        .service-card::before {
-            content: '🐂';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 32px;
-            opacity: 0.1;
-            transition: all 0.3s ease;
+        
+        body.high-contrast p, 
+        body.high-contrast li,
+        body.high-contrast .value-card p,
+        body.high-contrast .service-card p,
+        body.high-contrast .pricing-card p,
+        body.high-contrast .sustainability-card p {
+            color: #FFFFFF !important;
+            font-size: 1.1rem !important;
+            line-height: 1.8 !important;
+            font-weight: 500 !important;
         }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(193, 18, 31, 0.3);
-            border-color: #8B0000;
+        
+        /* Section Backgrounds High Contrast */
+        body.high-contrast .about,
+        body.high-contrast .sustainability,
+        body.high-contrast .pricing,
+        body.high-contrast .testimonials,
+        body.high-contrast .faq-section {
+            background: #000000 !important;
+            border-top: 3px solid #FFFFFF !important;
         }
-
-        .service-card:hover::before {
-            opacity: 0.3;
-            transform: scale(1.2) rotate(15deg);
+        
+        body.high-contrast .contact {
+            background: #1a1a1a !important;
+            border: 4px solid #FFFFFF !important;
         }
-
-        .service-card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-            font-weight: 700;
+        
+        body.high-contrast .contact h2,
+        body.high-contrast .contact h3 {
+            color: #FFFFFF !important;
+            font-size: 2.5rem !important;
         }
-
-        .service-card p {
-            color: var(--text-color);
-            line-height: 1.7;
-            font-size: 1rem;
+        
+        body.high-contrast .contact-info {
+            background: #000000 !important;
+            border: 3px solid #FFFFFF !important;
+            color: #FFFFFF !important;
         }
-
-        /* Contact Section */
-        .contact {
-            background: var(--secondary-color);
-            color: var(--text-color);
-            padding: 6rem 0;
-            text-align: center;
-            border-top: 4px solid var(--accent-color);
+        
+        body.high-contrast .contact-info p {
+            color: #FFFFFF !important;
+            font-size: 1.2rem !important;
+            font-weight: 600 !important;
         }
-
-        .contact h2 {
-            font-family: var(--font-heading);
-            color: var(--accent-color);
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            font-weight: 700;
+        
+        /* Enhanced Focus for Accessibility */
+        body.high-contrast *:focus {
+            outline: 4px solid #FFFFFF !important;
+            outline-offset: 4px !important;
+            background: #333333 !important;
         }
-
-        .contact-info {
-            background: var(--bg-color);
-            border: 3px solid var(--accent-color);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 2rem auto;
-            max-width: 600px;
+        
+        body.high-contrast input,
+        body.high-contrast textarea,
+        body.high-contrast select {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border: 3px solid #FFFFFF !important;
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
         }
-
-        .contact-info h3 {
-            color: var(--accent-color);
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+        
+        body.high-contrast a {
+            color: #FFFFFF !important;
+            text-decoration: underline !important;
+            font-weight: 600 !important;
         }
-
-        .contact-info p {
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+        
+        body.high-contrast a:hover {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            padding: 0.2em 0.4em !important;
+            text-decoration: none !important;
         }
-
-        /* Focus and Accessibility */
-        *:focus {
-            outline: 3px solid var(--accent-color);
-            outline-offset: 3px;
-        }
-
+        
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-container {
-                padding: 0 1rem;
+                padding: 1rem;
             }
             
-            .nav-links {
+            .nav-menu {
                 display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--secondary-color);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                background: var(--surface-white);
+                box-shadow: var(--shadow-xl);
                 flex-direction: column;
                 gap: 1rem;
                 padding: 2rem;
-                border-radius: 0 0 15px 15px;
-                border: 2px solid var(--accent-color);
             }
             
-            .nav-links.mobile-open {
+            .nav-menu.mobile-open {
                 display: flex;
             }
             
-            .logo {
-                font-size: 1.3rem;
+            body.high-contrast .nav-menu {
+                background: #1a1a1a !important;
+                border: 3px solid #FFFFFF !important;
             }
             
-            .logo-mascot {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            
-            .hero-mascot {
-                width: 70px;
-                height: 70px;
-                font-size: 32px;
-                top: 15%;
-                right: 5%;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .theme-toggle,
             .accessibility-toggle {
-                padding: 6px 12px;
-                font-size: 12px;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
             }
             
             .nav-cta {
-                padding: 8px 16px;
-                font-size: 14px;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
             
             .mobile-menu-btn {
                 display: block;
                 background: none;
-                border: 2px solid var(--accent-color);
-                color: var(--text-color);
+                border: 2px solid var(--neutral-300);
+                color: var(--neutral-700);
                 cursor: pointer;
                 padding: 0.5rem;
-                border-radius: 6px;
+                border-radius: var(--border-radius-md);
                 font-size: 1.2rem;
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn-primary,
-            .btn-secondary {
-                width: 100%;
-                max-width: 280px;
+            body.high-contrast .mobile-menu-btn {
+                border-color: #FFFFFF !important;
+                color: #FFFFFF !important;
             }
         }
         
@@ -3053,11 +2920,8 @@
         }
 
     </style>
-    <!-- Mythological Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
 </head>
-<body data-theme="light">
+<body>
     <!-- Accessibility Toggle Button -->
     <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
         🔄 Accessibility
@@ -3069,28 +2933,29 @@
         <header class="header">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-mascot">🐂</div>
+                <div class="logo-icon">
+                    🔧
+                </div>
                 <span>Labyrinth Tech Support</span>
             </a>
             
-            <nav class="nav-links">
+            <nav class="nav-menu">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li>
+                <li class="accessibility-menu-item">
                     <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
-                        <span>♿</span>
+                        <span class="accessibility-icon">♿</span>
                         <span class="accessibility-text">Accessibility</span>
                     </button>
                 </li>
             </nav>
             
             <div class="nav-actions">
-                <button class="theme-toggle" onclick="toggleTheme()">☀️ Light / 🌑 Dark</button>
                 <a href="tel:0482012429" class="nav-cta">Call Now</a>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">☰</button>
             </div>
         </div>
     </header>
@@ -4256,16 +4121,6 @@
     </script>
 
     <script>
-        // Dual theme system: Light/Dark + Accessibility
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('labyrinth-theme', newTheme);
-            updateFavicon();
-        }
-        
         function toggleAccessibility() {
             const body = document.body;
             const button = document.querySelector('.accessibility-toggle');
@@ -4282,60 +4137,31 @@
                 text.textContent = 'High Contrast';
                 localStorage.setItem('labyrinth-accessibility', 'high-contrast');
             }
-            updateFavicon();
-        }
-        
-        // Dynamic favicon based on theme and accessibility
-        function updateFavicon() {
-            const favicon = document.querySelector('link[rel="icon"]');
-            const isDark = document.body.getAttribute('data-theme') === 'dark';
-            const isAccessible = document.body.classList.contains('high-contrast');
-            
-            if (favicon) {
-                if (isAccessible) {
-                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C1121F'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' fill='white'%3E🐂%3C/text%3E%3C/svg%3E";
-                } else if (isDark) {
-                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000000'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23C1121F'%3E🐂%3C/text%3E%3C/svg%3E";
-                } else {
-                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f4f4f4'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23C1121F'%3E🐂%3C/text%3E%3C/svg%3E";
-                }
-            }
         }
         
         function toggleMobileMenu() {
-            const menu = document.querySelector('.nav-links');
+            const menu = document.querySelector('.nav-menu');
             menu.classList.toggle('mobile-open');
         }
         
-        // Load saved preferences
+        // Load saved accessibility preference
         document.addEventListener('DOMContentLoaded', function() {
-            // Load theme preference
-            const savedTheme = localStorage.getItem('labyrinth-theme') || 'light';
-            document.body.setAttribute('data-theme', savedTheme);
-            
-            // Load accessibility preference
-            const savedAccessibility = localStorage.getItem('labyrinth-accessibility');
+            const saved = localStorage.getItem('labyrinth-accessibility');
             const button = document.querySelector('.accessibility-toggle');
             const text = button ? button.querySelector('.accessibility-text') : null;
             
-            if (savedAccessibility === 'high-contrast' && button && text) {
+            if (saved === 'high-contrast' && button && text) {
                 document.body.classList.add('high-contrast');
                 button.classList.add('active');
                 text.textContent = 'High Contrast';
             }
-            
-            updateFavicon();
         });
         
-        // Keyboard shortcuts
+        // Keyboard shortcut Alt+A
         document.addEventListener('keydown', function(event) {
             if (event.altKey && event.key === 'a') {
                 event.preventDefault();
                 toggleAccessibility();
-            }
-            if (event.altKey && event.key === 't') {
-                event.preventDefault();
-                toggleTheme();
             }
         });
         
@@ -4345,20 +4171,29 @@
             
             focusableElements.forEach(element => {
                 element.addEventListener('focus', function() {
-                    this.style.outline = '3px solid var(--accent-color)';
-                    this.style.outlineOffset = '3px';
+                    if (document.body.classList.contains('high-contrast')) {
+                        this.style.outline = '4px solid #FFFFFF';
+                        this.style.outlineOffset = '4px';
+                        this.style.background = '#333333';
+                    } else {
+                        this.style.outline = '3px solid var(--primary-brand)';
+                        this.style.outlineOffset = '2px';
+                    }
                 });
                 
                 element.addEventListener('blur', function() {
-                    this.style.outline = '';
-                    this.style.outlineOffset = '';
+                    if (!document.body.classList.contains('high-contrast')) {
+                        this.style.outline = '';
+                        this.style.outlineOffset = '';
+                        this.style.background = '';
+                    }
                 });
             });
         });
         
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(event) {
-            const menu = document.querySelector('.nav-links');
+            const menu = document.querySelector('.nav-menu');
             const menuBtn = document.querySelector('.mobile-menu-btn');
             
             if (menu && menuBtn && !menu.contains(event.target) && !menuBtn.contains(event.target)) {
