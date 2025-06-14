@@ -17,6 +17,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
+            background: #ffffff;
         }
         
         /* Accessibility Toggle Button */
@@ -48,23 +49,33 @@
         .hero {
             background: linear-gradient(135deg, #0066ff 0%, #00b4d8 100%);
             color: white;
-            padding: 120px 0;
+            padding: 120px 20px;
             text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            display: block !important;
+            visibility: visible !important;
         }
         
         .hero-subtitle {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            opacity: 0.95;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            color: white !important;
+            font-weight: 500;
         }
         
         .cta-button {
@@ -86,7 +97,7 @@
         
         /* Services Section */
         .services {
-            padding: 80px 0;
+            padding: 80px 20px;
             background: #f8f9fa;
         }
         
@@ -100,13 +111,17 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #333;
+            color: #333 !important;
+            font-weight: 800;
+            display: block !important;
+            visibility: visible !important;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            margin-top: 3rem;
         }
         
         .service-card {
@@ -125,15 +140,40 @@
         .service-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #0066ff;
+            color: #0066ff !important;
+            font-weight: 700;
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        .service-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1rem;
         }
         
         /* Contact Section */
         .contact {
             background: #333;
             color: white;
-            padding: 80px 0;
+            padding: 80px 20px;
             text-align: center;
+        }
+        
+        .contact h2 {
+            color: white !important;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        .contact h3 {
+            color: #667eea !important;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: block !important;
+            visibility: visible !important;
         }
         
         .contact-info {
@@ -142,6 +182,12 @@
             padding: 30px;
             margin: 20px auto;
             max-width: 600px;
+        }
+        
+        .contact-info p {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
         
         /* High Contrast Accessible Theme */
@@ -159,12 +205,14 @@
             font-weight: 900 !important;
             letter-spacing: 1px !important;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+            color: white !important;
         }
         
         body.high-contrast .hero-subtitle {
             font-size: 1.6rem !important;
             font-weight: 600 !important;
             line-height: 1.8 !important;
+            color: white !important;
         }
         
         body.high-contrast .services {
@@ -195,11 +243,9 @@
         body.high-contrast .section-title {
             font-size: 3.5rem !important;
             font-weight: 900 !important;
-            background: linear-gradient(135deg, #667eea, #764ba2) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
+            color: #667eea !important;
             letter-spacing: 1px !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2) !important;
         }
         
         body.high-contrast .cta-button {
@@ -216,6 +262,16 @@
             background: linear-gradient(135deg, rgba(102,126,234,0.2) 0%, rgba(118,75,162,0.2) 100%) !important;
         }
         
+        body.high-contrast .contact h2 {
+            color: #667eea !important;
+            font-size: 3.5rem !important;
+        }
+        
+        body.high-contrast .contact h3 {
+            color: #667eea !important;
+            font-size: 2rem !important;
+        }
+        
         body.high-contrast .contact-info {
             background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%) !important;
             border: 2px solid rgba(255,255,255,0.25) !important;
@@ -224,6 +280,8 @@
         body.high-contrast h1, body.high-contrast h2, body.high-contrast h3 {
             letter-spacing: 0.8px !important;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+            display: block !important;
+            visibility: visible !important;
         }
         
         body.high-contrast p, body.high-contrast li {
@@ -240,15 +298,40 @@
         
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1rem; }
-            .services-grid { grid-template-columns: 1fr; }
+            .hero h1 { 
+                font-size: 2.5rem !important; 
+                display: block !important;
+                visibility: visible !important;
+            }
+            .hero-subtitle { 
+                font-size: 1rem !important; 
+            }
+            .services-grid { 
+                grid-template-columns: 1fr; 
+            }
+            .section-title {
+                font-size: 2rem !important;
+                display: block !important;
+                visibility: visible !important;
+            }
+            .service-card h3 {
+                font-size: 1.3rem !important;
+                display: block !important;
+                visibility: visible !important;
+            }
             #accessibility-toggle { 
                 top: 10px; 
                 right: 10px; 
                 padding: 12px 20px; 
                 font-size: 16px; 
             }
+        }
+        
+        /* Force heading visibility */
+        h1, h2, h3, h4, h5, h6 {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
     </style>
 </head>
@@ -260,7 +343,7 @@
     
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="hero-content">
             <h1>Professional Computer Repair Services Brisbane QLD</h1>
             <p class="hero-subtitle">Expert laptop repair, desktop computer fixes, and comprehensive IT support services in Brisbane. Same-day computer repair with 12-month warranty. Trusted by 500+ Brisbane customers for reliable technology solutions and emergency computer support.</p>
             <div>
@@ -273,31 +356,31 @@
     <!-- Services Section -->
     <section class="services">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
+            <h2 class="section-title">Our Computer Repair Services</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <h3>Laptop Repair Brisbane</h3>
-                    <p>Professional laptop repair services including screen replacement, keyboard fixes, battery replacement, and performance optimization. Same-day service available for most laptop brands.</p>
+                    <p>Professional laptop repair services including screen replacement, keyboard fixes, battery replacement, and performance optimization. Same-day service available for most laptop brands including HP, Dell, Lenovo, and Acer.</p>
                 </div>
                 <div class="service-card">
                     <h3>Desktop Computer Repair</h3>
-                    <p>Complete desktop computer repair and upgrade services. Hardware diagnostics, component replacement, system optimization, and custom build solutions.</p>
+                    <p>Complete desktop computer repair and upgrade services. Hardware diagnostics, component replacement, system optimization, and custom build solutions for home and business computers.</p>
                 </div>
                 <div class="service-card">
                     <h3>Data Recovery Brisbane</h3>
-                    <p>Emergency data recovery services for failed hard drives, corrupted files, and deleted data. Professional recovery with high success rates.</p>
+                    <p>Emergency data recovery services for failed hard drives, corrupted files, and deleted data. Professional recovery with high success rates for both personal and business critical data.</p>
                 </div>
                 <div class="service-card">
                     <h3>Network Setup & IT Support</h3>
-                    <p>Business IT support, network configuration, WiFi troubleshooting, and ongoing technical support for Brisbane businesses and homes.</p>
+                    <p>Business IT support, network configuration, WiFi troubleshooting, and ongoing technical support for Brisbane businesses and homes. Remote and on-site support available.</p>
                 </div>
                 <div class="service-card">
                     <h3>Virus Removal & Security</h3>
-                    <p>Complete virus removal, malware protection, and cybersecurity solutions. System cleanup and security software installation.</p>
+                    <p>Complete virus removal, malware protection, and cybersecurity solutions. System cleanup, security software installation, and protection against future threats.</p>
                 </div>
                 <div class="service-card">
                     <h3>Emergency Computer Support</h3>
-                    <p>24/7 emergency computer repair services for critical business systems. Remote support and on-site emergency repairs available.</p>
+                    <p>24/7 emergency computer repair services for critical business systems. Remote support and on-site emergency repairs available throughout Greater Brisbane area.</p>
                 </div>
             </div>
         </div>
@@ -306,13 +389,14 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Contact Labyrinth Tech Support</h2>
+            <h2>Contact Labyrinth Tech Support</h2>
             <div class="contact-info">
                 <h3>Get Professional Computer Repair Today</h3>
                 <p><strong>Phone:</strong> 0482 012 429</p>
                 <p><strong>Service Area:</strong> Greater Brisbane, Queensland</p>
                 <p><strong>Hours:</strong> Monday-Saturday 8AM-6PM</p>
                 <p><strong>Emergency Support:</strong> Available 24/7</p>
+                <p><strong>Warranty:</strong> 12-month guarantee on all repairs</p>
             </div>
             <div>
                 <a href="tel:0482012429" class="cta-button">Call Now for Same-Day Service</a>
@@ -346,6 +430,14 @@
                 document.body.classList.add('high-contrast');
                 button.innerHTML = '✓ High Contrast';
             }
+            
+            // Ensure all headings are visible
+            const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            headings.forEach(heading => {
+                heading.style.display = 'block';
+                heading.style.visibility = 'visible';
+                heading.style.opacity = '1';
+            });
         });
         
         // Keyboard shortcut Alt+A
