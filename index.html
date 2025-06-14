@@ -85,9 +85,34 @@
             padding: 15px 30px;
         }
 
-        header h1 {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        .logo-text h1 {
             color: var(--primary-color);
             margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 500;
+            display: block;
+            margin-top: -2px;
         }
 
         nav {
@@ -113,18 +138,50 @@
             text-align: center;
         }
 
+        .hero-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
         .hero h2 {
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin: 0;
             font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
         }
 
         .section {
@@ -153,6 +210,18 @@
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "🏛️";
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 2rem;
+            opacity: 0.1;
+            color: var(--primary-color);
         }
 
         .card:hover {
@@ -468,6 +537,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
         /* Focus states for accessibility */
         a:focus,
         button:focus,
@@ -489,7 +563,13 @@
     <button id="accessibility-toggle" aria-label="Toggle high contrast mode">🔄 Accessibility</button>
 
     <header>
-        <h1>⚡ Labyrinth Tech Support</h1>
+        <div class="logo-container">
+            <div class="logo-icon">🏛️</div>
+            <div class="logo-text">
+                <h1>Labyrinth Tech Support</h1>
+                <span class="tagline">Brisbane Computer Repair Specialists</span>
+            </div>
+        </div>
         <nav>
             <a href="#services">Services</a>
             <a href="#about">About</a>
@@ -500,8 +580,16 @@
     </header>
 
     <section class="hero">
-        <h2>Computer Repair in Brisbane</h2>
-        <p>Professional tech support with honest pricing, same-day service, and a 12-month warranty. Your trusted local computer repair specialists.</p>
+        <div class="hero-branding">
+            <div class="hero-icon">🏛️</div>
+            <h2>Navigate Your Tech Challenges with Labyrinth</h2>
+        </div>
+        <p>Brisbane's premier computer repair specialists. We guide you through technology maze with expert solutions, honest pricing, and guaranteed results.</p>
+        <div class="hero-badges">
+            <span class="badge">12-Month Warranty</span>
+            <span class="badge">Same-Day Service</span>
+            <span class="badge">Local Brisbane Expert</span>
+        </div>
         <a href="tel:0482012429" class="btn btn-primary">Call Now: 0482 012 429</a>
     </section>
 
@@ -724,8 +812,12 @@
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
                 <div>
-                    <h3>Labyrinth Tech Support</h3>
-                    <p>Your trusted Brisbane computer repair specialists. Professional service with honest pricing and guaranteed results.</p>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+                        <span style="font-size: 1.5rem;">🏛️</span>
+                        <h3 style="margin: 0;">Labyrinth Tech Support</h3>
+                    </div>
+                    <p>Navigate through your technology challenges with Brisbane's premier computer repair specialists. We guide you to solutions with expert service, honest pricing, and guaranteed results.</p>
+                    <p style="font-size: 0.9rem; color: #999; margin-top: 1rem;">🏛️ Finding your way through the tech maze since 2010</p>
                 </div>
                 
                 <div>
