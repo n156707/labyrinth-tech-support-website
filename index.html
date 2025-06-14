@@ -2503,36 +2503,150 @@
             }
         }
     
-        /* Accessibility Toggle Button - Top Left Position */
-        #accessibility-toggle {
-            position: fixed !important;
-            top: 10px !important;
-            left: 10px !important;
-            z-index: 999999 !important;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-            border: none !important;
-            border-radius: 20px !important;
-            padding: 8px 16px !important;
+        /* Enhanced Navigation with Integrated Accessibility Toggle */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--neutral-200);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 70px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--neutral-700);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-brand);
+        }
+        
+        /* Integrated Accessibility Toggle in Navigation */
+        .accessibility-nav-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: 2px solid var(--neutral-300);
+            border-radius: 25px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-700);
+            font-family: var(--font-sans);
+        }
+        
+        .accessibility-nav-toggle:hover {
+            border-color: var(--primary-brand);
+            color: var(--primary-brand);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,102,255,0.2);
+        }
+        
+        .accessibility-nav-toggle.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+        }
+        
+        .accessibility-nav-toggle.active:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.5);
+        }
+        
+        .accessibility-icon {
+            font-size: 16px;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,102,255,0.3);
+        }
+        
+        /* Enhanced High Contrast Theme for Navigation */
+        body.high-contrast .header {
+            background: rgba(26,26,46,0.95) !important;
+            border-bottom: 2px solid rgba(102,126,234,0.3) !important;
+        }
+        
+        body.high-contrast .logo {
+            color: #667eea !important;
+        }
+        
+        body.high-contrast .nav-menu a {
             color: white !important;
-            font-weight: 700 !important;
-            font-size: 12px !important;
-            cursor: pointer !important;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.4) !important;
-            transition: all 0.3s ease !important;
-            border: 2px solid rgba(255,255,255,0.2) !important;
-            font-family: var(--font-sans) !important;
-            backdrop-filter: blur(10px) !important;
-            min-width: 100px !important;
-            text-align: center !important;
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
         }
         
-        #accessibility-toggle:hover {
-            transform: translateY(-1px) scale(1.02) !important;
-            box-shadow: 0 6px 20px rgba(102,126,234,0.5) !important;
-            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+        body.high-contrast .nav-menu a:hover {
+            color: #667eea !important;
         }
         
-        /* Enhanced High Contrast Theme for All Sections */
+        body.high-contrast .accessibility-nav-toggle {
+            border-color: rgba(255,255,255,0.3) !important;
+            color: white !important;
+        }
+        
+        body.high-contrast .accessibility-nav-toggle.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border-color: #667eea !important;
+        }
+        
+        body.high-contrast .nav-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            font-size: 1.1rem !important;
+            font-weight: 800 !important;
+        }
+        
+        /* Enhanced High Contrast Theme for All Content */
         body.high-contrast {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
             color: #ffffff !important;
@@ -2594,9 +2708,9 @@
             letter-spacing: 1px !important;
         }
         
-        body.high-contrast .cta-button,
         body.high-contrast .btn-primary,
-        body.high-contrast .btn-secondary {
+        body.high-contrast .btn-secondary,
+        body.high-contrast .cta-button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
             color: white !important;
             padding: 18px 40px !important;
@@ -2635,42 +2749,69 @@
             border-radius: 4px !important;
         }
         
-        body.high-contrast .header {
-            background: rgba(26,26,46,0.95) !important;
-            border-bottom: 2px solid rgba(102,126,234,0.3) !important;
-        }
-        
-        body.high-contrast .logo {
-            color: #667eea !important;
-        }
-        
-        body.high-contrast .nav-menu a {
-            color: white !important;
-        }
-        
-        body.high-contrast .nav-menu a:hover {
-            color: #667eea !important;
-        }
-        
+        /* Mobile Navigation Adjustments */
         @media (max-width: 768px) {
-            #accessibility-toggle { 
-                top: 8px; 
-                left: 8px; 
-                padding: 6px 12px; 
-                font-size: 11px; 
-                min-width: 80px;
+            .nav-container {
+                padding: 0 1rem;
+                height: 60px;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface-white);
+                box-shadow: var(--shadow-lg);
+                border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu.mobile-open {
+                display: flex;
+            }
+            
+            .nav-actions {
+                gap: 0.5rem;
+            }
+            
+            .accessibility-nav-toggle {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-cta {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.5rem;
+                color: var(--neutral-700);
+                font-size: 1.5rem;
+            }
+            
+            body.high-contrast .nav-menu {
+                background: rgba(26,26,46,0.95) !important;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none;
             }
         }
 
     </style>
 </head>
 <body>
-    <!-- Accessibility Toggle Button -->
-    <button id="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
-        🔄 Access
-    </button>
-    
-
     <!-- Accessibility Toggle Button -->
     <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
         🔄 Accessibility
@@ -3864,27 +4005,37 @@
     <script>
         function toggleAccessibility() {
             const body = document.body;
-            const button = document.getElementById('accessibility-toggle');
+            const button = document.querySelector('.accessibility-nav-toggle');
+            const text = button.querySelector('.accessibility-text');
             
             if (body.classList.contains('high-contrast')) {
                 body.classList.remove('high-contrast');
-                button.innerHTML = '🔄 Access';
+                button.classList.remove('active');
+                text.textContent = 'Accessibility';
                 localStorage.setItem('labyrinth-accessibility', 'normal');
             } else {
                 body.classList.add('high-contrast');
-                button.innerHTML = '✓ Hi-Con';
+                button.classList.add('active');
+                text.textContent = 'High Contrast';
                 localStorage.setItem('labyrinth-accessibility', 'high-contrast');
             }
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('mobile-open');
         }
         
         // Load saved accessibility preference
         document.addEventListener('DOMContentLoaded', function() {
             const saved = localStorage.getItem('labyrinth-accessibility');
-            const button = document.getElementById('accessibility-toggle');
+            const button = document.querySelector('.accessibility-nav-toggle');
+            const text = button.querySelector('.accessibility-text');
             
             if (saved === 'high-contrast') {
                 document.body.classList.add('high-contrast');
-                button.innerHTML = '✓ Hi-Con';
+                button.classList.add('active');
+                text.textContent = 'High Contrast';
             }
         });
         
@@ -3911,6 +4062,16 @@
                     this.style.outlineOffset = '';
                 });
             });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.querySelector('.nav-menu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+                menu.classList.remove('mobile-open');
+            }
         });
     </script>
 
