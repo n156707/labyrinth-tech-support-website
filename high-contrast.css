@@ -58,6 +58,36 @@ body.high-contrast a:hover {
   color: var(--hc-link-hover);
 }
 
+/* Value proposition cards styling for high contrast */
+body.high-contrast .value-card {
+  background: var(--hc-bg);
+  border: 3px solid var(--hc-fg);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+body.high-contrast .value-card h3 {
+  color: var(--hc-accent);
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-shadow: none;
+}
+
+body.high-contrast .value-card p {
+  color: var(--hc-fg);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+body.high-contrast .value-icon {
+  background: var(--hc-accent) !important;
+  border: 3px solid var(--hc-fg);
+}
+
+body.high-contrast .value-icon svg {
+  color: var(--hc-bg);
+  filter: none;
+}
+
 body.high-contrast p,
 body.high-contrast li {
   line-height: 1.9;
@@ -141,6 +171,36 @@ body.high-contrast .cta-button:focus {
 
   a:hover {
     color: var(--hc-link-hover);
+  }
+
+  /* Value proposition cards styling for system high contrast */
+  .value-card {
+    background: var(--hc-bg);
+    border: 3px solid var(--hc-fg);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+  }
+
+  .value-card h3 {
+    color: var(--hc-accent);
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-shadow: none;
+  }
+
+  .value-card p {
+    color: var(--hc-fg);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .value-icon {
+    background: var(--hc-accent) !important;
+    border: 3px solid var(--hc-fg);
+  }
+
+  .value-icon svg {
+    color: var(--hc-bg);
+    filter: none;
   }
 
   a:focus {
