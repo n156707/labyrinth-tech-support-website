@@ -2503,7 +2503,7 @@
             }
         }
     
-        /* Clean Navigation without Accessibility Button + System Preferences */
+        /* Enhanced High Contrast Layout with Continuous Design */
         
         .navbar {
             position: fixed;
@@ -2669,41 +2669,42 @@
             font-size: 1.2rem;
         }
 
-        /* Dark Mode Styles */
+        /* Dark Mode Styles with Enhanced Contrast */
         body.dark-mode {
-            background: #111827;
-            color: #f9fafb;
+            background: #0f172a;
+            color: #f8fafc;
         }
 
         body.dark-mode .navbar {
-            background: #1f2937;
-            border-bottom-color: #374151;
+            background: #1e293b;
+            border-bottom-color: #334155;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         body.dark-mode .nav-brand {
-            color: #f9fafb;
+            color: #f8fafc;
         }
 
         body.dark-mode .brand-name {
-            color: #f9fafb;
+            color: #f8fafc;
         }
 
         body.dark-mode .brand-subtitle {
-            color: #d1d5db;
+            color: #cbd5e1;
         }
 
         body.dark-mode .nav-links a {
-            color: #d1d5db;
+            color: #cbd5e1;
         }
 
         body.dark-mode .nav-links a:hover {
             color: #60a5fa;
-            background: #1e3a8a;
+            background: #1e40af;
         }
 
         body.dark-mode .call-btn {
             background: #60a5fa;
-            color: #111827;
+            color: #0f172a;
         }
 
         body.dark-mode .call-btn:hover {
@@ -2711,20 +2712,24 @@
         }
 
         body.dark-mode .mobile-btn {
-            border-color: #4b5563;
-            color: #d1d5db;
+            border-color: #475569;
+            color: #cbd5e1;
         }
 
-        /* System High Contrast Mode Support */
+        /* Enhanced System High Contrast Mode Support */
         @media (prefers-contrast: high) {
+            /* Base High Contrast Styles */
             body {
                 background: #000000 !important;
                 color: #ffffff !important;
+                font-weight: 500 !important;
             }
             
+            /* Navigation High Contrast */
             .navbar {
                 background: #000000 !important;
-                border-bottom: 2px solid #ffffff !important;
+                border-bottom: 3px solid #ffffff !important;
+                box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2) !important;
             }
             
             .nav-brand {
@@ -2733,58 +2738,71 @@
             
             .brand-name {
                 color: #ffffff !important;
-                font-weight: 800 !important;
+                font-weight: 900 !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
             }
             
             .brand-subtitle {
                 color: #ffffff !important;
-                font-weight: 600 !important;
+                font-weight: 700 !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
             }
             
             .brand-logo {
                 background: #ffffff !important;
                 color: #000000 !important;
+                border: 2px solid #ffffff !important;
+                font-weight: 900 !important;
             }
             
             .nav-links a {
                 color: #ffffff !important;
-                font-weight: 600 !important;
-                border: 1px solid transparent !important;
+                font-weight: 700 !important;
+                border: 2px solid transparent !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
             }
             
             .nav-links a:hover {
                 background: #ffffff !important;
                 color: #000000 !important;
                 border-color: #ffffff !important;
+                text-shadow: none !important;
+                font-weight: 900 !important;
             }
             
             .theme-btn {
                 background: #ffffff !important;
                 color: #000000 !important;
-                font-weight: 700 !important;
+                font-weight: 900 !important;
+                border: 2px solid #ffffff !important;
+                text-shadow: none !important;
             }
             
             .theme-btn:hover {
                 background: #cccccc !important;
+                border-color: #cccccc !important;
             }
             
             .call-btn {
                 background: #ffffff !important;
                 color: #000000 !important;
-                font-weight: 700 !important;
-                border: 2px solid #ffffff !important;
+                font-weight: 900 !important;
+                border: 3px solid #ffffff !important;
+                text-shadow: none !important;
             }
             
             .call-btn:hover {
                 background: #cccccc !important;
+                border-color: #cccccc !important;
             }
             
             .mobile-btn {
-                border-color: #ffffff !important;
+                border: 2px solid #ffffff !important;
                 color: #ffffff !important;
+                font-weight: 900 !important;
             }
             
-            /* Content sections */
+            /* Content Sections High Contrast */
             .hero,
             .about,
             .services,
@@ -2792,42 +2810,162 @@
             .pricing,
             .testimonials,
             .faq-section,
-            .contact {
+            .contact,
+            .footer {
                 background: #000000 !important;
                 color: #ffffff !important;
+                border-top: 2px solid #ffffff !important;
+                border-bottom: 2px solid #ffffff !important;
             }
             
+            /* Cards and Components High Contrast */
             .value-card,
             .service-card,
             .pricing-card,
             .sustainability-card,
             .testimonial-card,
-            .faq-item {
+            .faq-item,
+            .contact-form,
+            .stats-container,
+            .review-container {
                 background: #000000 !important;
-                border: 2px solid #ffffff !important;
+                border: 3px solid #ffffff !important;
                 color: #ffffff !important;
+                margin: 1rem 0 !important;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
             }
             
+            /* Typography High Contrast */
             h1, h2, h3, h4, h5, h6 {
                 color: #ffffff !important;
-                font-weight: 800 !important;
+                font-weight: 900 !important;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+                border-bottom: 2px solid #ffffff !important;
+                padding-bottom: 0.5rem !important;
+                margin-bottom: 1rem !important;
             }
             
-            p, li {
+            p, li, span, div {
                 color: #ffffff !important;
-                font-weight: 500 !important;
+                font-weight: 600 !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
+                line-height: 1.8 !important;
             }
             
+            /* Links High Contrast */
             a {
                 color: #ffffff !important;
                 text-decoration: underline !important;
+                text-decoration-thickness: 2px !important;
+                font-weight: 700 !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
             }
             
             a:hover {
                 background: #ffffff !important;
                 color: #000000 !important;
                 text-decoration: none !important;
-                padding: 2px 4px !important;
+                padding: 4px 8px !important;
+                border-radius: 4px !important;
+                text-shadow: none !important;
+                font-weight: 900 !important;
+            }
+            
+            /* Buttons High Contrast */
+            button,
+            .btn,
+            input[type="submit"],
+            input[type="button"] {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: 3px solid #ffffff !important;
+                font-weight: 900 !important;
+                text-shadow: none !important;
+                padding: 0.75rem 1.5rem !important;
+            }
+            
+            button:hover,
+            .btn:hover,
+            input[type="submit"]:hover,
+            input[type="button"]:hover {
+                background: #cccccc !important;
+                border-color: #cccccc !important;
+            }
+            
+            /* Form Elements High Contrast */
+            input,
+            textarea,
+            select {
+                background: #000000 !important;
+                color: #ffffff !important;
+                border: 3px solid #ffffff !important;
+                font-weight: 600 !important;
+            }
+            
+            input:focus,
+            textarea:focus,
+            select:focus {
+                outline: 3px solid #ffffff !important;
+                outline-offset: 2px !important;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+            }
+            
+            /* Icons and Graphics High Contrast */
+            .icon,
+            svg,
+            img {
+                filter: contrast(2) brightness(1.2) !important;
+                border: 2px solid #ffffff !important;
+            }
+            
+            /* Lists High Contrast */
+            ul, ol {
+                border-left: 3px solid #ffffff !important;
+                padding-left: 1.5rem !important;
+            }
+            
+            li {
+                margin-bottom: 0.75rem !important;
+                padding-left: 0.5rem !important;
+            }
+            
+            /* Tables High Contrast */
+            table {
+                border: 3px solid #ffffff !important;
+                background: #000000 !important;
+            }
+            
+            th, td {
+                border: 2px solid #ffffff !important;
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                padding: 0.75rem !important;
+            }
+            
+            th {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-weight: 900 !important;
+            }
+            
+            /* Special Elements High Contrast */
+            .accessibility-info {
+                background: #000000 !important;
+                border: 3px solid #ffffff !important;
+                color: #ffffff !important;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4) !important;
+            }
+            
+            .accessibility-info h3 {
+                color: #ffffff !important;
+                border-bottom: 2px solid #ffffff !important;
+            }
+            
+            /* Footer High Contrast */
+            footer {
+                background: #000000 !important;
+                border-top: 3px solid #ffffff !important;
+                color: #ffffff !important;
             }
         }
 
@@ -2843,7 +2981,7 @@
             }
         }
 
-        /* Content sections for dark mode */
+        /* Content sections for dark mode with enhanced contrast */
         body.dark-mode .hero,
         body.dark-mode .about,
         body.dark-mode .services,
@@ -2852,8 +2990,9 @@
         body.dark-mode .testimonials,
         body.dark-mode .faq-section,
         body.dark-mode .contact {
-            background: #111827;
-            color: #f9fafb;
+            background: #0f172a;
+            color: #f8fafc;
+            border-top: 1px solid #334155;
         }
 
         body.dark-mode .value-card,
@@ -2862,9 +3001,10 @@
         body.dark-mode .sustainability-card,
         body.dark-mode .testimonial-card,
         body.dark-mode .faq-item {
-            background: #1f2937;
-            border-color: #374151;
-            color: #f9fafb;
+            background: #1e293b;
+            border: 1px solid #475569;
+            color: #f8fafc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         /* Mobile Responsive */
@@ -2943,8 +3083,8 @@
             }
 
             body.dark-mode .nav-links {
-                background: #1f2937;
-                border-top-color: #374151;
+                background: #1e293b;
+                border-top-color: #334155;
             }
         }
 
@@ -3057,18 +3197,21 @@
             </div>
         </section>
 
-    <!-- Accessibility Instructions -->
+    <!-- Enhanced Accessibility Instructions -->
     <div class="accessibility-info" id="accessibilityInfo">
-        <h3>🛠️ Accessibility Options for High Contrast</h3>
-        <p><strong>For users who need high contrast viewing:</strong></p>
+        <h3>🛠️ High Contrast Accessibility Options</h3>
+        <p><strong>For users who need enhanced contrast and readability:</strong></p>
         <ul>
-            <li><strong>Windows:</strong> Press Win + U to open Ease of Access, then enable High Contrast</li>
-            <li><strong>Mac:</strong> System Preferences → Accessibility → Display → Increase Contrast</li>
+            <li><strong>Windows 10/11:</strong> Press Win + U → Ease of Access → High Contrast (or Win + Alt + Print Screen)</li>
+            <li><strong>Mac:</strong> System Preferences → Accessibility → Display → Increase Contrast + Reduce Transparency</li>
             <li><strong>Chrome:</strong> Settings → Advanced → Accessibility → Use high contrast mode</li>
-            <li><strong>Firefox:</strong> about:preferences → General → Colors → Use system colors</li>
-            <li><strong>Edge:</strong> Settings → Accessibility → Use high contrast</li>
+            <li><strong>Firefox:</strong> about:preferences → General → Colors → Use system colors + Override page colors</li>
+            <li><strong>Edge:</strong> Settings → Accessibility → Use high contrast + Force Dark Mode</li>
+            <li><strong>Android:</strong> Settings → Accessibility → High contrast text + Color inversion</li>
+            <li><strong>iOS:</strong> Settings → Accessibility → Display → Increase Contrast + Smart Invert</li>
         </ul>
-        <p><em>These system-level settings provide better accessibility than website toggles.</em></p>
+        <p><em>System-level high contrast provides continuous, consistent accessibility across all content.</em></p>
+        <p><strong>Keyboard shortcut:</strong> Press Alt+H to show/hide this help panel.</p>
     </div>
 
 
@@ -4240,7 +4383,7 @@
                 info.classList.add('show');
                 setTimeout(() => {
                     info.classList.remove('show');
-                }, 8000); // Hide after 8 seconds
+                }, 12000); // Hide after 12 seconds for longer reading time
             }
         }
         
@@ -4251,15 +4394,16 @@
                 toggleTheme();
             }
             
-            // Show accessibility info on first visit
-            const hasSeenInfo = localStorage.getItem('labyrinth-accessibility-info');
-            if (!hasSeenInfo) {
+            // Show accessibility info on first visit or every 10th visit
+            const visitCount = parseInt(localStorage.getItem('labyrinth-visit-count') || '0') + 1;
+            localStorage.setItem('labyrinth-visit-count', visitCount.toString());
+            
+            if (visitCount === 1 || visitCount % 10 === 0) {
                 showAccessibilityInfo();
-                localStorage.setItem('labyrinth-accessibility-info', 'seen');
             }
         });
         
-        // Keyboard shortcut for theme toggle
+        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.altKey && e.key === 't') {
                 e.preventDefault();
@@ -4277,9 +4421,16 @@
         document.addEventListener('click', function(e) {
             const navLinks = document.getElementById('navLinks');
             const mobileBtn = document.querySelector('.mobile-btn');
+            const accessInfo = document.getElementById('accessibilityInfo');
             
             if (navLinks && mobileBtn && !navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
                 navLinks.classList.remove('show');
+            }
+            
+            // Close accessibility info when clicking outside
+            if (accessInfo && accessInfo.classList.contains('show') && 
+                !accessInfo.contains(e.target) && e.target.tagName !== 'BUTTON') {
+                accessInfo.classList.remove('show');
             }
         });
         
