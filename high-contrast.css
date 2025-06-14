@@ -1,8 +1,8 @@
 /* High contrast theme extracted from index.html */
 :root {
-  /* Standard high contrast palette */
+  /* Standard high contrast palette - Yellow theme */
   --hc-bg: #000000;
-  --hc-fg: #ffffff;
+  --hc-fg: #ffff00;
   --hc-accent: #f8d000;
   --hc-link: #00ffff;
   --hc-link-hover: #ffff00;
@@ -197,18 +197,21 @@ body.high-contrast .hero {
 }
 
 body.high-contrast .hero h1 {
+  color: var(--hc-fg) !important;
   font-size: var(--hc-size-h1);
   font-weight: 900;
   margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9) !important;
   letter-spacing: 1px;
 }
 
 body.high-contrast .hero-subtitle {
+  color: var(--hc-fg) !important;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 40px;
   line-height: 1.8;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9) !important;
 }
 
 body.high-contrast h1,
@@ -266,7 +269,7 @@ body.high-contrast .services h2 {
   color: var(--hc-fg) !important;
   font-size: var(--hc-size-h2) !important;
   font-weight: 900 !important;
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.1) !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
   border-bottom: 4px solid var(--hc-accent) !important;
   padding-bottom: 1rem !important;
   margin-bottom: 2rem !important;
