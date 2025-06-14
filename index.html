@@ -215,9 +215,6 @@
 
         /* Accessibility Toggle Button */
         .accessibility-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
             z-index: 99999;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -230,6 +227,7 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             border: 2px solid rgba(255,255,255,0.2);
+            margin-left: 2rem;
         }
 
         .accessibility-toggle:hover {
@@ -2301,10 +2299,6 @@
     </style>
 </head>
 <body>
-    <!-- Accessibility Toggle Button -->
-    <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
-        🔄 Accessibility
-    </button>
     <!-- Skip to main content -->
     <a href="#main-content" class="sr-only">Skip to main content</a>
     
@@ -2327,6 +2321,9 @@
                     <li><a href="#contact" class="nav-link" title="Contact Computer Repair Brisbane">Contact</a></li>
                     <li><a href="tel:+61482012429" class="cta-button" title="Call Brisbane Computer Repair">Call Now</a></li>
                 </ul>
+                <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
+                    🔄 Accessibility
+                </button>
             </nav>
         </div>
     </header>
