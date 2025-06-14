@@ -1,12 +1,15 @@
 /* High contrast theme extracted from index.html */
 :root {
-  --hc-bg: #000;
-  --hc-fg: #fff;
-  --hc-accent: #667eea;
-  --hc-size-base: 1.2rem;
+  /* Palette tuned for extremely high contrast */
+  --hc-bg: #000000;
+  --hc-fg: #ffffff;
+  --hc-accent: #f8d000;
+  --hc-link: #00ffff;
+  --hc-link-hover: #ffff00;
+  --hc-size-base: 1.25rem;
   --hc-size-h1: 4.5rem;
-  --hc-size-h2: 3rem;
-  --hc-size-h3: 2.2rem;
+  --hc-size-h2: 3.25rem;
+  --hc-size-h3: 2.4rem;
 }
 
 body.high-contrast {
@@ -22,7 +25,7 @@ body.high-contrast .container {
 }
 
 body.high-contrast .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, var(--hc-accent) 100%);
 }
 
 body.high-contrast .hero h1 {
@@ -47,6 +50,14 @@ body.high-contrast h3 {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+body.high-contrast a {
+  color: var(--hc-link);
+}
+
+body.high-contrast a:hover {
+  color: var(--hc-link-hover);
+}
+
 body.high-contrast p,
 body.high-contrast li {
   line-height: 1.9;
@@ -61,7 +72,7 @@ body.high-contrast *:focus {
 }
 
 body.high-contrast a:focus {
-  background: rgba(102, 126, 234, 0.2);
+  background: rgba(255, 255, 0, 0.25);
   padding: 2px 4px;
   border-radius: 4px;
 }
@@ -86,7 +97,7 @@ body.high-contrast .cta-button:focus {
   }
 
   .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #000000 0%, var(--hc-accent) 100%);
   }
 
   .hero h1 {
@@ -124,8 +135,16 @@ body.high-contrast .cta-button:focus {
     border-radius: 4px;
   }
 
+  a {
+    color: var(--hc-link);
+  }
+
+  a:hover {
+    color: var(--hc-link-hover);
+  }
+
   a:focus {
-    background: rgba(102, 126, 234, 0.2);
+    background: rgba(255, 255, 0, 0.25);
     padding: 2px 4px;
     border-radius: 4px;
   }
