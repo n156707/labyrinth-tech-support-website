@@ -1,1023 +1,750 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Labyrinth Tech Support | Brisbane Computer Repair</title>
-    <meta name="description" content="Professional computer repair Brisbane QLD. Same-day service, honest pricing, 12-month warranty. Expert technician for hardware, software, virus removal, data recovery. Call (07) 3123-4567">
+    <meta name="description" content="Professional computer repair Brisbane QLD. Same-day service, honest pricing, 12-month warranty. Expert technician for hardware, software, virus removal, data recovery. Call 0482 012 429">
     
-    <!-- Professional fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23007acc;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2300a8e8;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='6' fill='url(%23grad)'/%3E%3Cpath d='M8 12h16v8H8z' fill='white' fill-opacity='0.9'/%3E%3Ccircle cx='10' cy='14' r='1' fill='%23007acc'/%3E%3Ccircle cx='22' cy='14' r='1' fill='%2300ff00'/%3E%3Cpath d='M12 16h8v2h-8z' fill='%23007acc'/%3E%3Cpath d='M14 18h4v1h-4z' fill='%23007acc' fill-opacity='0.7'/%3E%3Cpath d='M6 8l3 3-3 3M26 8l-3 3 3 3' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     
     <link rel="stylesheet" href="high-contrast.css">
-    
+
     <style>
-        /* Base styles with improved typography */
+        :root {
+            --primary-color: #2B6CB0;
+            --accent-color: #319795;
+            --background-color: #f9fafb;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
-            color: #333;
-            font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        
-        /* Enhanced typography hierarchy */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 0.5em;
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
-        
-        h1 { font-size: 2.5rem; font-weight: 700; }
-        h2 { font-size: 2rem; font-weight: 600; }
-        h3 { font-size: 1.5rem; font-weight: 600; }
-        h4 { font-size: 1.25rem; font-weight: 500; }
-        
-        p, li {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            line-height: 1.7;
-            margin-bottom: 1em;
-        }
-        
-        /* Navigation */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.3rem; }
+
+        /* Accessibility toggle */
+        #accessibility-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: var(--accent-color);
             color: white;
-            padding: 1rem 0;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #accessibility-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        header {
+            background-color: white;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
+            box-shadow: var(--card-shadow);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 15px 30px;
         }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
+
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
         }
-        
-        .nav-links {
+
+        nav {
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            gap: 20px;
         }
-        
-        .nav-links a {
-            color: white;
+
+        nav a {
             text-decoration: none;
+            color: var(--text-color);
             font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: color 0.3s ease;
         }
-        
-        .nav-links a:hover {
-            color: #ffd700;
-            transform: translateY(-2px);
+
+        nav a:hover {
+            color: var(--accent-color);
         }
-        
-        /* Accessibility toggle in navigation */
-        #accessibility-toggle {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
-            padding: 8px 16px;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            margin-left: 1rem;
-        }
-        
-        #accessibility-toggle:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-1px);
-        }
-        
-        /* Hero section */
+
         .hero {
-            background: linear-gradient(135deg, rgba(102,126,234,0.9), rgba(118,75,162,0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="circuit" patternUnits="userSpaceOnUse" width="100" height="100"><path d="M10,10 L90,10 L90,90 L10,90 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.2)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.2)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23circuit)"/></svg>');
+            background: linear-gradient(135deg, var(--primary-color), #1e40af);
             color: white;
-            padding: 6rem 0;
+            padding: 80px 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%), linear-gradient(-45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%);
-            background-size: 20px 20px;
-            opacity: 0.3;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
+
+        .hero h2 {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-family: 'Inter', sans-serif;
+            font-weight: 700;
         }
-        
+
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
-            font-weight: 400;
-            font-family: 'Roboto', sans-serif;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        .cta-button {
-            display: inline-block;
-            background: #ffd700;
-            color: #333;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255,215,0,0.4);
-        }
-        
-        /* Section styles */
+
         .section {
-            padding: 4rem 0;
-        }
-        
-        .container {
+            padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
-        
-        .section-title {
+
+        .section h2 {
             text-align: center;
             margin-bottom: 3rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
+            color: var(--primary-color);
         }
-        
-        /* Services grid */
-        .services-grid {
+
+        .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
         }
-        
-        .service-card {
-            background: white;
+
+        .card {
+            background-color: white;
+            padding: 30px;
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
+            text-align: center;
         }
-        
-        .service-card:hover {
+
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
-        
-        .service-icon {
-            width: 60px;
-            height: 60px;
+
+        .card h3 {
+            color: var(--primary-color);
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
         }
-        
-        .service-card h3 {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        
-        .service-card p {
-            font-family: 'Roboto', sans-serif;
+
+        .card p {
+            margin-bottom: 1.5rem;
             color: #666;
-            line-height: 1.6;
         }
-        
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-color), #2dd4bf);
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(49,151,149,0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            font-size: 1.1rem;
+            padding: 15px 30px;
+        }
+
         .expand-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 14px;
-            font-weight: 500;
             margin-top: 1rem;
-            font-family: 'Inter', sans-serif;
             transition: all 0.3s ease;
         }
-        
+
         .expand-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+            background: #1e40af;
         }
-        
+
         .service-details {
             margin-top: 1rem;
             padding-top: 1rem;
             border-top: 1px solid #eee;
             display: none;
+            text-align: left;
         }
-        
+
         .service-details.show {
             display: block;
             animation: fadeIn 0.3s ease;
         }
-        
+
         .service-details ul {
             list-style: none;
-            padding-left: 0;
+            padding: 0;
         }
-        
+
         .service-details li {
             padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-family: 'Roboto', sans-serif;
+            position: relative;
+            padding-left: 1.5rem;
         }
-        
+
         .service-details li:before {
             content: "✓";
-            color: #4CAF50;
-            margin-right: 0.5rem;
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
             font-weight: bold;
         }
-        
-        /* About section */
-        .about {
-            background: #f8f9fa;
-        }
-        
-        .about-content {
+
+        .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 40px;
             align-items: center;
+            margin-top: 2rem;
         }
-        
-        .about-text h2 {
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-        
-        .about-text p {
-            font-family: 'Roboto', sans-serif;
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-        
-        .about-image {
-            text-align: center;
-        }
-        
+
         .about-image img {
-            max-width: 100%;
+            width: 100%;
             border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
         }
-        
-        /* Pricing section */
-        .pricing {
-            background: white;
-        }
-        
+
         .pricing-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--primary-color), #1e40af);
             color: white;
-            padding: 3rem;
+            padding: 40px;
             border-radius: 20px;
             text-align: center;
             max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 10px 40px rgba(102,126,234,0.3);
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(43,108,176,0.3);
         }
-        
+
         .pricing-card h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 2rem;
             margin-bottom: 1rem;
+            color: white;
         }
-        
+
         .price {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
-        
-        .pricing-features {
+
+        .price span {
+            font-size: 1.2rem;
+        }
+
+        .features-list {
             list-style: none;
+            padding: 0;
             margin: 2rem 0;
         }
-        
-        .pricing-features li {
+
+        .features-list li {
             padding: 0.5rem 0;
-            font-family: 'Roboto', sans-serif;
+            position: relative;
+            padding-left: 1.5rem;
         }
-        
-        .pricing-features li:before {
+
+        .features-list li:before {
             content: "✓";
             color: #ffd700;
-            margin-right: 0.5rem;
+            position: absolute;
+            left: 0;
             font-weight: bold;
         }
-        
-        /* Sustainability section */
-        .sustainability {
-            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-            padding: 4rem 0;
-        }
-        
-        .sustainability-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .sustainability-card {
+
+        .testimonial-card {
             background: white;
-            padding: 2rem;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border-left: 4px solid #4CAF50;
+            box-shadow: var(--card-shadow);
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-color);
         }
-        
-        .sustainability-card h3 {
-            font-family: 'Inter', sans-serif;
-            color: #2E7D32;
-            margin-bottom: 1rem;
-        }
-        
-        .sustainability-card p {
-            font-family: 'Roboto', sans-serif;
-            color: #666;
-        }
-        
-        /* Reviews section */
-        .reviews {
-            background: white;
-        }
-        
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .review-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-        
-        .review-rating {
+
+        .testimonial-rating {
             color: #ffd700;
             font-size: 1.2rem;
             margin-bottom: 1rem;
         }
-        
-        .review-text {
-            font-family: 'Roboto', sans-serif;
+
+        .testimonial-text {
             font-style: italic;
             margin-bottom: 1rem;
             color: #555;
         }
-        
-        .review-author {
-            font-family: 'Inter', sans-serif;
+
+        .testimonial-author {
             font-weight: 600;
-            color: #333;
+            color: var(--primary-color);
         }
-        
-        /* Contact section */
-        .contact {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-        
-        .contact-content {
+
+        .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 40px;
+            margin-top: 2rem;
         }
-        
-        .contact-info h3 {
-            font-family: 'Inter', sans-serif;
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .form-group {
             margin-bottom: 1.5rem;
         }
-        
-        .contact-info p {
-            font-family: 'Roboto', sans-serif;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-form {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 12px;
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--primary-color);
         }
-        
+
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: none;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-family: 'Roboto', sans-serif;
-            font-size: 16px;
+            transition: border-color 0.3s ease;
         }
-        
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
         .form-group textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
-        
-        .submit-btn {
-            background: #ffd700;
-            color: #333;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
+
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
         }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
         }
-        
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section h3 {
-            font-family: 'Inter', sans-serif;
+
+        .contact-info p {
             margin-bottom: 1rem;
         }
-        
-        .footer-section p,
-        .footer-section a {
-            font-family: 'Roboto', sans-serif;
-            color: #ccc;
+
+        .contact-info a {
+            color: var(--accent-color);
             text-decoration: none;
-            margin-bottom: 0.5rem;
-            display: block;
         }
-        
-        .footer-section a:hover {
-            color: #ffd700;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid #555;
-            padding-top: 1rem;
+
+        footer {
+            background-color: #1a202c;
+            color: white;
+            padding: 40px 20px 20px;
             text-align: center;
-            font-family: 'Roboto', sans-serif;
-            color: #999;
         }
-        
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
         /* Mobile responsiveness */
         @media (max-width: 768px) {
-            .nav-links {
+            nav {
                 display: none;
             }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
+
+            .hero h2 {
                 font-size: 2rem;
             }
-            
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .section {
+                padding: 40px 15px;
+            }
+
+            #accessibility-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 10px 16px;
+                font-size: 14px;
+            }
         }
-        
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Enhanced focus states for accessibility */
+
+        /* Focus states for accessibility */
         a:focus,
         button:focus,
         input:focus,
         textarea:focus {
-            outline: 3px solid #ffd700;
+            outline: 3px solid var(--accent-color);
             outline-offset: 2px;
         }
-        
+
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
     </style>
 </head>
+
 <body>
-    <!-- Accessibility toggle button -->
+    <!-- Accessibility toggle -->
     <button id="accessibility-toggle" aria-label="Toggle high contrast mode">🔄 Accessibility</button>
-    
-    <!-- Header -->
+
     <header>
+        <h1>⚡ Labyrinth Tech Support</h1>
         <nav>
-            <div class="logo">⚡ Labyrinth Tech Support</div>
-            <ul class="nav-links">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#sustainability">Values</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#terms">Terms</a></li>
-            </ul>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Computer Repair in Brisbane</h1>
-            <p>Professional tech support with honest pricing, same-day service, and a 12-month warranty. Your trusted local computer repair specialists.</p>
-            <a href="tel:0482012429" class="cta-button">Call Now: 0482 012 429</a>
+        <h2>Computer Repair in Brisbane</h2>
+        <p>Professional tech support with honest pricing, same-day service, and a 12-month warranty. Your trusted local computer repair specialists.</p>
+        <a href="tel:0482012429" class="btn btn-primary">Call Now: 0482 012 429</a>
+    </section>
+
+    <section class="section" id="services">
+        <h2>Our Services</h2>
+        <div class="cards-container">
+            <div class="card">
+                <span class="card-icon">🔧</span>
+                <h3>Computer Troubleshooting</h3>
+                <p>Comprehensive diagnostics and repair for desktop computers, addressing hardware failures, performance issues, and system crashes.</p>
+                <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
+                <div class="service-details">
+                    <ul>
+                        <li>Complete hardware diagnostics and testing</li>
+                        <li>Software conflict resolution and optimization</li>
+                        <li>Boot failure and startup problem fixes</li>
+                        <li>Performance optimization and system cleanup</li>
+                        <li>Driver updates and compatibility fixes</li>
+                        <li>Memory and storage upgrades consultation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">⚙️</span>
+                <h3>Hardware Upgrades</h3>
+                <p>Professional installation of new components including RAM, SSDs, graphics cards, and processors to boost your computer's performance.</p>
+                <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
+                <div class="service-details">
+                    <ul>
+                        <li>RAM memory upgrades for faster performance</li>
+                        <li>SSD installation and data migration</li>
+                        <li>Graphics card installation and setup</li>
+                        <li>Processor and motherboard upgrades</li>
+                        <li>Power supply replacement and sizing</li>
+                        <li>Cooling system upgrades and maintenance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">🛡️</span>
+                <h3>Virus & Malware Removal</h3>
+                <p>Complete system cleaning and protection against viruses, malware, ransomware, and other security threats.</p>
+                <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
+                <div class="service-details">
+                    <ul>
+                        <li>Deep system scan and threat removal</li>
+                        <li>Ransomware detection and recovery</li>
+                        <li>Browser hijacker and adware cleanup</li>
+                        <li>Antivirus software installation and setup</li>
+                        <li>System security hardening</li>
+                        <li>Safe browsing education and tips</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">💾</span>
+                <h3>Data Recovery</h3>
+                <p>Professional data recovery services for failed hard drives, corrupted files, and accidentally deleted important documents.</p>
+                <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
+                <div class="service-details">
+                    <ul>
+                        <li>Hard drive failure data recovery</li>
+                        <li>Accidental file deletion recovery</li>
+                        <li>Corrupted file system repair</li>
+                        <li>SSD and flash drive recovery</li>
+                        <li>Photo and document restoration</li>
+                        <li>Data backup strategy consultation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">📧</span>
+                <h3>Email Setup & Migration</h3>
+                <p>Professional email configuration, migration between providers, and troubleshooting of email client issues.</p>
+                <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
+                <div class="service-details">
+                    <ul>
+                        <li>Email client setup (Outlook, Thunderbird, Apple Mail)</li>
+                        <li>Email migration between providers</li>
+                        <li>IMAP/POP3 configuration and optimization</li>
+                        <li>Email backup and archiving solutions</li>
+                        <li>Spam filter configuration</li>
+                        <li>Mobile email synchronization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">🌐</span>
+                <h3>Network Setup & IT Support</h3>
+                <p>Complete network configuration, WiFi optimization, and ongoing IT support for homes and small businesses.</p>
+                <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
+                <div class="service-details">
+                    <ul>
+                        <li>WiFi network setup and optimization</li>
+                        <li>Router configuration and firmware updates</li>
+                        <li>Network security and access control</li>
+                        <li>File sharing and network storage setup</li>
+                        <li>Internet connection troubleshooting</li>
+                        <li>Remote access and VPN configuration</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="section">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
+    <section class="section" id="about" style="background-color: white;">
+        <h2>About Your Local Technician</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>With over a decade of experience in computer repair and IT support, I provide personalized, professional service to Brisbane residents and businesses.</p>
+                <p>My expertise spans hardware diagnostics, software troubleshooting, network configuration, and data recovery. I believe in transparent communication, honest pricing, and building long-term relationships with my clients.</p>
+                <p>Operating from my fully equipped workshop in Brisbane, I combine technical expertise with personalized service to ensure your technology works seamlessly. Every repair comes with my personal guarantee and comprehensive warranty.</p>
+            </div>
+            <div class="about-image">
+                <img src="data:image/png;base64,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" alt="Professional technician at Brisbane workshop">
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="pricing">
+        <h2>Transparent Pricing</h2>
+        <div class="pricing-card">
+            <h3>Honest, Fair Pricing</h3>
+            <div class="price">$100<span>/hour</span></div>
+            <p>No hidden fees, no surprises. You pay only for the time needed to fix your computer.</p>
+            <ul class="features-list">
+                <li>Free initial consultation and diagnostic</li>
+                <li>$100/hour rate cap - never pay more</li>
+                <li>12-month warranty on all repairs</li>
+                <li>Same-day service available</li>
+                <li>No call-out fees within Brisbane</li>
+                <li>Parts at cost price, no markup</li>
+            </ul>
+            <a href="tel:0482012429" class="btn btn-primary">Get Free Quote: 0482 012 429</a>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials" style="background-color: white;">
+        <h2>What Our Customers Say</h2>
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+            <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">4.9/5 Google Rating</p>
+            <a href="https://www.google.com/search?q=labyrinth+tech+support+brisbane+reviews" target="_blank" class="btn">
+                Read All Google Reviews
+            </a>
+        </div>
+        
+        <div class="cards-container">
+            <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Outstanding service! My laptop was running incredibly slow and kept crashing. Fixed it same day and explained everything clearly. Very professional and honest pricing."</p>
+                <div class="testimonial-author">- Sarah M., West End</div>
+            </div>
             
-            <div class="services-grid">
-                <!-- Computer Troubleshooting -->
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <h3>Computer Troubleshooting</h3>
-                    <p>Comprehensive diagnostics and repair for desktop computers, addressing hardware failures, performance issues, and system crashes.</p>
-                    <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
-                    <div class="service-details">
-                        <ul>
-                            <li>Complete hardware diagnostics and testing</li>
-                            <li>Software conflict resolution and optimization</li>
-                            <li>Boot failure and startup problem fixes</li>
-                            <li>Performance optimization and system cleanup</li>
-                            <li>Driver updates and compatibility fixes</li>
-                            <li>Memory and storage upgrades consultation</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Hardware Upgrades -->
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
-                    <h3>Hardware Upgrades</h3>
-                    <p>Professional installation of new components including RAM, SSDs, graphics cards, and processors to boost your computer's performance.</p>
-                    <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
-                    <div class="service-details">
-                        <ul>
-                            <li>RAM memory upgrades for faster performance</li>
-                            <li>SSD installation and data migration</li>
-                            <li>Graphics card installation and setup</li>
-                            <li>Processor and motherboard upgrades</li>
-                            <li>Power supply replacement and sizing</li>
-                            <li>Cooling system upgrades and maintenance</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Virus Removal -->
-                <div class="service-card">
-                    <div class="service-icon">🛡️</div>
-                    <h3>Virus & Malware Removal</h3>
-                    <p>Complete system cleaning and protection against viruses, malware, ransomware, and other security threats.</p>
-                    <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
-                    <div class="service-details">
-                        <ul>
-                            <li>Deep system scan and threat removal</li>
-                            <li>Ransomware detection and recovery</li>
-                            <li>Browser hijacker and adware cleanup</li>
-                            <li>Antivirus software installation and setup</li>
-                            <li>System security hardening</li>
-                            <li>Safe browsing education and tips</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Data Recovery -->
-                <div class="service-card">
-                    <div class="service-icon">💾</div>
-                    <h3>Data Recovery</h3>
-                    <p>Professional data recovery services for failed hard drives, corrupted files, and accidentally deleted important documents.</p>
-                    <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
-                    <div class="service-details">
-                        <ul>
-                            <li>Hard drive failure data recovery</li>
-                            <li>Accidental file deletion recovery</li>
-                            <li>Corrupted file system repair</li>
-                            <li>SSD and flash drive recovery</li>
-                            <li>Photo and document restoration</li>
-                            <li>Data backup strategy consultation</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Email Setup -->
-                <div class="service-card">
-                    <div class="service-icon">📧</div>
-                    <h3>Email Setup & Migration</h3>
-                    <p>Professional email configuration, migration between providers, and troubleshooting of email client issues.</p>
-                    <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
-                    <div class="service-details">
-                        <ul>
-                            <li>Email client setup (Outlook, Thunderbird, Apple Mail)</li>
-                            <li>Email migration between providers</li>
-                            <li>IMAP/POP3 configuration and optimization</li>
-                            <li>Email backup and archiving solutions</li>
-                            <li>Spam filter configuration</li>
-                            <li>Mobile email synchronization</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Network Setup -->
-                <div class="service-card">
-                    <div class="service-icon">🌐</div>
-                    <h3>Network Setup & IT Support</h3>
-                    <p>Complete network configuration, WiFi optimization, and ongoing IT support for homes and small businesses.</p>
-                    <button class="expand-btn" onclick="toggleDetails(this)">Learn More</button>
-                    <div class="service-details">
-                        <ul>
-                            <li>WiFi network setup and optimization</li>
-                            <li>Router configuration and firmware updates</li>
-                            <li>Network security and access control</li>
-                            <li>File sharing and network storage setup</li>
-                            <li>Internet connection troubleshooting</li>
-                            <li>Remote access and VPN configuration</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Lost years of family photos when my hard drive crashed. They recovered everything! Can't thank them enough. Highly recommend for data recovery."</p>
+                <div class="testimonial-author">- Mark T., New Farm</div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Best computer repair in Brisbane. Fair pricing, quick turnaround, and great communication. Will definitely use again and recommend to friends."</p>
+                <div class="testimonial-author">- Jennifer L., South Brisbane</div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About Your Local Technician</h2>
-                    <p>With over a decade of experience in computer repair and IT support, I provide personalized, professional service to Brisbane residents and businesses.</p>
-                    <p>My expertise spans hardware diagnostics, software troubleshooting, network configuration, and data recovery. I believe in transparent communication, honest pricing, and building long-term relationships with my clients.</p>
-                    <p>Operating from my fully equipped workshop in Brisbane, I combine technical expertise with personalized service to ensure your technology works seamlessly. Every repair comes with my personal guarantee and comprehensive warranty.</p>
-                    <p>Whether you're dealing with a slow computer, broken laptop screen, or complex network issues, I'm here to help with honest advice, transparent pricing, and quality workmanship you can trust.</p>
-                </div>
-                <div class="about-image">
-                    <img src="data:image/png;base64,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" alt="Professional technician at Brisbane computer repair workshop">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="section pricing">
-        <div class="container">
-            <h2 class="section-title">Transparent Pricing</h2>
-            <div class="pricing-card">
-                <h3>Honest, Fair Pricing</h3>
-                <div class="price">$100<span style="font-size: 1.5rem;">/hour</span></div>
-                <p>No hidden fees, no surprises. You pay only for the time needed to fix your computer.</p>
-                <ul class="pricing-features">
-                    <li>Free initial consultation and diagnostic</li>
-                    <li>$100/hour rate cap - never pay more</li>
-                    <li>12-month warranty on all repairs</li>
-                    <li>Same-day service available</li>
-                    <li>No call-out fees within Brisbane</li>
-                    <li>Parts at cost price, no markup</li>
+    <section class="section" id="contact">
+        <h2>Get Your Computer Fixed Today</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p><strong>Phone:</strong> <a href="tel:0482012429">0482 012 429</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@labyrinth-tech.com.au">info@labyrinth-tech.com.au</a></p>
+                <p><strong>Service Area:</strong> Brisbane and surrounding suburbs</p>
+                <p><strong>Hours:</strong> Monday - Friday 8AM - 6PM<br>Saturday 9AM - 4PM</p>
+                
+                <h3 style="margin-top: 2rem;">Why Choose Us?</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;">✓ 12-month warranty on all repairs</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Same-day service available</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Free diagnostics and quotes</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Honest, transparent pricing</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Local Brisbane technician</li>
                 </ul>
-                <a href="tel:0482012429" class="cta-button">Get Free Quote: 0482 012 429</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sustainability Section -->
-    <section id="sustainability" class="section sustainability">
-        <div class="container">
-            <h2 class="section-title">Our Values & Commitment</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #2E7D32;">We believe in responsible technology repair that benefits both our customers and the environment. Our commitment extends beyond just fixing computers.</p>
-            
-            <div class="sustainability-grid">
-                <div class="sustainability-card">
-                    <h3>🌱 Environmental Responsibility</h3>
-                    <p>We prioritize repair over replacement, extending the life of your technology and reducing electronic waste. Proper disposal and recycling of old components is standard practice.</p>
-                </div>
-                
-                <div class="sustainability-card">
-                    <h3>🔧 Repair-First Philosophy</h3>
-                    <p>Before recommending new purchases, we explore every repair option. Most computers can be restored to excellent performance with the right expertise and care.</p>
-                </div>
-                
-                <div class="sustainability-card">
-                    <h3>💡 Education & Transparency</h3>
-                    <p>We explain what's wrong, why it happened, and how to prevent future issues. Knowledge empowers you to make informed decisions about your technology.</p>
-                </div>
-                
-                <div class="sustainability-card">
-                    <h3>🤝 Community Support</h3>
-                    <p>Supporting local Brisbane businesses and residents with reliable, affordable tech support. We're your neighbors, committed to our community's digital well-being.</p>
-                </div>
-                
-                <div class="sustainability-card">
-                    <h3>⚡ Energy Efficiency</h3>
-                    <p>Our repairs often improve your computer's energy efficiency through software optimization and component upgrades, reducing your electricity costs.</p>
-                </div>
-                
-                <div class="sustainability-card">
-                    <h3>🛡️ Ethical Practices</h3>
-                    <p>Honest pricing, quality workmanship, and respect for your privacy and data. We operate with integrity and treat every customer with fairness and respect.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="section reviews">
-        <div class="container">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <div style="font-size: 2rem; color: #ffd700; margin-bottom: 0.5rem;">
-                    ⭐⭐⭐⭐⭐
-                </div>
-                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">4.9/5 Google Rating</p>
-                <a href="https://www.google.com/search?q=labyrinth+tech+support+brisbane+reviews" target="_blank" style="display: inline-block; background: #4285f4; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-weight: 600; transition: all 0.3s ease;">
-                    Read All Google Reviews
-                </a>
             </div>
             
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"Outstanding service! My laptop was running incredibly slow and kept crashing. Fixed it same day and explained everything clearly. Very professional and honest pricing."</p>
-                    <div class="review-author">- Sarah M., West End</div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"Lost years of family photos when my hard drive crashed. They recovered everything! Can't thank them enough. Highly recommend for data recovery."</p>
-                    <div class="review-author">- Mark T., New Farm</div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    <p class="review-text">"Best computer repair in Brisbane. Fair pricing, quick turnaround, and great communication. Will definitely use again and recommend to friends."</p>
-                    <div class="review-author">- Jennifer L., South Brisbane</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <h2 class="section-title">Get Your Computer Fixed Today</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p><strong>Phone:</strong> <a href="tel:0482012429" style="color: #ffd700;">0482 012 429</a></p>
-                    <p><strong>Email:</strong> <a href="mailto:info@labyrinth-tech.com.au" style="color: #ffd700;">info@labyrinth-tech.com.au</a></p>
-                    <p><strong>Service Area:</strong> Brisbane and surrounding suburbs</p>
-                    <p><strong>Hours:</strong> Monday - Friday 8AM - 6PM<br>Saturday 9AM - 4PM</p>
-                    
-                    <h3 style="margin-top: 2rem;">Why Choose Us?</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 0.5rem;">✓ 12-month warranty on all repairs</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Same-day service available</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Free diagnostics and quotes</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Honest, transparent pricing</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Local Brisbane technician</li>
-                    </ul>
-                </div>
-                
-                <div class="contact-form">
-                    <h3>Send Us a Message</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Describe Your Computer Problem</label>
-                            <textarea id="message" name="message" required placeholder="Tell us what's wrong with your computer..."></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Terms & Conditions Section -->
-    <section id="terms" class="section" style="background: #f8f9fa;">
-        <div class="container">
-            <h2 class="section-title">Terms & Conditions</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                    <h3>Our Commitment to You</h3>
-                    <p>At Labyrinth Tech Support, we believe in clear, fair terms that protect both our customers and our business. Here's what you can expect:</p>
-                    
-                    <h4>Service Warranty</h4>
-                    <ul>
-                        <li>12-month warranty on all repair work and installed parts</li>
-                        <li>If the same problem occurs within 12 months, we'll fix it free of charge</li>
-                        <li>Warranty covers workmanship, not damage from misuse or accidents</li>
-                    </ul>
-                    
-                    <h4>Pricing & Payment</h4>
-                    <ul>
-                        <li>$100/hour labor rate with no hidden fees</li>
-                        <li>Free initial diagnostic and quote</li>
-                        <li>Parts charged at cost price with no markup</li>
-                        <li>Payment due upon completion of work</li>
-                        <li>We accept cash, card, and bank transfer</li>
-                    </ul>
-                    
-                    <h4>Data & Privacy</h4>
-                    <ul>
-                        <li>Your data privacy is paramount - we never access personal files without permission</li>
-                        <li>Data backup is recommended before any repair work</li>
-                        <li>We're not responsible for data loss, though we take every precaution</li>
-                        <li>All customer information is kept strictly confidential</li>
-                    </ul>
-                    
-                    <h4>Service Limitations</h4>
-                    <ul>
-                        <li>Some repairs may not be economically viable - we'll advise honestly</li>
-                        <li>Liquid damage and physical impacts may void repair possibilities</li>
-                        <li>Parts availability may affect repair timelines</li>
-                        <li>We reserve the right to refuse service in extreme circumstances</li>
-                    </ul>
-                    
-                    <h4>Customer Responsibilities</h4>
-                    <ul>
-                        <li>Provide accurate information about the problem</li>
-                        <li>Backup important data before repair work begins</li>
-                        <li>Collect repaired equipment within 30 days</li>
-                        <li>Pay for services as agreed upon completion</li>
-                    </ul>
-                    
-                    <div style="margin-top: 2rem; padding: 1rem; background: #e8f5e8; border-radius: 8px;">
-                        <p style="margin: 0; font-weight: 600; color: #2E7D32;">Questions about our terms? We're happy to explain anything before you commit to our services. Call us at 0482 012 429.</p>
+            <div class="contact-form">
+                <h3>Send Us a Message</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Describe Your Computer Problem</label>
+                        <textarea id="message" name="message" required placeholder="Tell us what's wrong with your computer..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
                     <h3>Labyrinth Tech Support</h3>
                     <p>Your trusted Brisbane computer repair specialists. Professional service with honest pricing and guaranteed results.</p>
-                    <p><strong>ABN:</strong> 12 345 678 901</p>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="#services">Services</a>
-                    <a href="#about">About</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#sustainability">Values</a>
-                    <a href="#reviews">Reviews</a>
-                    <a href="#contact">Contact</a>
-                    <a href="#terms">Terms</a>
-                </div>
-                
-                <div class="footer-section">
+                <div>
                     <h3>Services</h3>
-                    <a href="#services">Computer Troubleshooting</a>
-                    <a href="#services">Hardware Upgrades</a>
-                    <a href="#services">Virus Removal</a>
-                    <a href="#services">Data Recovery</a>
-                    <a href="#services">Email Setup</a>
-                    <a href="#services">Network Support</a>
+                    <a href="#services" style="display: block; margin-bottom: 0.5rem;">Computer Troubleshooting</a>
+                    <a href="#services" style="display: block; margin-bottom: 0.5rem;">Hardware Upgrades</a>
+                    <a href="#services" style="display: block; margin-bottom: 0.5rem;">Virus Removal</a>
+                    <a href="#services" style="display: block; margin-bottom: 0.5rem;">Data Recovery</a>
                 </div>
                 
-                <div class="footer-section">
+                <div>
                     <h3>Contact</h3>
                     <p>Phone: <a href="tel:0482012429">0482 012 429</a></p>
                     <p>Email: <a href="mailto:info@labyrinth-tech.com.au">info@labyrinth-tech.com.au</a></p>
                     <p>Service Area: Brisbane QLD</p>
-                    <p>Hours: Mon-Fri 8AM-6PM<br>Sat 9AM-4PM</p>
                 </div>
             </div>
             
-            <div class="footer-bottom">
+            <div style="border-top: 1px solid #555; padding-top: 1rem; text-align: center; color: #999;">
                 <p>&copy; 2025 Labyrinth Tech Support. All rights reserved. | Professional computer repair Brisbane QLD</p>
             </div>
         </div>
@@ -1094,9 +821,9 @@
             });
         });
         
-        // Add loading animation for service cards
+        // Add loading animation for cards
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.service-card, .sustainability-card, .review-card');
+            const cards = document.querySelectorAll('.card, .testimonial-card');
             
             const observerOptions = {
                 threshold: 0.1,
