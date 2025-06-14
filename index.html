@@ -413,6 +413,15 @@
             font-family: 'Lora', serif;
         }
         
+        /* Ensure business mode maintains proper dark text */
+        body:not(.bull-theme) .value-card h3 {
+            color: var(--neutral-900) !important;
+        }
+        
+        body:not(.bull-theme) .value-card p {
+            color: var(--neutral-700) !important;
+        }
+        
         body.bull-theme .service-card {
             background: linear-gradient(135deg, #2F1B14 0%, #3D2817 100%);
             border: 1px solid #CD853F;
@@ -426,6 +435,15 @@
         body.bull-theme .service-card p {
             color: #CD853F;
             font-family: 'Lora', serif;
+        }
+        
+        /* Ensure business mode service cards maintain proper dark text */
+        body:not(.bull-theme) .service-card h3 {
+            color: var(--neutral-900) !important;
+        }
+        
+        body:not(.bull-theme) .service-card p {
+            color: var(--neutral-700) !important;
         }
         
         body.bull-theme .contact {
