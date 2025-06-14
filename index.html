@@ -302,6 +302,100 @@
             outline-offset: 3px !important;
             border-radius: 4px !important;
         }
+        
+        /* Expandable Card Styles */
+        .service-card.expandable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .expanded-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e6f3ff;
+        }
+        
+        .expanded-content.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+            }
+        }
+        
+        .expanded-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        
+        .expanded-content li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .expanded-content li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0066ff;
+            font-weight: bold;
+        }
+        
+        .expand-btn {
+            background: linear-gradient(135deg, #0066ff, #00b4d8);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .expand-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .expand-btn.expanded {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+        }
+        
+        /* High contrast mode for expandable cards */
+        body.high-contrast .expanded-content {
+            border-top-color: rgba(255,255,255,0.3) !important;
+        }
+        
+        body.high-contrast .expanded-content li {
+            border-bottom-color: rgba(255,255,255,0.2) !important;
+            color: #ffffff !important;
+        }
+        
+        body.high-contrast .expanded-content li:before {
+            color: #667eea !important;
+        }
+        
+        body.high-contrast .expand-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+            font-weight: 700 !important;
+        }
+        
+        body.high-contrast .expand-btn.expanded {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52) !important;
+        }
     </style>
 </head>
 <body>
@@ -327,29 +421,118 @@
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <h3>Laptop Repair Brisbane</h3>
-                    <p>Professional laptop repair services including screen replacement, keyboard fixes, battery replacement, and performance optimization. Same-day service available for most laptop brands.</p>
+                <div class="service-card expandable">
+                    <h3>🖥️ Computer Troubleshooting & Diagnostics</h3>
+                    <p class="summary">Professional diagnosis and repair of desktop computers, laptops, and all-in-one systems. Same-day service available.</p>
+                    <div class="expanded-content">
+                        <ul>
+                            <li>Hardware failure diagnosis and component testing</li>
+                            <li>Blue screen error resolution and system crash analysis</li>
+                            <li>Performance optimization and speed improvements</li>
+                            <li>Boot-up problems and startup repair</li>
+                            <li>Overheating issues and cooling system maintenance</li>
+                            <li>Power supply testing and replacement</li>
+                            <li>Memory (RAM) upgrades and troubleshooting</li>
+                            <li>Hard drive health checks and replacement</li>
+                        </ul>
+                        <p><strong>Service includes:</strong> Free initial diagnosis, detailed problem report, and transparent pricing before any work begins.</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpansion(this)">Show More Details</button>
                 </div>
-                <div class="service-card">
-                    <h3>Desktop Computer Repair</h3>
-                    <p>Complete desktop computer repair and upgrade services. Hardware diagnostics, component replacement, system optimization, and custom build solutions.</p>
+                
+                <div class="service-card expandable">
+                    <h3>💻 Laptop Repair Specialists</h3>
+                    <p class="summary">Expert laptop repair services for all major brands including screen replacement, keyboard repair, and performance upgrades.</p>
+                    <div class="expanded-content">
+                        <ul>
+                            <li>Cracked screen replacement (LCD, LED, OLED displays)</li>
+                            <li>Keyboard repair and key replacement</li>
+                            <li>Battery replacement and charging port repair</li>
+                            <li>Hinge repair and case damage fixes</li>
+                            <li>Touchpad and trackpad troubleshooting</li>
+                            <li>Laptop cleaning and thermal paste replacement</li>
+                            <li>SSD upgrades for faster performance</li>
+                            <li>RAM memory expansion services</li>
+                        </ul>
+                        <p><strong>Brands serviced:</strong> Acer, ASUS, Dell, HP, Lenovo, MSI, Surface, MacBook, and more.</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpansion(this)">Show More Details</button>
                 </div>
-                <div class="service-card">
-                    <h3>Data Recovery Brisbane</h3>
-                    <p>Emergency data recovery services for failed hard drives, corrupted files, and deleted data. Professional recovery with high success rates.</p>
+                
+                <div class="service-card expandable">
+                    <h3>🔧 Hardware Upgrades & Installation</h3>
+                    <p class="summary">Boost your computer's performance with professional hardware upgrades and component installations.</p>
+                    <div class="expanded-content">
+                        <ul>
+                            <li>SSD drive installations for 5x faster boot times</li>
+                            <li>RAM memory upgrades up to maximum capacity</li>
+                            <li>Graphics card installations for gaming and design</li>
+                            <li>CPU processor upgrades and motherboard compatibility</li>
+                            <li>Power supply unit upgrades for high-performance systems</li>
+                            <li>Additional storage drive installations</li>
+                            <li>WiFi card upgrades and Bluetooth installations</li>
+                            <li>Custom cooling solutions and case fans</li>
+                        </ul>
+                        <p><strong>Performance guarantee:</strong> All upgrades include performance testing and optimization.</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpansion(this)">Show More Details</button>
                 </div>
-                <div class="service-card">
-                    <h3>Network Setup & IT Support</h3>
-                    <p>Business IT support, network configuration, WiFi troubleshooting, and ongoing technical support for Brisbane businesses and homes.</p>
+                
+                <div class="service-card expandable">
+                    <h3>🛡️ Virus Removal & Security Solutions</h3>
+                    <p class="summary">Complete malware removal, virus protection, and cybersecurity solutions to keep your data safe.</p>
+                    <div class="expanded-content">
+                        <ul>
+                            <li>Complete virus and malware removal</li>
+                            <li>Spyware and adware elimination</li>
+                            <li>Ransomware detection and removal</li>
+                            <li>Browser hijacker cleanup</li>
+                            <li>System security assessment and hardening</li>
+                            <li>Antivirus software installation and configuration</li>
+                            <li>Firewall setup and network security</li>
+                            <li>Data backup solutions and recovery planning</li>
+                        </ul>
+                        <p><strong>Security package:</strong> Includes ongoing protection recommendations and maintenance tips.</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpansion(this)">Show More Details</button>
                 </div>
-                <div class="service-card">
-                    <h3>Virus Removal & Security</h3>
-                    <p>Complete virus removal, malware protection, and cybersecurity solutions. System cleanup and security software installation.</p>
+                
+                <div class="service-card expandable">
+                    <h3>📊 Data Recovery & Backup Services</h3>
+                    <p class="summary">Emergency data recovery from failed drives and professional backup solutions to prevent future data loss.</p>
+                    <div class="expanded-content">
+                        <ul>
+                            <li>Hard drive data recovery (mechanical and electronic failures)</li>
+                            <li>SSD data recovery with specialized tools</li>
+                            <li>Accidentally deleted file recovery</li>
+                            <li>Corrupted partition and file system repair</li>
+                            <li>Photo and video recovery from memory cards</li>
+                            <li>Email recovery from damaged profiles</li>
+                            <li>Automated backup system setup</li>
+                            <li>Cloud backup integration and synchronization</li>
+                        </ul>
+                        <p><strong>Recovery success:</strong> 85% success rate on physically damaged drives, 95% on logically corrupted data.</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpansion(this)">Show More Details</button>
                 </div>
-                <div class="service-card">
-                    <h3>Emergency Computer Support</h3>
-                    <p>24/7 emergency computer repair services for critical business systems. Remote support and on-site emergency repairs available.</p>
+                
+                <div class="service-card expandable">
+                    <h3>🚨 Emergency Computer Support</h3>
+                    <p class="summary">24/7 emergency computer repair services for critical business systems. Remote support and on-site emergency repairs available.</p>
+                    <div class="expanded-content">
+                        <ul>
+                            <li>24/7 emergency response for business-critical systems</li>
+                            <li>Remote desktop support and troubleshooting</li>
+                            <li>On-site emergency repairs within 2 hours</li>
+                            <li>Server downtime recovery and restoration</li>
+                            <li>Network outage diagnosis and repair</li>
+                            <li>Emergency data backup and migration</li>
+                            <li>Critical system monitoring and alerts</li>
+                            <li>Disaster recovery planning and implementation</li>
+                        </ul>
+                        <p><strong>Emergency response:</strong> Average 15-minute phone response, 2-hour on-site arrival for critical issues.</p>
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpansion(this)">Show More Details</button>
                 </div>
             </div>
         </div>
@@ -436,6 +619,23 @@
                 });
             });
         });
+        
+        // Expandable card functionality
+        function toggleExpansion(button) {
+            const card = button.closest('.service-card');
+            const expandedContent = card.querySelector('.expanded-content');
+            const isExpanded = expandedContent.classList.contains('show');
+            
+            if (isExpanded) {
+                expandedContent.classList.remove('show');
+                button.textContent = 'Show More Details';
+                button.classList.remove('expanded');
+            } else {
+                expandedContent.classList.add('show');
+                button.textContent = 'Show Less Details';
+                button.classList.add('expanded');
+            }
+        }
     </script>
 </body>
 </html>
