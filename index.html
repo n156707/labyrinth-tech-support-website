@@ -2503,7 +2503,7 @@
             }
         }
     
-        /* Hero Section High Contrast Fix */
+        /* Comprehensive High Contrast Implementation - WCAG AAA Compliant */
         
         .navbar {
             position: fixed;
@@ -2526,6 +2526,27 @@
             margin: 0 auto;
             padding: 0 2rem;
             gap: 1rem;
+        }
+
+        /* Skip to Content Link for Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000000;
+            color: #ffffff;
+            padding: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 10000;
+            border-radius: 0 0 4px 4px;
+            font-family: Arial, sans-serif;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
         }
 
         /* Brand Section */
@@ -2716,189 +2737,182 @@
             color: #cbd5e1;
         }
 
-        /* FIXED: Enhanced System High Contrast Mode Support - Hero Section Focus */
+        /* COMPREHENSIVE HIGH CONTRAST MODE - WCAG AAA COMPLIANT */
         @media (prefers-contrast: high) {
-            /* Base High Contrast Styles */
+            /* 1. Enhanced Color Contrast Ratios - WCAG AAA (7:1) */
             body {
                 background: #000000 !important;
                 color: #ffffff !important;
-                font-weight: 500 !important;
+                font-family: Arial, Verdana, sans-serif !important;
+                font-weight: 600 !important;
+                line-height: 1.8 !important;
+                letter-spacing: 0.5px !important;
             }
             
-            /* Navigation High Contrast */
+            /* Skip Link Enhanced */
+            .skip-link {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-weight: 900 !important;
+                font-size: 1.1rem !important;
+                border: 4px solid #000000 !important;
+            }
+            
+            .skip-link:focus {
+                outline: 4px solid #000000 !important;
+                outline-offset: 4px !important;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8) !important;
+            }
+            
+            /* 2. Navigation High Contrast with Enhanced Visual Indicators */
             .navbar {
                 background: #000000 !important;
-                border-bottom: 3px solid #ffffff !important;
-                box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2) !important;
+                border-bottom: 5px solid #ffffff !important;
+                box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3) !important;
+                position: relative !important;
+            }
+            
+            .navbar::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: repeating-linear-gradient(
+                    90deg,
+                    #ffffff 0px,
+                    #ffffff 10px,
+                    #000000 10px,
+                    #000000 20px
+                ) !important;
             }
             
             .nav-brand {
                 color: #ffffff !important;
+                outline: 2px solid transparent !important;
+                border-radius: 6px !important;
+            }
+            
+            .nav-brand:focus {
+                outline: 4px solid #ffffff !important;
+                outline-offset: 3px !important;
+                background: rgba(255, 255, 255, 0.1) !important;
             }
             
             .brand-name {
                 color: #ffffff !important;
                 font-weight: 900 !important;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+                font-size: 1.25rem !important;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+                letter-spacing: 1px !important;
             }
             
             .brand-subtitle {
                 color: #ffffff !important;
-                font-weight: 700 !important;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+                font-weight: 800 !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                letter-spacing: 0.5px !important;
             }
             
             .brand-logo {
                 background: #ffffff !important;
                 color: #000000 !important;
-                border: 2px solid #ffffff !important;
+                border: 3px solid #ffffff !important;
                 font-weight: 900 !important;
+                font-size: 18px !important;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
             }
             
+            /* 3. Enhanced Navigation Links with Focus Indicators */
             .nav-links a {
                 color: #ffffff !important;
-                font-weight: 700 !important;
-                border: 2px solid transparent !important;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+                font-weight: 800 !important;
+                font-size: 1.05rem !important;
+                border: 3px solid transparent !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                letter-spacing: 0.75px !important;
+                transition: all 0.2s ease !important;
+                outline: 2px solid transparent !important;
+                outline-offset: 2px !important;
             }
             
-            .nav-links a:hover {
+            .nav-links a:hover,
+            .nav-links a:focus {
                 background: #ffffff !important;
                 color: #000000 !important;
                 border-color: #ffffff !important;
                 text-shadow: none !important;
                 font-weight: 900 !important;
+                outline: 4px solid #ffffff !important;
+                outline-offset: 4px !important;
+                transform: scale(1.05) !important;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.7) !important;
             }
             
+            /* 4. Enhanced Buttons with Animation */
             .theme-btn {
                 background: #ffffff !important;
                 color: #000000 !important;
                 font-weight: 900 !important;
-                border: 2px solid #ffffff !important;
+                font-size: 0.95rem !important;
+                border: 4px solid #ffffff !important;
                 text-shadow: none !important;
+                letter-spacing: 0.5px !important;
+                outline: 2px solid transparent !important;
             }
             
-            .theme-btn:hover {
+            .theme-btn:hover,
+            .theme-btn:focus {
                 background: #cccccc !important;
                 border-color: #cccccc !important;
+                outline: 4px solid #ffffff !important;
+                outline-offset: 3px !important;
+                transform: scale(1.1) !important;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8) !important;
             }
             
             .call-btn {
                 background: #ffffff !important;
                 color: #000000 !important;
                 font-weight: 900 !important;
-                border: 3px solid #ffffff !important;
+                font-size: 0.95rem !important;
+                border: 4px solid #ffffff !important;
                 text-shadow: none !important;
+                letter-spacing: 0.5px !important;
+                outline: 2px solid transparent !important;
+                text-decoration: none !important;
             }
             
-            .call-btn:hover {
+            .call-btn:hover,
+            .call-btn:focus {
                 background: #cccccc !important;
                 border-color: #cccccc !important;
+                outline: 4px solid #ffffff !important;
+                outline-offset: 3px !important;
+                transform: scale(1.1) !important;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8) !important;
             }
             
             .mobile-btn {
-                border: 2px solid #ffffff !important;
+                border: 4px solid #ffffff !important;
                 color: #ffffff !important;
                 font-weight: 900 !important;
-            }
-            
-            /* HERO SECTION HIGH CONTRAST FIX */
-            .hero {
-                background: #000000 !important;
-                color: #ffffff !important;
-                border-top: 3px solid #ffffff !important;
-                border-bottom: 3px solid #ffffff !important;
-            }
-            
-            .hero h1,
-            .hero .hero-title {
-                color: #ffffff !important;
-                font-weight: 900 !important;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
-                border-bottom: 3px solid #ffffff !important;
-                padding-bottom: 1rem !important;
-                margin-bottom: 1.5rem !important;
+                font-size: 1.4rem !important;
                 background: #000000 !important;
             }
             
-            .hero h2,
-            .hero .hero-subtitle {
-                color: #ffffff !important;
-                font-weight: 800 !important;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
-                background: #000000 !important;
-                padding: 0.5rem 0 !important;
-            }
-            
-            .hero p,
-            .hero .hero-description,
-            .hero .hero-text {
-                color: #ffffff !important;
-                font-weight: 700 !important;
-                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
-                background: #000000 !important;
-                line-height: 1.8 !important;
-                padding: 0.25rem 0 !important;
-            }
-            
-            .hero ul li,
-            .hero .hero-list li,
-            .hero .value-item {
-                color: #ffffff !important;
-                font-weight: 700 !important;
-                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
-                background: #000000 !important;
-                border-left: 4px solid #ffffff !important;
-                padding-left: 1rem !important;
-                margin-bottom: 0.75rem !important;
-            }
-            
-            .hero .hero-cta,
-            .hero .cta-button,
-            .hero .hero-button {
+            .mobile-btn:hover,
+            .mobile-btn:focus {
                 background: #ffffff !important;
                 color: #000000 !important;
-                font-weight: 900 !important;
-                border: 3px solid #ffffff !important;
-                text-shadow: none !important;
-                padding: 1rem 2rem !important;
+                outline: 4px solid #ffffff !important;
+                outline-offset: 3px !important;
             }
             
-            .hero .hero-cta:hover,
-            .hero .cta-button:hover,
-            .hero .hero-button:hover {
-                background: #cccccc !important;
-                border-color: #cccccc !important;
-            }
-            
-            /* About Section High Contrast */
-            .about {
-                background: #000000 !important;
-                color: #ffffff !important;
-                border-top: 3px solid #ffffff !important;
-                border-bottom: 3px solid #ffffff !important;
-            }
-            
-            .about h1,
-            .about h2,
-            .about h3 {
-                color: #ffffff !important;
-                font-weight: 900 !important;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
-                border-bottom: 2px solid #ffffff !important;
-                padding-bottom: 0.5rem !important;
-                margin-bottom: 1rem !important;
-            }
-            
-            .about p,
-            .about li {
-                color: #ffffff !important;
-                font-weight: 600 !important;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
-                line-height: 1.8 !important;
-            }
-            
-            /* Content Sections High Contrast */
+            /* 5. Content Sections with Enhanced Separation */
+            .hero,
+            .about,
             .services,
             .sustainability,
             .pricing,
@@ -2908,11 +2922,184 @@
             .footer {
                 background: #000000 !important;
                 color: #ffffff !important;
-                border-top: 2px solid #ffffff !important;
-                border-bottom: 2px solid #ffffff !important;
+                border-top: 6px solid #ffffff !important;
+                border-bottom: 6px solid #ffffff !important;
+                padding: 3rem 1rem !important;
+                margin: 2rem 0 !important;
+                position: relative !important;
             }
             
-            /* Cards and Components High Contrast */
+            /* Section Pattern Backgrounds for Distinction */
+            .hero::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 8px;
+                background: repeating-linear-gradient(
+                    90deg,
+                    #ffffff 0px,
+                    #ffffff 15px,
+                    #000000 15px,
+                    #000000 30px
+                ) !important;
+            }
+            
+            .about::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 8px;
+                background: repeating-linear-gradient(
+                    45deg,
+                    #ffffff 0px,
+                    #ffffff 10px,
+                    #000000 10px,
+                    #000000 20px
+                ) !important;
+            }
+            
+            .services::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 8px;
+                background: repeating-linear-gradient(
+                    135deg,
+                    #ffffff 0px,
+                    #ffffff 8px,
+                    #000000 8px,
+                    #000000 16px
+                ) !important;
+            }
+            
+            /* 6. Enhanced Typography Hierarchy */
+            h1 {
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                font-size: 3rem !important;
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9) !important;
+                border-bottom: 4px solid #ffffff !important;
+                padding-bottom: 1rem !important;
+                margin-bottom: 2rem !important;
+                letter-spacing: 2px !important;
+                line-height: 1.3 !important;
+                font-family: Arial, sans-serif !important;
+            }
+            
+            h2 {
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                font-size: 2.25rem !important;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9) !important;
+                border-bottom: 3px solid #ffffff !important;
+                padding-bottom: 0.75rem !important;
+                margin-bottom: 1.5rem !important;
+                letter-spacing: 1.5px !important;
+                line-height: 1.4 !important;
+                font-family: Arial, sans-serif !important;
+            }
+            
+            h3 {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 1.75rem !important;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+                border-bottom: 2px solid #ffffff !important;
+                padding-bottom: 0.5rem !important;
+                margin-bottom: 1rem !important;
+                letter-spacing: 1px !important;
+                line-height: 1.5 !important;
+                font-family: Arial, sans-serif !important;
+            }
+            
+            h4, h5, h6 {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 1.25rem !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                border-left: 4px solid #ffffff !important;
+                padding-left: 1rem !important;
+                margin-bottom: 1rem !important;
+                letter-spacing: 0.75px !important;
+                font-family: Arial, sans-serif !important;
+            }
+            
+            /* 7. Enhanced Paragraph and Text */
+            p {
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                font-size: 1.125rem !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7) !important;
+                line-height: 2 !important;
+                letter-spacing: 0.5px !important;
+                margin-bottom: 1.5rem !important;
+                font-family: Verdana, Arial, sans-serif !important;
+            }
+            
+            /* 8. Enhanced Lists with Better Indicators */
+            ul, ol {
+                border-left: 6px solid #ffffff !important;
+                padding-left: 2rem !important;
+                margin: 1.5rem 0 !important;
+                background: rgba(255, 255, 255, 0.05) !important;
+                border-radius: 0 8px 8px 0 !important;
+            }
+            
+            li {
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                font-size: 1.1rem !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7) !important;
+                margin-bottom: 1rem !important;
+                padding: 0.5rem 0 !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+                letter-spacing: 0.5px !important;
+                line-height: 1.8 !important;
+                font-family: Verdana, Arial, sans-serif !important;
+            }
+            
+            li::marker {
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                font-size: 1.2em !important;
+            }
+            
+            /* 9. Enhanced Links with Strong Visual Feedback */
+            a {
+                color: #ffffff !important;
+                text-decoration: underline !important;
+                text-decoration-thickness: 3px !important;
+                text-underline-offset: 4px !important;
+                font-weight: 800 !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                letter-spacing: 0.5px !important;
+                transition: all 0.2s ease !important;
+                outline: 2px solid transparent !important;
+                outline-offset: 2px !important;
+            }
+            
+            a:hover,
+            a:focus {
+                background: #ffffff !important;
+                color: #000000 !important;
+                text-decoration: none !important;
+                padding: 6px 12px !important;
+                border-radius: 6px !important;
+                text-shadow: none !important;
+                font-weight: 900 !important;
+                outline: 4px solid #ffffff !important;
+                outline-offset: 4px !important;
+                transform: scale(1.05) !important;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.7) !important;
+            }
+            
+            /* 10. Enhanced Cards and Components */
             .value-card,
             .service-card,
             .pricing-card,
@@ -2923,143 +3110,228 @@
             .stats-container,
             .review-container {
                 background: #000000 !important;
-                border: 3px solid #ffffff !important;
+                border: 5px solid #ffffff !important;
                 color: #ffffff !important;
-                margin: 1rem 0 !important;
-                box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+                margin: 2rem 0 !important;
+                padding: 2rem !important;
+                border-radius: 12px !important;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.4) !important;
+                position: relative !important;
             }
             
-            /* Typography High Contrast */
-            h1, h2, h3, h4, h5, h6 {
-                color: #ffffff !important;
-                font-weight: 900 !important;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
-                border-bottom: 2px solid #ffffff !important;
-                padding-bottom: 0.5rem !important;
-                margin-bottom: 1rem !important;
+            .value-card::before,
+            .service-card::before,
+            .pricing-card::before {
+                content: "";
+                position: absolute;
+                top: -3px;
+                left: -3px;
+                right: -3px;
+                bottom: -3px;
+                background: linear-gradient(45deg, #ffffff 25%, transparent 25%),
+                           linear-gradient(-45deg, #ffffff 25%, transparent 25%),
+                           linear-gradient(45deg, transparent 75%, #ffffff 75%),
+                           linear-gradient(-45deg, transparent 75%, #ffffff 75%);
+                background-size: 20px 20px;
+                background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+                z-index: -1;
+                border-radius: 15px;
             }
             
-            p, li, span, div {
-                color: #ffffff !important;
-                font-weight: 600 !important;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6) !important;
-                line-height: 1.8 !important;
-            }
-            
-            /* Links High Contrast */
-            a {
-                color: #ffffff !important;
-                text-decoration: underline !important;
-                text-decoration-thickness: 2px !important;
-                font-weight: 700 !important;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
-            }
-            
-            a:hover {
-                background: #ffffff !important;
-                color: #000000 !important;
-                text-decoration: none !important;
-                padding: 4px 8px !important;
-                border-radius: 4px !important;
-                text-shadow: none !important;
-                font-weight: 900 !important;
-            }
-            
-            /* Buttons High Contrast */
-            button,
-            .btn,
-            input[type="submit"],
-            input[type="button"] {
-                background: #ffffff !important;
-                color: #000000 !important;
-                border: 3px solid #ffffff !important;
-                font-weight: 900 !important;
-                text-shadow: none !important;
-                padding: 0.75rem 1.5rem !important;
-            }
-            
-            button:hover,
-            .btn:hover,
-            input[type="submit"]:hover,
-            input[type="button"]:hover {
-                background: #cccccc !important;
-                border-color: #cccccc !important;
-            }
-            
-            /* Form Elements High Contrast */
+            /* 11. Enhanced Form Elements */
             input,
             textarea,
             select {
                 background: #000000 !important;
                 color: #ffffff !important;
-                border: 3px solid #ffffff !important;
-                font-weight: 600 !important;
+                border: 4px solid #ffffff !important;
+                font-weight: 700 !important;
+                font-size: 1.1rem !important;
+                padding: 1rem !important;
+                border-radius: 8px !important;
+                letter-spacing: 0.5px !important;
+                font-family: Verdana, Arial, sans-serif !important;
+                outline: 2px solid transparent !important;
+                outline-offset: 2px !important;
             }
             
             input:focus,
             textarea:focus,
             select:focus {
-                outline: 3px solid #ffffff !important;
-                outline-offset: 2px !important;
-                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+                outline: 4px solid #ffffff !important;
+                outline-offset: 4px !important;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
+                border-color: #ffffff !important;
+                transform: scale(1.02) !important;
             }
             
-            /* Icons and Graphics High Contrast */
+            label {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 1.1rem !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                letter-spacing: 0.5px !important;
+                margin-bottom: 0.5rem !important;
+                display: block !important;
+                font-family: Arial, sans-serif !important;
+            }
+            
+            /* 12. Enhanced Error Messages and Validation */
+            .error,
+            .error-message,
+            .validation-error {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: 4px solid #000000 !important;
+                padding: 1rem !important;
+                font-weight: 900 !important;
+                font-size: 1.1rem !important;
+                border-radius: 8px !important;
+                margin: 1rem 0 !important;
+                text-align: center !important;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8) !important;
+                letter-spacing: 1px !important;
+            }
+            
+            /* 13. Enhanced Icons and Graphics */
             .icon,
             svg,
             img {
-                filter: contrast(2) brightness(1.2) !important;
-                border: 2px solid #ffffff !important;
-            }
-            
-            /* Lists High Contrast */
-            ul, ol {
-                border-left: 3px solid #ffffff !important;
-                padding-left: 1.5rem !important;
-            }
-            
-            li {
-                margin-bottom: 0.75rem !important;
-                padding-left: 0.5rem !important;
-            }
-            
-            /* Tables High Contrast */
-            table {
+                filter: contrast(3) brightness(1.5) saturate(0) !important;
                 border: 3px solid #ffffff !important;
+                border-radius: 8px !important;
                 background: #000000 !important;
+                padding: 4px !important;
             }
             
-            th, td {
-                border: 2px solid #ffffff !important;
-                color: #ffffff !important;
-                font-weight: 600 !important;
-                padding: 0.75rem !important;
+            /* 14. Enhanced Tables */
+            table {
+                border: 5px solid #ffffff !important;
+                background: #000000 !important;
+                border-collapse: separate !important;
+                border-spacing: 2px !important;
+                width: 100% !important;
             }
             
             th {
                 background: #ffffff !important;
                 color: #000000 !important;
                 font-weight: 900 !important;
+                font-size: 1.1rem !important;
+                padding: 1rem !important;
+                border: 3px solid #000000 !important;
+                text-align: center !important;
+                letter-spacing: 1px !important;
             }
             
-            /* Special Elements High Contrast */
-            .accessibility-info {
-                background: #000000 !important;
+            td {
                 border: 3px solid #ffffff !important;
                 color: #ffffff !important;
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4) !important;
+                font-weight: 700 !important;
+                font-size: 1rem !important;
+                padding: 1rem !important;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            /* 15. Accessibility Info Enhancement */
+            .accessibility-info {
+                background: #000000 !important;
+                border: 5px solid #ffffff !important;
+                color: #ffffff !important;
+                box-shadow: 0 0 25px rgba(255, 255, 255, 0.5) !important;
+                padding: 2rem !important;
+                border-radius: 12px !important;
+                position: relative !important;
+            }
+            
+            .accessibility-info::before {
+                content: "🔊 ACCESSIBILITY MODE ACTIVE";
+                position: absolute;
+                top: -15px;
+                left: 20px;
+                background: #ffffff;
+                color: #000000;
+                padding: 8px 16px;
+                font-weight: 900;
+                font-size: 0.9rem;
+                border-radius: 20px;
+                letter-spacing: 1px;
             }
             
             .accessibility-info h3 {
                 color: #ffffff !important;
-                border-bottom: 2px solid #ffffff !important;
+                border-bottom: 3px solid #ffffff !important;
+                font-size: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
             }
             
-            /* Footer High Contrast */
+            /* 16. Footer Enhancement */
             footer {
                 background: #000000 !important;
-                border-top: 3px solid #ffffff !important;
+                border-top: 6px solid #ffffff !important;
                 color: #ffffff !important;
+                padding: 3rem 1rem !important;
+                position: relative !important;
+            }
+            
+            footer::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 10px;
+                background: repeating-linear-gradient(
+                    90deg,
+                    #ffffff 0px,
+                    #ffffff 20px,
+                    #000000 20px,
+                    #000000 40px
+                ) !important;
+            }
+            
+            /* 17. Breadcrumb Navigation */
+            .breadcrumb {
+                background: #ffffff !important;
+                color: #000000 !important;
+                padding: 1rem !important;
+                margin: 1rem 0 !important;
+                border: 3px solid #000000 !important;
+                border-radius: 8px !important;
+                font-weight: 800 !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            .breadcrumb a {
+                color: #000000 !important;
+                text-decoration: underline !important;
+                font-weight: 900 !important;
+            }
+            
+            .breadcrumb a:hover {
+                background: #000000 !important;
+                color: #ffffff !important;
+            }
+            
+            /* 18. Loading and Status Indicators */
+            .loading,
+            .status-indicator {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: 4px solid #000000 !important;
+                padding: 1rem !important;
+                text-align: center !important;
+                font-weight: 900 !important;
+                font-size: 1.2rem !important;
+                border-radius: 12px !important;
+                letter-spacing: 1px !important;
+                animation: pulse-high-contrast 1s infinite !important;
+            }
+            
+            @keyframes pulse-high-contrast {
+                0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+                50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
             }
         }
 
@@ -3072,6 +3344,25 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
+                transform: none !important;
+            }
+            
+            @media (prefers-contrast: high) {
+                .nav-links a:hover,
+                .nav-links a:focus,
+                .theme-btn:hover,
+                .theme-btn:focus,
+                .call-btn:hover,
+                .call-btn:focus,
+                a:hover,
+                a:focus {
+                    transform: none !important;
+                }
+                
+                .loading,
+                .status-indicator {
+                    animation: none !important;
+                }
             }
         }
 
@@ -3125,6 +3416,20 @@
                 padding: 0.4rem 1rem;
                 font-size: 0.8rem;
             }
+            
+            @media (prefers-contrast: high) {
+                h1 {
+                    font-size: 2.5rem !important;
+                }
+                
+                h2 {
+                    font-size: 2rem !important;
+                }
+                
+                .nav-links a {
+                    font-size: 1rem !important;
+                }
+            }
         }
 
         @media (max-width: 768px) {
@@ -3155,6 +3460,10 @@
                 border-radius: 6px;
                 text-align: center;
                 width: 100%;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .nav-actions {
@@ -3165,20 +3474,62 @@
             .theme-btn {
                 padding: 0.35rem 0.7rem;
                 font-size: 0.75rem;
+                min-height: 44px;
             }
 
             .call-btn {
                 padding: 0.35rem 0.8rem;
                 font-size: 0.75rem;
+                min-height: 44px;
             }
 
             .mobile-btn {
                 display: block;
+                min-height: 44px;
+                min-width: 44px;
             }
 
             body.dark-mode .nav-links {
                 background: #1e293b;
                 border-top-color: #334155;
+            }
+            
+            @media (prefers-contrast: high) {
+                .nav-links {
+                    background: #000000 !important;
+                    border-top: 5px solid #ffffff !important;
+                }
+                
+                .nav-links a {
+                    min-height: 60px !important;
+                    font-size: 1.1rem !important;
+                    border: 3px solid #ffffff !important;
+                    margin: 0.5rem 0 !important;
+                }
+                
+                .theme-btn,
+                .call-btn {
+                    min-height: 50px !important;
+                    font-size: 0.9rem !important;
+                }
+                
+                .mobile-btn {
+                    min-height: 50px !important;
+                    min-width: 50px !important;
+                    font-size: 1.6rem !important;
+                }
+                
+                h1 {
+                    font-size: 2rem !important;
+                }
+                
+                h2 {
+                    font-size: 1.75rem !important;
+                }
+                
+                p {
+                    font-size: 1rem !important;
+                }
             }
         }
 
@@ -3264,7 +3615,7 @@
     <!-- Main Content -->
     <main id="main-content">
         <!-- Hero Section -->
-        <section class="hero">
+        <main id="main-content"><section class="hero">
             <div class="container">
                 <div class="hero-content">
                     <h1>Professional Computer Repair Services Brisbane QLD</h1>
@@ -3291,23 +3642,60 @@
             </div>
         </section>
 
-    <!-- Enhanced Accessibility Instructions -->
-    <div class="accessibility-info" id="accessibilityInfo">
-        <h3>🛠️ High Contrast Accessibility Options</h3>
-        <p><strong>For users who need enhanced contrast and readability:</strong></p>
-        <ul>
-            <li><strong>Windows 10/11:</strong> Press Win + U → Ease of Access → High Contrast (or Win + Alt + Print Screen)</li>
-            <li><strong>Mac:</strong> System Preferences → Accessibility → Display → Increase Contrast + Reduce Transparency</li>
-            <li><strong>Chrome:</strong> Settings → Advanced → Accessibility → Use high contrast mode</li>
-            <li><strong>Firefox:</strong> about:preferences → General → Colors → Use system colors + Override page colors</li>
-            <li><strong>Edge:</strong> Settings → Accessibility → Use high contrast + Force Dark Mode</li>
-            <li><strong>Android:</strong> Settings → Accessibility → High contrast text + Color inversion</li>
-            <li><strong>iOS:</strong> Settings → Accessibility → Display → Increase Contrast + Smart Invert</li>
-        </ul>
-        <p><em>System-level high contrast provides continuous, consistent accessibility across all content including hero sections.</em></p>
-        <p><strong>Keyboard shortcut:</strong> Press Alt+H to show/hide this help panel.</p>
-    </div>
-
+    <!-- Comprehensive Accessibility Instructions -->
+    <section class="accessibility-info" id="accessibilityInfo" role="region" aria-labelledby="accessibility-heading">
+        <h3 id="accessibility-heading">🛠️ Comprehensive High Contrast Accessibility Options</h3>
+        <div role="group" aria-labelledby="accessibility-heading">
+            <p><strong>For users who need enhanced contrast, readability, and accessibility:</strong></p>
+            
+            <h4>Operating System Level (Recommended):</h4>
+            <ul role="list">
+                <li><strong>Windows 10/11:</strong> Press Win + U → Ease of Access → High Contrast (or Win + Alt + Print Screen for instant toggle)</li>
+                <li><strong>Mac:</strong> System Preferences → Accessibility → Display → Increase Contrast + Reduce Transparency + Bold Text</li>
+                <li><strong>Android:</strong> Settings → Accessibility → High contrast text + Color inversion + Large text</li>
+                <li><strong>iOS:</strong> Settings → Accessibility → Display → Increase Contrast + Smart Invert + Bold Text</li>
+            </ul>
+            
+            <h4>Browser Level:</h4>
+            <ul role="list">
+                <li><strong>Chrome:</strong> Settings → Advanced → Accessibility → Use high contrast mode + Force Dark Mode</li>
+                <li><strong>Firefox:</strong> about:preferences → General → Colors → Use system colors + Override page colors</li>
+                <li><strong>Edge:</strong> Settings → Accessibility → Use high contrast + Force Dark Mode + High contrast themes</li>
+                <li><strong>Safari:</strong> Preferences → Advanced → Accessibility → Use system appearance</li>
+            </ul>
+            
+            <h4>Screen Reader Compatibility:</h4>
+            <ul role="list">
+                <li><strong>NVDA (Windows):</strong> Free screen reader with full high contrast support</li>
+                <li><strong>JAWS (Windows):</strong> Professional screen reader with enhanced navigation</li>
+                <li><strong>VoiceOver (Mac/iOS):</strong> Built-in screen reader with gesture support</li>
+                <li><strong>TalkBack (Android):</strong> Built-in screen reader with touch exploration</li>
+            </ul>
+            
+            <h4>Keyboard Navigation:</h4>
+            <ul role="list">
+                <li><strong>Tab/Shift+Tab:</strong> Navigate through interactive elements</li>
+                <li><strong>Enter/Space:</strong> Activate buttons and links</li>
+                <li><strong>Arrow Keys:</strong> Navigate within menus and lists</li>
+                <li><strong>Alt+H:</strong> Show/hide this accessibility help panel</li>
+                <li><strong>Alt+T:</strong> Toggle website theme (light/dark)</li>
+            </ul>
+            
+            <p><em>System-level high contrast provides WCAG AAA compliant (7:1 contrast ratio) accessibility across all content with enhanced typography, focus indicators, and visual separation.</em></p>
+            
+            <div role="note" aria-label="Additional accessibility information">
+                <p><strong>Additional Features Active in High Contrast Mode:</strong></p>
+                <ul>
+                    <li>Enhanced font weights and sizing</li>
+                    <li>Improved letter spacing and line height</li>
+                    <li>Stronger borders and visual indicators</li>
+                    <li>Pattern backgrounds for section distinction</li>
+                    <li>Enhanced focus animations and feedback</li>
+                    <li>Screen reader optimized markup and labels</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
         <!-- Value Proposition -->
         <section class="value-prop" id="about">
@@ -4438,9 +4826,28 @@
             });
         });
     </script>
+</main>
 
     <script>
         let isDarkMode = false;
+        
+        // Announce changes to screen readers
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.style.position = 'absolute';
+            announcement.style.left = '-10000px';
+            announcement.style.width = '1px';
+            announcement.style.height = '1px';
+            announcement.style.overflow = 'hidden';
+            announcement.textContent = message;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
         
         function toggleTheme() {
             const body = document.body;
@@ -4453,13 +4860,17 @@
             if (isDarkMode) {
                 body.classList.add('dark-mode');
                 btn.classList.add('dark');
+                btn.setAttribute('aria-pressed', 'true');
                 icon.textContent = '🌙';
                 text.textContent = 'Dark';
+                announceToScreenReader('Dark theme activated');
             } else {
                 body.classList.remove('dark-mode');
                 btn.classList.remove('dark');
+                btn.setAttribute('aria-pressed', 'false');
                 icon.textContent = '☀️';
                 text.textContent = 'Light';
+                announceToScreenReader('Light theme activated');
             }
             
             localStorage.setItem('labyrinth-theme', isDarkMode ? 'dark' : 'light');
@@ -4467,17 +4878,102 @@
         
         function toggleMobile() {
             const navLinks = document.getElementById('navLinks');
+            const mobileBtn = document.querySelector('.mobile-btn');
+            const isExpanded = navLinks.classList.contains('show');
+            
             navLinks.classList.toggle('show');
+            mobileBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+            
+            if (!isExpanded) {
+                announceToScreenReader('Mobile navigation menu opened');
+                // Focus first menu item
+                const firstLink = navLinks.querySelector('a');
+                if (firstLink) {
+                    setTimeout(() => firstLink.focus(), 100);
+                }
+            } else {
+                announceToScreenReader('Mobile navigation menu closed');
+            }
         }
         
-        // Show accessibility info briefly on page load
+        // Show accessibility info with enhanced timing
         function showAccessibilityInfo() {
             const info = document.getElementById('accessibilityInfo');
             if (info) {
                 info.classList.add('show');
+                info.focus();
+                announceToScreenReader('Accessibility help panel is now visible. Press Alt+H to toggle.');
+                
                 setTimeout(() => {
                     info.classList.remove('show');
-                }, 15000); // Hide after 15 seconds for longer reading time
+                }, 20000); // Hide after 20 seconds for comprehensive reading
+            }
+        }
+        
+        // Enhanced keyboard navigation
+        function handleKeyboardNavigation(e) {
+            // Theme toggle
+            if (e.altKey && e.key === 't') {
+                e.preventDefault();
+                toggleTheme();
+                document.getElementById('themeBtn').focus();
+            }
+            
+            // Accessibility help
+            if (e.altKey && e.key === 'h') {
+                e.preventDefault();
+                const info = document.getElementById('accessibilityInfo');
+                if (info.classList.contains('show')) {
+                    info.classList.remove('show');
+                    announceToScreenReader('Accessibility help panel closed');
+                } else {
+                    showAccessibilityInfo();
+                }
+            }
+            
+            // Escape key to close mobile menu and accessibility panel
+            if (e.key === 'Escape') {
+                const navLinks = document.getElementById('navLinks');
+                const accessInfo = document.getElementById('accessibilityInfo');
+                const mobileBtn = document.querySelector('.mobile-btn');
+                
+                if (navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                    mobileBtn.focus();
+                    announceToScreenReader('Mobile menu closed');
+                }
+                
+                if (accessInfo.classList.contains('show')) {
+                    accessInfo.classList.remove('show');
+                    announceToScreenReader('Accessibility help panel closed');
+                }
+            }
+            
+            // Arrow key navigation in mobile menu
+            if (document.getElementById('navLinks').classList.contains('show')) {
+                const links = Array.from(document.querySelectorAll('.nav-links a'));
+                const currentIndex = links.indexOf(document.activeElement);
+                
+                if (e.key === 'ArrowDown' && currentIndex < links.length - 1) {
+                    e.preventDefault();
+                    links[currentIndex + 1].focus();
+                } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                    e.preventDefault();
+                    links[currentIndex - 1].focus();
+                }
+            }
+        }
+        
+        // Detect high contrast mode
+        function detectHighContrastMode() {
+            if (window.matchMedia('(prefers-contrast: high)').matches) {
+                announceToScreenReader('High contrast mode detected. Enhanced accessibility features are active.');
+                
+                // Show accessibility info briefly for high contrast users
+                setTimeout(() => {
+                    showAccessibilityInfo();
+                }, 2000);
             }
         }
         
@@ -4488,61 +4984,139 @@
                 toggleTheme();
             }
             
-            // Show accessibility info on first visit or every 5th visit
+            // Detect high contrast mode
+            detectHighContrastMode();
+            
+            // Show accessibility info on first visit or periodically
             const visitCount = parseInt(localStorage.getItem('labyrinth-visit-count') || '0') + 1;
             localStorage.setItem('labyrinth-visit-count', visitCount.toString());
             
-            if (visitCount === 1 || visitCount % 5 === 0) {
-                showAccessibilityInfo();
+            if (visitCount === 1) {
+                setTimeout(() => {
+                    showAccessibilityInfo();
+                }, 3000); // Show after 3 seconds on first visit
+            } else if (visitCount % 3 === 0) {
+                setTimeout(() => {
+                    showAccessibilityInfo();
+                }, 5000); // Show every 3rd visit
             }
+            
+            // Add focus trap for mobile menu
+            const navLinks = document.getElementById('navLinks');
+            const mobileBtn = document.querySelector('.mobile-btn');
+            
+            navLinks.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab' && navLinks.classList.contains('show')) {
+                    const focusableElements = navLinks.querySelectorAll('a');
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+                    
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            });
         });
         
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.altKey && e.key === 't') {
-                e.preventDefault();
-                toggleTheme();
-            }
-            // Show accessibility info with Alt+H
-            if (e.altKey && e.key === 'h') {
-                e.preventDefault();
-                const info = document.getElementById('accessibilityInfo');
-                info.classList.toggle('show');
-            }
-        });
+        // Enhanced event listeners
+        document.addEventListener('keydown', handleKeyboardNavigation);
         
-        // Close mobile menu when clicking outside
+        // High contrast mode change detection
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-contrast: high)').addEventListener('change', function(e) {
+                if (e.matches) {
+                    announceToScreenReader('High contrast mode activated. Enhanced accessibility features are now active.');
+                } else {
+                    announceToScreenReader('High contrast mode deactivated.');
+                }
+            });
+        }
+        
+        // Enhanced click outside handling
         document.addEventListener('click', function(e) {
             const navLinks = document.getElementById('navLinks');
             const mobileBtn = document.querySelector('.mobile-btn');
             const accessInfo = document.getElementById('accessibilityInfo');
             
+            // Close mobile menu when clicking outside
             if (navLinks && mobileBtn && !navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
-                navLinks.classList.remove('show');
+                if (navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                }
             }
             
-            // Close accessibility info when clicking outside
+            // Close accessibility info when clicking outside (but not buttons)
             if (accessInfo && accessInfo.classList.contains('show') && 
-                !accessInfo.contains(e.target) && e.target.tagName !== 'BUTTON') {
+                !accessInfo.contains(e.target) && 
+                e.target.tagName !== 'BUTTON' &&
+                !e.target.closest('button')) {
                 accessInfo.classList.remove('show');
             }
         });
         
-        // Smooth scroll for navigation links
+        // Enhanced smooth scroll with accessibility considerations
         document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId) || document.querySelector(`[data-section="${targetId}"]`);
+                
                 if (target) {
                     const offset = 70; // Navbar height
                     const top = target.offsetTop - offset;
-                    window.scrollTo({ top, behavior: 'smooth' });
+                    
+                    // Respect reduced motion preference
+                    const scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+                    
+                    window.scrollTo({ 
+                        top, 
+                        behavior: scrollBehavior 
+                    });
+                    
+                    // Focus target for screen readers
+                    setTimeout(() => {
+                        target.focus();
+                        announceToScreenReader(`Navigated to ${this.textContent} section`);
+                    }, scrollBehavior === 'smooth' ? 500 : 0);
                 }
+                
                 // Close mobile menu
-                document.getElementById('navLinks').classList.remove('show');
+                const navLinks = document.getElementById('navLinks');
+                const mobileBtn = document.querySelector('.mobile-btn');
+                if (navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                }
             });
         });
+        
+        // Performance optimization: Intersection Observer for animations
+        if ('IntersectionObserver' in window) {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe sections for scroll animations (if not reduced motion)
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelectorAll('section').forEach(section => {
+                    observer.observe(section);
+                });
+            }
+        }
     </script>
-
 </body>
 </html>
