@@ -2503,7 +2503,7 @@
             }
         }
     
-        /* Fixed Accessibility Integration with Proper Contrast */
+        /* Expanded Menu Bar with Integrated Toggle Features */
         .header {
             position: fixed;
             top: 0;
@@ -2514,6 +2514,7 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--neutral-200);
             transition: all 0.3s ease;
+            height: 80px;
         }
         
         .nav-container {
@@ -2521,8 +2522,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
+            height: 100%;
         }
         
         .logo {
@@ -2541,24 +2543,27 @@
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: var(--gradient-primary);
             border-radius: var(--border-radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             box-shadow: var(--shadow-md);
         }
         
+        /* Expanded Navigation Menu with Feature Toggles */
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
             list-style: none;
             margin: 0;
             padding: 0;
+            flex: 1;
+            justify-content: center;
         }
         
         .nav-menu a {
@@ -2568,6 +2573,7 @@
             transition: color 0.3s ease;
             padding: 0.5rem 1rem;
             border-radius: var(--border-radius-md);
+            font-size: 1rem;
         }
         
         .nav-menu a:hover {
@@ -2575,19 +2581,65 @@
             background: rgba(0, 102, 255, 0.1);
         }
         
-        /* Integrated Accessibility Toggle */
-        .accessibility-menu-item {
-            position: relative;
+        /* Feature Toggles Section in Menu */
+        .feature-toggles {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: 2rem;
+            padding-left: 2rem;
+            border-left: 2px solid var(--neutral-200);
         }
         
+        /* Theme Toggle Button */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--neutral-100);
+            border: 2px solid var(--neutral-300);
+            border-radius: 25px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--neutral-700);
+            font-family: var(--font-sans);
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--primary-brand);
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary-brand);
+            transform: translateY(-1px);
+        }
+        
+        .theme-toggle.dark-mode {
+            background: var(--neutral-800);
+            border-color: var(--neutral-600);
+            color: var(--neutral-100);
+        }
+        
+        .theme-toggle.dark-mode:hover {
+            background: var(--neutral-700);
+            border-color: var(--primary-brand);
+            color: white;
+        }
+        
+        .theme-icon {
+            font-size: 1.1rem;
+        }
+        
+        /* Accessibility Toggle Button */
         .accessibility-toggle {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: none;
+            background: var(--neutral-100);
             border: 2px solid var(--neutral-300);
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            padding: 0.6rem 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.9rem;
@@ -2598,8 +2650,8 @@
         
         .accessibility-toggle:hover {
             border-color: var(--primary-brand);
+            background: rgba(0, 102, 255, 0.1);
             color: var(--primary-brand);
-            background: rgba(0, 102, 255, 0.05);
             transform: translateY(-1px);
         }
         
@@ -2611,9 +2663,10 @@
         }
         
         .accessibility-icon {
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
         
+        /* Call to Action Section */
         .nav-actions {
             display: flex;
             align-items: center;
@@ -2623,12 +2676,13 @@
         .nav-cta {
             background: var(--gradient-primary);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-md);
+            font-size: 1rem;
         }
         
         .nav-cta:hover {
@@ -2636,14 +2690,71 @@
             box-shadow: var(--shadow-lg);
         }
         
-        /* High Contrast Accessibility Mode - BLACK BACKGROUND, WHITE TEXT */
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        body.dark-mode .header {
+            background: rgba(26, 26, 26, 0.95);
+            border-bottom: 1px solid #333333;
+        }
+        
+        body.dark-mode .logo {
+            color: #ffffff;
+        }
+        
+        body.dark-mode .nav-menu a {
+            color: #cccccc;
+        }
+        
+        body.dark-mode .nav-menu a:hover {
+            color: #66b3ff;
+            background: rgba(102, 179, 255, 0.1);
+        }
+        
+        body.dark-mode .feature-toggles {
+            border-left-color: #333333;
+        }
+        
+        body.dark-mode .theme-toggle {
+            background: #333333;
+            border-color: #555555;
+            color: #cccccc;
+        }
+        
+        body.dark-mode .theme-toggle:hover {
+            background: #444444;
+            border-color: #66b3ff;
+            color: #66b3ff;
+        }
+        
+        body.dark-mode .accessibility-toggle {
+            background: #333333;
+            border-color: #555555;
+            color: #cccccc;
+        }
+        
+        body.dark-mode .accessibility-toggle:hover {
+            background: #444444;
+            border-color: #66b3ff;
+            color: #66b3ff;
+        }
+        
+        body.dark-mode .accessibility-toggle.active {
+            background: #66b3ff;
+            border-color: #66b3ff;
+            color: #1a1a1a;
+        }
+        
+        /* High Contrast Mode - Black background, white text */
         body.high-contrast {
             background: #000000 !important;
             color: #FFFFFF !important;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
         }
         
-        /* Header in High Contrast - Black background, white text */
         body.high-contrast .header {
             background: #000000 !important;
             border-bottom: 3px solid #FFFFFF !important;
@@ -2673,6 +2784,23 @@
             border-color: #FFFFFF !important;
         }
         
+        body.high-contrast .feature-toggles {
+            border-left-color: #FFFFFF !important;
+        }
+        
+        body.high-contrast .theme-toggle {
+            background: #FFFFFF !important;
+            border-color: #FFFFFF !important;
+            color: #000000 !important;
+            font-weight: 700 !important;
+        }
+        
+        body.high-contrast .theme-toggle:hover {
+            background: #CCCCCC !important;
+            border-color: #CCCCCC !important;
+            color: #000000 !important;
+        }
+        
         body.high-contrast .accessibility-toggle {
             background: #FFFFFF !important;
             border-color: #FFFFFF !important;
@@ -2699,7 +2827,30 @@
             color: #000000 !important;
         }
         
-        /* All sections BLACK background in high contrast */
+        /* All sections styling for dark and high contrast modes */
+        body.dark-mode .hero,
+        body.dark-mode .about,
+        body.dark-mode .services,
+        body.dark-mode .sustainability,
+        body.dark-mode .pricing,
+        body.dark-mode .testimonials,
+        body.dark-mode .faq-section,
+        body.dark-mode .contact {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        body.dark-mode .value-card,
+        body.dark-mode .service-card,
+        body.dark-mode .pricing-card,
+        body.dark-mode .sustainability-card,
+        body.dark-mode .testimonial-card,
+        body.dark-mode .faq-item {
+            background: #2a2a2a;
+            border-color: #444444;
+            color: #ffffff;
+        }
+        
         body.high-contrast .hero,
         body.high-contrast .about,
         body.high-contrast .services,
@@ -2712,47 +2863,6 @@
             color: #FFFFFF !important;
         }
         
-        /* Hero Section - Black background, white text */
-        body.high-contrast .hero {
-            background: #000000 !important;
-            border-bottom: 4px solid #FFFFFF !important;
-        }
-        
-        body.high-contrast .hero h1 {
-            color: #FFFFFF !important;
-            font-size: 4rem !important;
-            font-weight: 900 !important;
-            text-shadow: none !important;
-            line-height: 1.1 !important;
-        }
-        
-        body.high-contrast .hero-subtitle {
-            color: #FFFFFF !important;
-            font-size: 1.5rem !important;
-            font-weight: 600 !important;
-            line-height: 1.6 !important;
-        }
-        
-        /* Buttons - White background, black text */
-        body.high-contrast .btn-primary,
-        body.high-contrast .btn-secondary {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            font-weight: 800 !important;
-            font-size: 1.1rem !important;
-            border: 3px solid #FFFFFF !important;
-            padding: 1rem 2rem !important;
-        }
-        
-        body.high-contrast .btn-primary:hover,
-        body.high-contrast .btn-secondary:hover {
-            background: #CCCCCC !important;
-            border-color: #CCCCCC !important;
-            color: #000000 !important;
-            transform: translateY(-3px) !important;
-        }
-        
-        /* All Cards - Black background with white borders and white text */
         body.high-contrast .value-card,
         body.high-contrast .service-card,
         body.high-contrast .pricing-card,
@@ -2764,18 +2874,6 @@
             color: #FFFFFF !important;
         }
         
-        body.high-contrast .value-card:hover,
-        body.high-contrast .service-card:hover,
-        body.high-contrast .pricing-card:hover,
-        body.high-contrast .sustainability-card:hover,
-        body.high-contrast .testimonial-card:hover,
-        body.high-contrast .faq-item:hover {
-            background: #1a1a1a !important;
-            border-color: #CCCCCC !important;
-            transform: translateY(-5px) !important;
-        }
-        
-        /* All headings WHITE text on black background */
         body.high-contrast h1, 
         body.high-contrast h2, 
         body.high-contrast h3,
@@ -2788,114 +2886,48 @@
             font-weight: 900 !important;
         }
         
-        body.high-contrast .section-title {
-            font-size: 3rem !important;
-            border-bottom: 4px solid #FFFFFF !important;
-            padding-bottom: 1rem !important;
-            background: transparent !important;
-        }
-        
-        body.high-contrast .value-card h3,
-        body.high-contrast .service-card h3,
-        body.high-contrast .pricing-card h3,
-        body.high-contrast .sustainability-card h3 {
-            color: #FFFFFF !important;
-            background: transparent !important;
-            font-size: 1.8rem !important;
-            font-weight: 800 !important;
-            border-bottom: 2px solid #FFFFFF !important;
-            padding-bottom: 0.5rem !important;
-        }
-        
-        /* All paragraph text WHITE on black background */
         body.high-contrast p, 
-        body.high-contrast li,
-        body.high-contrast .value-card p,
-        body.high-contrast .service-card p,
-        body.high-contrast .pricing-card p,
-        body.high-contrast .sustainability-card p,
-        body.high-contrast .testimonial-card p,
-        body.high-contrast .faq-item p {
+        body.high-contrast li {
             color: #FFFFFF !important;
             background: transparent !important;
-            font-size: 1.1rem !important;
-            line-height: 1.8 !important;
-            font-weight: 500 !important;
         }
         
-        /* Contact section - black background, white text */
-        body.high-contrast .contact {
-            background: #000000 !important;
-            border: 4px solid #FFFFFF !important;
-        }
-        
-        body.high-contrast .contact h2,
-        body.high-contrast .contact h3 {
-            color: #FFFFFF !important;
-            background: transparent !important;
-            font-size: 2.5rem !important;
-        }
-        
-        body.high-contrast .contact-info {
-            background: #000000 !important;
-            border: 3px solid #FFFFFF !important;
-            color: #FFFFFF !important;
-        }
-        
-        body.high-contrast .contact-info p {
-            color: #FFFFFF !important;
-            background: transparent !important;
-            font-size: 1.2rem !important;
-            font-weight: 600 !important;
-        }
-        
-        /* Links - WHITE text with underline */
         body.high-contrast a {
             color: #FFFFFF !important;
             background: transparent !important;
-            text-decoration: underline !important;
-            font-weight: 600 !important;
         }
         
         body.high-contrast a:hover {
             background: #FFFFFF !important;
             color: #000000 !important;
-            padding: 0.2em 0.4em !important;
-            text-decoration: none !important;
-        }
-        
-        /* Form inputs - WHITE background, BLACK text */
-        body.high-contrast input,
-        body.high-contrast textarea,
-        body.high-contrast select {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            border: 3px solid #FFFFFF !important;
-            font-size: 1.1rem !important;
-            font-weight: 600 !important;
-        }
-        
-        /* Enhanced Focus - WHITE outline */
-        body.high-contrast *:focus {
-            outline: 4px solid #FFFFFF !important;
-            outline-offset: 4px !important;
-            background: #1a1a1a !important;
-            color: #FFFFFF !important;
-        }
-        
-        /* Specific fix for any remaining white on white issues */
-        body.high-contrast * {
-            border-color: #FFFFFF !important;
-        }
-        
-        body.high-contrast *:not(input):not(textarea):not(select) {
-            background-color: transparent !important;
         }
         
         /* Mobile Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .nav-container {
                 padding: 1rem;
+            }
+            
+            .feature-toggles {
+                margin-left: 1rem;
+                padding-left: 1rem;
+            }
+            
+            .theme-toggle,
+            .accessibility-toggle {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .nav-cta {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 70px;
             }
             
             .nav-menu {
@@ -2909,10 +2941,26 @@
                 flex-direction: column;
                 gap: 1rem;
                 padding: 2rem;
+                border-radius: 0 0 15px 15px;
             }
             
             .nav-menu.mobile-open {
                 display: flex;
+            }
+            
+            .feature-toggles {
+                flex-direction: column;
+                gap: 1rem;
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                border-top: 2px solid var(--neutral-200);
+                padding-top: 1rem;
+            }
+            
+            body.dark-mode .nav-menu {
+                background: #2a2a2a;
+                border: 2px solid #444444;
             }
             
             body.high-contrast .nav-menu {
@@ -2920,14 +2968,8 @@
                 border: 3px solid #FFFFFF !important;
             }
             
-            .accessibility-toggle {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            
-            .nav-cta {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
+            body.high-contrast .feature-toggles {
+                border-top-color: #FFFFFF !important;
             }
             
             .mobile-menu-btn {
@@ -2939,6 +2981,11 @@
                 padding: 0.5rem;
                 border-radius: var(--border-radius-md);
                 font-size: 1.2rem;
+            }
+            
+            body.dark-mode .mobile-menu-btn {
+                border-color: #555555;
+                color: #cccccc;
             }
             
             body.high-contrast .mobile-menu-btn {
@@ -2980,12 +3027,18 @@
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li class="accessibility-menu-item">
+                
+                <div class="feature-toggles">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark theme">
+                        <span class="theme-icon">🌓</span>
+                        <span class="theme-text">Light/Dark</span>
+                    </button>
+                    
                     <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
                         <span class="accessibility-icon">♿</span>
                         <span class="accessibility-text">Accessibility</span>
                     </button>
-                </li>
+                </div>
             </nav>
             
             <div class="nav-actions">
@@ -4156,6 +4209,29 @@
     </script>
 
     <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-toggle');
+            const text = button.querySelector('.theme-text');
+            const icon = button.querySelector('.theme-icon');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                button.classList.remove('dark-mode');
+                text.textContent = 'Light/Dark';
+                icon.textContent = '🌓';
+                localStorage.setItem('labyrinth-theme', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                button.classList.add('dark-mode');
+                text.textContent = 'Dark Mode';
+                icon.textContent = '🌙';
+                localStorage.setItem('labyrinth-theme', 'dark');
+            }
+        }
+        
+        // Accessibility toggle functionality
         function toggleAccessibility() {
             const body = document.body;
             const button = document.querySelector('.accessibility-toggle');
@@ -4174,26 +4250,45 @@
             }
         }
         
+        // Mobile menu toggle
         function toggleMobileMenu() {
             const menu = document.querySelector('.nav-menu');
             menu.classList.toggle('mobile-open');
         }
         
-        // Load saved accessibility preference
+        // Load saved preferences on page load
         document.addEventListener('DOMContentLoaded', function() {
-            const saved = localStorage.getItem('labyrinth-accessibility');
-            const button = document.querySelector('.accessibility-toggle');
-            const text = button ? button.querySelector('.accessibility-text') : null;
+            // Load theme preference
+            const savedTheme = localStorage.getItem('labyrinth-theme');
+            const themeButton = document.querySelector('.theme-toggle');
+            const themeText = themeButton ? themeButton.querySelector('.theme-text') : null;
+            const themeIcon = themeButton ? themeButton.querySelector('.theme-icon') : null;
             
-            if (saved === 'high-contrast' && button && text) {
+            if (savedTheme === 'dark' && themeButton && themeText && themeIcon) {
+                document.body.classList.add('dark-mode');
+                themeButton.classList.add('dark-mode');
+                themeText.textContent = 'Dark Mode';
+                themeIcon.textContent = '🌙';
+            }
+            
+            // Load accessibility preference
+            const savedAccessibility = localStorage.getItem('labyrinth-accessibility');
+            const accessButton = document.querySelector('.accessibility-toggle');
+            const accessText = accessButton ? accessButton.querySelector('.accessibility-text') : null;
+            
+            if (savedAccessibility === 'high-contrast' && accessButton && accessText) {
                 document.body.classList.add('high-contrast');
-                button.classList.add('active');
-                text.textContent = 'High Contrast';
+                accessButton.classList.add('active');
+                accessText.textContent = 'High Contrast';
             }
         });
         
-        // Keyboard shortcut Alt+A
+        // Keyboard shortcuts
         document.addEventListener('keydown', function(event) {
+            if (event.altKey && event.key === 't') {
+                event.preventDefault();
+                toggleTheme();
+            }
             if (event.altKey && event.key === 'a') {
                 event.preventDefault();
                 toggleAccessibility();
@@ -4208,6 +4303,28 @@
             if (menu && menuBtn && !menu.contains(event.target) && !menuBtn.contains(event.target)) {
                 menu.classList.remove('mobile-open');
             }
+        });
+        
+        // Enhanced focus management for accessibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const focusableElements = document.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
+            
+            focusableElements.forEach(element => {
+                element.addEventListener('focus', function() {
+                    if (document.body.classList.contains('high-contrast')) {
+                        this.style.outline = '4px solid #FFFFFF';
+                        this.style.outlineOffset = '4px';
+                    } else {
+                        this.style.outline = '3px solid var(--primary-brand)';
+                        this.style.outlineOffset = '2px';
+                    }
+                });
+                
+                element.addEventListener('blur', function() {
+                    this.style.outline = '';
+                    this.style.outlineOffset = '';
+                });
+            });
         });
     </script>
 
