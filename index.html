@@ -2503,8 +2503,7 @@
             }
         }
     
-        /* ANALYZED & FIXED HIGH CONTRAST IMPLEMENTATION */
-        /* Addressing identified readability issues */
+        /* TARGETED FONT CONTRAST FIXES FOR SPECIFIC SECTIONS */
         
         .navbar {
             position: fixed;
@@ -2738,21 +2737,10 @@
             color: #cbd5e1;
         }
 
-        /* FIXED HIGH CONTRAST MODE - READABILITY ISSUES RESOLVED */
+        /* HIGH CONTRAST MODE - TARGETED FIXES FOR SPECIFIC SECTIONS */
         @media (prefers-contrast: high) {
             
-            /* ANALYSIS FINDINGS & FIXES:
-               1. Text shadows were causing blur - REMOVED
-               2. Font sizes too small for readability - INCREASED
-               3. Letter spacing insufficient - IMPROVED
-               4. Pattern backgrounds interfering with text - SIMPLIFIED
-               5. Border thickness causing layout issues - OPTIMIZED
-               6. Color contrast not consistent - STANDARDIZED
-               7. Focus indicators too complex - SIMPLIFIED
-               8. Mobile targets too small - ENLARGED
-            */
-            
-            /* BASE FIXES - Clean & Simple */
+            /* Base settings */
             * {
                 transition: none !important;
                 animation: none !important;
@@ -2768,7 +2756,7 @@
                 font-size: 18px !important;
             }
             
-            /* SKIP LINK ENHANCED */
+            /* Skip Link */
             .skip-link {
                 background: #ffffff !important;
                 color: #000000 !important;
@@ -2783,7 +2771,7 @@
                 outline-offset: 3px !important;
             }
             
-            /* NAVIGATION FIXES */
+            /* Navigation */
             .navbar {
                 background: #000000 !important;
                 border-bottom: 4px solid #ffffff !important;
@@ -2817,7 +2805,6 @@
                 font-size: 18px !important;
             }
             
-            /* NAVIGATION LINKS SIMPLIFIED */
             .nav-links a {
                 color: #ffffff !important;
                 font-weight: 700 !important;
@@ -2838,7 +2825,6 @@
                 outline-offset: 2px !important;
             }
             
-            /* BUTTONS SIMPLIFIED & ENLARGED */
             .theme-btn {
                 background: #ffffff !important;
                 color: #000000 !important;
@@ -2898,13 +2884,216 @@
                 outline-offset: 2px !important;
             }
             
-            /* CONTENT SECTIONS - CLEAN SEPARATION */
+            /* FIX 1: VALUE PROPOSITION CARDS (From Screenshot 1) */
             .hero,
+            .value-section,
+            .value-grid,
+            .value-cards {
+                background: #000000 !important;
+                color: #ffffff !important;
+                border-top: 4px solid #ffffff !important;
+                border-bottom: 4px solid #ffffff !important;
+            }
+            
+            /* Target the specific gray text issues */
+            .value-card,
+            .value-item,
+            .feature-card {
+                background: #000000 !important;
+                border: 3px solid #ffffff !important;
+                color: #ffffff !important;
+                padding: 24px !important;
+                margin: 20px 0 !important;
+                border-radius: 8px !important;
+            }
+            
+            .value-card h3,
+            .value-card h4,
+            .value-item h3,
+            .value-item h4,
+            .feature-card h3,
+            .feature-card h4 {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 22px !important;
+                letter-spacing: 0.5px !important;
+                margin-bottom: 12px !important;
+                border-bottom: 2px solid #ffffff !important;
+                padding-bottom: 8px !important;
+            }
+            
+            .value-card p,
+            .value-item p,
+            .feature-card p {
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                font-size: 18px !important;
+                line-height: 1.6 !important;
+                letter-spacing: 0.4px !important;
+            }
+            
+            /* Target subtitle text that appears gray */
+            .value-subtitle,
+            .hero-subtitle,
+            .section-subtitle {
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                font-size: 18px !important;
+                letter-spacing: 0.5px !important;
+            }
+            
+            /* FIX 2: ABOUT SECTION (From Screenshot 2) */
             .about,
-            .services,
-            .sustainability,
-            .pricing,
+            .about-section,
+            .technician-section {
+                background: #000000 !important;
+                color: #ffffff !important;
+                border-top: 4px solid #ffffff !important;
+                border-bottom: 4px solid #ffffff !important;
+                padding: 40px 20px !important;
+            }
+            
+            .about h1,
+            .about h2,
+            .about .section-title,
+            .about .about-title {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 40px !important;
+                letter-spacing: 1px !important;
+                border-bottom: 3px solid #ffffff !important;
+                padding-bottom: 16px !important;
+                margin-bottom: 24px !important;
+                text-align: center !important;
+            }
+            
+            .about p,
+            .about .about-description,
+            .about .technician-description {
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                font-size: 20px !important;
+                line-height: 1.7 !important;
+                letter-spacing: 0.5px !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
+            }
+            
+            /* FIX 3: REVIEWS SECTION (From Screenshot 3) */
+            .reviews,
+            .reviews-section,
             .testimonials,
+            .testimonials-section {
+                background: #000000 !important;
+                color: #ffffff !important;
+                border-top: 4px solid #ffffff !important;
+                border-bottom: 4px solid #ffffff !important;
+                padding: 40px 20px !important;
+            }
+            
+            .reviews h1,
+            .reviews h2,
+            .reviews .section-title,
+            .testimonials h1,
+            .testimonials h2,
+            .testimonials .section-title {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 36px !important;
+                letter-spacing: 1px !important;
+                border-bottom: 3px solid #ffffff !important;
+                padding-bottom: 16px !important;
+                margin-bottom: 24px !important;
+                text-align: center !important;
+            }
+            
+            .reviews p,
+            .reviews .section-description,
+            .testimonials p,
+            .testimonials .section-description {
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                font-size: 18px !important;
+                line-height: 1.7 !important;
+                letter-spacing: 0.5px !important;
+                text-align: center !important;
+                margin-bottom: 20px !important;
+            }
+            
+            /* Google Reviews Card */
+            .review-card,
+            .google-reviews,
+            .rating-card {
+                background: #000000 !important;
+                border: 3px solid #ffffff !important;
+                color: #ffffff !important;
+                padding: 24px !important;
+                border-radius: 8px !important;
+                margin: 20px 0 !important;
+            }
+            
+            .review-card h3,
+            .google-reviews h3,
+            .rating-card h3 {
+                color: #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 24px !important;
+                text-align: center !important;
+                margin-bottom: 16px !important;
+            }
+            
+            .review-card p,
+            .google-reviews p,
+            .rating-card p {
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                font-size: 18px !important;
+                text-align: center !important;
+            }
+            
+            /* Rating number */
+            .rating-number,
+            .review-score {
+                color: #ffffff !important;
+                font-weight: 900 !important;
+                font-size: 48px !important;
+            }
+            
+            /* Stars */
+            .stars,
+            .rating-stars {
+                color: #ffffff !important;
+                font-size: 24px !important;
+            }
+            
+            /* Review button */
+            .review-button,
+            .google-review-btn {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border: 2px solid #ffffff !important;
+                font-weight: 800 !important;
+                font-size: 16px !important;
+                padding: 12px 24px !important;
+                border-radius: 6px !important;
+                text-decoration: none !important;
+                display: inline-block !important;
+                margin: 16px auto !important;
+            }
+            
+            .review-button:hover,
+            .review-button:focus,
+            .google-review-btn:hover,
+            .google-review-btn:focus {
+                background: #cccccc !important;
+                outline: 2px solid #ffffff !important;
+                outline-offset: 2px !important;
+            }
+            
+            /* ALL SECTIONS - GENERAL FIXES */
+            .services,
+            .pricing,
+            .sustainability,
             .faq-section,
             .contact,
             .footer {
@@ -2916,55 +3105,35 @@
                 margin: 20px 0 !important;
             }
             
-            /* TYPOGRAPHY FIXES - LARGER & CLEARER */
-            h1 {
+            /* All headings */
+            h1, h2, h3, h4, h5, h6 {
                 color: #ffffff !important;
                 font-weight: 800 !important;
+                letter-spacing: 0.5px !important;
+                border-bottom: 2px solid #ffffff !important;
+                padding-bottom: 8px !important;
+                margin-bottom: 16px !important;
+            }
+            
+            h1 {
                 font-size: 48px !important;
                 border-bottom: 3px solid #ffffff !important;
                 padding-bottom: 16px !important;
                 margin-bottom: 24px !important;
                 letter-spacing: 1px !important;
-                line-height: 1.3 !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
             }
             
             h2 {
-                color: #ffffff !important;
-                font-weight: 800 !important;
                 font-size: 36px !important;
-                border-bottom: 2px solid #ffffff !important;
-                padding-bottom: 12px !important;
-                margin-bottom: 20px !important;
                 letter-spacing: 0.8px !important;
-                line-height: 1.4 !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
             }
             
             h3 {
-                color: #ffffff !important;
-                font-weight: 700 !important;
                 font-size: 28px !important;
-                border-bottom: 1px solid #ffffff !important;
-                padding-bottom: 8px !important;
-                margin-bottom: 16px !important;
                 letter-spacing: 0.6px !important;
-                line-height: 1.5 !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
             }
             
-            h4, h5, h6 {
-                color: #ffffff !important;
-                font-weight: 700 !important;
-                font-size: 22px !important;
-                border-left: 3px solid #ffffff !important;
-                padding-left: 12px !important;
-                margin-bottom: 12px !important;
-                letter-spacing: 0.5px !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
-            }
-            
-            /* PARAGRAPH TEXT - OPTIMIZED READABILITY */
+            /* All paragraphs */
             p {
                 color: #ffffff !important;
                 font-weight: 600 !important;
@@ -2972,10 +3141,9 @@
                 line-height: 1.8 !important;
                 letter-spacing: 0.5px !important;
                 margin-bottom: 20px !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
             }
             
-            /* LISTS - CLEAR INDICATORS */
+            /* Lists */
             ul, ol {
                 border-left: 4px solid #ffffff !important;
                 padding-left: 24px !important;
@@ -2995,14 +3163,13 @@
                 border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
                 letter-spacing: 0.4px !important;
                 line-height: 1.6 !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
             }
             
             li:last-child {
                 border-bottom: none !important;
             }
             
-            /* LINKS - CLEAR & ACCESSIBLE */
+            /* Links */
             a {
                 color: #ffffff !important;
                 text-decoration: underline !important;
@@ -3024,16 +3191,14 @@
                 outline-offset: 2px !important;
             }
             
-            /* CARDS & COMPONENTS - SIMPLIFIED */
-            .value-card,
+            /* Cards and components */
             .service-card,
             .pricing-card,
             .sustainability-card,
             .testimonial-card,
             .faq-item,
             .contact-form,
-            .stats-container,
-            .review-container {
+            .stats-container {
                 background: #000000 !important;
                 border: 3px solid #ffffff !important;
                 color: #ffffff !important;
@@ -3042,7 +3207,7 @@
                 border-radius: 8px !important;
             }
             
-            /* FORM ELEMENTS - ENLARGED & CLEAR */
+            /* Form elements */
             input,
             textarea,
             select {
@@ -3054,7 +3219,6 @@
                 padding: 16px !important;
                 border-radius: 6px !important;
                 letter-spacing: 0.4px !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
                 min-height: 56px !important;
             }
             
@@ -3073,10 +3237,9 @@
                 letter-spacing: 0.4px !important;
                 margin-bottom: 8px !important;
                 display: block !important;
-                font-family: "Segoe UI", Arial, sans-serif !important;
             }
             
-            /* BUTTONS - CONSISTENT STYLING */
+            /* Buttons */
             button,
             .btn,
             input[type="submit"],
@@ -3107,7 +3270,7 @@
                 outline-offset: 3px !important;
             }
             
-            /* TABLES - CLEAR STRUCTURE */
+            /* Tables */
             table {
                 border: 3px solid #ffffff !important;
                 background: #000000 !important;
@@ -3136,7 +3299,7 @@
                 letter-spacing: 0.4px !important;
             }
             
-            /* ACCESSIBILITY INFO - ENHANCED */
+            /* Accessibility info */
             .accessibility-info {
                 background: #000000 !important;
                 border: 4px solid #ffffff !important;
@@ -3144,7 +3307,6 @@
                 padding: 32px !important;
                 border-radius: 8px !important;
                 margin: 32px 0 !important;
-                position: relative !important;
             }
             
             .accessibility-info h3 {
@@ -3161,7 +3323,7 @@
                 margin-bottom: 12px !important;
             }
             
-            /* FOOTER - CONSISTENT */
+            /* Footer */
             footer {
                 background: #000000 !important;
                 border-top: 4px solid #ffffff !important;
@@ -3169,7 +3331,7 @@
                 padding: 40px 20px !important;
             }
             
-            /* IMAGES & ICONS - HIGH CONTRAST */
+            /* Icons and images */
             .icon,
             svg,
             img {
@@ -3179,7 +3341,7 @@
             }
         }
 
-        /* MOBILE RESPONSIVE FIXES */
+        /* Mobile responsive */
         @media (max-width: 968px) {
             .nav-container {
                 padding: 0 1rem;
@@ -3350,7 +3512,7 @@
             }
         }
 
-        /* Body padding for fixed navbar */
+        /* Body padding */
         body {
             padding-top: 70px;
         }
@@ -3361,7 +3523,7 @@
             }
         }
 
-        /* Content sections for dark mode */
+        /* Dark mode sections */
         body.dark-mode .hero,
         body.dark-mode .about,
         body.dark-mode .services,
@@ -3387,7 +3549,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Accessibility Instructions Section */
+        /* Accessibility instructions */
         .accessibility-info {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
