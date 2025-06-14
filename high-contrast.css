@@ -1,0 +1,138 @@
+/* High contrast theme extracted from index.html */
+:root {
+  --hc-bg: #000;
+  --hc-fg: #fff;
+  --hc-accent: #667eea;
+  --hc-size-base: 1.2rem;
+  --hc-size-h1: 4.5rem;
+  --hc-size-h2: 3rem;
+  --hc-size-h3: 2.2rem;
+}
+
+body.high-contrast {
+  background: var(--hc-bg);
+  color: var(--hc-fg);
+  font-size: var(--hc-size-base);
+}
+
+body.high-contrast .container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+body.high-contrast .hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body.high-contrast .hero h1 {
+  font-size: var(--hc-size-h1);
+  font-weight: 900;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+body.high-contrast .hero-subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3 {
+  letter-spacing: 0.8px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.high-contrast p,
+body.high-contrast li {
+  line-height: 1.9;
+  word-spacing: 2px;
+  font-weight: 500;
+}
+
+body.high-contrast *:focus {
+  outline: 4px solid var(--hc-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+body.high-contrast a:focus {
+  background: rgba(102, 126, 234, 0.2);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+body.high-contrast button:focus,
+body.high-contrast .cta-button:focus {
+  outline: 4px solid var(--hc-fg);
+  outline-offset: 2px;
+}
+
+@media (prefers-contrast: more) {
+  body {
+    background: var(--hc-bg);
+    color: var(--hc-fg);
+    font-size: var(--hc-size-base);
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .hero h1 {
+    font-size: var(--hc-size-h1);
+    font-weight: 900;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: 0.8px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  p,
+  li {
+    line-height: 1.9;
+    word-spacing: 2px;
+    font-weight: 500;
+  }
+
+  *:focus {
+    outline: 4px solid var(--hc-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  a:focus {
+    background: rgba(102, 126, 234, 0.2);
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+
+  button:focus,
+  .cta-button:focus {
+    outline: 4px solid var(--hc-fg);
+    outline-offset: 2px;
+  }
+}
