@@ -2503,7 +2503,7 @@
             }
         }
     
-        /* Enhanced Accessibility Integration with Fixed Layout */
+        /* Fixed Accessibility Integration with Proper Contrast */
         .header {
             position: fixed;
             top: 0;
@@ -2636,15 +2636,16 @@
             box-shadow: var(--shadow-lg);
         }
         
-        /* High Contrast Accessibility Mode with Better Contrast */
+        /* High Contrast Accessibility Mode - BLACK BACKGROUND, WHITE TEXT */
         body.high-contrast {
             background: #000000 !important;
             color: #FFFFFF !important;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
         }
         
+        /* Header in High Contrast - Black background, white text */
         body.high-contrast .header {
-            background: #1a1a1a !important;
+            background: #000000 !important;
             border-bottom: 3px solid #FFFFFF !important;
             backdrop-filter: none !important;
         }
@@ -2682,6 +2683,7 @@
         body.high-contrast .accessibility-toggle:hover {
             background: #CCCCCC !important;
             border-color: #CCCCCC !important;
+            color: #000000 !important;
         }
         
         body.high-contrast .nav-cta {
@@ -2694,9 +2696,23 @@
         body.high-contrast .nav-cta:hover {
             background: #CCCCCC !important;
             border-color: #CCCCCC !important;
+            color: #000000 !important;
         }
         
-        /* Hero Section High Contrast */
+        /* All sections BLACK background in high contrast */
+        body.high-contrast .hero,
+        body.high-contrast .about,
+        body.high-contrast .services,
+        body.high-contrast .sustainability,
+        body.high-contrast .pricing,
+        body.high-contrast .testimonials,
+        body.high-contrast .faq-section,
+        body.high-contrast .contact {
+            background: #000000 !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Hero Section - Black background, white text */
         body.high-contrast .hero {
             background: #000000 !important;
             border-bottom: 4px solid #FFFFFF !important;
@@ -2706,7 +2722,7 @@
             color: #FFFFFF !important;
             font-size: 4rem !important;
             font-weight: 900 !important;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.3) !important;
+            text-shadow: none !important;
             line-height: 1.1 !important;
         }
         
@@ -2717,6 +2733,7 @@
             line-height: 1.6 !important;
         }
         
+        /* Buttons - White background, black text */
         body.high-contrast .btn-primary,
         body.high-contrast .btn-secondary {
             background: #FFFFFF !important;
@@ -2731,17 +2748,18 @@
         body.high-contrast .btn-secondary:hover {
             background: #CCCCCC !important;
             border-color: #CCCCCC !important;
+            color: #000000 !important;
             transform: translateY(-3px) !important;
         }
         
-        /* Content Sections High Contrast */
+        /* All Cards - Black background with white borders and white text */
         body.high-contrast .value-card,
         body.high-contrast .service-card,
         body.high-contrast .pricing-card,
         body.high-contrast .sustainability-card,
         body.high-contrast .testimonial-card,
         body.high-contrast .faq-item {
-            background: #1a1a1a !important;
+            background: #000000 !important;
             border: 3px solid #FFFFFF !important;
             color: #FFFFFF !important;
         }
@@ -2752,24 +2770,29 @@
         body.high-contrast .sustainability-card:hover,
         body.high-contrast .testimonial-card:hover,
         body.high-contrast .faq-item:hover {
-            background: #333333 !important;
+            background: #1a1a1a !important;
             border-color: #CCCCCC !important;
             transform: translateY(-5px) !important;
         }
         
+        /* All headings WHITE text on black background */
         body.high-contrast h1, 
         body.high-contrast h2, 
         body.high-contrast h3,
+        body.high-contrast h4,
+        body.high-contrast h5,
+        body.high-contrast h6,
         body.high-contrast .section-title {
             color: #FFFFFF !important;
+            background: transparent !important;
             font-weight: 900 !important;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.1) !important;
         }
         
         body.high-contrast .section-title {
             font-size: 3rem !important;
             border-bottom: 4px solid #FFFFFF !important;
             padding-bottom: 1rem !important;
+            background: transparent !important;
         }
         
         body.high-contrast .value-card h3,
@@ -2777,42 +2800,39 @@
         body.high-contrast .pricing-card h3,
         body.high-contrast .sustainability-card h3 {
             color: #FFFFFF !important;
+            background: transparent !important;
             font-size: 1.8rem !important;
             font-weight: 800 !important;
             border-bottom: 2px solid #FFFFFF !important;
             padding-bottom: 0.5rem !important;
         }
         
+        /* All paragraph text WHITE on black background */
         body.high-contrast p, 
         body.high-contrast li,
         body.high-contrast .value-card p,
         body.high-contrast .service-card p,
         body.high-contrast .pricing-card p,
-        body.high-contrast .sustainability-card p {
+        body.high-contrast .sustainability-card p,
+        body.high-contrast .testimonial-card p,
+        body.high-contrast .faq-item p {
             color: #FFFFFF !important;
+            background: transparent !important;
             font-size: 1.1rem !important;
             line-height: 1.8 !important;
             font-weight: 500 !important;
         }
         
-        /* Section Backgrounds High Contrast */
-        body.high-contrast .about,
-        body.high-contrast .sustainability,
-        body.high-contrast .pricing,
-        body.high-contrast .testimonials,
-        body.high-contrast .faq-section {
-            background: #000000 !important;
-            border-top: 3px solid #FFFFFF !important;
-        }
-        
+        /* Contact section - black background, white text */
         body.high-contrast .contact {
-            background: #1a1a1a !important;
+            background: #000000 !important;
             border: 4px solid #FFFFFF !important;
         }
         
         body.high-contrast .contact h2,
         body.high-contrast .contact h3 {
             color: #FFFFFF !important;
+            background: transparent !important;
             font-size: 2.5rem !important;
         }
         
@@ -2824,17 +2844,27 @@
         
         body.high-contrast .contact-info p {
             color: #FFFFFF !important;
+            background: transparent !important;
             font-size: 1.2rem !important;
             font-weight: 600 !important;
         }
         
-        /* Enhanced Focus for Accessibility */
-        body.high-contrast *:focus {
-            outline: 4px solid #FFFFFF !important;
-            outline-offset: 4px !important;
-            background: #333333 !important;
+        /* Links - WHITE text with underline */
+        body.high-contrast a {
+            color: #FFFFFF !important;
+            background: transparent !important;
+            text-decoration: underline !important;
+            font-weight: 600 !important;
         }
         
+        body.high-contrast a:hover {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            padding: 0.2em 0.4em !important;
+            text-decoration: none !important;
+        }
+        
+        /* Form inputs - WHITE background, BLACK text */
         body.high-contrast input,
         body.high-contrast textarea,
         body.high-contrast select {
@@ -2845,17 +2875,21 @@
             font-weight: 600 !important;
         }
         
-        body.high-contrast a {
+        /* Enhanced Focus - WHITE outline */
+        body.high-contrast *:focus {
+            outline: 4px solid #FFFFFF !important;
+            outline-offset: 4px !important;
+            background: #1a1a1a !important;
             color: #FFFFFF !important;
-            text-decoration: underline !important;
-            font-weight: 600 !important;
         }
         
-        body.high-contrast a:hover {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            padding: 0.2em 0.4em !important;
-            text-decoration: none !important;
+        /* Specific fix for any remaining white on white issues */
+        body.high-contrast * {
+            border-color: #FFFFFF !important;
+        }
+        
+        body.high-contrast *:not(input):not(textarea):not(select) {
+            background-color: transparent !important;
         }
         
         /* Mobile Responsive */
@@ -2882,7 +2916,7 @@
             }
             
             body.high-contrast .nav-menu {
-                background: #1a1a1a !important;
+                background: #000000 !important;
                 border: 3px solid #FFFFFF !important;
             }
             
@@ -2910,6 +2944,7 @@
             body.high-contrast .mobile-menu-btn {
                 border-color: #FFFFFF !important;
                 color: #FFFFFF !important;
+                background: transparent !important;
             }
         }
         
@@ -4163,32 +4198,6 @@
                 event.preventDefault();
                 toggleAccessibility();
             }
-        });
-        
-        // Enhanced focus management
-        document.addEventListener('DOMContentLoaded', function() {
-            const focusableElements = document.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
-            
-            focusableElements.forEach(element => {
-                element.addEventListener('focus', function() {
-                    if (document.body.classList.contains('high-contrast')) {
-                        this.style.outline = '4px solid #FFFFFF';
-                        this.style.outlineOffset = '4px';
-                        this.style.background = '#333333';
-                    } else {
-                        this.style.outline = '3px solid var(--primary-brand)';
-                        this.style.outlineOffset = '2px';
-                    }
-                });
-                
-                element.addEventListener('blur', function() {
-                    if (!document.body.classList.contains('high-contrast')) {
-                        this.style.outline = '';
-                        this.style.outlineOffset = '';
-                        this.style.background = '';
-                    }
-                });
-            });
         });
         
         // Close mobile menu when clicking outside
