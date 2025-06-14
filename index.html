@@ -2503,331 +2503,312 @@
             }
         }
     
-        /* Expanded Menu Bar with Integrated Toggle Features */
+        /* Redesigned Menu and Title Bar - Clean Architecture */
+        
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --header-height: 70px;
+            --nav-bg: #ffffff;
+            --nav-text: #333333;
+            --nav-accent: #0066ff;
+            --nav-border: #e5e5e5;
+            --nav-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            
+            --dark-bg: #1a1a1a;
+            --dark-text: #ffffff;
+            --dark-accent: #66b3ff;
+            --dark-border: #404040;
+            
+            --contrast-bg: #000000;
+            --contrast-text: #ffffff;
+            --contrast-accent: #ffffff;
+            --contrast-border: #ffffff;
+        }
+        
+        /* Header Container */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--neutral-200);
+            height: var(--header-height);
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--nav-border);
+            box-shadow: var(--nav-shadow);
             transition: all 0.3s ease;
-            height: 80px;
         }
         
+        /* Navigation Container */
         .nav-container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1600px;
-            margin: 0 auto;
+            justify-content: space-between;
             height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
         
-        .logo {
+        /* Logo Section */
+        .nav-logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--neutral-900);
+            gap: 12px;
             text-decoration: none;
-            transition: transform 0.3s ease;
+            color: var(--nav-text);
+            font-weight: 700;
+            font-size: 1.4rem;
+            transition: color 0.3s ease;
         }
         
-        .logo:hover {
-            transform: scale(1.05);
+        .nav-logo:hover {
+            color: var(--nav-accent);
         }
         
         .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: var(--gradient-primary);
-            border-radius: var(--border-radius-lg);
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--nav-accent), #0052cc);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: var(--shadow-md);
+            color: white;
+            font-size: 18px;
         }
         
-        /* Expanded Navigation Menu with Feature Toggles */
-        .nav-menu {
+        /* Main Navigation */
+        .nav-main {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 2rem;
+            flex: 1;
+            justify-content: center;
             list-style: none;
             margin: 0;
             padding: 0;
-            flex: 1;
-            justify-content: center;
         }
         
-        .nav-menu a {
+        .nav-main a {
             text-decoration: none;
-            color: var(--neutral-700);
+            color: var(--nav-text);
             font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius-md);
-            font-size: 1rem;
-        }
-        
-        .nav-menu a:hover {
-            color: var(--primary-brand);
-            background: rgba(0, 102, 255, 0.1);
-        }
-        
-        /* Feature Toggles Section in Menu */
-        .feature-toggles {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-left: 2rem;
-            padding-left: 2rem;
-            border-left: 2px solid var(--neutral-200);
-        }
-        
-        /* Theme Toggle Button */
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--neutral-100);
-            border: 2px solid var(--neutral-300);
-            border-radius: 25px;
-            padding: 0.6rem 1.2rem;
-            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 6px;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--neutral-700);
-            font-family: var(--font-sans);
+            position: relative;
         }
         
-        .theme-toggle:hover {
-            border-color: var(--primary-brand);
+        .nav-main a:hover {
+            color: var(--nav-accent);
             background: rgba(0, 102, 255, 0.1);
-            color: var(--primary-brand);
-            transform: translateY(-1px);
         }
         
-        .theme-toggle.dark-mode {
-            background: var(--neutral-800);
-            border-color: var(--neutral-600);
-            color: var(--neutral-100);
+        /* Controls Section */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
-        .theme-toggle.dark-mode:hover {
-            background: var(--neutral-700);
-            border-color: var(--primary-brand);
+        /* Toggle Buttons */
+        .toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid var(--nav-border);
+            border-radius: 20px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--nav-text);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .toggle-btn:hover {
+            border-color: var(--nav-accent);
+            color: var(--nav-accent);
+            background: rgba(0, 102, 255, 0.05);
+        }
+        
+        .toggle-btn.active {
+            background: var(--nav-accent);
+            border-color: var(--nav-accent);
             color: white;
         }
         
-        .theme-icon {
-            font-size: 1.1rem;
+        .toggle-icon {
+            font-size: 14px;
         }
         
-        /* Accessibility Toggle Button */
-        .accessibility-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--neutral-100);
-            border: 2px solid var(--neutral-300);
-            border-radius: 25px;
-            padding: 0.6rem 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--neutral-700);
-            font-family: var(--font-sans);
-        }
-        
-        .accessibility-toggle:hover {
-            border-color: var(--primary-brand);
-            background: rgba(0, 102, 255, 0.1);
-            color: var(--primary-brand);
-            transform: translateY(-1px);
-        }
-        
-        .accessibility-toggle.active {
-            background: var(--primary-brand);
-            border-color: var(--primary-brand);
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
-        }
-        
-        .accessibility-icon {
-            font-size: 1.1rem;
-        }
-        
-        /* Call to Action Section */
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
+        /* Call Button */
         .nav-cta {
-            background: var(--gradient-primary);
+            background: var(--nav-accent);
             color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 30px;
             text-decoration: none;
-            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-            font-size: 1rem;
+            white-space: nowrap;
         }
         
         .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            background: #0052cc;
+            transform: translateY(-1px);
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--nav-border);
+            color: var(--nav-text);
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
         }
         
         /* Dark Mode Styles */
         body.dark-mode {
-            background: #1a1a1a;
-            color: #ffffff;
+            background: var(--dark-bg);
+            color: var(--dark-text);
         }
         
         body.dark-mode .header {
-            background: rgba(26, 26, 26, 0.95);
-            border-bottom: 1px solid #333333;
+            background: var(--dark-bg);
+            border-bottom-color: var(--dark-border);
         }
         
-        body.dark-mode .logo {
-            color: #ffffff;
+        body.dark-mode .nav-logo {
+            color: var(--dark-text);
         }
         
-        body.dark-mode .nav-menu a {
-            color: #cccccc;
+        body.dark-mode .nav-logo:hover {
+            color: var(--dark-accent);
         }
         
-        body.dark-mode .nav-menu a:hover {
-            color: #66b3ff;
+        body.dark-mode .nav-main a {
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode .nav-main a:hover {
+            color: var(--dark-accent);
             background: rgba(102, 179, 255, 0.1);
         }
         
-        body.dark-mode .feature-toggles {
-            border-left-color: #333333;
+        body.dark-mode .toggle-btn {
+            border-color: var(--dark-border);
+            color: var(--dark-text);
         }
         
-        body.dark-mode .theme-toggle {
-            background: #333333;
-            border-color: #555555;
-            color: #cccccc;
+        body.dark-mode .toggle-btn:hover {
+            border-color: var(--dark-accent);
+            color: var(--dark-accent);
+            background: rgba(102, 179, 255, 0.1);
         }
         
-        body.dark-mode .theme-toggle:hover {
-            background: #444444;
-            border-color: #66b3ff;
-            color: #66b3ff;
+        body.dark-mode .toggle-btn.active {
+            background: var(--dark-accent);
+            border-color: var(--dark-accent);
+            color: var(--dark-bg);
         }
         
-        body.dark-mode .accessibility-toggle {
-            background: #333333;
-            border-color: #555555;
-            color: #cccccc;
+        body.dark-mode .nav-cta {
+            background: var(--dark-accent);
+            color: var(--dark-bg);
         }
         
-        body.dark-mode .accessibility-toggle:hover {
-            background: #444444;
-            border-color: #66b3ff;
-            color: #66b3ff;
+        body.dark-mode .nav-cta:hover {
+            background: #4da6ff;
         }
         
-        body.dark-mode .accessibility-toggle.active {
-            background: #66b3ff;
-            border-color: #66b3ff;
-            color: #1a1a1a;
+        body.dark-mode .mobile-toggle {
+            border-color: var(--dark-border);
+            color: var(--dark-text);
         }
         
-        /* High Contrast Mode - Black background, white text */
+        /* High Contrast Mode Styles */
         body.high-contrast {
-            background: #000000 !important;
-            color: #FFFFFF !important;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            background: var(--contrast-bg) !important;
+            color: var(--contrast-text) !important;
         }
         
         body.high-contrast .header {
-            background: #000000 !important;
-            border-bottom: 3px solid #FFFFFF !important;
-            backdrop-filter: none !important;
+            background: var(--contrast-bg) !important;
+            border-bottom: 2px solid var(--contrast-border) !important;
+            box-shadow: none !important;
         }
         
-        body.high-contrast .logo {
-            color: #FFFFFF !important;
+        body.high-contrast .nav-logo {
+            color: var(--contrast-text) !important;
             font-weight: 800 !important;
         }
         
+        body.high-contrast .nav-logo:hover {
+            color: var(--contrast-text) !important;
+        }
+        
         body.high-contrast .logo-icon {
-            background: #FFFFFF !important;
-            color: #000000 !important;
+            background: var(--contrast-text) !important;
+            color: var(--contrast-bg) !important;
         }
         
-        body.high-contrast .nav-menu a {
-            color: #FFFFFF !important;
+        body.high-contrast .nav-main a {
+            color: var(--contrast-text) !important;
             font-weight: 600 !important;
-            font-size: 1.1rem !important;
-            border: 2px solid transparent !important;
+            border: 1px solid transparent !important;
         }
         
-        body.high-contrast .nav-menu a:hover {
-            color: #000000 !important;
-            background: #FFFFFF !important;
-            border-color: #FFFFFF !important;
+        body.high-contrast .nav-main a:hover {
+            color: var(--contrast-bg) !important;
+            background: var(--contrast-text) !important;
+            border-color: var(--contrast-text) !important;
         }
         
-        body.high-contrast .feature-toggles {
-            border-left-color: #FFFFFF !important;
-        }
-        
-        body.high-contrast .theme-toggle {
-            background: #FFFFFF !important;
-            border-color: #FFFFFF !important;
-            color: #000000 !important;
+        body.high-contrast .toggle-btn {
+            background: var(--contrast-text) !important;
+            border-color: var(--contrast-text) !important;
+            color: var(--contrast-bg) !important;
             font-weight: 700 !important;
         }
         
-        body.high-contrast .theme-toggle:hover {
-            background: #CCCCCC !important;
-            border-color: #CCCCCC !important;
-            color: #000000 !important;
-        }
-        
-        body.high-contrast .accessibility-toggle {
-            background: #FFFFFF !important;
-            border-color: #FFFFFF !important;
-            color: #000000 !important;
-            font-weight: 700 !important;
-        }
-        
-        body.high-contrast .accessibility-toggle:hover {
-            background: #CCCCCC !important;
-            border-color: #CCCCCC !important;
-            color: #000000 !important;
+        body.high-contrast .toggle-btn:hover {
+            background: #cccccc !important;
+            border-color: #cccccc !important;
+            color: var(--contrast-bg) !important;
         }
         
         body.high-contrast .nav-cta {
-            background: #FFFFFF !important;
-            color: #000000 !important;
+            background: var(--contrast-text) !important;
+            color: var(--contrast-bg) !important;
             font-weight: 700 !important;
-            border: 3px solid #FFFFFF !important;
+            border: 2px solid var(--contrast-text) !important;
         }
         
         body.high-contrast .nav-cta:hover {
-            background: #CCCCCC !important;
-            border-color: #CCCCCC !important;
-            color: #000000 !important;
+            background: #cccccc !important;
+            border-color: #cccccc !important;
+            color: var(--contrast-bg) !important;
         }
         
-        /* All sections styling for dark and high contrast modes */
+        body.high-contrast .mobile-toggle {
+            border-color: var(--contrast-text) !important;
+            color: var(--contrast-text) !important;
+            background: transparent !important;
+        }
+        
+        /* Content sections for all themes */
         body.dark-mode .hero,
         body.dark-mode .about,
         body.dark-mode .services,
@@ -2836,8 +2817,8 @@
         body.dark-mode .testimonials,
         body.dark-mode .faq-section,
         body.dark-mode .contact {
-            background: #1a1a1a;
-            color: #ffffff;
+            background: var(--dark-bg);
+            color: var(--dark-text);
         }
         
         body.dark-mode .value-card,
@@ -2847,8 +2828,8 @@
         body.dark-mode .testimonial-card,
         body.dark-mode .faq-item {
             background: #2a2a2a;
-            border-color: #444444;
-            color: #ffffff;
+            border-color: var(--dark-border);
+            color: var(--dark-text);
         }
         
         body.high-contrast .hero,
@@ -2859,8 +2840,8 @@
         body.high-contrast .testimonials,
         body.high-contrast .faq-section,
         body.high-contrast .contact {
-            background: #000000 !important;
-            color: #FFFFFF !important;
+            background: var(--contrast-bg) !important;
+            color: var(--contrast-text) !important;
         }
         
         body.high-contrast .value-card,
@@ -2869,136 +2850,113 @@
         body.high-contrast .sustainability-card,
         body.high-contrast .testimonial-card,
         body.high-contrast .faq-item {
-            background: #000000 !important;
-            border: 3px solid #FFFFFF !important;
-            color: #FFFFFF !important;
+            background: var(--contrast-bg) !important;
+            border: 2px solid var(--contrast-text) !important;
+            color: var(--contrast-text) !important;
         }
         
-        body.high-contrast h1, 
-        body.high-contrast h2, 
+        body.high-contrast h1,
+        body.high-contrast h2,
         body.high-contrast h3,
         body.high-contrast h4,
         body.high-contrast h5,
         body.high-contrast h6,
         body.high-contrast .section-title {
-            color: #FFFFFF !important;
-            background: transparent !important;
-            font-weight: 900 !important;
+            color: var(--contrast-text) !important;
+            font-weight: 800 !important;
         }
         
-        body.high-contrast p, 
+        body.high-contrast p,
         body.high-contrast li {
-            color: #FFFFFF !important;
-            background: transparent !important;
+            color: var(--contrast-text) !important;
+            font-weight: 500 !important;
         }
         
         body.high-contrast a {
-            color: #FFFFFF !important;
-            background: transparent !important;
+            color: var(--contrast-text) !important;
+            text-decoration: underline !important;
         }
         
         body.high-contrast a:hover {
-            background: #FFFFFF !important;
-            color: #000000 !important;
+            background: var(--contrast-text) !important;
+            color: var(--contrast-bg) !important;
+            text-decoration: none !important;
+            padding: 2px 4px !important;
+        }
+        
+        /* Focus styles */
+        body.high-contrast *:focus {
+            outline: 3px solid var(--contrast-text) !important;
+            outline-offset: 2px !important;
         }
         
         /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .nav-container {
-                padding: 1rem;
-            }
-            
-            .feature-toggles {
-                margin-left: 1rem;
-                padding-left: 1rem;
-            }
-            
-            .theme-toggle,
-            .accessibility-toggle {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-            
-            .nav-cta {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
-            }
-        }
-        
         @media (max-width: 768px) {
-            .header {
-                height: 70px;
+            .nav-container {
+                padding: 0 1rem;
             }
             
-            .nav-menu {
+            .nav-main {
                 display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--surface-white);
-                box-shadow: var(--shadow-xl);
+                background: var(--nav-bg);
+                border-top: 1px solid var(--nav-border);
                 flex-direction: column;
-                gap: 1rem;
-                padding: 2rem;
-                border-radius: 0 0 15px 15px;
+                gap: 0;
+                padding: 1rem;
+                box-shadow: var(--nav-shadow);
             }
             
-            .nav-menu.mobile-open {
+            .nav-main.show {
                 display: flex;
             }
             
-            .feature-toggles {
-                flex-direction: column;
-                gap: 1rem;
-                margin-left: 0;
-                padding-left: 0;
-                border-left: none;
-                border-top: 2px solid var(--neutral-200);
-                padding-top: 1rem;
+            .nav-main a {
+                width: 100%;
+                text-align: left;
+                padding: 12px 16px;
+                border-radius: 6px;
             }
             
-            body.dark-mode .nav-menu {
-                background: #2a2a2a;
-                border: 2px solid #444444;
+            .nav-controls {
+                gap: 8px;
             }
             
-            body.high-contrast .nav-menu {
-                background: #000000 !important;
-                border: 3px solid #FFFFFF !important;
+            .toggle-btn {
+                padding: 6px 10px;
+                font-size: 12px;
             }
             
-            body.high-contrast .feature-toggles {
-                border-top-color: #FFFFFF !important;
+            .toggle-btn span:not(.toggle-icon) {
+                display: none;
             }
             
-            .mobile-menu-btn {
+            .nav-cta {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .mobile-toggle {
                 display: block;
-                background: none;
-                border: 2px solid var(--neutral-300);
-                color: var(--neutral-700);
-                cursor: pointer;
-                padding: 0.5rem;
-                border-radius: var(--border-radius-md);
-                font-size: 1.2rem;
             }
             
-            body.dark-mode .mobile-menu-btn {
-                border-color: #555555;
-                color: #cccccc;
+            body.dark-mode .nav-main {
+                background: var(--dark-bg);
+                border-top-color: var(--dark-border);
             }
             
-            body.high-contrast .mobile-menu-btn {
-                border-color: #FFFFFF !important;
-                color: #FFFFFF !important;
-                background: transparent !important;
+            body.high-contrast .nav-main {
+                background: var(--contrast-bg) !important;
+                border-top: 2px solid var(--contrast-text) !important;
             }
         }
         
-        @media (min-width: 769px) {
-            .mobile-menu-btn {
-                display: none;
-            }
+        /* Body padding for fixed header */
+        body {
+            padding-top: var(--header-height);
         }
 
     </style>
@@ -3014,36 +2972,40 @@
     <!-- Header -->
         <header class="header">
         <div class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    🔧
-                </div>
+            <!-- Logo Section -->
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">🔧</div>
                 <span>Labyrinth Tech Support</span>
             </a>
             
-            <nav class="nav-menu">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#contact">Contact</a></li>
-                
-                <div class="feature-toggles">
-                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark theme">
-                        <span class="theme-icon">🌓</span>
-                        <span class="theme-text">Light/Dark</span>
-                    </button>
-                    
-                    <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
-                        <span class="accessibility-icon">♿</span>
-                        <span class="accessibility-text">Accessibility</span>
-                    </button>
-                </div>
+            <!-- Main Navigation -->
+            <nav class="nav-main" id="navMain">
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
             </nav>
             
-            <div class="nav-actions">
+            <!-- Controls Section -->
+            <div class="nav-controls">
+                <!-- Theme Toggle -->
+                <button class="toggle-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <span class="toggle-icon">🌓</span>
+                    <span>Theme</span>
+                </button>
+                
+                <!-- Accessibility Toggle -->
+                <button class="toggle-btn" id="accessToggle" onclick="toggleAccessibility()" aria-label="Toggle accessibility">
+                    <span class="toggle-icon">♿</span>
+                    <span>A11y</span>
+                </button>
+                
+                <!-- Call Button -->
                 <a href="tel:0482012429" class="nav-cta">Call Now</a>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">☰</button>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
             </div>
         </div>
     </header>
@@ -4209,77 +4171,75 @@
     </script>
 
     <script>
-        // Theme toggle functionality
+        // Theme Management
+        let currentTheme = 'light';
+        let isHighContrast = false;
+        
         function toggleTheme() {
             const body = document.body;
-            const button = document.querySelector('.theme-toggle');
-            const text = button.querySelector('.theme-text');
-            const icon = button.querySelector('.theme-icon');
+            const themeButton = document.getElementById('themeToggle');
+            const themeIcon = themeButton.querySelector('.toggle-icon');
+            const themeText = themeButton.querySelector('span:not(.toggle-icon)');
             
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                button.classList.remove('dark-mode');
-                text.textContent = 'Light/Dark';
-                icon.textContent = '🌓';
-                localStorage.setItem('labyrinth-theme', 'light');
-            } else {
+            if (currentTheme === 'light') {
                 body.classList.add('dark-mode');
-                button.classList.add('dark-mode');
-                text.textContent = 'Dark Mode';
-                icon.textContent = '🌙';
-                localStorage.setItem('labyrinth-theme', 'dark');
+                themeButton.classList.add('active');
+                themeIcon.textContent = '🌙';
+                if (themeText) themeText.textContent = 'Dark';
+                currentTheme = 'dark';
+            } else {
+                body.classList.remove('dark-mode');
+                themeButton.classList.remove('active');
+                themeIcon.textContent = '🌓';
+                if (themeText) themeText.textContent = 'Theme';
+                currentTheme = 'light';
             }
+            
+            localStorage.setItem('labyrinth-theme', currentTheme);
         }
         
-        // Accessibility toggle functionality
         function toggleAccessibility() {
             const body = document.body;
-            const button = document.querySelector('.accessibility-toggle');
-            const text = button.querySelector('.accessibility-text');
+            const accessButton = document.getElementById('accessToggle');
+            const accessIcon = accessButton.querySelector('.toggle-icon');
+            const accessText = accessButton.querySelector('span:not(.toggle-icon)');
             
-            if (body.classList.contains('high-contrast')) {
+            if (isHighContrast) {
                 body.classList.remove('high-contrast');
-                button.classList.remove('active');
-                text.textContent = 'Accessibility';
-                localStorage.setItem('labyrinth-accessibility', 'normal');
+                accessButton.classList.remove('active');
+                accessIcon.textContent = '♿';
+                if (accessText) accessText.textContent = 'A11y';
+                isHighContrast = false;
             } else {
                 body.classList.add('high-contrast');
-                button.classList.add('active');
-                text.textContent = 'High Contrast';
-                localStorage.setItem('labyrinth-accessibility', 'high-contrast');
+                accessButton.classList.add('active');
+                accessIcon.textContent = '👁';
+                if (accessText) accessText.textContent = 'High';
+                isHighContrast = true;
             }
+            
+            localStorage.setItem('labyrinth-accessibility', isHighContrast ? 'high-contrast' : 'normal');
         }
         
-        // Mobile menu toggle
         function toggleMobileMenu() {
-            const menu = document.querySelector('.nav-menu');
-            menu.classList.toggle('mobile-open');
+            const navMain = document.getElementById('navMain');
+            navMain.classList.toggle('show');
         }
         
-        // Load saved preferences on page load
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             // Load theme preference
             const savedTheme = localStorage.getItem('labyrinth-theme');
-            const themeButton = document.querySelector('.theme-toggle');
-            const themeText = themeButton ? themeButton.querySelector('.theme-text') : null;
-            const themeIcon = themeButton ? themeButton.querySelector('.theme-icon') : null;
-            
-            if (savedTheme === 'dark' && themeButton && themeText && themeIcon) {
-                document.body.classList.add('dark-mode');
-                themeButton.classList.add('dark-mode');
-                themeText.textContent = 'Dark Mode';
-                themeIcon.textContent = '🌙';
+            if (savedTheme === 'dark') {
+                currentTheme = 'light'; // Set opposite so toggle works correctly
+                toggleTheme();
             }
             
             // Load accessibility preference
             const savedAccessibility = localStorage.getItem('labyrinth-accessibility');
-            const accessButton = document.querySelector('.accessibility-toggle');
-            const accessText = accessButton ? accessButton.querySelector('.accessibility-text') : null;
-            
-            if (savedAccessibility === 'high-contrast' && accessButton && accessText) {
-                document.body.classList.add('high-contrast');
-                accessButton.classList.add('active');
-                accessText.textContent = 'High Contrast';
+            if (savedAccessibility === 'high-contrast') {
+                isHighContrast = false; // Set opposite so toggle works correctly
+                toggleAccessibility();
             }
         });
         
@@ -4297,33 +4257,32 @@
         
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(event) {
-            const menu = document.querySelector('.nav-menu');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navMain = document.getElementById('navMain');
+            const mobileToggle = document.querySelector('.mobile-toggle');
             
-            if (menu && menuBtn && !menu.contains(event.target) && !menuBtn.contains(event.target)) {
-                menu.classList.remove('mobile-open');
+            if (navMain && mobileToggle && 
+                !navMain.contains(event.target) && 
+                !mobileToggle.contains(event.target)) {
+                navMain.classList.remove('show');
             }
         });
         
-        // Enhanced focus management for accessibility
-        document.addEventListener('DOMContentLoaded', function() {
-            const focusableElements = document.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
-            
-            focusableElements.forEach(element => {
-                element.addEventListener('focus', function() {
-                    if (document.body.classList.contains('high-contrast')) {
-                        this.style.outline = '4px solid #FFFFFF';
-                        this.style.outlineOffset = '4px';
-                    } else {
-                        this.style.outline = '3px solid var(--primary-brand)';
-                        this.style.outlineOffset = '2px';
-                    }
-                });
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-main a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = 70;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
                 
-                element.addEventListener('blur', function() {
-                    this.style.outline = '';
-                    this.style.outlineOffset = '';
-                });
+                // Close mobile menu after clicking
+                document.getElementById('navMain').classList.remove('show');
             });
         });
     </script>
