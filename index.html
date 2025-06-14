@@ -2503,20 +2503,61 @@
             }
         }
     
-        /* Enhanced Navigation with Better Accessibility Integration */
+        /* Red Bull Inspired Theme System */
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #000;
+            --accent-color: #C1121F;
+            --secondary-color: #e2e2e2;
+            --muted-color: #444444;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Lora', serif;
+            --font-tech: 'Inter', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #000;
+            --text-color: #fff;
+            --accent-color: #C1121F;
+            --secondary-color: #2E2E2E;
+            --muted-color: #CCCCCC;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Enhanced Navigation with Theme Integration */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(var(--bg-color), 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--neutral-200);
+            border-bottom: 2px solid var(--accent-color);
             transition: all 0.3s ease;
             height: 70px;
         }
-        
+
+        [data-theme="dark"] .header {
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        [data-theme="light"] .header {
+            background: rgba(244, 244, 244, 0.95);
+        }
+
         .nav-container {
             display: flex;
             justify-content: space-between;
@@ -2526,37 +2567,40 @@
             margin: 0 auto;
             height: 100%;
         }
-        
-        /* Logo with Mascot */
+
+        /* Mythological Logo Design */
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-brand);
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent-color);
             transition: all 0.3s ease;
         }
-        
+
         .logo-mascot {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #8B0000 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            border: 2px solid #654321;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(193, 18, 31, 0.4);
+            border: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
         }
-        
+
         .logo:hover .logo-mascot {
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(193, 18, 31, 0.6);
         }
-        
-        /* Navigation Links */
+
+        /* Navigation Links with Mythological Touch */
         .nav-links {
             display: flex;
             align-items: center;
@@ -2565,359 +2609,358 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .nav-links a {
             text-decoration: none;
-            color: var(--neutral-700);
+            color: var(--text-color);
             font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 0.5rem 0;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-brand);
-        }
-        
-        /* Integrated Accessibility Button as Navigation Item */
-        .accessibility-nav-item {
+            font-family: var(--font-tech);
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             position: relative;
         }
-        
+
+        .nav-links a:hover {
+            color: var(--bg-color);
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Theme Toggle Integration */
+        .theme-toggle {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            border: 2px solid var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: var(--font-tech);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            transform: translateY(-1px);
+        }
+
+        /* Accessibility Toggle with Red Bull Styling */
         .accessibility-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: none;
-            border: 2px solid var(--neutral-300);
-            border-radius: 25px;
+            background: var(--secondary-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
             padding: 8px 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 14px;
             font-weight: 600;
-            color: var(--neutral-700);
-            font-family: var(--font-sans);
-            text-decoration: none;
+            color: var(--text-color);
+            font-family: var(--font-tech);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .accessibility-toggle:hover {
-            border-color: var(--primary-brand);
-            color: var(--primary-brand);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,102,255,0.2);
-        }
-        
+
+        .accessibility-toggle:hover,
         .accessibility-toggle.active {
-            background: linear-gradient(135deg, #C1121F 0%, #8B0000 100%);
-            border-color: #C1121F;
-            color: white;
-            box-shadow: 0 4px 15px rgba(193,18,31,0.4);
-        }
-        
-        .accessibility-toggle.active:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(193,18,31,0.5);
         }
-        
-        .accessibility-icon {
-            font-size: 16px;
-        }
-        
-        /* Right Side Navigation Actions */
+
+        /* Navigation Actions */
         .nav-actions {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-        
+
         .nav-cta {
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--accent-color) 0%, #8B0000 100%);
             color: white;
             padding: 12px 24px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 700;
+            font-family: var(--font-heading);
             transition: all 0.3s ease;
-            font-size: 15px;
+            border: 2px solid transparent;
         }
-        
+
         .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,102,255,0.3);
+            box-shadow: 0 8px 25px rgba(193, 18, 31, 0.4);
+            border-color: var(--accent-color);
         }
-        
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            color: var(--neutral-700);
-            font-size: 1.5rem;
-        }
-        
-        /* Fixed Hero Section */
+
+        /* Mythological Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--secondary-color) 100%);
             position: relative;
             overflow: hidden;
             margin-top: 70px;
-            padding: 2rem 0;
+            padding: 4rem 0;
+            border-bottom: 4px solid var(--accent-color);
         }
-        
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="bullPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><text x="25" y="30" text-anchor="middle" font-size="20" fill="rgba(193,18,31,0.05)">🐂</text></pattern></defs><rect width="100" height="100" fill="url(%23bullPattern)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
         .hero-mascot {
             position: absolute;
-            top: 100px;
-            right: 20px;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+            top: 20%;
+            right: 5%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #8B0000 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            border: 3px solid #654321;
-            animation: mascotPulse 3s ease-in-out infinite;
+            font-size: 48px;
+            box-shadow: 0 10px 30px rgba(193, 18, 31, 0.5);
+            border: 4px solid var(--accent-color);
+            animation: mysticalPulse 4s ease-in-out infinite;
             z-index: 10;
         }
-        
-        @keyframes mascotPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+        @keyframes mysticalPulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 10px 30px rgba(193, 18, 31, 0.5);
+            }
+            50% { 
+                transform: scale(1.1) rotate(10deg);
+                box-shadow: 0 15px 40px rgba(193, 18, 31, 0.8);
+            }
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            color: white;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.1;
-            color: white;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
         }
-        
+
         .hero-subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
+            font-family: var(--font-body);
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
             line-height: 1.6;
-            color: white;
+            color: var(--text-color);
+            font-style: italic;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
+
         .hero-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 3rem;
         }
-        
+
         .btn-primary,
         .btn-secondary {
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            padding: 1.2rem 2.5rem;
+            border-radius: 8px;
             text-decoration: none;
+            font-family: var(--font-heading);
             font-weight: 700;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 2px solid var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
+
         .btn-primary {
-            background: white;
-            color: var(--primary-brand);
+            background: var(--accent-color);
+            color: white;
         }
-        
+
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: #8B0000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(193, 18, 31, 0.4);
         }
-        
+
         .btn-secondary {
             background: transparent;
-            color: white;
-            border-color: white;
+            color: var(--accent-color);
         }
-        
+
         .btn-secondary:hover {
-            background: white;
-            color: var(--primary-brand);
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
         }
-        
-        /* High Contrast Theme */
-        body.high-contrast {
-            background: #000000 !important;
-            color: #FFFFFF !important;
-            font-family: 'Roboto', sans-serif !important;
+
+        /* Content Sections with Mythological Theme */
+        .section {
+            padding: 6rem 0;
+            background: var(--bg-color);
+            border-bottom: 2px solid var(--secondary-color);
         }
-        
-        body.high-contrast .header {
-            background: #2E2E2E !important;
-            border-bottom: 3px solid #C1121F !important;
+
+        .section:nth-child(even) {
+            background: var(--secondary-color);
         }
-        
-        body.high-contrast .logo {
-            color: #C1121F !important;
-            font-family: 'Oswald', sans-serif !important;
-            font-weight: 600 !important;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
-        
-        body.high-contrast .logo-mascot {
-            background: linear-gradient(135deg, #C1121F 0%, #8B0000 100%) !important;
-            border-color: #FFFFFF !important;
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
-        
-        body.high-contrast .nav-links a {
-            color: #FFFFFF !important;
-            font-family: 'Oswald', sans-serif !important;
-            font-weight: 600 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-            font-size: 15px !important;
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--muted-color);
+            margin-bottom: 4rem;
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        body.high-contrast .nav-links a:hover {
-            color: #C1121F !important;
-            background-color: #FFFFFF !important;
-            padding: 0.5rem 1rem !important;
-            border-radius: 4px !important;
+
+        /* Service Cards with Mythological Design */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        body.high-contrast .accessibility-toggle {
-            background: #C1121F !important;
-            border-color: #8B0000 !important;
-            color: #FFFFFF !important;
-            font-family: 'Oswald', sans-serif !important;
-            font-weight: 600 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
+
+        .service-card {
+            background: var(--secondary-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        
-        body.high-contrast .accessibility-toggle:hover {
-            background: #8B0000 !important;
-            border-color: #FFFFFF !important;
+
+        .service-card::before {
+            content: '🐂';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            opacity: 0.1;
+            transition: all 0.3s ease;
         }
-        
-        body.high-contrast .nav-cta {
-            background: #C1121F !important;
-            color: #FFFFFF !important;
-            font-family: 'Oswald', sans-serif !important;
-            font-weight: 600 !important;
-            text-transform: uppercase !important;
-            border: 2px solid #8B0000 !important;
-            font-size: 16px !important;
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(193, 18, 31, 0.3);
+            border-color: #8B0000;
         }
-        
-        body.high-contrast .nav-cta:hover {
-            background: #8B0000 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(193,18,31,0.5) !important;
+
+        .service-card:hover::before {
+            opacity: 0.3;
+            transform: scale(1.2) rotate(15deg);
         }
-        
-        body.high-contrast .hero {
-            background: linear-gradient(135deg, #2E2E2E 0%, #000000 100%) !important;
-            border-bottom: 4px solid #C1121F !important;
+
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-weight: 700;
         }
-        
-        body.high-contrast .hero-mascot {
-            background: linear-gradient(135deg, #C1121F 0%, #8B0000 100%) !important;
-            border-color: #FFFFFF !important;
+
+        .service-card p {
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1rem;
         }
-        
-        body.high-contrast .hero h1 {
-            font-family: 'Oswald', sans-serif !important;
-            font-weight: 600 !important;
-            color: #FFFFFF !important;
-            text-transform: uppercase !important;
-            letter-spacing: 2px !important;
+
+        /* Contact Section */
+        .contact {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            padding: 6rem 0;
+            text-align: center;
+            border-top: 4px solid var(--accent-color);
         }
-        
-        body.high-contrast .hero-subtitle {
-            font-family: 'Roboto', sans-serif !important;
-            color: #CCCCCC !important;
-            font-size: 1.4rem !important;
+
+        .contact h2 {
+            font-family: var(--font-heading);
+            color: var(--accent-color);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
         }
-        
-        body.high-contrast .btn-primary,
-        body.high-contrast .btn-secondary {
-            background: #C1121F !important;
-            color: #FFFFFF !important;
-            font-family: 'Oswald', sans-serif !important;
-            font-weight: 600 !important;
-            text-transform: uppercase !important;
-            border: 3px solid #8B0000 !important;
-            border-radius: 0 !important;
+
+        .contact-info {
+            background: var(--bg-color);
+            border: 3px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 600px;
         }
-        
-        body.high-contrast .btn-primary:hover,
-        body.high-contrast .btn-secondary:hover {
-            background: #8B0000 !important;
-            transform: translateY(-3px) !important;
+
+        .contact-info h3 {
+            color: var(--accent-color);
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
         }
-        
-        /* Content Sections High Contrast */
-        body.high-contrast .value-card,
-        body.high-contrast .service-card,
-        body.high-contrast .pricing-card,
-        body.high-contrast .sustainability-card,
-        body.high-contrast .testimonial-card,
-        body.high-contrast .faq-item {
-            background: #2E2E2E !important;
-            border: 3px solid #C1121F !important;
-            color: #FFFFFF !important;
-            border-radius: 0 !important;
+
+        .contact-info p {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
-        
-        body.high-contrast h1, 
-        body.high-contrast h2, 
-        body.high-contrast h3,
-        body.high-contrast .section-title {
-            font-family: 'Oswald', sans-serif !important;
-            font-weight: 600 !important;
-            color: #C1121F !important;
-            text-transform: uppercase !important;
-            letter-spacing: 2px !important;
+
+        /* Focus and Accessibility */
+        *:focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 3px;
         }
-        
-        body.high-contrast p, 
-        body.high-contrast li {
-            font-family: 'Roboto', sans-serif !important;
-            color: #CCCCCC !important;
-            line-height: 1.8 !important;
-        }
-        
-        body.high-contrast .about,
-        body.high-contrast .sustainability,
-        body.high-contrast .pricing,
-        body.high-contrast .testimonials,
-        body.high-contrast .faq-section {
-            background: #000000 !important;
-            border-top: 3px solid #C1121F !important;
-        }
-        
-        body.high-contrast .contact {
-            background: #2E2E2E !important;
-            border: 4px solid #C1121F !important;
-        }
-        
-        body.high-contrast *:focus {
-            outline: 4px solid #C1121F !important;
-            outline-offset: 3px !important;
-        }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-container {
@@ -2930,41 +2973,46 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--surface-white);
-                box-shadow: var(--shadow-lg);
+                background: var(--secondary-color);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
                 flex-direction: column;
                 gap: 1rem;
-                padding: 1rem;
-                border-radius: 0 0 10px 10px;
+                padding: 2rem;
+                border-radius: 0 0 15px 15px;
+                border: 2px solid var(--accent-color);
             }
             
             .nav-links.mobile-open {
                 display: flex;
             }
             
-            body.high-contrast .nav-links {
-                background: #2E2E2E !important;
-                border: 2px solid #C1121F !important;
-            }
-            
-            .accessibility-nav-item {
-                order: -1;
+            .logo {
+                font-size: 1.3rem;
             }
             
             .logo-mascot {
-                width: 30px;
-                height: 30px;
+                width: 32px;
+                height: 32px;
                 font-size: 16px;
             }
             
             .hero-mascot {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-                top: 80px;
-                right: 15px;
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+                top: 15%;
+                right: 5%;
             }
             
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .theme-toggle,
             .accessibility-toggle {
                 padding: 6px 12px;
                 font-size: 12px;
@@ -2977,12 +3025,18 @@
             
             .mobile-menu-btn {
                 display: block;
+                background: none;
+                border: 2px solid var(--accent-color);
+                color: var(--text-color);
+                cursor: pointer;
+                padding: 0.5rem;
+                border-radius: 6px;
+                font-size: 1.2rem;
             }
             
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
             }
             
             .btn-primary,
@@ -2999,11 +3053,11 @@
         }
 
     </style>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Mythological Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
 </head>
-<body>
+<body data-theme="light">
     <!-- Accessibility Toggle Button -->
     <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
         🔄 Accessibility
@@ -3025,17 +3079,18 @@
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li class="accessibility-nav-item">
+                <li>
                     <button class="accessibility-toggle" onclick="toggleAccessibility()" aria-label="Toggle high contrast accessibility mode">
-                        <span class="accessibility-icon">♿</span>
+                        <span>♿</span>
                         <span class="accessibility-text">Accessibility</span>
                     </button>
                 </li>
             </nav>
             
             <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">☀️ Light / 🌑 Dark</button>
                 <a href="tel:0482012429" class="nav-cta">Call Now</a>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">☰</button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
             </div>
         </div>
     </header>
@@ -4201,16 +4256,14 @@
     </script>
 
     <script>
-        // Dynamic favicon management
-        function updateFavicon(isHighContrast) {
-            const favicon = document.querySelector('link[rel="icon"]');
-            if (favicon) {
-                if (isHighContrast) {
-                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C1121F'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' fill='white'%3E🐂%3C/text%3E%3C/svg%3E";
-                } else {
-                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23007acc'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='white'%3E🐂%3C/text%3E%3C/svg%3E";
-                }
-            }
+        // Dual theme system: Light/Dark + Accessibility
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('labyrinth-theme', newTheme);
+            updateFavicon();
         }
         
         function toggleAccessibility() {
@@ -4223,13 +4276,29 @@
                 button.classList.remove('active');
                 text.textContent = 'Accessibility';
                 localStorage.setItem('labyrinth-accessibility', 'normal');
-                updateFavicon(false);
             } else {
                 body.classList.add('high-contrast');
                 button.classList.add('active');
                 text.textContent = 'High Contrast';
                 localStorage.setItem('labyrinth-accessibility', 'high-contrast');
-                updateFavicon(true);
+            }
+            updateFavicon();
+        }
+        
+        // Dynamic favicon based on theme and accessibility
+        function updateFavicon() {
+            const favicon = document.querySelector('link[rel="icon"]');
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            const isAccessible = document.body.classList.contains('high-contrast');
+            
+            if (favicon) {
+                if (isAccessible) {
+                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C1121F'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' fill='white'%3E🐂%3C/text%3E%3C/svg%3E";
+                } else if (isDark) {
+                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000000'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23C1121F'%3E🐂%3C/text%3E%3C/svg%3E";
+                } else {
+                    favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f4f4f4'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23C1121F'%3E🐂%3C/text%3E%3C/svg%3E";
+                }
             }
         }
         
@@ -4238,27 +4307,35 @@
             menu.classList.toggle('mobile-open');
         }
         
-        // Load saved accessibility preference
+        // Load saved preferences
         document.addEventListener('DOMContentLoaded', function() {
-            const saved = localStorage.getItem('labyrinth-accessibility');
+            // Load theme preference
+            const savedTheme = localStorage.getItem('labyrinth-theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            
+            // Load accessibility preference
+            const savedAccessibility = localStorage.getItem('labyrinth-accessibility');
             const button = document.querySelector('.accessibility-toggle');
             const text = button ? button.querySelector('.accessibility-text') : null;
             
-            if (saved === 'high-contrast' && button && text) {
+            if (savedAccessibility === 'high-contrast' && button && text) {
                 document.body.classList.add('high-contrast');
                 button.classList.add('active');
                 text.textContent = 'High Contrast';
-                updateFavicon(true);
-            } else {
-                updateFavicon(false);
             }
+            
+            updateFavicon();
         });
         
-        // Keyboard shortcut Alt+A
+        // Keyboard shortcuts
         document.addEventListener('keydown', function(event) {
             if (event.altKey && event.key === 'a') {
                 event.preventDefault();
                 toggleAccessibility();
+            }
+            if (event.altKey && event.key === 't') {
+                event.preventDefault();
+                toggleTheme();
             }
         });
         
@@ -4268,13 +4345,8 @@
             
             focusableElements.forEach(element => {
                 element.addEventListener('focus', function() {
-                    if (document.body.classList.contains('high-contrast')) {
-                        this.style.outline = '4px solid #C1121F';
-                        this.style.outlineOffset = '3px';
-                    } else {
-                        this.style.outline = '3px solid #667eea';
-                        this.style.outlineOffset = '2px';
-                    }
+                    this.style.outline = '3px solid var(--accent-color)';
+                    this.style.outlineOffset = '3px';
                 });
                 
                 element.addEventListener('blur', function() {
