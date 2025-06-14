@@ -211,6 +211,102 @@
             
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+            
+            /* Experimental accessibility enhancements */
+            --focus-ring: 3px solid #f8d000;
+            --touch-target-min: 48px;
+        }
+        
+        /* Experimental: Enhanced focus management for better keyboard navigation */
+        :focus-visible {
+            outline: var(--focus-ring);
+            outline-offset: 2px;
+            border-radius: 4px;
+            box-shadow: 0 0 0 2px rgba(248, 208, 0, 0.2);
+        }
+        
+        /* Experimental: Improved mobile touch targets */
+        @media (max-width: 768px) {
+            .nav-link,
+            .cta-button,
+            .service-expand-btn,
+            button,
+            .accessibility-toggle {
+                min-height: var(--touch-target-min);
+                min-width: var(--touch-target-min);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 12px 16px;
+            }
+        }
+        
+        /* Experimental: Respect motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .hero::before,
+            .contact::before {
+                animation: none !important;
+            }
+        }
+        
+        /* Experimental: Skip link for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary-brand);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Experimental: Enhanced loading states */
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* Experimental: Better color contrast indicators */
+        .contrast-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-brand);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        
+        body.high-contrast .contrast-indicator {
+            opacity: 1;
         }
 
         /* Accessibility Toggle Button */
@@ -2300,8 +2396,12 @@
     </style>
 </head>
 <body>
-    <!-- Skip to main content -->
-    <a href="#main-content" class="sr-only">Skip to main content</a>
+    <!-- Experimental: Skip to main content link for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Experimental: Contrast mode indicator -->
+    <div class="contrast-indicator">High Contrast Mode Active</div>
+
     
     <!-- Header -->
     <header class="header">
