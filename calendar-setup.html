@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Integration Setup - Labyrinth Tech Support</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #005a87;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .step {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f0f8ff;
+            border-left: 4px solid #005a87;
+            border-radius: 6px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #005a87;
+        }
+        .auth-button {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background: #4285f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .auth-button:hover {
+            background: #3367d6;
+        }
+        .auth-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .status.loading {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        .status.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .info-box {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .info-box h4 {
+            margin-top: 0;
+            color: #495057;
+        }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gmail Calendar Integration Setup</h1>
+        <p class="subtitle">One-time authorization to sync your booking system with your Gmail calendar</p>
+        
+        <div class="step">
+            <h3>What This Does</h3>
+            <p>This authorization allows your booking widget to:</p>
+            <ul>
+                <li>Read your Gmail calendar to check real availability</li>
+                <li>Show "Busy" time slots when you have existing appointments</li>
+                <li>Create new appointments directly in your evangelos747@gmail.com calendar</li>
+                <li>Prevent double-bookings automatically</li>
+            </ul>
+            <p><strong>Important:</strong> You only need to do this once. After authorization, your booking system will work automatically without requiring customer authentication.</p>
+        </div>
+
+        <div id="auth-section">
+            <button onclick="startAuthorization()" class="auth-button" id="auth-btn">
+                Authorize Gmail Calendar Access
+            </button>
+        </div>
+
+        <div id="status" class="hidden"></div>
+
+        <div class="step">
+            <h3>After Authorization</h3>
+            <p>Once completed, your booking widget will:</p>
+            <ul>
+                <li>Automatically sync with your Gmail calendar</li>
+                <li>Show real availability to customers</li>
+                <li>Block time slots when you're busy</li>
+                <li>Create appointments directly in your calendar</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h4>Technical Details</h4>
+            <p>This uses Google's OAuth2 system with your existing credentials:</p>
+            <p><code>326908991757-b3fgc1jq840bdhl7jica1perk0tjpec1.apps.googleusercontent.com</code></p>
+            <p>The system will obtain a refresh token that allows permanent calendar access for your booking system.</p>
+        </div>
+    </div>
+
+    <script>
+        let authWindow = null;
+
+        async function startAuthorization() {
+            const statusDiv = document.getElementById('status');
+            const authBtn = document.getElementById('auth-btn');
+            
+            try {
+                statusDiv.className = 'status loading';
+                statusDiv.textContent = 'Getting authorization URL...';
+                statusDiv.classList.remove('hidden');
+                authBtn.disabled = true;
+
+                // Get authorization URL from server
+                const response = await fetch('/api/calendar/auth');
+                const data = await response.json();
+
+                if (data.authUrl) {
+                    statusDiv.textContent = 'Opening Google authorization...';
+                    
+                    // Open Google authorization in new window
+                    authWindow = window.open(
+                        data.authUrl,
+                        'calendar_auth',
+                        'width=600,height=700,scrollbars=yes,resizable=yes'
+                    );
+
+                    // Check for authorization completion
+                    checkAuthCompletion();
+                } else {
+                    throw new Error('Failed to get authorization URL');
+                }
+            } catch (error) {
+                console.error('Authorization error:', error);
+                statusDiv.className = 'status error';
+                statusDiv.textContent = 'Error: ' + error.message;
+                authBtn.disabled = false;
+            }
+        }
+
+        function checkAuthCompletion() {
+            const statusDiv = document.getElementById('status');
+            
+            // Listen for the authorization code from the popup
+            window.addEventListener('message', async (event) => {
+                if (event.data.type === 'CALENDAR_AUTH_CODE') {
+                    const code = event.data.code;
+                    
+                    try {
+                        statusDiv.textContent = 'Processing authorization...';
+                        
+                        // Send code to server for token exchange
+                        const response = await fetch('/api/calendar/callback', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ code })
+                        });
+
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            statusDiv.className = 'status success';
+                            statusDiv.textContent = 'Calendar authorization successful! Your booking system is now connected to your Gmail calendar.';
+                            
+                            // Hide auth button
+                            document.getElementById('auth-section').style.display = 'none';
+                            
+                            // Close popup
+                            if (authWindow) {
+                                authWindow.close();
+                            }
+                        } else {
+                            throw new Error(result.error || 'Authorization failed');
+                        }
+                    } catch (error) {
+                        console.error('Token exchange error:', error);
+                        statusDiv.className = 'status error';
+                        statusDiv.textContent = 'Authorization failed: ' + error.message;
+                        document.getElementById('auth-btn').disabled = false;
+                    }
+                }
+            });
+
+            // Check if popup was closed manually
+            const checkClosed = setInterval(() => {
+                if (authWindow && authWindow.closed) {
+                    clearInterval(checkClosed);
+                    const statusDiv = document.getElementById('status');
+                    if (!statusDiv.classList.contains('success')) {
+                        statusDiv.className = 'status error';
+                        statusDiv.textContent = 'Authorization cancelled. Please try again.';
+                        document.getElementById('auth-btn').disabled = false;
+                    }
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
