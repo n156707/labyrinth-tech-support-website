@@ -324,6 +324,29 @@
             <!-- Step 2: Date & Time Selection -->
             <div class="booking-section" id="section-2">
                 <h2 style="margin-bottom: 20px;">Choose Date & Time</h2>
+                
+                <!-- Gmail Calendar Authentication Status -->
+                <div id="auth-status"></div>
+                
+                <!-- Authorization button (shown when not authenticated) -->
+                <div id="auth-button-container" style="text-align: center; margin: 15px 0; display: none;">
+                    <button onclick="authorizeCalendarAccess()" style="
+                        background: #4285f4;
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 6px;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        transition: background 0.3s;
+                    " onmouseover="this.style.background='#3367d6'" onmouseout="this.style.background='#4285f4'">
+                        Authorize Calendar Access
+                    </button>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 8px;">
+                        Connect to your Gmail calendar for real-time availability
+                    </p>
+                </div>
+                
                 <div class="form-group">
                     <label>Select a date:</label>
                     <div id="calendar-container">
@@ -402,10 +425,15 @@
 
         // Google Calendar API configuration
         const CALENDAR_ID = 'evangelos747@gmail.com';
-        const API_KEY = 'AIzaSyB5lnfb-WQFExT4tLiIElcVAfHBXSB_mZU';
-        const CLIENT_ID = ''; // OAuth2 client ID needed for calendar access
+        const CLIENT_ID = '326908991757-b3fgc1jq840bdhl7jica1perk0tjpec1.apps.googleusercontent.com';
         const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-        const SCOPES = 'https://www.googleapis.com/auth/calendar.readonly';
+        const SCOPES = 'https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events';
+        
+        let gapi;
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
+        let isSignedIn = false;
         
         // Initialize the widget
         document.addEventListener('DOMContentLoaded', function() {
@@ -414,52 +442,101 @@
             updateStepIndicator();
         });
 
-        // Initialize calendar availability system
+        // Initialize OAuth2 authentication for Gmail calendar access
         function initializeGoogleCalendarAPI() {
-            // Initialize with calendar sync capability
-            loadCalendarAvailabilitySystem();
+            loadGoogleAPIs();
         }
 
-        // Load calendar availability system with real-time sync
-        async function loadCalendarAvailabilitySystem() {
-            try {
-                // Load Google Calendar API for public calendar access
-                const script = document.createElement('script');
-                script.src = 'https://apis.google.com/js/api.js';
-                script.onload = async function() {
-                    try {
-                        await new Promise((resolve, reject) => {
-                            gapi.load('client', {
-                                callback: resolve,
-                                onerror: reject
-                            });
-                        });
-                        
-                        await gapi.client.init({
-                            apiKey: API_KEY,
-                            discoveryDocs: [DISCOVERY_DOC],
-                        });
-                        
-                        calendarAPI = gapi.client.calendar;
-                        console.log('Calendar availability system initialized');
-                        
-                        // Test calendar access
-                        await testCalendarAccess();
-                        
-                    } catch (error) {
-                        console.log('Calendar API initialization failed, using intelligent availability system');
-                        setupIntelligentAvailability();
-                    }
-                };
-                script.onerror = function() {
-                    console.log('Could not load Google APIs, using intelligent availability system');
-                    setupIntelligentAvailability();
-                };
-                document.head.appendChild(script);
-                
-            } catch (error) {
-                console.log('Calendar system setup failed, using intelligent availability');
+        // Load Google APIs with OAuth2 support
+        function loadGoogleAPIs() {
+            // Load Google API library
+            const gapiScript = document.createElement('script');
+            gapiScript.src = 'https://apis.google.com/js/api.js';
+            gapiScript.onload = gapiLoaded;
+            document.head.appendChild(gapiScript);
+
+            // Load Google Identity Services library
+            const gisScript = document.createElement('script');
+            gisScript.src = 'https://accounts.google.com/gsi/client';
+            gisScript.onload = gisLoaded;
+            document.head.appendChild(gisScript);
+        }
+
+        // Callback after Google API library loads
+        async function gapiLoaded() {
+            await new Promise((resolve) => {
+                gapi.load('client', resolve);
+            });
+            
+            await gapi.client.init({
+                discoveryDocs: [DISCOVERY_DOC],
+            });
+            
+            gapiInited = true;
+            maybeEnableAuth();
+        }
+
+        // Callback after Google Identity Services library loads
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: handleAuthResponse,
+            });
+            gisInited = true;
+            maybeEnableAuth();
+        }
+
+        // Enable authentication when both libraries are loaded
+        function maybeEnableAuth() {
+            if (gapiInited && gisInited) {
+                console.log('OAuth2 authentication ready for Gmail calendar access');
+                showAuthStatus();
+            }
+        }
+
+        // Handle OAuth2 authentication response
+        function handleAuthResponse(response) {
+            if (response.error !== undefined) {
+                console.log('OAuth2 authentication failed:', response.error);
                 setupIntelligentAvailability();
+                return;
+            }
+            
+            isSignedIn = true;
+            console.log('Successfully authenticated with Gmail calendar');
+            showAuthStatus();
+            
+            // Refresh availability for currently selected date
+            if (selectedDate) {
+                loadAvailabilityForDate(selectedDate);
+                generateTimeSlots();
+            }
+        }
+
+        // Show authentication status to user
+        function showAuthStatus() {
+            const statusElement = document.getElementById('auth-status');
+            const authButtonContainer = document.getElementById('auth-button-container');
+            
+            if (statusElement) {
+                if (isSignedIn) {
+                    statusElement.innerHTML = '<div style="color: #28a745; font-size: 0.9rem; text-align: center; padding: 10px; background: #d4edda; border-radius: 6px; margin: 10px 0;">Connected to your Gmail calendar for real-time availability</div>';
+                    if (authButtonContainer) authButtonContainer.style.display = 'none';
+                } else if (gapiInited && gisInited) {
+                    statusElement.innerHTML = '<div style="color: #856404; font-size: 0.9rem; text-align: center; padding: 10px; background: #fff3cd; border-radius: 6px; margin: 10px 0;">Authorize access to sync with your Gmail calendar for real availability</div>';
+                    if (authButtonContainer) authButtonContainer.style.display = 'block';
+                } else {
+                    statusElement.innerHTML = '<div style="color: #6c757d; font-size: 0.9rem; text-align: center; padding: 10px; background: #f8f9fa; border-radius: 6px; margin: 10px 0;">Loading calendar authentication system...</div>';
+                    if (authButtonContainer) authButtonContainer.style.display = 'none';
+                }
+            }
+        }
+
+        // Trigger OAuth2 authentication
+        function authorizeCalendarAccess() {
+            if (tokenClient) {
+                tokenClient.requestAccessToken();
             }
         }
 
@@ -532,12 +609,12 @@
             return busyPeriods;
         }
 
-        // Load busy times from calendar or intelligent system
+        // Load busy times from authenticated Gmail calendar
         async function loadBusyTimes(startDate, endDate) {
-            if (calendarAPI) {
+            if (isSignedIn && gapi.client.calendar) {
                 try {
-                    // Try to get real calendar data
-                    const response = await calendarAPI.events.list({
+                    // Get real calendar events from authenticated Gmail account
+                    const response = await gapi.client.calendar.events.list({
                         calendarId: CALENDAR_ID,
                         timeMin: startDate.toISOString(),
                         timeMax: endDate.toISOString(),
@@ -551,19 +628,16 @@
                         end: event.end.dateTime || event.end.date
                     }));
                     
-                    console.log('Loaded real calendar events:', busySlots);
+                    console.log('Loaded real Gmail calendar events:', busySlots);
                     return busySlots;
                     
                 } catch (error) {
-                    console.log('Calendar access failed, using intelligent availability');
-                    return busyTimes;
+                    console.log('Gmail calendar access failed:', error);
+                    return [];
                 }
             } else {
-                // Use intelligent availability system
-                return busyTimes.filter(slot => {
-                    const slotStart = new Date(slot.start);
-                    return slotStart >= startDate && slotStart <= endDate;
-                });
+                console.log('Not authenticated - no calendar sync available');
+                return [];
             }
         }
 
