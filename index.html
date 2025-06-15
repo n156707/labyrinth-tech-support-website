@@ -484,17 +484,20 @@
         }
         
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 15px;
             border: 2px solid #e1e5e9;
             border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
+            font-family: 'Roboto', sans-serif;
         }
         
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #005a87;
         }
@@ -502,6 +505,21 @@
         .form-group textarea {
             height: 130px;
             resize: vertical;
+        }
+        
+        .form-group select {
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        .booking-options {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .booking-btn {
+            width: 100%;
+            margin-bottom: 10px;
         }
         
         /* Footer */
@@ -702,8 +720,8 @@
                     </ul>
                 </div>
                 <div class="about-image">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6N" 
-                         alt="Professional computer repair technician in Brisbane workshop" loading="lazy">
+                    <img src="technician-photo.jpg" 
+                         alt="Professional computer repair technician in Brisbane workshop with multiple monitors and diagnostic equipment" loading="lazy">
                 </div>
             </div>
 
@@ -848,17 +866,17 @@
             </div>
             
             <div class="review-actions">
-                <a href="https://search.google.com/local/writereview?placeid=ChIJd8BlQ2tZkWsRAAAAAAAAAA" target="_blank" class="cta-btn">
+                <p style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin: 20px 0; color: #005a87; border-left: 4px solid #005a87;">
+                    <strong>Google Business Profile Setup Required:</strong> To display live Google reviews and enable review submissions, please create your Google Business Profile at <a href="https://business.google.com" target="_blank" style="color: #005a87;">business.google.com</a>. Once verified, we can integrate your live reviews and review submission links.
+                </p>
+                <a href="https://business.google.com" target="_blank" class="cta-btn">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right: 8px;">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                         <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                         <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                         <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                     </svg>
-                    Write a Review
-                </a>
-                <a href="https://www.google.com/maps/search/Labyrinth+Tech+Support+Brisbane" target="_blank" class="btn-secondary">
-                    View All Reviews
+                    Create Google Business Profile
                 </a>
             </div>
         </section>
@@ -905,7 +923,24 @@
                 </div>
                 
                 <div class="contact-form">
-                    <h3>Send a Message</h3>
+                    <h3>Book an Appointment</h3>
+                    <div class="booking-options">
+                        <button onclick="openCalendarBooking()" class="cta-btn booking-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right: 8px;">
+                                <path d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
+                            </svg>
+                            Schedule Appointment
+                        </button>
+                        <p style="margin: 15px 0; color: #666; font-size: 0.9rem;">
+                            Book directly into my Google Calendar for immediate confirmation
+                        </p>
+                    </div>
+                    
+                    <div style="margin: 30px 0; text-align: center;">
+                        <div style="border-top: 1px solid #e1e5e9; margin: 20px 0;"></div>
+                        <span style="background: white; padding: 0 15px; color: #666;">or send a message</span>
+                    </div>
+                    
                     <form onsubmit="submitForm(event)" role="form" aria-label="Contact form">
                         <div class="form-group">
                             <label for="name">Full Name</label>
@@ -920,10 +955,23 @@
                             <input type="tel" id="phone" name="phone">
                         </div>
                         <div class="form-group">
+                            <label for="service">Service Needed</label>
+                            <select id="service" name="service" required aria-required="true">
+                                <option value="">Select a service...</option>
+                                <option value="computer-troubleshooting">Computer Troubleshooting</option>
+                                <option value="cybersecurity">Cybersecurity Solutions</option>
+                                <option value="data-recovery">Data Recovery</option>
+                                <option value="hardware-upgrades">Hardware Upgrades</option>
+                                <option value="email-setup">Email Setup & Migration</option>
+                                <option value="network-support">Network & IT Support</option>
+                                <option value="emergency">Emergency Support</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="message">Describe Your Computer Problem</label>
                             <textarea id="message" name="message" placeholder="Please describe the issues you're experiencing with your computer..." required aria-required="true"></textarea>
                         </div>
-                        <button type="submit" class="cta-btn" style="width: 100%;">Send Message</button>
+                        <button type="submit" class="btn-secondary" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -992,6 +1040,34 @@
             document.getElementById('toggle-contrast').textContent = 'Normal View';
         }
 
+        // Google Calendar booking integration
+        function openCalendarBooking() {
+            // Create Google Calendar event URL with pre-filled details
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() + 1); // Tomorrow
+            startDate.setHours(9, 0, 0, 0); // 9 AM
+            
+            const endDate = new Date(startDate);
+            endDate.setHours(10, 0, 0, 0); // 1 hour appointment
+            
+            const eventDetails = {
+                text: 'Computer Repair Consultation - Labyrinth Tech Support',
+                dates: formatGoogleCalendarDate(startDate) + '/' + formatGoogleCalendarDate(endDate),
+                details: 'Computer repair consultation with Labyrinth Tech Support. Professional IT service with 20+ years experience. Location will be confirmed via email or phone.',
+                location: 'Brisbane, QLD (Location to be confirmed)',
+                add: 'labyrinth.tech.support@gmail.com' // Replace with your actual email
+            };
+            
+            const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&' +
+                Object.keys(eventDetails).map(key => key + '=' + encodeURIComponent(eventDetails[key])).join('&');
+            
+            window.open(googleCalendarUrl, '_blank');
+        }
+        
+        function formatGoogleCalendarDate(date) {
+            return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        }
+
         // Contact form submission
         function submitForm(event) {
             event.preventDefault();
@@ -1000,10 +1076,34 @@
             
             const name = formData.get('name');
             const email = formData.get('email');
+            const service = formData.get('service');
             const message = formData.get('message');
             
-            if (name && email && message) {
-                alert(`Thank you ${name}! Your message has been received. We'll contact you at ${email} within 2 hours during business hours.`);
+            if (name && email && service && message) {
+                // Create email template for appointment request
+                const emailSubject = `Computer Repair Request - ${service} - ${name}`;
+                const emailBody = `
+New service request from ${name}
+
+Contact Details:
+- Name: ${name}
+- Email: ${email}
+- Phone: ${formData.get('phone') || 'Not provided'}
+- Service: ${service}
+
+Problem Description:
+${message}
+
+Please respond within 2 hours during business hours (Mon-Fri: 8AM-6PM, Sat: 9AM-3PM).
+                `.trim();
+                
+                // Create mailto link for automatic email composition
+                const mailtoLink = `mailto:labyrinth.tech.support@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                alert(`Thank you ${name}! Your email client will open to send your service request. We'll respond within 2 hours during business hours.`);
                 form.reset();
             } else {
                 alert('Please fill in all required fields.');
