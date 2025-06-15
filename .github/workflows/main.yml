@@ -1,0 +1,22 @@
+name: Auto Commit and Push Changes
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour
+  workflow_dispatch:    # Allows manual trigger
+
+jobs:
+  auto_commit_push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }} # use your secret PAT here
+
+      - name: Commit and push changes automatically
+        run: |
+          git config --local user.name "AutoCommit Bot"
+          git config --local user.email "autocommit@example.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Automatic commit: updating website files"
+          git push
