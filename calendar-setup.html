@@ -169,17 +169,10 @@
                 const data = await response.json();
 
                 if (data.authUrl) {
-                    statusDiv.textContent = 'Opening Google authorization...';
+                    statusDiv.textContent = 'Redirecting to Google authorization...';
                     
-                    // Open Google authorization in new window
-                    authWindow = window.open(
-                        data.authUrl,
-                        'calendar_auth',
-                        'width=600,height=700,scrollbars=yes,resizable=yes'
-                    );
-
-                    // Check for authorization completion
-                    checkAuthCompletion();
+                    // Redirect to Google authorization
+                    window.location.href = data.authUrl;
                 } else {
                     throw new Error('Failed to get authorization URL');
                 }
@@ -189,65 +182,6 @@
                 statusDiv.textContent = 'Error: ' + error.message;
                 authBtn.disabled = false;
             }
-        }
-
-        function checkAuthCompletion() {
-            const statusDiv = document.getElementById('status');
-            
-            // Listen for the authorization code from the popup
-            window.addEventListener('message', async (event) => {
-                if (event.data.type === 'CALENDAR_AUTH_CODE') {
-                    const code = event.data.code;
-                    
-                    try {
-                        statusDiv.textContent = 'Processing authorization...';
-                        
-                        // Send code to server for token exchange
-                        const response = await fetch('/api/calendar/callback', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ code })
-                        });
-
-                        const result = await response.json();
-                        
-                        if (result.success) {
-                            statusDiv.className = 'status success';
-                            statusDiv.textContent = 'Calendar authorization successful! Your booking system is now connected to your Gmail calendar.';
-                            
-                            // Hide auth button
-                            document.getElementById('auth-section').style.display = 'none';
-                            
-                            // Close popup
-                            if (authWindow) {
-                                authWindow.close();
-                            }
-                        } else {
-                            throw new Error(result.error || 'Authorization failed');
-                        }
-                    } catch (error) {
-                        console.error('Token exchange error:', error);
-                        statusDiv.className = 'status error';
-                        statusDiv.textContent = 'Authorization failed: ' + error.message;
-                        document.getElementById('auth-btn').disabled = false;
-                    }
-                }
-            });
-
-            // Check if popup was closed manually
-            const checkClosed = setInterval(() => {
-                if (authWindow && authWindow.closed) {
-                    clearInterval(checkClosed);
-                    const statusDiv = document.getElementById('status');
-                    if (!statusDiv.classList.contains('success')) {
-                        statusDiv.className = 'status error';
-                        statusDiv.textContent = 'Authorization cancelled. Please try again.';
-                        document.getElementById('auth-btn').disabled = false;
-                    }
-                }
-            }, 1000);
         }
     </script>
 </body>
