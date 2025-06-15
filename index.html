@@ -1109,12 +1109,13 @@
         function initGoogleReviews() {
             const service = new google.maps.places.PlacesService(document.createElement('div'));
             
-            // Try multiple search terms to find your business
+            // Search for your verified Google Business Profile
             const searchQueries = [
-                'Labyrinth Tech Support Brisbane',
-                'computer repair Brisbane QLD',
-                'IT support Brisbane',
-                'tech support Brisbane'
+                'Labyrinth Tech Support Chermside',
+                'Labyrinth Tech Support Queensland',
+                'computer repair Chermside QLD',
+                'labyrinth-techsupport.com',
+                'Labyrinth Tech Support Westfield Chermside'
             ];
             
             let searchIndex = 0;
@@ -1136,11 +1137,12 @@
                         // Found some results, try to get one that matches better
                         let bestMatch = results[0];
                         
-                        // Look for Brisbane-based computer repair business
+                        // Look for Labyrinth Tech Support specifically
                         for (let result of results) {
-                            if (result.name.toLowerCase().includes('computer') || 
-                                result.name.toLowerCase().includes('tech') ||
-                                result.name.toLowerCase().includes('repair')) {
+                            if (result.name.toLowerCase().includes('labyrinth') || 
+                                result.name.toLowerCase().includes('tech support') ||
+                                (result.name.toLowerCase().includes('computer') && 
+                                 result.formatted_address && result.formatted_address.toLowerCase().includes('chermside'))) {
                                 bestMatch = result;
                                 break;
                             }
