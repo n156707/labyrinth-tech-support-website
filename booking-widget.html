@@ -609,52 +609,39 @@
             return busyPeriods;
         }
 
-        // Load real calendar availability using direct API approach
+        // Load real calendar availability from server-side integration
         async function loadBusyTimes(startDate, endDate) {
             try {
-                // Method 1: Try to access public calendar data with API key
-                if (gapiInited && gapi?.client) {
-                    console.log('Checking calendar availability for:', startDate.toDateString());
-                    
-                    // Initialize calendar API with API key only
-                    await gapi.client.init({
-                        apiKey: 'AIzaSyB5lnfb-WQFExT4tLiIElcVAfHBXSB_mZU',
-                        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
-                    });
-                    
-                    // Try to access calendar events (if calendar is public or shared)
-                    try {
-                        const response = await gapi.client.calendar.events.list({
-                            calendarId: CALENDAR_ID,
-                            timeMin: startDate.toISOString(),
-                            timeMax: endDate.toISOString(),
-                            singleEvents: true,
-                            orderBy: 'startTime',
-                            maxResults: 20
-                        });
-                        
-                        if (response.result.items) {
-                            const events = response.result.items;
-                            const busySlots = events.map(event => ({
-                                start: event.start.dateTime || event.start.date,
-                                end: event.end.dateTime || event.end.date,
-                                summary: event.summary || 'Busy'
-                            }));
-                            
-                            console.log('Direct calendar access successful:', busySlots);
-                            return busySlots;
-                        }
-                    } catch (directError) {
-                        console.log('Direct calendar access failed (expected for private calendars):', directError.message);
+                console.log('Checking server-side calendar availability for:', startDate.toDateString());
+                
+                // Get real calendar data from your authorized server
+                const response = await fetch('/api/calendar/availability', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        startDate: startDate.toISOString(),
+                        endDate: endDate.toISOString()
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.busyTimes && data.busyTimes.length > 0) {
+                        console.log('Server calendar sync successful:', data.busyTimes);
+                        return data.busyTimes;
+                    } else {
+                        console.log('No busy times found for this date');
+                        return [];
                     }
+                } else {
+                    console.log('Server calendar sync not available, using intelligent patterns');
+                    return generateBusinessBasedAvailability(startDate, endDate);
                 }
                 
-                // Method 2: Use realistic business pattern based on your actual schedule
-                console.log('Using intelligent availability based on business patterns');
-                return generateBusinessBasedAvailability(startDate, endDate);
-                
             } catch (error) {
-                console.log('Calendar sync error, using business hours:', error);
+                console.log('Calendar sync error, using business patterns:', error);
                 return generateBusinessBasedAvailability(startDate, endDate);
             }
         }
@@ -1009,24 +996,56 @@
             `;
         }
 
-        function confirmBooking() {
-            // Create calendar event
+        async function confirmBooking() {
+            // Prepare appointment data
+            const appointmentData = {
+                service: document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text,
+                date: selectedDate,
+                time: selectedTime,
+                name: bookingData.name,
+                phone: bookingData.phone,
+                email: bookingData.email,
+                problem: bookingData.problem,
+                location: document.getElementById('preferred-location').options[document.getElementById('preferred-location').selectedIndex].text,
+                urgency: document.getElementById('urgency').options[document.getElementById('urgency').selectedIndex].text
+            };
+            
+            try {
+                // Send appointment to server for logging
+                const response = await fetch('/api/calendar/appointment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(appointmentData)
+                });
+                
+                if (response.ok) {
+                    console.log('Appointment sent to server successfully');
+                } else {
+                    console.log('Server appointment failed, continuing with manual process');
+                }
+            } catch (error) {
+                console.log('Server connection error, continuing with manual process');
+            }
+            
+            // Create Google Calendar URL for manual addition
             const startDateTime = new Date(`${selectedDate}T${convertToISO(selectedTime)}`);
             const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
             
             const eventDetails = {
-                text: `${document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text} - ${bookingData.name}`,
+                text: `${appointmentData.service} - ${appointmentData.name}`,
                 dates: formatGoogleCalendarDate(startDateTime) + '/' + formatGoogleCalendarDate(endDateTime),
                 details: `Appointment Details:
-Customer: ${bookingData.name}
-Phone: ${bookingData.phone}
-Email: ${bookingData.email}
-Service: ${document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text}
-Location: ${document.getElementById('preferred-location').options[document.getElementById('preferred-location').selectedIndex].text}
-Urgency: ${document.getElementById('urgency').options[document.getElementById('urgency').selectedIndex].text}
+Customer: ${appointmentData.name}
+Phone: ${appointmentData.phone}
+Email: ${appointmentData.email}
+Service: ${appointmentData.service}
+Location: ${appointmentData.location}
+Urgency: ${appointmentData.urgency}
 
 Problem Description:
-${bookingData.problem}
+${appointmentData.problem}
 
 Booked via: labyrinth-techsupport.com`,
                 location: 'Brisbane, QLD'
