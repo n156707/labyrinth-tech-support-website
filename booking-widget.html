@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labyrinth Tech Support - Book Appointment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .booking-widget {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .widget-header {
+            background: linear-gradient(135deg, #005a87, #003e5e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .widget-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .widget-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .booking-content {
+            padding: 40px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .step.active .step-number {
+            background: #005a87;
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: #28a745;
+            color: white;
+        }
+
+        .booking-section {
+            display: none;
+        }
+
+        .booking-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #005a87;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .time-slot {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .time-slot:hover {
+            border-color: #005a87;
+            background: #f8f9fa;
+        }
+
+        .time-slot.selected {
+            background: #005a87;
+            color: white;
+            border-color: #005a87;
+        }
+
+        .time-slot.unavailable {
+            background: #f8f9fa;
+            color: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .booking-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #005a87;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #003e5e;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calendar-day:hover {
+            background: #f8f9fa;
+        }
+
+        .calendar-day.selected {
+            background: #005a87;
+            color: white;
+        }
+
+        .calendar-day.unavailable {
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .booking-content {
+                padding: 20px;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .booking-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-widget">
+        <div class="widget-header">
+            <h1>Book Your Appointment</h1>
+            <p>Professional Computer Repair & IT Support</p>
+        </div>
+
+        <div class="booking-content">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" id="step-1">
+                    <div class="step-number">1</div>
+                    <span>Service</span>
+                </div>
+                <div class="step" id="step-2">
+                    <div class="step-number">2</div>
+                    <span>Date & Time</span>
+                </div>
+                <div class="step" id="step-3">
+                    <div class="step-number">3</div>
+                    <span>Details</span>
+                </div>
+                <div class="step" id="step-4">
+                    <div class="step-number">4</div>
+                    <span>Confirm</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Service Selection -->
+            <div class="booking-section active" id="section-1">
+                <h2 style="margin-bottom: 20px;">Select Your Service</h2>
+                <div class="form-group">
+                    <label for="service-select">What can we help you with?</label>
+                    <select id="service-select" required>
+                        <option value="">Choose a service...</option>
+                        <option value="computer-repair">Computer Troubleshooting & Repair</option>
+                        <option value="cybersecurity">Cybersecurity Solutions</option>
+                        <option value="data-recovery">Data Recovery Services</option>
+                        <option value="hardware-upgrade">Hardware Upgrades</option>
+                        <option value="email-setup">Email Setup & Migration</option>
+                        <option value="network-support">Network & IT Support</option>
+                        <option value="enterprise-software">Enterprise Software Support</option>
+                        <option value="microsoft-365">Microsoft 365 & Azure Support</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="urgency">Urgency Level</label>
+                    <select id="urgency">
+                        <option value="standard">Standard (within 1-2 days)</option>
+                        <option value="urgent">Urgent (same day if possible)</option>
+                        <option value="emergency">Emergency (immediate assistance)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 2: Date & Time Selection -->
+            <div class="booking-section" id="section-2">
+                <h2 style="margin-bottom: 20px;">Choose Date & Time</h2>
+                <div class="form-group">
+                    <label>Select a date:</label>
+                    <div id="calendar-container">
+                        <!-- Calendar will be generated here -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Available time slots:</label>
+                    <div class="time-slots" id="time-slots-container">
+                        <!-- Time slots will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Customer Details -->
+            <div class="booking-section" id="section-3">
+                <h2 style="margin-bottom: 20px;">Your Information</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label for="customer-name">Full Name *</label>
+                        <input type="text" id="customer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-phone">Phone Number *</label>
+                        <input type="tel" id="customer-phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Email Address *</label>
+                    <input type="email" id="customer-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="problem-description">Describe Your Computer Problem *</label>
+                    <textarea id="problem-description" rows="4" placeholder="Please describe the issues you're experiencing in detail..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="preferred-location">Preferred Service Location</label>
+                    <select id="preferred-location">
+                        <option value="on-site">On-site (your location)</option>
+                        <option value="remote">Remote assistance</option>
+                        <option value="workshop">Bring to our workshop</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 4: Confirmation -->
+            <div class="booking-section" id="section-4">
+                <h2 style="margin-bottom: 20px;">Confirm Your Appointment</h2>
+                <div id="booking-summary" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <!-- Summary will be generated here -->
+                </div>
+                <div class="success-message" id="success-message" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h3>Appointment Booked Successfully!</h3>
+                    <p>You'll receive a confirmation email and phone call within 24 hours.</p>
+                    <button class="btn btn-primary" onclick="window.close()" style="margin-top: 20px;">Close</button>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="booking-actions">
+                <button class="btn btn-secondary" id="back-btn" onclick="goBack()" style="display: none;">Back</button>
+                <button class="btn btn-primary" id="next-btn" onclick="goNext()">Next</button>
+                <button class="btn btn-primary" id="confirm-btn" onclick="confirmBooking()" style="display: none;">Confirm Appointment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let selectedDate = null;
+        let selectedTime = null;
+        let bookingData = {};
+
+        // Initialize the widget
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCalendar();
+            updateStepIndicator();
+        });
+
+        function goNext() {
+            if (validateCurrentStep()) {
+                if (currentStep < 4) {
+                    currentStep++;
+                    showStep(currentStep);
+                    updateStepIndicator();
+                    updateButtons();
+                }
+            }
+        }
+
+        function goBack() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+                updateStepIndicator();
+                updateButtons();
+            }
+        }
+
+        function showStep(step) {
+            // Hide all sections
+            document.querySelectorAll('.booking-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show current section
+            document.getElementById(`section-${step}`).classList.add('active');
+            
+            // Special handling for step 2
+            if (step === 2) {
+                generateTimeSlots();
+            }
+            
+            // Special handling for step 4
+            if (step === 4) {
+                generateBookingSummary();
+            }
+        }
+
+        function updateStepIndicator() {
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById(`step-${i}`);
+                if (i < currentStep) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (i === currentStep) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            }
+        }
+
+        function updateButtons() {
+            const backBtn = document.getElementById('back-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const confirmBtn = document.getElementById('confirm-btn');
+            
+            backBtn.style.display = currentStep > 1 ? 'block' : 'none';
+            nextBtn.style.display = currentStep < 4 ? 'block' : 'none';
+            confirmBtn.style.display = currentStep === 4 ? 'block' : 'none';
+        }
+
+        function validateCurrentStep() {
+            switch (currentStep) {
+                case 1:
+                    const service = document.getElementById('service-select').value;
+                    if (!service) {
+                        alert('Please select a service.');
+                        return false;
+                    }
+                    bookingData.service = service;
+                    bookingData.urgency = document.getElementById('urgency').value;
+                    return true;
+                    
+                case 2:
+                    if (!selectedDate || !selectedTime) {
+                        alert('Please select a date and time.');
+                        return false;
+                    }
+                    bookingData.date = selectedDate;
+                    bookingData.time = selectedTime;
+                    return true;
+                    
+                case 3:
+                    const name = document.getElementById('customer-name').value.trim();
+                    const phone = document.getElementById('customer-phone').value.trim();
+                    const email = document.getElementById('customer-email').value.trim();
+                    const problem = document.getElementById('problem-description').value.trim();
+                    
+                    if (!name || !phone || !email || !problem) {
+                        alert('Please fill in all required fields.');
+                        return false;
+                    }
+                    
+                    bookingData.name = name;
+                    bookingData.phone = phone;
+                    bookingData.email = email;
+                    bookingData.problem = problem;
+                    bookingData.location = document.getElementById('preferred-location').value;
+                    return true;
+                    
+                default:
+                    return true;
+            }
+        }
+
+        function generateCalendar() {
+            const container = document.getElementById('calendar-container');
+            const today = new Date();
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            
+            let calendarHTML = '<div class="calendar-grid">';
+            
+            // Add day headers
+            daysOfWeek.forEach(day => {
+                calendarHTML += `<div style="font-weight: 600; text-align: center; padding: 8px;">${day}</div>`;
+            });
+            
+            // Generate next 14 days
+            for (let i = 1; i <= 14; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                
+                const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+                const dateStr = date.toISOString().split('T')[0];
+                
+                calendarHTML += `
+                    <div class="calendar-day ${isWeekend ? 'unavailable' : ''}" 
+                         onclick="${isWeekend ? '' : `selectDate('${dateStr}')`}">
+                        ${date.getDate()}
+                    </div>
+                `;
+            }
+            
+            calendarHTML += '</div>';
+            container.innerHTML = calendarHTML;
+        }
+
+        function selectDate(dateStr) {
+            // Remove previous selection
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            
+            // Select new date
+            event.target.classList.add('selected');
+            selectedDate = dateStr;
+            
+            // Generate time slots for selected date
+            generateTimeSlots();
+        }
+
+        function generateTimeSlots() {
+            const container = document.getElementById('time-slots-container');
+            
+            if (!selectedDate) {
+                container.innerHTML = '<p style="text-align: center; color: #6c757d;">Please select a date first.</p>';
+                return;
+            }
+            
+            const timeSlots = [
+                '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+                '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'
+            ];
+            
+            let slotsHTML = '';
+            timeSlots.forEach(time => {
+                slotsHTML += `
+                    <div class="time-slot" onclick="selectTime('${time}')">
+                        ${time}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = slotsHTML;
+        }
+
+        function selectTime(time) {
+            // Remove previous selection
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            
+            // Select new time
+            event.target.classList.add('selected');
+            selectedTime = time;
+        }
+
+        function generateBookingSummary() {
+            const container = document.getElementById('booking-summary');
+            const serviceText = document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text;
+            const urgencyText = document.getElementById('urgency').options[document.getElementById('urgency').selectedIndex].text;
+            const locationText = document.getElementById('preferred-location').options[document.getElementById('preferred-location').selectedIndex].text;
+            
+            container.innerHTML = `
+                <h3 style="margin-bottom: 15px;">Appointment Summary</h3>
+                <div style="display: grid; gap: 10px;">
+                    <div><strong>Service:</strong> ${serviceText}</div>
+                    <div><strong>Date:</strong> ${new Date(selectedDate).toLocaleDateString()}</div>
+                    <div><strong>Time:</strong> ${selectedTime}</div>
+                    <div><strong>Urgency:</strong> ${urgencyText}</div>
+                    <div><strong>Customer:</strong> ${bookingData.name}</div>
+                    <div><strong>Phone:</strong> ${bookingData.phone}</div>
+                    <div><strong>Email:</strong> ${bookingData.email}</div>
+                    <div><strong>Location:</strong> ${locationText}</div>
+                    <div><strong>Problem:</strong> ${bookingData.problem}</div>
+                </div>
+            `;
+        }
+
+        function confirmBooking() {
+            // Create calendar event
+            const startDateTime = new Date(`${selectedDate}T${convertToISO(selectedTime)}`);
+            const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
+            
+            const eventDetails = {
+                text: `${document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text} - ${bookingData.name}`,
+                dates: formatGoogleCalendarDate(startDateTime) + '/' + formatGoogleCalendarDate(endDateTime),
+                details: `Appointment Details:
+Customer: ${bookingData.name}
+Phone: ${bookingData.phone}
+Email: ${bookingData.email}
+Service: ${document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text}
+Location: ${document.getElementById('preferred-location').options[document.getElementById('preferred-location').selectedIndex].text}
+Urgency: ${document.getElementById('urgency').options[document.getElementById('urgency').selectedIndex].text}
+
+Problem Description:
+${bookingData.problem}
+
+Booked via: labyrinth-techsupport.com`,
+                location: 'Brisbane, QLD'
+            };
+            
+            // Create Google Calendar URL
+            const calendarParams = Object.keys(eventDetails).map(key => key + '=' + encodeURIComponent(eventDetails[key])).join('&');
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&${calendarParams}`;
+            
+            // Open calendar
+            window.open(calendarUrl, '_blank');
+            
+            // Send notification email
+            sendNotificationEmail();
+            
+            // Show success message
+            document.getElementById('booking-summary').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('confirm-btn').style.display = 'none';
+            document.getElementById('back-btn').style.display = 'none';
+        }
+
+        function sendNotificationEmail() {
+            const emailSubject = `New Appointment: ${document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text}`;
+            const emailBody = `New appointment booked via booking widget:
+
+CUSTOMER DETAILS:
+Name: ${bookingData.name}
+Phone: ${bookingData.phone}
+Email: ${bookingData.email}
+
+APPOINTMENT DETAILS:
+Service: ${document.getElementById('service-select').options[document.getElementById('service-select').selectedIndex].text}
+Date: ${new Date(selectedDate).toLocaleDateString()}
+Time: ${selectedTime}
+Location: ${document.getElementById('preferred-location').options[document.getElementById('preferred-location').selectedIndex].text}
+Urgency: ${document.getElementById('urgency').options[document.getElementById('urgency').selectedIndex].text}
+
+PROBLEM DESCRIPTION:
+${bookingData.problem}
+
+Please follow up within 24 hours to confirm details.
+
+Generated from: labyrinth-techsupport.com booking widget`;
+            
+            const emailUrl = `mailto:service@labyrinth-techsupport.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            setTimeout(() => {
+                window.open(emailUrl, '_blank');
+            }, 1000);
+        }
+
+        function convertToISO(timeStr) {
+            const [time, modifier] = timeStr.split(' ');
+            let [hours, minutes] = time.split(':').map(Number);
+            
+            if (modifier === 'PM' && hours !== 12) {
+                hours += 12;
+            } else if (modifier === 'AM' && hours === 12) {
+                hours = 0;
+            }
+            
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        }
+
+        function formatGoogleCalendarDate(date) {
+            return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        }
+    </script>
+</body>
+</html>
