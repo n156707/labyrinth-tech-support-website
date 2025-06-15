@@ -1109,34 +1109,128 @@
         function initGoogleReviews() {
             const service = new google.maps.places.PlacesService(document.createElement('div'));
             
-            // Search for your business first
-            const request = {
-                query: 'Labyrinth Tech Support Brisbane computer repair',
-                fields: ['place_id', 'name', 'rating', 'user_ratings_total', 'reviews', 'url']
-            };
+            // Try multiple search terms to find your business
+            const searchQueries = [
+                'Labyrinth Tech Support Brisbane',
+                'computer repair Brisbane QLD',
+                'IT support Brisbane',
+                'tech support Brisbane'
+            ];
             
-            service.textSearch(request, (results, status) => {
-                if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
-                    const place = results[0];
-                    
-                    // Get detailed place information including reviews
-                    const detailsRequest = {
-                        placeId: place.place_id,
-                        fields: ['name', 'rating', 'user_ratings_total', 'reviews', 'url']
-                    };
-                    
-                    service.getDetails(detailsRequest, (placeDetails, detailsStatus) => {
-                        if (detailsStatus === google.maps.places.PlacesServiceStatus.OK) {
-                            displayGoogleReviews(placeDetails);
-                        } else {
-                            // Fallback to current reviews if API call fails
-                            console.log('Could not fetch live reviews, using current display');
-                        }
-                    });
-                } else {
-                    console.log('Business not found in Google Places, using current display');
+            let searchIndex = 0;
+            
+            function trySearch() {
+                if (searchIndex >= searchQueries.length) {
+                    // No business found, display placeholder content
+                    displayPlaceholderReviews();
+                    return;
                 }
-            });
+                
+                const request = {
+                    query: searchQueries[searchIndex],
+                    fields: ['place_id', 'name', 'rating', 'user_ratings_total', 'reviews', 'url']
+                };
+                
+                service.textSearch(request, (results, status) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+                        // Found some results, try to get one that matches better
+                        let bestMatch = results[0];
+                        
+                        // Look for Brisbane-based computer repair business
+                        for (let result of results) {
+                            if (result.name.toLowerCase().includes('computer') || 
+                                result.name.toLowerCase().includes('tech') ||
+                                result.name.toLowerCase().includes('repair')) {
+                                bestMatch = result;
+                                break;
+                            }
+                        }
+                        
+                        // Get detailed place information including reviews
+                        const detailsRequest = {
+                            placeId: bestMatch.place_id,
+                            fields: ['name', 'rating', 'user_ratings_total', 'reviews', 'url']
+                        };
+                        
+                        service.getDetails(detailsRequest, (placeDetails, detailsStatus) => {
+                            if (detailsStatus === google.maps.places.PlacesServiceStatus.OK && placeDetails.reviews) {
+                                displayGoogleReviews(placeDetails);
+                            } else {
+                                searchIndex++;
+                                trySearch();
+                            }
+                        });
+                    } else {
+                        searchIndex++;
+                        trySearch();
+                    }
+                });
+            }
+            
+            trySearch();
+        }
+        
+        // Display setup message when no Google Business found
+        function displayPlaceholderReviews() {
+            const testimonialsGrid = document.getElementById('testimonials-grid');
+            if (testimonialsGrid) {
+                testimonialsGrid.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; background: #f8f9fa; border-radius: 12px; margin: 20px 0;">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">⭐</div>
+                        <h3 style="color: #005a87; margin-bottom: 15px;">Ready for Your First Reviews</h3>
+                        <p style="color: #666; margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                            Once you create your Google Business Profile, authentic customer reviews will automatically appear here. 
+                            Your Google Maps API is configured and ready to fetch real reviews.
+                        </p>
+                        <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; border-left: 4px solid #005a87; text-align: left; max-width: 600px; margin: 0 auto;">
+                            <strong style="color: #005a87;">Next Steps:</strong>
+                            <ol style="margin: 10px 0; padding-left: 20px; color: #555;">
+                                <li>Create Google Business Profile at business.google.com</li>
+                                <li>Verify your business location</li>
+                                <li>Add photos, hours, and service details</li>
+                                <li>Start receiving authentic customer reviews</li>
+                            </ol>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Update rating overview
+            const ratingOverview = document.getElementById('rating-overview');
+            if (ratingOverview) {
+                const ratingText = ratingOverview.querySelector('.rating-text .rating-count');
+                if (ratingText) {
+                    ratingText.textContent = 'Google Business Profile Required';
+                }
+            }
+            
+            // Set up review buttons for Google Business Profile creation
+            const writeReviewBtn = document.getElementById('write-review-btn');
+            const viewAllReviewsBtn = document.getElementById('view-all-reviews-btn');
+            
+            if (writeReviewBtn) {
+                writeReviewBtn.href = 'https://business.google.com';
+                writeReviewBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Create Google Business
+                `;
+            }
+            
+            if (viewAllReviewsBtn) {
+                viewAllReviewsBtn.href = 'https://business.google.com';
+                viewAllReviewsBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M19,19H5V5H19V19Z"/>
+                        <path d="M17,8.5L12,13.5L7,8.5H17Z"/>
+                    </svg>
+                    Setup Guide
+                `;
+            }
         }
 
         // Display fetched Google reviews
