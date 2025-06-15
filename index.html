@@ -909,15 +909,23 @@
                 <div class="contact-form">
                     <h3>Book an Appointment</h3>
                     <div class="booking-options">
-                        <button onclick="openSelfServeBooking()" class="cta-btn booking-btn">
+                        <button onclick="openBookingWidget()" class="cta-btn booking-btn">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right: 8px;">
                                 <path d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
                             </svg>
-                            Book Available Time Slot
+                            Book Appointment Online
                         </button>
                         <p style="margin: 15px 0; color: #666; font-size: 0.9rem;">
-                            View real availability and book directly into my calendar
+                            Professional booking system with step-by-step process
                         </p>
+                        <a href="https://n156707.github.io/labyrinth-tech-support-website/booking-widget.html" target="_blank" style="
+                            display: inline-block;
+                            margin-top: 10px;
+                            color: #005a87;
+                            text-decoration: none;
+                            font-size: 0.85rem;
+                            border-bottom: 1px solid #005a87;
+                        ">Open booking system in new window</a>
                     </div>
                     
                     <!-- Self-Serve Booking Interface -->
@@ -1089,7 +1097,22 @@
             document.getElementById('toggle-contrast').textContent = 'Normal View';
         }
 
-        // Self-serve booking system with real calendar availability
+        // Professional booking widget integration
+        function openBookingWidget() {
+            // Open booking widget in a new window
+            const widgetWindow = window.open(
+                'https://n156707.github.io/labyrinth-tech-support-website/booking-widget.html',
+                'bookingWidget',
+                'width=900,height=700,scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no,status=no'
+            );
+            
+            // Focus on the new window
+            if (widgetWindow) {
+                widgetWindow.focus();
+            }
+        }
+        
+        // Legacy self-serve booking system (deprecated)
         let selectedTimeSlot = null;
         let availableSlots = [];
         
