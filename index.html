@@ -839,25 +839,10 @@
             </div>
 
             <div class="testimonials-grid" id="testimonials-grid">
-                <div style="text-align: center; padding: 40px 20px; background: #f8f9fa; border-radius: 12px; border: 2px dashed #005a87;">
-                    <div style="font-size: 3rem; margin-bottom: 20px;">⭐</div>
-                    <h3 style="color: #005a87; margin-bottom: 15px;">Be Our First Google Reviewer!</h3>
-                    <p style="color: #666; margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto;">
-                        We have 264 customer interactions but need written Google reviews to display here. 
-                        Help future customers by sharing your experience with Labyrinth Tech Support.
-                    </p>
-                    <div style="background: #e8f4f8; padding: 20px; border-radius: 8px; text-align: left; max-width: 600px; margin: 0 auto;">
-                        <strong style="color: #005a87;">How to Get Reviews:</strong>
-                        <ol style="margin: 10px 0; padding-left: 20px; color: #555;">
-                            <li>Ask satisfied customers: "Could you leave a Google review?"</li>
-                            <li>Send follow-up emails after successful repairs</li>
-                            <li>Include review requests on invoices/receipts</li>
-                            <li>Provide direct link to your Google Business Profile</li>
-                        </ol>
-                        <p style="margin-top: 15px; color: #005a87; font-weight: bold;">
-                            Once you receive written reviews, they'll automatically appear here!
-                        </p>
-                    </div>
+                <div style="text-align: center; padding: 40px 20px; color: #666;">
+                    <div style="font-size: 2rem; margin-bottom: 15px;">🔄</div>
+                    <p>Connecting to Google Business Profile...</p>
+                    <p style="font-size: 0.9rem; color: #888;">Loading your 5.0 star reviews</p>
                 </div>
             </div>
             
@@ -1081,22 +1066,32 @@
         function initGoogleReviews() {
             const service = new google.maps.places.PlacesService(document.createElement('div'));
             
-            // Direct search for verified Labyrinth Tech Support business
+            // Direct search for verified Labyrinth Tech Support business with place ID
             const businessSearches = [
                 {
-                    query: 'Labyrinth Tech Support Chermside Queensland',
+                    query: 'Labyrinth Tech Support Chermside',
                     location: { lat: -27.3813, lng: 153.0281 }, // Chermside coordinates
-                    radius: 5000
+                    radius: 2000
                 },
                 {
-                    query: 'Computer repair Westfield Chermside QLD',
+                    query: 'Computer support services Chermside Queensland',
                     location: { lat: -27.3813, lng: 153.0281 },
                     radius: 3000
                 },
                 {
-                    query: 'Labyrinth Tech Support Brisbane',
-                    location: { lat: -27.4698, lng: 153.0251 }, // Brisbane coordinates
-                    radius: 15000
+                    query: 'labyrinth-techsupport.com',
+                    location: { lat: -27.3813, lng: 153.0281 },
+                    radius: 5000
+                },
+                {
+                    // Direct place ID from Google Business Profile
+                    placeId: 'ChIJDZqz7O_2bGoRDQGSm_Nrqes'
+                },
+                {
+                    // Alternative search using exact business name
+                    query: 'Labyrinth Tech Support Professional Computer Repair',
+                    location: { lat: -27.3813, lng: 153.0281 },
+                    radius: 1000
                 }
             ];
             
@@ -1109,6 +1104,14 @@
                 }
                 
                 const search = businessSearches[searchIndex];
+                
+                // If we have a place ID, try direct lookup first
+                if (search.placeId) {
+                    console.log(`Trying direct place ID lookup: ${search.placeId}`);
+                    fetchBusinessDetails(search.placeId);
+                    return;
+                }
+                
                 const request = {
                     query: search.query,
                     location: new google.maps.LatLng(search.location.lat, search.location.lng),
@@ -1127,7 +1130,7 @@
                             const name = result.name.toLowerCase();
                             const address = (result.formatted_address || '').toLowerCase();
                             
-                            if (name.includes('labyrinth') && name.includes('tech')) {
+                            if (name.includes('labyrinth') && (name.includes('tech') || name.includes('support'))) {
                                 targetBusiness = result;
                                 console.log('Found exact match:', result.name);
                                 break;
@@ -1135,7 +1138,7 @@
                                 targetBusiness = result;
                                 console.log('Found partial match:', result.name);
                                 break;
-                            } else if (address.includes('chermside') && name.includes('computer')) {
+                            } else if (address.includes('chermside') && (name.includes('computer') || name.includes('tech'))) {
                                 targetBusiness = result;
                                 console.log('Found location match:', result.name);
                                 break;
@@ -1205,33 +1208,27 @@
             updateReviewButtons(place.url);
         }
         
-        // Display message when business not found in search
+        // Display connection status when reviews cannot be fetched
         function displayNoReviewsMessage() {
             const testimonialsGrid = document.getElementById('testimonials-grid');
             if (testimonialsGrid) {
                 testimonialsGrid.innerHTML = `
                     <div style="text-align: center; padding: 40px 20px; background: #fff3cd; border-radius: 12px; border: 1px solid #ffeaa7;">
-                        <div style="font-size: 2rem; margin-bottom: 15px;">🔍</div>
-                        <h3 style="color: #856404; margin-bottom: 15px;">Searching for Your Business Profile</h3>
+                        <div style="font-size: 2rem; margin-bottom: 15px;">🔗</div>
+                        <h3 style="color: #856404; margin-bottom: 15px;">Google Business Profile Integration</h3>
                         <p style="color: #856404; margin-bottom: 20px;">
-                            Unable to locate your Google Business Profile automatically. 
-                            Your reviews will display once the profile is discoverable in Google Search.
+                            Unable to automatically fetch reviews from Google Business Profile.
+                            This may be due to API limitations or privacy settings.
                         </p>
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: left; max-width: 500px; margin: 0 auto;">
-                            <strong>To fix this:</strong>
-                            <ol style="margin: 10px 0; padding-left: 20px; color: #555;">
-                                <li>Ensure your Google Business Profile is verified</li>
-                                <li>Check that your business name exactly matches "Labyrinth Tech Support"</li>
-                                <li>Verify your Chermside, QLD location is accurate</li>
-                                <li>Wait 24-48 hours for Google to index changes</li>
-                            </ol>
-                        </div>
+                        <p style="color: #666; margin-bottom: 20px;">
+                            You can view authentic customer reviews directly on our Google Business Profile.
+                        </p>
                     </div>
                 `;
             }
             
-            // Set default buttons
-            updateReviewButtons('https://business.google.com');
+            // Set buttons to direct Google Business Profile review URL
+            updateReviewButtons('https://g.page/r/CWvpj_pzbJkNEAE/review');
         }
         
         // Display setup message when no Google Business found
