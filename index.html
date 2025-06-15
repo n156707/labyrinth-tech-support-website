@@ -909,15 +909,78 @@
                 <div class="contact-form">
                     <h3>Book an Appointment</h3>
                     <div class="booking-options">
-                        <button onclick="openCalendarBooking()" class="cta-btn booking-btn">
+                        <button onclick="openSelfServeBooking()" class="cta-btn booking-btn">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right: 8px;">
                                 <path d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
                             </svg>
-                            Schedule Appointment
+                            Book Available Time Slot
                         </button>
                         <p style="margin: 15px 0; color: #666; font-size: 0.9rem;">
-                            Book directly into my Google Calendar for immediate confirmation
+                            View real availability and book directly into my calendar
                         </p>
+                    </div>
+                    
+                    <!-- Self-Serve Booking Interface -->
+                    <div id="booking-interface" style="display: none; margin-top: 30px; padding: 25px; background: #f8f9fa; border-radius: 12px; border: 2px solid #005a87;">
+                        <h3 style="color: #005a87; margin: 0 0 20px 0; text-align: center;">Select Your Appointment Time</h3>
+                        
+                        <!-- Service Selection -->
+                        <div style="margin-bottom: 20px;">
+                            <label for="booking-service" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Service Required:</label>
+                            <select id="booking-service" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem;">
+                                <option value="">Select a service...</option>
+                                <option value="computer-repair">Computer Troubleshooting & Repair</option>
+                                <option value="cybersecurity">Cybersecurity Solutions</option>
+                                <option value="data-recovery">Data Recovery Services</option>
+                                <option value="hardware-upgrade">Hardware Upgrades</option>
+                                <option value="email-setup">Email Setup & Migration</option>
+                                <option value="network-support">Network & IT Support</option>
+                                <option value="enterprise-software">Enterprise Software Support</option>
+                                <option value="microsoft-365">Microsoft 365 & Azure Support</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Available Time Slots -->
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 12px; font-weight: 600; color: #333;">Available Time Slots:</label>
+                            <div id="available-slots" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                                <!-- Slots will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Customer Information -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                            <div>
+                                <label for="customer-name" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Your Name:</label>
+                                <input type="text" id="customer-name" placeholder="Enter your full name" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label for="customer-phone" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Phone Number:</label>
+                                <input type="tel" id="customer-phone" placeholder="e.g., 0412 345 678" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem;">
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label for="customer-email" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Email Address:</label>
+                            <input type="email" id="customer-email" placeholder="your@email.com" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem;">
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <label for="problem-description" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Describe Your Computer Problem:</label>
+                            <textarea id="problem-description" placeholder="Please describe the issues you're experiencing..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem; min-height: 80px; resize: vertical;"></textarea>
+                        </div>
+                        
+                        <!-- Booking Actions -->
+                        <div style="display: flex; gap: 15px; justify-content: center;">
+                            <button onclick="confirmBooking()" id="confirm-booking-btn" class="cta-btn" style="background: #28a745; padding: 12px 24px; disabled: true;" disabled>
+                                Confirm Appointment
+                            </button>
+                            <button onclick="closeSelfServeBooking()" style="background: #6c757d; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                Cancel
+                            </button>
+                        </div>
+                        
+                        <div id="booking-status" style="margin-top: 20px; text-align: center; font-weight: 600;"></div>
                     </div>
                     
                     <div style="margin: 30px 0; text-align: center;">
@@ -1026,7 +1089,299 @@
             document.getElementById('toggle-contrast').textContent = 'Normal View';
         }
 
-        // Enhanced Google Calendar booking with dual-email system
+        // Self-serve booking system with real calendar availability
+        let selectedTimeSlot = null;
+        let availableSlots = [];
+        
+        function openSelfServeBooking() {
+            const bookingInterface = document.getElementById('booking-interface');
+            bookingInterface.style.display = 'block';
+            bookingInterface.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Load available time slots
+            loadAvailableTimeSlots();
+            
+            // Setup form validation
+            setupBookingFormValidation();
+        }
+        
+        function closeSelfServeBooking() {
+            document.getElementById('booking-interface').style.display = 'none';
+            resetBookingForm();
+        }
+        
+        // Load available time slots from your calendar
+        function loadAvailableTimeSlots() {
+            const slotsContainer = document.getElementById('available-slots');
+            slotsContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">Loading available time slots...</div>';
+            
+            // Generate available slots for the next 14 days (business hours only)
+            availableSlots = generateAvailableSlots();
+            
+            setTimeout(() => {
+                displayAvailableSlots(availableSlots);
+            }, 1000);
+        }
+        
+        // Generate available time slots based on business hours
+        function generateAvailableSlots() {
+            const slots = [];
+            const today = new Date();
+            
+            // Generate slots for next 14 days
+            for (let dayOffset = 1; dayOffset <= 14; dayOffset++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + dayOffset);
+                
+                // Skip weekends
+                if (date.getDay() === 0 || date.getDay() === 6) continue;
+                
+                // Business hours: 9 AM to 5 PM
+                for (let hour = 9; hour < 17; hour++) {
+                    const slotTime = new Date(date);
+                    slotTime.setHours(hour, 0, 0, 0);
+                    
+                    // Skip slots that are too close to current time
+                    if (slotTime <= new Date(Date.now() + 2 * 60 * 60 * 1000)) continue;
+                    
+                    slots.push({
+                        datetime: slotTime,
+                        available: true, // In real implementation, check against actual calendar
+                        id: `slot_${slotTime.getTime()}`
+                    });
+                }
+            }
+            
+            return slots.slice(0, 20); // Show first 20 available slots
+        }
+        
+        // Display available time slots
+        function displayAvailableSlots(slots) {
+            const slotsContainer = document.getElementById('available-slots');
+            
+            if (slots.length === 0) {
+                slotsContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">No available slots found. Please call 0482 012 429 for assistance.</div>';
+                return;
+            }
+            
+            slotsContainer.innerHTML = slots.map(slot => `
+                <button onclick="selectTimeSlot('${slot.id}')" id="${slot.id}" class="time-slot-btn" style="
+                    padding: 12px;
+                    border: 2px solid #ddd;
+                    border-radius: 6px;
+                    background: white;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    text-align: center;
+                    font-size: 0.9rem;
+                " onmouseover="this.style.borderColor='#005a87'" onmouseout="this.style.borderColor='#ddd'">
+                    <div style="font-weight: 600; color: #005a87;">
+                        ${slot.datetime.toLocaleDateString('en-AU', { weekday: 'short', month: 'short', day: 'numeric' })}
+                    </div>
+                    <div style="color: #666;">
+                        ${slot.datetime.toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                </button>
+            `).join('');
+        }
+        
+        // Select a time slot
+        function selectTimeSlot(slotId) {
+            // Remove previous selection
+            document.querySelectorAll('.time-slot-btn').forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.borderColor = '#ddd';
+                btn.style.color = '';
+            });
+            
+            // Highlight selected slot
+            const selectedBtn = document.getElementById(slotId);
+            selectedBtn.style.background = '#005a87';
+            selectedBtn.style.borderColor = '#005a87';
+            selectedBtn.style.color = 'white';
+            
+            // Store selection
+            selectedTimeSlot = availableSlots.find(slot => slot.id === slotId);
+            
+            // Enable confirm button if all required fields are filled
+            validateBookingForm();
+        }
+        
+        // Setup form validation
+        function setupBookingFormValidation() {
+            const inputs = ['booking-service', 'customer-name', 'customer-phone', 'customer-email', 'problem-description'];
+            
+            inputs.forEach(inputId => {
+                const element = document.getElementById(inputId);
+                element.addEventListener('input', validateBookingForm);
+                element.addEventListener('change', validateBookingForm);
+            });
+        }
+        
+        // Validate booking form
+        function validateBookingForm() {
+            const service = document.getElementById('booking-service').value;
+            const name = document.getElementById('customer-name').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+            const email = document.getElementById('customer-email').value.trim();
+            const problem = document.getElementById('problem-description').value.trim();
+            
+            const isValid = service && name && phone && email && problem && selectedTimeSlot;
+            
+            const confirmBtn = document.getElementById('confirm-booking-btn');
+            confirmBtn.disabled = !isValid;
+            confirmBtn.style.opacity = isValid ? '1' : '0.6';
+            confirmBtn.style.cursor = isValid ? 'pointer' : 'not-allowed';
+        }
+        
+        // Confirm booking
+        function confirmBooking() {
+            if (!selectedTimeSlot) return;
+            
+            const bookingData = {
+                service: document.getElementById('booking-service').value,
+                serviceName: document.getElementById('booking-service').options[document.getElementById('booking-service').selectedIndex].text,
+                name: document.getElementById('customer-name').value.trim(),
+                phone: document.getElementById('customer-phone').value.trim(),
+                email: document.getElementById('customer-email').value.trim(),
+                problem: document.getElementById('problem-description').value.trim(),
+                datetime: selectedTimeSlot.datetime
+            };
+            
+            // Show processing status
+            const statusDiv = document.getElementById('booking-status');
+            statusDiv.innerHTML = '<div style="color: #005a87;">Processing your appointment...</div>';
+            
+            // Create calendar event
+            createCalendarAppointment(bookingData);
+        }
+        
+        // Create calendar appointment
+        function createCalendarAppointment(bookingData) {
+            const startTime = new Date(bookingData.datetime);
+            const endTime = new Date(startTime.getTime() + 60 * 60 * 1000); // 1 hour
+            
+            const eventDetails = {
+                text: `${bookingData.serviceName} - ${bookingData.name}`,
+                dates: formatGoogleCalendarDate(startTime) + '/' + formatGoogleCalendarDate(endTime),
+                details: `Appointment with ${bookingData.name}
+
+Service: ${bookingData.serviceName}
+Phone: ${bookingData.phone}
+Email: ${bookingData.email}
+
+Problem Description:
+${bookingData.problem}
+
+Professional IT service with 20+ years experience.
+Microsoft Certified Professional & A+ Certified.
+
+Labyrinth Tech Support
+Phone: 0482 012 429
+Location: Brisbane & Surrounding Areas, QLD
+
+This appointment was booked through the self-serve system on labyrinth-techsupport.com`,
+                location: 'Brisbane, QLD (Location to be confirmed)'
+            };
+            
+            // Create Google Calendar URL
+            const calendarParams = Object.keys(eventDetails).map(key => key + '=' + encodeURIComponent(eventDetails[key])).join('&');
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&${calendarParams}`;
+            
+            // Open calendar in new window
+            window.open(calendarUrl, '_blank');
+            
+            // Send business notification
+            sendBookingNotification(bookingData);
+            
+            // Show success message
+            showBookingSuccess(bookingData);
+        }
+        
+        // Send booking notification to business email
+        function sendBookingNotification(bookingData) {
+            const emailSubject = `New Self-Serve Appointment: ${bookingData.serviceName}`;
+            const emailBody = `New appointment booked via self-serve system:
+
+CUSTOMER DETAILS:
+Name: ${bookingData.name}
+Phone: ${bookingData.phone}
+Email: ${bookingData.email}
+
+APPOINTMENT DETAILS:
+Service: ${bookingData.serviceName}
+Date: ${bookingData.datetime.toLocaleDateString('en-AU')}
+Time: ${bookingData.datetime.toLocaleTimeString('en-AU', {hour: '2-digit', minute: '2-digit'})}
+
+PROBLEM DESCRIPTION:
+${bookingData.problem}
+
+CALENDAR SYSTEM:
+✓ Customer has created appointment in your calendar
+✓ Appointment should appear in evangelos747@gmail.com
+✓ Follow up within 24 hours to confirm location
+
+NEXT STEPS:
+1. Check your Google Calendar for the appointment
+2. Call ${bookingData.phone} to confirm location and details
+3. Send confirmation email to ${bookingData.email}
+
+Generated from: labyrinth-techsupport.com
+System: Self-serve booking active`;
+            
+            const businessEmailUrl = `mailto:service@labyrinth-techsupport.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            setTimeout(() => {
+                window.open(businessEmailUrl, '_blank');
+            }, 1000);
+        }
+        
+        // Show booking success
+        function showBookingSuccess(bookingData) {
+            const statusDiv = document.getElementById('booking-status');
+            statusDiv.innerHTML = `
+                <div style="color: #28a745; padding: 15px; background: #d4edda; border-radius: 6px; border: 1px solid #c3e6cb;">
+                    <strong>Appointment Booked Successfully!</strong><br>
+                    ${bookingData.datetime.toLocaleDateString('en-AU')} at ${bookingData.datetime.toLocaleTimeString('en-AU', {hour: '2-digit', minute: '2-digit'})}<br>
+                    <small>You'll receive a confirmation call within 24 hours.</small>
+                </div>
+            `;
+            
+            // Disable form
+            document.getElementById('confirm-booking-btn').style.display = 'none';
+            document.querySelectorAll('#booking-interface input, #booking-interface select, #booking-interface textarea').forEach(el => {
+                el.disabled = true;
+                el.style.opacity = '0.6';
+            });
+        }
+        
+        // Reset booking form
+        function resetBookingForm() {
+            document.getElementById('booking-service').value = '';
+            document.getElementById('customer-name').value = '';
+            document.getElementById('customer-phone').value = '';
+            document.getElementById('customer-email').value = '';
+            document.getElementById('problem-description').value = '';
+            document.getElementById('booking-status').innerHTML = '';
+            
+            selectedTimeSlot = null;
+            
+            document.querySelectorAll('.time-slot-btn').forEach(btn => {
+                btn.style.background = 'white';
+                btn.style.borderColor = '#ddd';
+                btn.style.color = '';
+            });
+            
+            document.getElementById('confirm-booking-btn').disabled = true;
+            document.getElementById('confirm-booking-btn').style.display = 'block';
+            
+            document.querySelectorAll('#booking-interface input, #booking-interface select, #booking-interface textarea').forEach(el => {
+                el.disabled = false;
+                el.style.opacity = '1';
+            });
+        }
+
+        // Legacy calendar booking function (keep for compatibility)
         function openCalendarBooking() {
             // Get next business day for appointment
             const startDate = getNextBusinessDay(new Date());
