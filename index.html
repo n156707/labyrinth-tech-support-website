@@ -1005,9 +1005,120 @@
 
     <script>
     function openBookingWidget() {
-        // Direct customers to contact form until booking system is fully deployed
-        alert('To schedule your computer repair appointment:\n\n• Use the contact form below\n• Call 0482 012 429 for immediate service\n• Email service@labyrinth-techsupport.com\n\nWe provide same-day service with transparent $100/hour pricing.');
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        // Show embedded booking form
+        document.getElementById('booking-modal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingModal() {
+        document.getElementById('booking-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function selectService(serviceName, price) {
+        document.getElementById('selected-service').textContent = serviceName;
+        document.getElementById('selected-price').textContent = price;
+        document.getElementById('booking-service').value = serviceName;
+        
+        // Show time selection
+        document.getElementById('service-selection').style.display = 'none';
+        document.getElementById('time-selection').style.display = 'block';
+        generateTimeSlots();
+    }
+
+    function generateTimeSlots() {
+        const timeSlotsContainer = document.getElementById('time-slots');
+        timeSlotsContainer.innerHTML = '';
+        
+        const today = new Date();
+        const days = ['Today', 'Tomorrow', 'Day After'];
+        
+        for (let i = 0; i < 3; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'day-slots';
+            dayDiv.innerHTML = `<h4>${days[i]} - ${date.toLocaleDateString()}</h4>`;
+            
+            const slotsDiv = document.createElement('div');
+            slotsDiv.className = 'time-slots-grid';
+            
+            // Generate time slots 8am-8pm
+            for (let hour = 8; hour < 20; hour += 2) {
+                const timeSlot = document.createElement('button');
+                timeSlot.className = 'time-slot';
+                timeSlot.textContent = `${hour}:00 - ${hour + 2}:00`;
+                timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
+                slotsDiv.appendChild(timeSlot);
+            }
+            
+            dayDiv.appendChild(slotsDiv);
+            timeSlotsContainer.appendChild(dayDiv);
+        }
+    }
+
+    function selectTimeSlot(element, date, hour) {
+        // Remove previous selection
+        document.querySelectorAll('.time-slot.selected').forEach(slot => {
+            slot.classList.remove('selected');
+        });
+        
+        element.classList.add('selected');
+        document.getElementById('selected-time').textContent = 
+            `${date.toLocaleDateString()} at ${hour}:00-${hour + 2}:00`;
+        
+        // Show customer details form
+        document.getElementById('time-selection').style.display = 'none';
+        document.getElementById('customer-details').style.display = 'block';
+    }
+
+    function submitBooking(event) {
+        event.preventDefault();
+        
+        const formData = new FormData(event.target);
+        const bookingData = {
+            service: formData.get('service'),
+            customerName: formData.get('customerName'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            address: formData.get('address'),
+            issue: formData.get('issue'),
+            selectedTime: document.getElementById('selected-time').textContent,
+            timestamp: new Date().toISOString()
+        };
+        
+        // Submit to Formspree with booking details
+        const submitData = new FormData();
+        submitData.append('_to', 'service@labyrinth-techsupport.com');
+        submitData.append('_subject', 'New Computer Repair Booking - ' + bookingData.service);
+        submitData.append('_next', window.location.href);
+        submitData.append('Service', bookingData.service);
+        submitData.append('Customer Name', bookingData.customerName);
+        submitData.append('Email', bookingData.email);
+        submitData.append('Phone', bookingData.phone);
+        submitData.append('Address', bookingData.address);
+        submitData.append('Issue Description', bookingData.issue);
+        submitData.append('Requested Time', bookingData.selectedTime);
+        submitData.append('Booking Type', 'Online Appointment Request');
+        
+        fetch('https://formspree.io/f/xvgpvpvg', {
+            method: 'POST',
+            body: submitData
+        }).then(() => {
+            alert('Booking request submitted successfully! We will contact you within 1 hour to confirm your appointment.');
+            closeBookingModal();
+            resetBookingForm();
+        }).catch(() => {
+            alert('Error submitting booking. Please call 0482 012 429 or use the contact form below.');
+        });
+    }
+
+    function resetBookingForm() {
+        document.getElementById('service-selection').style.display = 'block';
+        document.getElementById('time-selection').style.display = 'none';
+        document.getElementById('customer-details').style.display = 'none';
+        document.getElementById('booking-form').reset();
     }
 
     // Form security and validation
@@ -1073,5 +1184,119 @@
         }
     });
     </script>
+
+    <!-- Embedded Booking Modal -->
+    <div id="booking-modal" class="booking-modal">
+        <div class="booking-modal-content">
+            <div class="booking-header">
+                <h2>Book Your Computer Repair Appointment</h2>
+                <span class="close-booking" onclick="closeBookingModal()">&times;</span>
+                <p>Professional Brisbane IT support with same-day service</p>
+            </div>
+            
+            <div class="booking-body">
+                <div class="step-indicator">
+                    <div class="step active" id="step1">1</div>
+                    <div class="step" id="step2">2</div>
+                    <div class="step" id="step3">3</div>
+                </div>
+
+                <form id="booking-form" onsubmit="submitBooking(event)">
+                    <!-- Step 1: Service Selection -->
+                    <div id="service-selection" class="booking-section">
+                        <h3>Select Your Service</h3>
+                        <div class="service-grid">
+                            <div class="service-option" onclick="selectService('Computer Troubleshooting & Diagnostics', '$100/hour')">
+                                <h4>Computer Troubleshooting</h4>
+                                <p>Diagnose and fix computer issues, performance problems, error messages</p>
+                                <div class="service-price">$100/hour</div>
+                            </div>
+                            <div class="service-option" onclick="selectService('Virus Removal & Security', '$100/hour')">
+                                <h4>Virus Removal & Security</h4>
+                                <p>Remove malware, viruses, spyware and secure your system</p>
+                                <div class="service-price">$100/hour</div>
+                            </div>
+                            <div class="service-option" onclick="selectService('Hardware Upgrade & Installation', '$100/hour')">
+                                <h4>Hardware Upgrade</h4>
+                                <p>RAM upgrades, SSD installation, component replacement</p>
+                                <div class="service-price">$100/hour</div>
+                            </div>
+                            <div class="service-option" onclick="selectService('Data Recovery & Backup', '$100/hour')">
+                                <h4>Data Recovery</h4>
+                                <p>Recover lost files, setup backup solutions, data transfer</p>
+                                <div class="service-price">$100/hour</div>
+                            </div>
+                            <div class="service-option" onclick="selectService('Network & WiFi Support', '$100/hour')">
+                                <h4>Network Support</h4>
+                                <p>WiFi setup, network troubleshooting, connectivity issues</p>
+                                <div class="service-price">$100/hour</div>
+                            </div>
+                            <div class="service-option" onclick="selectService('General Computer Support', '$100/hour')">
+                                <h4>General Support</h4>
+                                <p>Software installation, email setup, general assistance</p>
+                                <div class="service-price">$100/hour</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Time Selection -->
+                    <div id="time-selection" class="booking-section" style="display: none;">
+                        <h3>Choose Your Preferred Time</h3>
+                        <div class="booking-summary">
+                            <h4>Selected Service:</h4>
+                            <p><span id="selected-service"></span> - <span id="selected-price"></span></p>
+                        </div>
+                        <div id="time-slots"></div>
+                    </div>
+
+                    <!-- Step 3: Customer Details -->
+                    <div id="customer-details" class="booking-section" style="display: none;">
+                        <h3>Your Contact Information</h3>
+                        <div class="booking-summary">
+                            <h4>Appointment Summary:</h4>
+                            <p><strong>Service:</strong> <span id="selected-service"></span></p>
+                            <p><strong>Time:</strong> <span id="selected-time"></span></p>
+                            <p><strong>Rate:</strong> $100/hour transparent pricing</p>
+                        </div>
+
+                        <input type="hidden" name="service" id="booking-service">
+                        
+                        <div class="form-group">
+                            <label for="customerName">Full Name *</label>
+                            <input type="text" id="customerName" name="customerName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Service Address (Brisbane area) *</label>
+                            <input type="text" id="address" name="address" placeholder="Your address for mobile service" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="issue">Describe Your Computer Issue *</label>
+                            <textarea id="issue" name="issue" placeholder="Please describe what's wrong with your computer, any error messages, when the problem started, etc." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-btn" style="width: 100%; margin-top: 20px;">
+                            Submit Booking Request
+                        </button>
+                        
+                        <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #666;">
+                            We'll contact you within 1 hour to confirm your appointment
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
