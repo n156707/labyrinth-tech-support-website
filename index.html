@@ -1564,25 +1564,73 @@
 
     // Enhanced error handling for booking widget
     function openBookingWidget() {
+        console.log('Brisbane booking system: Opening widget...');
+        
         try {
-            console.log('Opening booking widget...');
             const modal = document.getElementById('booking-modal');
+            console.log('Modal element found:', !!modal);
+            
             if (!modal) {
-                console.error('Modal not found');
+                console.error('❌ Modal element not found - Creating fallback');
+                // Create fallback modal if missing
+                createFallbackModal();
                 return;
             }
             
+            // Show modal with proper display
             modal.style.display = 'block';
+            modal.style.visibility = 'visible';
+            modal.style.opacity = '1';
             document.body.style.overflow = 'hidden';
             
             // Reset form to step 1
             resetBookingForm();
             
-            console.log('✓ Booking modal opened successfully');
+            console.log('✅ Brisbane booking modal opened successfully');
+            
         } catch (error) {
-            console.error('Error opening booking widget:', error);
-            alert('Booking system temporarily unavailable. Please call 0482 012 429');
+            console.error('❌ Critical error opening booking widget:', error);
+            
+            // Fallback: Direct phone contact
+            if (confirm('Booking system needs attention. Call 0482 012 429 now?')) {
+                window.location.href = 'tel:0482012429';
+            }
         }
+    }
+
+    function createFallbackModal() {
+        console.log('Creating emergency booking modal...');
+        
+        const modal = document.createElement('div');
+        modal.id = 'booking-modal';
+        modal.style.cssText = \`
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+        \`;
+        
+        modal.innerHTML = \`
+            <div style="background: white; margin: 10% auto; padding: 30px; max-width: 500px; border-radius: 12px; text-align: center;">
+                <h2 style="color: #005a87; margin-bottom: 20px;">Brisbane Computer Repair Booking</h2>
+                <p style="margin-bottom: 20px;">Professional mobile computer repair service</p>
+                <p style="margin-bottom: 20px;"><strong>Rate: $100/hour</strong></p>
+                <div style="margin: 20px 0;">
+                    <a href="tel:0482012429" style="background: #005a87; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; margin: 10px; display: inline-block;">📞 Call Now: 0482 012 429</a>
+                </div>
+                <div style="margin: 20px 0;">
+                    <a href="mailto:evangelos747@gmail.com?subject=Computer Repair Booking&body=Hi, I need computer repair service in Brisbane. Please contact me to schedule an appointment." style="background: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; margin: 10px; display: inline-block;">📧 Email Booking</a>
+                </div>
+                <button onclick="document.getElementById('booking-modal').remove()" style="background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Close</button>
+            </div>
+        \`;
+        
+        document.body.appendChild(modal);
+        console.log('✅ Emergency booking modal created');
     }
 
     function closeBookingWidget() {
