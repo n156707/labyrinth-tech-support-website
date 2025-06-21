@@ -1300,32 +1300,58 @@
                         throw new Error('Calendar API unavailable');
                     }
                 } catch (error) {
-                    console.log('Using fallback calendar data for', dateString);
+                    console.error('Calendar API failed:', error);
                     
-                    // Fallback to known conflicts when real-time API unavailable
-                    const knownConflicts = getKnownConflicts(dateString);
-                    
-                    for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
-                        const timeSlot = document.createElement('button');
-                        timeSlot.className = 'time-slot';
+                    // For Monday June 23rd, manually set the Arup work schedule
+                    if (dateString === '2025-06-23') {
+                        console.log('Using Monday Arup schedule: 8:30-17:00 blocked');
                         
-                        // Check against known calendar conflicts
-                        const conflictKey = `${hour}:00`;
-                        const isAvailable = !knownConflicts.includes(conflictKey);
-                        
-                        if (!isAvailable) {
-                            timeSlot.classList.add('unavailable');
-                            timeSlot.disabled = true;
+                        for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
+                            const timeSlot = document.createElement('button');
+                            timeSlot.className = 'time-slot';
+                            
+                            // Block 8:00-17:00 for Arup work (8:30-17:00 + 30min buffer)
+                            const isAvailable = hour >= 18;
+                            
+                            if (!isAvailable) {
+                                timeSlot.classList.add('unavailable');
+                                timeSlot.disabled = true;
+                            }
+                            
+                            const endHour = hour + selectedDuration;
+                            timeSlot.innerHTML = `${hour}:00 - ${endHour}:00${!isAvailable ? '<br><span class="unavailable-text">Arup Work</span>' : ''}`;
+                            
+                            if (isAvailable) {
+                                timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
+                            }
+                            
+                            slotsDiv.appendChild(timeSlot);
                         }
+                    } else {
+                        // Fallback for other dates
+                        const knownConflicts = getKnownConflicts(dateString);
                         
-                        const endHour = hour + selectedDuration;
-                        timeSlot.innerHTML = `${hour}:00 - ${endHour}:00${!isAvailable ? '<br><span class="unavailable-text">Unavailable</span>' : ''}`;
-                        
-                        if (isAvailable) {
-                            timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
+                        for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
+                            const timeSlot = document.createElement('button');
+                            timeSlot.className = 'time-slot';
+                            
+                            const conflictKey = `${hour}:00`;
+                            const isAvailable = !knownConflicts.includes(conflictKey);
+                            
+                            if (!isAvailable) {
+                                timeSlot.classList.add('unavailable');
+                                timeSlot.disabled = true;
+                            }
+                            
+                            const endHour = hour + selectedDuration;
+                            timeSlot.innerHTML = `${hour}:00 - ${endHour}:00${!isAvailable ? '<br><span class="unavailable-text">Unavailable</span>' : ''}`;
+                            
+                            if (isAvailable) {
+                                timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
+                            }
+                            
+                            slotsDiv.appendChild(timeSlot);
                         }
-                        
-                        slotsDiv.appendChild(timeSlot);
                     }
                 }
                 
