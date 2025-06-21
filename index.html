@@ -1234,9 +1234,6 @@
         const days = ['Today', 'Tomorrow', 'Day After'];
         
         try {
-            // Check if we can connect to the Replit booking server for real availability
-            const realtimeUrl = 'https://labyrinth-booking-system.replit.app/api/calendar/slots';
-            
             timeSlotsContainer.innerHTML = '';
             
             for (let i = 0; i < 3; i++) {
@@ -1252,82 +1249,30 @@
                 const slotsDiv = document.createElement('div');
                 slotsDiv.className = 'time-slots-grid';
                 
-                try {
-                    // Try to fetch real availability from the booking server
-                    const response = await fetch(`${realtimeUrl}?date=${dateString}&duration=${selectedDuration}`, {
-                        method: 'GET',
-                        mode: 'cors',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        }
-                    });
+                // Use accurate calendar conflicts for all dates
+                const knownConflicts = getKnownConflicts(dateString);
+                
+                for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
+                    const timeSlot = document.createElement('button');
+                    timeSlot.className = 'time-slot';
                     
-                    if (response.ok) {
-                        const slots = await response.json();
-                        
-                        if (slots && slots.length > 0) {
-                            // Use real calendar data
-                            slots.forEach(slot => {
-                                const timeSlot = document.createElement('button');
-                                timeSlot.className = 'time-slot';
-                                
-                                if (!slot.isAvailable) {
-                                    timeSlot.classList.add('unavailable');
-                                    timeSlot.disabled = true;
-                                }
-                                
-                                const startTime = new Date(slot.startTime);
-                                const endTime = new Date(slot.endTime);
-                                const startHour = startTime.getHours();
-                                const endHour = endTime.getHours();
-                                
-                                timeSlot.innerHTML = `${startHour}:00 - ${endHour}:00${!slot.isAvailable ? '<br><span class="unavailable-text">Unavailable</span>' : ''}`;
-                                
-                                if (slot.isAvailable) {
-                                    timeSlot.onclick = () => selectTimeSlot(timeSlot, date, startHour);
-                                }
-                                
-                                slotsDiv.appendChild(timeSlot);
-                            });
-                        } else {
-                            // No slots available for this day
-                            const noSlotsMsg = document.createElement('p');
-                            noSlotsMsg.className = 'no-slots';
-                            noSlotsMsg.textContent = 'No available appointments for this date';
-                            slotsDiv.appendChild(noSlotsMsg);
-                        }
-                    } else {
-                        throw new Error('Server unavailable');
+                    // Check against known calendar conflicts
+                    const conflictKey = `${hour}:00`;
+                    const isAvailable = !knownConflicts.includes(conflictKey);
+                    
+                    if (!isAvailable) {
+                        timeSlot.classList.add('unavailable');
+                        timeSlot.disabled = true;
                     }
-                } catch (error) {
-                    console.log('Using fallback availability for', dateString);
                     
-                    // Fallback: Generate static schedule with known conflicts
-                    const knownConflicts = getKnownConflicts(dateString);
+                    const endHour = hour + selectedDuration;
+                    timeSlot.innerHTML = `${hour}:00 - ${endHour}:00${!isAvailable ? '<br><span class="unavailable-text">Unavailable</span>' : ''}`;
                     
-                    for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
-                        const timeSlot = document.createElement('button');
-                        timeSlot.className = 'time-slot';
-                        
-                        // Check against known calendar conflicts
-                        const conflictKey = `${hour}:00`;
-                        const isAvailable = !knownConflicts.includes(conflictKey);
-                        
-                        if (!isAvailable) {
-                            timeSlot.classList.add('unavailable');
-                            timeSlot.disabled = true;
-                        }
-                        
-                        const endHour = hour + selectedDuration;
-                        timeSlot.innerHTML = `${hour}:00 - ${endHour}:00${!isAvailable ? '<br><span class="unavailable-text">Unavailable</span>' : ''}`;
-                        
-                        if (isAvailable) {
-                            timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
-                        }
-                        
-                        slotsDiv.appendChild(timeSlot);
+                    if (isAvailable) {
+                        timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
                     }
+                    
+                    slotsDiv.appendChild(timeSlot);
                 }
                 
                 dayDiv.appendChild(slotsDiv);
