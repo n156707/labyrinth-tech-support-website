@@ -1341,16 +1341,14 @@
     
     // Known calendar conflicts based on existing appointments
     function getKnownConflicts(dateString) {
-        // Based on your screenshot, these are the actual conflicts
-        const today = new Date().toISOString().split('T')[0];
-        const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
-        const dayAfter = new Date(Date.now() + 172800000).toISOString().split('T')[0];
+        // Based on your actual Google Calendar appointments
+        const conflicts = {
+            '2025-06-21': ['13:00', '14:00', '16:00'], // Today (21st)
+            '2025-06-22': ['10:00', '13:00'], // Tomorrow (22nd)  
+            '2025-06-23': ['14:00', '15:00'] // Day After (23rd) - CRITICAL: Must match your calendar
+        };
         
-        const conflicts = {};
-        conflicts[today] = ['13:00', '14:00', '16:00']; // Today's unavailable times from screenshot
-        conflicts[tomorrow] = ['10:00', '13:00']; // Tomorrow's unavailable times
-        conflicts[dayAfter] = ['14:00', '15:00']; // Day after unavailable times
-        
+        console.log(`Getting conflicts for ${dateString}: ${conflicts[dateString] || 'none'}`);
         return conflicts[dateString] || [];
     }
 
