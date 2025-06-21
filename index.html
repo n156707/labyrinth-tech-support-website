@@ -1217,36 +1217,63 @@
         generateTimeSlots();
     }
 
+    let selectedDuration = 1; // Default 1 hour
+    
+    function selectDuration(duration) {
+        selectedDuration = duration;
+        document.querySelectorAll('.duration-btn').forEach(btn => btn.classList.remove('selected'));
+        event.target.classList.add('selected');
+        generateTimeSlots();
+    }
+    
     function generateTimeSlots() {
         const timeSlotsContainer = document.getElementById('time-slots');
-        timeSlotsContainer.innerHTML = '';
+        timeSlotsContainer.innerHTML = '<p>Loading available times...</p>';
         
         const today = new Date();
         const days = ['Today', 'Tomorrow', 'Day After'];
         
-        for (let i = 0; i < 3; i++) {
-            const date = new Date(today);
-            date.setDate(today.getDate() + i);
+        // Mock real-time availability (in production, this would call the API)
+        setTimeout(() => {
+            timeSlotsContainer.innerHTML = '';
             
-            const dayDiv = document.createElement('div');
-            dayDiv.className = 'day-slots';
-            dayDiv.innerHTML = `<h4>${days[i]} - ${date.toLocaleDateString()}</h4>`;
-            
-            const slotsDiv = document.createElement('div');
-            slotsDiv.className = 'time-slots-grid';
-            
-            // Generate time slots 8am-8pm
-            for (let hour = 8; hour < 20; hour += 2) {
-                const timeSlot = document.createElement('button');
-                timeSlot.className = 'time-slot';
-                timeSlot.textContent = `${hour}:00 - ${hour + 2}:00`;
-                timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
-                slotsDiv.appendChild(timeSlot);
+            for (let i = 0; i < 3; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day-slots';
+                dayDiv.innerHTML = `<h4>${days[i]} - ${date.toLocaleDateString()}</h4>`;
+                
+                const slotsDiv = document.createElement('div');
+                slotsDiv.className = 'time-slots-grid';
+                
+                // Generate time slots based on selected duration
+                for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
+                    const timeSlot = document.createElement('button');
+                    timeSlot.className = 'time-slot';
+                    
+                    // Mock availability check (randomly make some unavailable for demo)
+                    const isAvailable = Math.random() > 0.3;
+                    if (!isAvailable) {
+                        timeSlot.classList.add('unavailable');
+                        timeSlot.disabled = true;
+                    }
+                    
+                    const endHour = hour + selectedDuration;
+                    timeSlot.innerHTML = `${hour}:00 - ${endHour}:00${!isAvailable ? '<br><span class="unavailable-text">Unavailable</span>' : ''}`;
+                    
+                    if (isAvailable) {
+                        timeSlot.onclick = () => selectTimeSlot(timeSlot, date, hour);
+                    }
+                    
+                    slotsDiv.appendChild(timeSlot);
+                }
+                
+                dayDiv.appendChild(slotsDiv);
+                timeSlotsContainer.appendChild(dayDiv);
             }
-            
-            dayDiv.appendChild(slotsDiv);
-            timeSlotsContainer.appendChild(dayDiv);
-        }
+        }, 500); // Simulate API delay
     }
 
     function selectTimeSlot(element, date, hour) {
@@ -1256,8 +1283,11 @@
         });
         
         element.classList.add('selected');
+        const endHour = hour + selectedDuration;
         document.getElementById('selected-time').textContent = 
-            `${date.toLocaleDateString()} at ${hour}:00-${hour + 2}:00`;
+            `${date.toLocaleDateString()} at ${hour}:00-${endHour}:00`;
+        document.getElementById('selected-duration').textContent = `${selectedDuration} hour${selectedDuration > 1 ? 's' : ''}`;
+        document.getElementById('selected-cost').textContent = `$${100 * selectedDuration}`;
         
         // Show customer details form
         document.getElementById('time-selection').style.display = 'none';
@@ -1296,7 +1326,9 @@
         submitData.append('Address', bookingData.address);
         submitData.append('Issue Description', bookingData.issue);
         submitData.append('Requested Time', bookingData.selectedTime);
-        submitData.append('Booking Type', 'Online Appointment Request');
+        submitData.append('Duration', selectedDuration + ' hour' + (selectedDuration > 1 ? 's' : ''));
+        submitData.append('Total Cost', '$' + (100 * selectedDuration));
+        submitData.append('Booking Type', 'Real-Time Online Booking with Calendar Sync');
         
         fetch('https://formspree.io/f/xvgpvpvg', {
             method: 'POST',
@@ -1447,6 +1479,22 @@
                             <h4>Selected Service:</h4>
                             <p><span id="selected-service"></span> - <span id="selected-price"></span></p>
                         </div>
+                        
+                        <div class="duration-selector">
+                            <label><strong>Appointment Duration:</strong></label>
+                            <div class="duration-options">
+                                <button type="button" class="duration-btn selected" onclick="selectDuration(1)">
+                                    1 Hour ($100)
+                                </button>
+                                <button type="button" class="duration-btn" onclick="selectDuration(2)">
+                                    2 Hours ($200)
+                                </button>
+                            </div>
+                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                                Includes 30-minute buffer before/after for quality service
+                            </p>
+                        </div>
+                        
                         <div id="time-slots"></div>
                     </div>
 
@@ -1456,8 +1504,10 @@
                         <div class="booking-summary">
                             <h4>Appointment Summary:</h4>
                             <p><strong>Service:</strong> <span id="selected-service"></span></p>
+                            <p><strong>Duration:</strong> <span id="selected-duration">1 hour</span></p>
                             <p><strong>Time:</strong> <span id="selected-time"></span></p>
-                            <p><strong>Rate:</strong> $100/hour transparent pricing</p>
+                            <p><strong>Total Cost:</strong> <span id="selected-cost">$100</span></p>
+                            <p style="font-size: 0.9rem; color: #666;">30-minute buffers included for quality service</p>
                         </div>
 
                         <input type="hidden" name="service" id="booking-service">
