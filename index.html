@@ -66,6 +66,194 @@
         .skip-link:focus {
             top: 6px;
         }
+
+        /* Booking Modal Styles */
+        .booking-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            overflow-y: auto;
+        }
+
+        .booking-modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .booking-header {
+            background: linear-gradient(135deg, #005a87 0%, #003e5e 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px 12px 0 0;
+            position: relative;
+        }
+
+        .close-booking {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .close-booking:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .booking-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .service-option {
+            border: 2px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .service-option:hover {
+            border-color: #005a87;
+            background-color: #f8fafc;
+        }
+
+        .service-option h4 {
+            color: #005a87;
+            margin-bottom: 10px;
+        }
+
+        .service-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d3748;
+            margin: 10px 0;
+        }
+
+        .day-slots {
+            margin: 20px 0;
+        }
+
+        .day-slots h4 {
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .time-slot {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .time-slot:hover {
+            border-color: #005a87;
+            background-color: #f0f9ff;
+        }
+
+        .time-slot.selected {
+            background-color: #005a87;
+            color: white;
+            border-color: #005a87;
+        }
+
+        .booking-section {
+            margin: 20px 0;
+        }
+
+        .booking-summary {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .booking-summary h4 {
+            color: #005a87;
+            margin-bottom: 10px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .step.active {
+            background-color: #005a87;
+            color: white;
+        }
+
+        .step.completed {
+            background-color: #10b981;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .booking-modal-content {
+                width: 95%;
+                margin: 1% auto;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-slots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
         
         body {
             font-family: 'Roboto', sans-serif;
@@ -1071,6 +1259,11 @@
         // Show customer details form
         document.getElementById('time-selection').style.display = 'none';
         document.getElementById('customer-details').style.display = 'block';
+        
+        // Update step indicator
+        document.getElementById('step2').classList.add('completed');
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step3').classList.add('active');
     }
 
     function submitBooking(event) {
@@ -1119,6 +1312,11 @@
         document.getElementById('time-selection').style.display = 'none';
         document.getElementById('customer-details').style.display = 'none';
         document.getElementById('booking-form').reset();
+        
+        // Reset step indicators
+        document.getElementById('step1').className = 'step active';
+        document.getElementById('step2').className = 'step';
+        document.getElementById('step3').className = 'step';
     }
 
     // Form security and validation
