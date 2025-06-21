@@ -874,7 +874,7 @@
         <p>Professional IT support with same-day service, honest pricing, and a 12-month warranty. Microsoft Certified Professional and A+ Certified technician.</p>
         <div class="hero-buttons">
             <a href="tel:0482012429" class="cta-btn">Call Now: 0482 012 429</a>
-            <button onclick="openBookingWidget()" class="btn-secondary">Book Online Appointment</button>
+            <button id="hero-booking-btn" onclick="openBookingWidget(); console.log('Hero button clicked');" class="btn-secondary">Book Online Appointment</button>
         </div>
     </section>
 
@@ -989,7 +989,7 @@
             <div class="container">
                 <h2 style="color: white; margin-bottom: 20px;">Book Your Appointment Online</h2>
                 <p style="margin-bottom: 30px; font-size: 18px;">Schedule professional computer repair service in Brisbane</p>
-                <button onclick="openBookingWidget()" style="background: white; color: rgb(0, 90, 135); border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: rgba(0, 90, 135, 0.3) 0px 4px 12px; transition: transform 0.3s; transform: translateY(0px);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                <button id="main-booking-btn" onclick="openBookingWidget(); console.log('Button clicked');" style="background: white; color: rgb(0, 90, 135); border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: rgba(0, 90, 135, 0.3) 0px 4px 12px; transition: transform 0.3s; transform: translateY(0px);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
                     📅 Book Your Appointment Now
                 </button>
             </div>
@@ -1335,12 +1335,56 @@
     let selectedDuration = 1;
     let selectedTimeSlot = '';
 
-    function openBookingWidget() {
-        document.getElementById('booking-modal').style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        // Set minimum date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('appointment-date').min = today;
+    // Global function for booking button
+    window.openBookingWidget = function() {
+        console.log('BOOKING: Function called');
+        
+        const modal = document.getElementById('booking-modal');
+        console.log('BOOKING: Modal found:', !!modal);
+        
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            console.log('BOOKING: Modal displayed');
+            
+            // Reset form
+            resetBookingForm();
+            
+            // Set minimum date
+            const dateInput = document.getElementById('appointment-date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+            }
+        } else {
+            console.error('BOOKING: Modal not found, creating emergency modal');
+            createEmergencyBookingModal();
+        }
+    };
+
+    function createEmergencyBookingModal() {
+        const emergencyModal = document.createElement('div');
+        emergencyModal.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 10000; display: flex;
+            align-items: center; justify-content: center;
+        `;
+        
+        emergencyModal.innerHTML = `
+            <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; text-align: center;">
+                <h2 style="color: #005a87; margin-bottom: 20px;">Brisbane Computer Repair</h2>
+                <p style="margin-bottom: 20px;">Professional mobile service at $100/hour</p>
+                <div style="margin: 20px 0;">
+                    <a href="tel:0482012429" style="background: #005a87; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; margin: 10px; display: inline-block;">📞 Call: 0482 012 429</a>
+                </div>
+                <div style="margin: 20px 0;">
+                    <a href="mailto:evangelos747@gmail.com?subject=Computer Repair Booking&body=Hi, I need computer repair service in Brisbane." style="background: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; margin: 10px; display: inline-block;">📧 Email Booking</a>
+                </div>
+                <button onclick="this.closest('div').parentElement.remove()" style="background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+            </div>
+        `;
+        
+        document.body.appendChild(emergencyModal);
     }
 
     function closeBookingWidget() {
