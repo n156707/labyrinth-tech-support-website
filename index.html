@@ -1191,11 +1191,198 @@
         </div>
     </footer>
 
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="booking-modal">
+        <div class="booking-modal-content">
+            <div class="booking-header">
+                <h2>Book Your Appointment</h2>
+                <span class="close-booking" onclick="closeBookingWidget()">&times;</span>
+            </div>
+            <div class="booking-body">
+                <!-- Step indicators -->
+                <div class="step-indicator">
+                    <div class="step active" data-step="1">1. Service</div>
+                    <div class="step" data-step="2">2. Time</div>
+                    <div class="step" data-step="3">3. Details</div>
+                </div>
+
+                <form id="booking-form" action="https://formspree.io/f/mrbzrkzk" method="POST">
+                    <!-- Step 1: Service Selection -->
+                    <div id="service-selection" class="booking-section">
+                        <h3>Select Your Service</h3>
+                        
+                        <div class="service-grid">
+                            <div class="service-card" onclick="selectService('Computer Repair', '$100/hour', 1)">
+                                <h4>Computer Repair</h4>
+                                <p class="service-price">$100/hour</p>
+                                <p>Hardware diagnosis, component replacement, system repairs</p>
+                            </div>
+                            
+                            <div class="service-card" onclick="selectService('Software Support', '$100/hour', 1)">
+                                <h4>Software Support</h4>
+                                <p class="service-price">$100/hour</p>
+                                <p>Software installation, virus removal, system optimization</p>
+                            </div>
+                            
+                            <div class="service-card" onclick="selectService('Data Recovery', '$100/hour', 2)">
+                                <h4>Data Recovery</h4>
+                                <p class="service-price">$100/hour</p>
+                                <p>File recovery, backup solutions, data transfer services</p>
+                            </div>
+                            
+                            <div class="service-card" onclick="selectService('Network Setup', '$100/hour', 1)">
+                                <h4>Network Setup</h4>
+                                <p class="service-price">$100/hour</p>
+                                <p>WiFi configuration, network troubleshooting, security setup</p>
+                            </div>
+                            
+                            <div class="service-card" onclick="selectService('System Optimization', '$100/hour', 1)">
+                                <h4>System Optimization</h4>
+                                <p class="service-price">$100/hour</p>
+                                <p>Performance tuning, cleanup, speed improvements</p>
+                            </div>
+                            
+                            <div class="service-card" onclick="selectService('General Consultation', '$100/hour', 1)">
+                                <h4>General Consultation</h4>
+                                <p class="service-price">$100/hour</p>
+                                <p>Diagnose and fix computer issues, performance problems, error messages</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Time Selection -->
+                    <div id="time-selection" class="booking-section" style="display: none;">
+                        <h3>Choose Your Preferred Time</h3>
+                        <div class="booking-summary">
+                            <h4>Selected Service:</h4>
+                            <p><span id="selected-service-display"></span> - <span id="selected-price-display"></span></p>
+                        </div>
+                        
+                        <div class="duration-selector">
+                            <label>
+                                <input type="radio" name="duration" value="1" checked onchange="updateDuration(1)"> 1 Hour ($100)
+                            </label>
+                            <label>
+                                <input type="radio" name="duration" value="2" onchange="updateDuration(2)"> 2 Hours ($200)
+                            </label>
+                        </div>
+
+                        <div class="date-picker">
+                            <label for="appointment-date">Select Date:</label>
+                            <input type="date" id="appointment-date" name="date" onchange="loadTimeSlots()" required>
+                        </div>
+                        
+                        <div id="time-slots"></div>
+                    </div>
+
+                    <!-- Step 3: Customer Details -->
+                    <div id="customer-details" class="booking-section" style="display: none;">
+                        <h3>Your Contact Information</h3>
+                        <div class="booking-summary">
+                            <h4>Appointment Summary:</h4>
+                            <p><strong>Service:</strong> <span id="selected-service-final"></span></p>
+                            <p><strong>Duration:</strong> <span id="selected-duration-final">1 hour</span></p>
+                            <p><strong>Time:</strong> <span id="selected-time-final"></span></p>
+                            <p><strong>Total Cost:</strong> <span id="selected-cost-final">$100</span></p>
+                            <p style="font-size: 0.9rem; color: #666;">30-minute buffers included for quality service</p>
+                        </div>
+
+                        <input type="hidden" name="service" id="booking-service">
+                        <input type="hidden" name="appointment_time" id="booking-time">
+                        <input type="hidden" name="duration" id="booking-duration">
+                        <input type="hidden" name="total_cost" id="booking-cost">
+                        
+                        <div class="form-group">
+                            <label for="customerName">Full Name *</label>
+                            <input type="text" id="customerName" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerEmail">Email Address *</label>
+                            <input type="email" id="customerEmail" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerPhone">Phone Number *</label>
+                            <input type="tel" id="customerPhone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerAddress">Service Address (Brisbane) *</label>
+                            <input type="text" id="customerAddress" name="address" placeholder="Full address where service is needed" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="issue-description">Describe Your Issue</label>
+                            <textarea id="issue-description" name="message" rows="4" placeholder="Please describe the computer issue you're experiencing..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-btn" style="width: 100%; margin-top: 20px;">
+                            Submit Booking Request
+                        </button>
+                        
+                        <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #666;">
+                            We'll contact you within 1 hour to confirm your appointment
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
+    let selectedService = '';
+    let selectedDuration = 1;
+    let selectedTimeSlot = '';
+
     function openBookingWidget() {
-        // Show embedded booking form
         document.getElementById('booking-modal').style.display = 'block';
         document.body.style.overflow = 'hidden';
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('appointment-date').min = today;
+    }
+
+    function closeBookingWidget() {
+        document.getElementById('booking-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        resetBookingForm();
+    }
+
+    function resetBookingForm() {
+        document.getElementById('service-selection').style.display = 'block';
+        document.getElementById('time-selection').style.display = 'none';
+        document.getElementById('customer-details').style.display = 'none';
+        updateStepIndicators(1);
+    }
+
+    function selectService(service, price, defaultDuration) {
+        selectedService = service;
+        selectedDuration = defaultDuration;
+        
+        document.getElementById('selected-service-display').textContent = service;
+        document.getElementById('selected-price-display').textContent = price;
+        
+        // Show time selection
+        document.getElementById('service-selection').style.display = 'none';
+        document.getElementById('time-selection').style.display = 'block';
+        updateStepIndicators(2);
+    }
+
+    function updateDuration(duration) {
+        selectedDuration = duration;
+        const cost = duration * 100;
+        // Reload time slots if date is selected
+        const dateInput = document.getElementById('appointment-date');
+        if (dateInput.value) {
+            loadTimeSlots();
+        }
+    }
+
+    function updateStepIndicators(activeStep) {
+        document.querySelectorAll('.step').forEach((step, index) => {
+            step.classList.toggle('active', index + 1 <= activeStep);
+        });
     }
 
     function closeBookingModal() {
