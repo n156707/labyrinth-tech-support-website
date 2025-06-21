@@ -1263,19 +1263,23 @@
                         
                         if (slots && slots.length > 0) {
                             // Use real calendar data
+                            console.log(`Processing ${slots.length} slots for ${dateString}`);
                             slots.forEach(slot => {
                                 const timeSlot = document.createElement('button');
                                 timeSlot.className = 'time-slot';
                                 
+                                const startTime = new Date(slot.startTime);
+                                const endTime = new Date(slot.endTime);
+                                const startHour = startTime.getUTCHours() + 10; // Convert to Brisbane time
+                                const endHour = endTime.getUTCHours() + 10;
+                                
+                                console.log(`Slot ${startHour}:00-${endHour}:00 available: ${slot.isAvailable}`);
+                                
                                 if (!slot.isAvailable) {
                                     timeSlot.classList.add('unavailable');
                                     timeSlot.disabled = true;
+                                    console.log(`Blocking slot ${startHour}:00`);
                                 }
-                                
-                                const startTime = new Date(slot.startTime);
-                                const endTime = new Date(slot.endTime);
-                                const startHour = startTime.getHours();
-                                const endHour = endTime.getHours();
                                 
                                 timeSlot.innerHTML = `${startHour}:00 - ${endHour}:00${!slot.isAvailable ? '<br><span class="unavailable-text">Unavailable</span>' : ''}`;
                                 
