@@ -1523,40 +1523,6 @@
             console.error('Booking system incomplete');
         }
     });
-
-    function closeBookingModal() {
-        document.getElementById('booking-modal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-
-    function selectService(serviceName, price) {
-        document.getElementById('selected-service').textContent = serviceName;
-        document.getElementById('selected-price').textContent = price;
-        document.getElementById('booking-service').value = serviceName;
-        
-        // Show time selection and update step indicator
-        document.getElementById('service-selection').style.display = 'none';
-        document.getElementById('time-selection').style.display = 'block';
-        document.getElementById('step1').classList.add('completed');
-        document.getElementById('step1').classList.remove('active');
-        document.getElementById('step2').classList.add('active');
-        generateTimeSlots();
-    }
-
-    let selectedDuration = 1; // Default 1 hour
-    
-    function selectDuration(duration) {
-        selectedDuration = duration;
-        document.querySelectorAll('.duration-btn').forEach(btn => btn.classList.remove('selected'));
-        event.target.classList.add('selected');
-        generateTimeSlots();
-    }
-    
-    async function generateTimeSlots() {
-        const timeSlotsContainer = document.getElementById('time-slots');
-        timeSlotsContainer.innerHTML = '<p>⏳ Checking real-time availability...</p>';
-        
-        const today = new Date();
         const days = ['Today', 'Tomorrow', 'Day After'];
         
         try {
