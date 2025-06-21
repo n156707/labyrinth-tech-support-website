@@ -1357,16 +1357,37 @@
     }
 
     function selectService(service, price, defaultDuration) {
-        selectedService = service;
-        selectedDuration = defaultDuration;
-        
-        document.getElementById('selected-service-display').textContent = service;
-        document.getElementById('selected-price-display').textContent = price;
-        
-        // Show time selection
-        document.getElementById('service-selection').style.display = 'none';
-        document.getElementById('time-selection').style.display = 'block';
-        updateStepIndicators(2);
+        try {
+            selectedService = service;
+            selectedDuration = defaultDuration || 1;
+            
+            console.log('Service selected:', service, '- Duration:', selectedDuration);
+            
+            const serviceDisplay = document.getElementById('selected-service-display');
+            const priceDisplay = document.getElementById('selected-price-display');
+            
+            if (serviceDisplay && priceDisplay) {
+                serviceDisplay.textContent = service;
+                priceDisplay.textContent = price;
+            }
+            
+            // Show time selection step
+            document.getElementById('service-selection').style.display = 'none';
+            document.getElementById('time-selection').style.display = 'block';
+            updateStepIndicators(2);
+            
+            // Set minimum date for appointment
+            const dateInput = document.getElementById('appointment-date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+                dateInput.value = ''; // Clear any previous selection
+            }
+            
+            console.log('✓ Advanced to time selection step');
+        } catch (error) {
+            console.error('Error selecting service:', error);
+        }
     }
 
     function updateDuration(duration) {
@@ -1402,46 +1423,42 @@
         // OpenAI-Guided Calendar Sync - Force correct data
         console.log('OpenAI Analysis: Forcing correct calendar data for', dateString);
         
-        if (dateString === '2025-06-23') {
-            // Monday: Arup work 8:30-17:00 - OpenAI confirmed this should block 8:00-17:00
-            console.log('Monday Arup schedule: 8:30-17:00 work blocks 8:00-17:00 slots');
+        // Generate time slots with Brisbane business rules
+        slotsDiv.innerHTML = '';
+        
+        for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
+            const timeSlot = document.createElement('button');
+            timeSlot.className = 'time-slot';
             
-            slotsDiv.innerHTML = '';
-            for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
-                const timeSlot = document.createElement('button');
-                timeSlot.className = 'time-slot';
-                
-                // OpenAI analysis: Block 8:00-17:00, available 18:00-20:00
-                const isAvailable = hour >= 18;
-                
-                if (!isAvailable) {
-                    timeSlot.classList.add('unavailable');
-                    timeSlot.disabled = true;
-                }
-                
-                const endHour = hour + selectedDuration;
-                timeSlot.innerHTML = hour + ':00 - ' + endHour + ':00' + (!isAvailable ? '<br><span class=\"unavailable-text\">Arup Work</span>' : '');
-                
-                if (isAvailable) {
-                    timeSlot.onclick = () => selectTimeSlot(timeSlot, selectedDate, hour);
-                }
-                
-                slotsDiv.appendChild(timeSlot);
+            let isAvailable = true;
+            let unavailableReason = '';
+            
+            // Monday June 23rd: Arup work blocks 8:00-17:00
+            if (dateString === '2025-06-23' && hour < 18) {
+                isAvailable = false;
+                unavailableReason = 'Arup Work';
             }
-        } else {
-            // Generate standard time slots for other dates
-            slotsDiv.innerHTML = '';
-            for (let hour = 8; hour < (20 - selectedDuration + 1); hour++) {
-                const timeSlot = document.createElement('button');
-                timeSlot.className = 'time-slot';
-                
-                const endHour = hour + selectedDuration;
-                timeSlot.innerHTML = hour + ':00 - ' + endHour + ':00';
+            
+            // Add other business rules here if needed
+            // Weekend hours, holidays, etc.
+            
+            if (!isAvailable) {
+                timeSlot.classList.add('unavailable');
+                timeSlot.disabled = true;
+            }
+            
+            const endHour = hour + selectedDuration;
+            timeSlot.innerHTML = hour + ':00 - ' + endHour + ':00' + 
+                (!isAvailable ? '<br><span class="unavailable-text">' + unavailableReason + '</span>' : '');
+            
+            if (isAvailable) {
                 timeSlot.onclick = () => selectTimeSlot(timeSlot, selectedDate, hour);
-                
-                slotsDiv.appendChild(timeSlot);
             }
+            
+            slotsDiv.appendChild(timeSlot);
         }
+        
+        console.log('Time slots generated for', dateString, '- Duration:', selectedDuration, 'hour(s)');
     }
 
     function selectTimeSlot(button, date, hour) {
@@ -1509,20 +1526,102 @@
         }
     }
 
-    // Auto-test on page load
+    // Enhanced booking system initialization and error handling
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('Page loaded, checking booking system...');
-        const modal = document.getElementById('booking-modal');
-        const button = document.querySelector('[onclick*=\"openBookingWidget\"]');
-        console.log('Modal exists:', !!modal);
-        console.log('Button exists:', !!button);
+        console.log('Initializing Brisbane computer repair booking system...');
         
-        if (modal && button) {
-            console.log('Booking system ready');
+        // Verify all components exist
+        const modal = document.getElementById('booking-modal');
+        const buttons = document.querySelectorAll('[onclick*=\"openBookingWidget\"]');
+        const form = document.getElementById('booking-form');
+        
+        console.log('Modal:', !!modal);
+        console.log('Buttons:', buttons.length);
+        console.log('Form:', !!form);
+        
+        if (modal && buttons.length > 0 && form) {
+            console.log('✓ Booking system fully integrated - Ready for Brisbane customers');
+            
+            // Add backup event listeners in case onclick fails
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openBookingWidget();
+                });
+            });
+            
+            // Initialize date picker with minimum date
+            const dateInput = document.getElementById('appointment-date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+            }
+            
         } else {
-            console.error('Booking system incomplete');
+            console.error('❌ Booking system incomplete - Missing components');
         }
     });
+
+    // Enhanced error handling for booking widget
+    function openBookingWidget() {
+        try {
+            console.log('Opening booking widget...');
+            const modal = document.getElementById('booking-modal');
+            if (!modal) {
+                console.error('Modal not found');
+                return;
+            }
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Reset form to step 1
+            resetBookingForm();
+            
+            console.log('✓ Booking modal opened successfully');
+        } catch (error) {
+            console.error('Error opening booking widget:', error);
+            alert('Booking system temporarily unavailable. Please call 0482 012 429');
+        }
+    }
+
+    function closeBookingWidget() {
+        try {
+            const modal = document.getElementById('booking-modal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                console.log('✓ Booking modal closed');
+            }
+        } catch (error) {
+            console.error('Error closing booking widget:', error);
+        }
+    }
+
+    function resetBookingForm() {
+        try {
+            // Reset to step 1
+            document.getElementById('service-selection').style.display = 'block';
+            document.getElementById('time-selection').style.display = 'none';
+            document.getElementById('customer-details').style.display = 'none';
+            updateStepIndicators(1);
+            
+            // Clear form data
+            selectedService = '';
+            selectedDuration = 1;
+            selectedTimeSlot = '';
+            
+            // Remove any proceed buttons
+            const proceedBtn = document.getElementById('proceed-to-details');
+            if (proceedBtn) {
+                proceedBtn.remove();
+            }
+            
+            console.log('✓ Booking form reset to step 1');
+        } catch (error) {
+            console.error('Error resetting form:', error);
+        }
+    }
         const days = ['Today', 'Tomorrow', 'Day After'];
         
         try {
