@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brisbane Computer Repair - Book Now</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        
+        .hero { 
+            background: linear-gradient(135deg, #005a87 0%, #003e5e 100%); 
+            color: white; padding: 40px 0; text-align: center; 
+        }
+        
+        .booking-btn {
+            background: white; color: #005a87; border: none;
+            padding: 15px 30px; border-radius: 8px; font-size: 18px;
+            font-weight: 600; cursor: pointer; margin: 10px;
+            box-shadow: 0 4px 12px rgba(0,90,135,0.3);
+            transition: transform 0.3s;
+        }
+        
+        .booking-btn:hover { transform: translateY(-2px); }
+        
+        .modal {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+            z-index: 10000; justify-content: center; align-items: center;
+        }
+        
+        .modal-content {
+            background: white; border-radius: 12px; width: 90%;
+            max-width: 600px; max-height: 80vh; overflow-y: auto;
+        }
+        
+        .modal-header {
+            background: #005a87; color: white; padding: 20px;
+            border-radius: 12px 12px 0 0; position: relative;
+        }
+        
+        .close-btn {
+            position: absolute; right: 20px; top: 15px;
+            background: none; border: none; color: white;
+            font-size: 24px; cursor: pointer;
+        }
+        
+        .modal-body { padding: 30px; }
+        
+        .step { display: none; }
+        .step.active { display: block; }
+        
+        .service-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px; margin: 20px 0;
+        }
+        
+        .service-card {
+            border: 2px solid #e9ecef; border-radius: 8px; padding: 20px;
+            cursor: pointer; transition: all 0.3s; text-align: center;
+        }
+        
+        .service-card:hover { border-color: #005a87; background: #f8f9fa; }
+        .service-card.selected { border-color: #005a87; background: #e3f2fd; }
+        
+        .time-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px; margin: 20px 0;
+        }
+        
+        .time-slot {
+            border: 2px solid #e9ecef; border-radius: 6px; padding: 10px;
+            cursor: pointer; text-align: center; transition: all 0.3s;
+        }
+        
+        .time-slot:hover { border-color: #005a87; }
+        .time-slot.selected { background: #005a87; color: white; }
+        .time-slot.unavailable { background: #f8f9fa; color: #6c757d; cursor: not-allowed; }
+        
+        .form-group { margin: 15px 0; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 10px; border: 2px solid #e9ecef;
+            border-radius: 6px; font-size: 16px;
+        }
+        
+        .btn-primary {
+            background: #005a87; color: white; border: none;
+            padding: 12px 24px; border-radius: 6px; cursor: pointer;
+            font-size: 16px; width: 100%; margin-top: 20px;
+        }
+        
+        .step-indicator {
+            display: flex; justify-content: center; margin-bottom: 30px; gap: 20px;
+        }
+        
+        .step-item {
+            padding: 8px 16px; border-radius: 20px; background: #e9ecef;
+            color: #6c757d; font-weight: 500;
+        }
+        
+        .step-item.active { background: #005a87; color: white; }
+        
+        .loading { text-align: center; padding: 20px; color: #6c757d; }
+        .error { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 6px; margin: 10px 0; }
+        .success { background: #d1edff; border: 1px solid #bee5eb; padding: 15px; border-radius: 6px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1>Brisbane Computer Repair</h1>
+            <p>Professional mobile IT support - $100/hour</p>
+            <button class="booking-btn" onclick="openModal()">Book Appointment Now</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Mobile Computer Repair Service</h2>
+        <p>Microsoft Certified Professional serving Brisbane with same-day service, honest pricing, and 12-month warranty.</p>
+        <button class="booking-btn" onclick="openModal()">Book Online Appointment</button>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Your Appointment</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="step-indicator">
+                    <div class="step-item active" data-step="1">1. Service</div>
+                    <div class="step-item" data-step="2">2. Time</div>
+                    <div class="step-item" data-step="3">3. Details</div>
+                </div>
+
+                <!-- Step 1: Service Selection -->
+                <div id="step1" class="step active">
+                    <h3>Select Your Service</h3>
+                    <div class="service-grid">
+                        <div class="service-card" onclick="selectService('Computer Repair', 100, 1)">
+                            <h4>Computer Repair</h4>
+                            <p>$100/hour</p>
+                            <p>Hardware diagnosis, component replacement, system repairs</p>
+                        </div>
+                        <div class="service-card" onclick="selectService('Software Support', 100, 1)">
+                            <h4>Software Support</h4>
+                            <p>$100/hour</p>
+                            <p>Software installation, virus removal, optimization</p>
+                        </div>
+                        <div class="service-card" onclick="selectService('Data Recovery', 100, 2)">
+                            <h4>Data Recovery</h4>
+                            <p>$100/hour</p>
+                            <p>File recovery, backup solutions, data transfer</p>
+                        </div>
+                        <div class="service-card" onclick="selectService('Network Setup', 100, 1)">
+                            <h4>Network Setup</h4>
+                            <p>$100/hour</p>
+                            <p>WiFi configuration, network troubleshooting</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Time Selection -->
+                <div id="step2" class="step">
+                    <h3>Choose Your Time</h3>
+                    <div id="selectedService"></div>
+                    
+                    <div class="form-group">
+                        <label for="appointmentDate">Select Date:</label>
+                        <input type="date" id="appointmentDate" onchange="loadTimeSlots()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Duration:</label>
+                        <label><input type="radio" name="duration" value="1" checked onchange="updateDuration(1)"> 1 Hour ($100)</label>
+                        <label><input type="radio" name="duration" value="2" onchange="updateDuration(2)"> 2 Hours ($200)</label>
+                    </div>
+                    
+                    <div id="timeSlots" class="time-grid"></div>
+                </div>
+
+                <!-- Step 3: Customer Details -->
+                <div id="step3" class="step">
+                    <h3>Your Details</h3>
+                    <div id="bookingSummary"></div>
+                    
+                    <form id="bookingForm" action="https://formspree.io/f/xrbzrkzk" method="POST">
+                        <input type="hidden" name="service" id="hiddenService">
+                        <input type="hidden" name="datetime" id="hiddenDateTime">
+                        <input type="hidden" name="duration" id="hiddenDuration">
+                        <input type="hidden" name="cost" id="hiddenCost">
+                        
+                        <div class="form-group">
+                            <label for="customerName">Full Name *</label>
+                            <input type="text" id="customerName" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerEmail">Email Address *</label>
+                            <input type="email" id="customerEmail" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerPhone">Phone Number *</label>
+                            <input type="tel" id="customerPhone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerAddress">Service Address (Brisbane) *</label>
+                            <input type="text" id="customerAddress" name="address" placeholder="Where should we visit?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerMessage">Describe Your Issue</label>
+                            <textarea id="customerMessage" name="message" rows="4" placeholder="Tell us about your computer problem..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Submit Booking Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedServiceName = '';
+        let selectedDuration = 1;
+        let selectedTime = '';
+        let selectedDate = '';
+
+        function openModal() {
+            document.getElementById('bookingModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = today;
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            resetForm();
+        }
+
+        function resetForm() {
+            showStep(1);
+            selectedServiceName = '';
+            selectedDuration = 1;
+            selectedTime = '';
+            selectedDate = '';
+            
+            document.getElementById('bookingForm').reset();
+            document.querySelectorAll('.service-card').forEach(card => card.classList.remove('selected'));
+            document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
+        }
+
+        function showStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.querySelectorAll('.step-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById('step' + stepNumber).classList.add('active');
+            document.querySelector('.step-item[data-step="' + stepNumber + '"]').classList.add('active');
+        }
+
+        function selectService(serviceName, price, defaultDuration) {
+            selectedServiceName = serviceName;
+            selectedDuration = defaultDuration;
+            
+            document.querySelectorAll('.service-card').forEach(card => card.classList.remove('selected'));
+            event.target.closest('.service-card').classList.add('selected');
+            
+            document.getElementById('selectedService').innerHTML = 
+                '<p><strong>Selected:</strong> ' + serviceName + ' - $' + price + '/hour</p>';
+            
+            document.querySelector('input[name="duration"][value="' + defaultDuration + '"]').checked = true;
+            
+            setTimeout(() => showStep(2), 500);
+        }
+
+        function updateDuration(duration) {
+            selectedDuration = parseInt(duration);
+            if (selectedDate) {
+                loadTimeSlots();
+            }
+        }
+
+        function loadTimeSlots() {
+            const dateInput = document.getElementById('appointmentDate');
+            selectedDate = dateInput.value;
+            
+            if (!selectedDate) return;
+            
+            const slotsContainer = document.getElementById('timeSlots');
+            slotsContainer.innerHTML = '<div class="loading">Loading available times...</div>';
+            
+            // Generate Brisbane business schedule with known conflicts
+            setTimeout(() => {
+                generateBrisbaneSchedule();
+            }, 500);
+        }
+
+        function generateBrisbaneSchedule() {
+            const slotsContainer = document.getElementById('timeSlots');
+            slotsContainer.innerHTML = '';
+            
+            const selectedDateObj = new Date(selectedDate);
+            const dayOfWeek = selectedDateObj.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            
+            // Brisbane business hours: 8 AM to 8 PM
+            for (let hour = 8; hour <= 20 - selectedDuration; hour++) {
+                let isAvailable = true;
+                let reason = '';
+                
+                // Weekday schedule conflicts (Monday = 1, Friday = 5)
+                if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                    // Arup work schedule: 8:30 AM - 5:00 PM (block 8:00 AM - 5:00 PM with buffer)
+                    if (hour >= 8 && hour < 17) {
+                        isAvailable = false;
+                        reason = 'Work Schedule';
+                    }
+                }
+                
+                // Weekend availability (Saturday = 6, Sunday = 0)
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    // Weekends: Limited hours 10 AM - 6 PM
+                    if (hour < 10 || hour >= 18) {
+                        isAvailable = false;
+                        reason = 'Weekend Hours';
+                    }
+                }
+                
+                createTimeSlot(hour, isAvailable, reason);
+            }
+            
+            // Add status message
+            const statusDiv = document.createElement('div');
+            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                statusDiv.className = 'error';
+                statusDiv.innerHTML = 'Weekday availability: Evenings 5:00 PM - 8:00 PM (after work hours)';
+            } else {
+                statusDiv.className = 'success';
+                statusDiv.innerHTML = 'Weekend availability: 10:00 AM - 6:00 PM';
+            }
+            slotsContainer.insertBefore(statusDiv, slotsContainer.firstChild);
+        }
+
+        function createTimeSlot(hour, isAvailable, reason) {
+            const slotsContainer = document.getElementById('timeSlots');
+            const slot = document.createElement('div');
+            slot.className = 'time-slot';
+            
+            const endHour = hour + selectedDuration;
+            const timeLabel = hour.toString().padStart(2, '0') + ':00-' + endHour.toString().padStart(2, '0') + ':00';
+            
+            if (!isAvailable) {
+                slot.classList.add('unavailable');
+                slot.innerHTML = timeLabel + '<br><small>' + reason + '</small>';
+            } else {
+                slot.innerHTML = timeLabel;
+                slot.onclick = () => selectTime(slot, hour);
+            }
+            
+            slotsContainer.appendChild(slot);
+        }
+
+        function selectTime(slotElement, hour) {
+            selectedTime = hour.toString().padStart(2, '0') + ':00';
+            
+            document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
+            slotElement.classList.add('selected');
+            
+            setTimeout(() => {
+                updateBookingSummary();
+                showStep(3);
+            }, 500);
+        }
+
+        function updateBookingSummary() {
+            const cost = selectedDuration * 100;
+            const summary = 
+                '<div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 20px;">' +
+                '<h4>Appointment Summary</h4>' +
+                '<p><strong>Service:</strong> ' + selectedServiceName + '</p>' +
+                '<p><strong>Date:</strong> ' + new Date(selectedDate).toLocaleDateString('en-AU') + '</p>' +
+                '<p><strong>Time:</strong> ' + selectedTime + ' (' + selectedDuration + ' hour' + (selectedDuration > 1 ? 's' : '') + ')</p>' +
+                '<p><strong>Cost:</strong> $' + cost + '</p>' +
+                '<p><small>30-minute buffer included for quality service</small></p>' +
+                '</div>';
+            
+            document.getElementById('bookingSummary').innerHTML = summary;
+            
+            // Update hidden form fields
+            document.getElementById('hiddenService').value = selectedServiceName;
+            document.getElementById('hiddenDateTime').value = selectedDate + ' ' + selectedTime;
+            document.getElementById('hiddenDuration').value = selectedDuration + ' hour' + (selectedDuration > 1 ? 's' : '');
+            document.getElementById('hiddenCost').value = '$' + cost;
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('bookingModal').onclick = function(e) {
+            if (e.target === this) closeModal();
+        };
+
+        // Form submission handling
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Create FormData object
+            const formData = new FormData(this);
+            
+            // Submit via fetch to handle response
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('Booking request submitted successfully! We will contact you within 2 hours to confirm your appointment.');
+                    closeModal();
+                } else {
+                    alert('There was an issue submitting your booking. Please call 0482 012 429 directly.');
+                }
+            }).catch(error => {
+                alert('Network error. Please call 0482 012 429 to book your appointment.');
+            });
+        });
+
+        console.log('Brisbane Computer Repair booking system loaded with Brisbane schedule');
+    </script>
+</body>
+</html>
