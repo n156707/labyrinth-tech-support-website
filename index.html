@@ -1005,21 +1005,9 @@
 
     <script>
     function openBookingWidget() {
-        // Open booking system in new window
-        const bookingUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-            ? 'http://localhost:5000/booking' 
-            : 'https://labyrinth-booking-system.replit.app/booking';
-        
-        // Try to open booking system, fallback to contact form
-        const bookingWindow = window.open(bookingUrl, '_blank', 'width=1200,height=800');
-        
-        // Check if popup was blocked or failed to open
-        setTimeout(() => {
-            if (!bookingWindow || bookingWindow.closed) {
-                alert('Booking system opening... If blocked by popup blocker, please use the contact form below or call 0482 012 429 for immediate service.');
-                window.location.href = '#contact';
-            }
-        }, 1000);
+        // Direct customers to contact form until booking system is fully deployed
+        alert('To schedule your computer repair appointment:\n\n• Use the contact form below\n• Call 0482 012 429 for immediate service\n• Email service@labyrinth-techsupport.com\n\nWe provide same-day service with transparent $100/hour pricing.');
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Form security and validation
