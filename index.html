@@ -1208,9 +1208,12 @@
         document.getElementById('selected-price').textContent = price;
         document.getElementById('booking-service').value = serviceName;
         
-        // Show time selection
+        // Show time selection and update step indicator
         document.getElementById('service-selection').style.display = 'none';
         document.getElementById('time-selection').style.display = 'block';
+        document.getElementById('step1').classList.add('completed');
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
         generateTimeSlots();
     }
 
